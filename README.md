@@ -1,1 +1,1 @@
-# project
+# Mini-Muse project
