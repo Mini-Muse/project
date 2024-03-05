@@ -1,52 +1,142 @@
 [
-  {
-    "title": "The Fall of Rome: A Historical Analysis",
-    "author": "John Smith",
-    "publication_date": "15-05-2023"
-  },
-  {
-    "title": "The Renaissance: A Cultural Rebirth",
-    "author": "Emily Johnson",
-    "publication_date": "30-09-2022"
-  },
-  {
-    "title": "Genghis Khan: The Rise of the Mongol Empire",
-    "author": "David Brown",
-    "publication_date": "10-01-2024"
-  },
-  {
-    "title": "The French Revolution: A Turning Point in History",
-    "author": "Sarah Davis",
-    "publication_date": "20-07-2023"
-  },
-  {
-    "title": "The Industrial Revolution: Impact on Society",
-    "author": "Michael Wilson",
-    "publication_date": "05-12-2022"
-  },
-  {
-    "title": "The Fall of Rome: A Historical Analysis",
-    "author": "John Smith",
-    "publication_date": "15-05-2023"
-  },
-  {
-    "title": "The Renaissance: A Cultural Rebirth",
-    "author": "Emily Johnson",
-    "publication_date": "30-09-2022"
-  },
-  {
-    "title": "Genghis Khan: The Rise of the Mongol Empire",
-    "author": "David Brown",
-    "publication_date": "10-01-2024"
-  },
-  {
-    "title": "The French Revolution: A Turning Point in History",
-    "author": "Sarah Davis",
-    "publication_date": "20-07-2023"
-  },
-  {
-    "title": "The Industrial Revolution: Impact on Society",
-    "author": "Michael Wilson",
-    "publication_date": "05-12-2022"
-  }
+    {
+        "title": "The Fall of Rome: A Historical Analysis",
+        "author": "John Smith",
+        "publication_date": "2023-05-15",
+        "actions": [
+            {
+                "title": "The Kiss",
+                "type": "painting",
+                "date": "1907-1908",
+                "location": "Österreichische Galerie Belvedere, Vienna"
+            },
+            {
+                "title": "Portrait of Adele Bloch-Bauer I",
+                "type": "painting",
+                "date": "1907",
+                "location": "Neue Galerie New York"
+            },
+            {
+                "title": "Judith and the Head of Holofernes",
+                "type": "painting",
+                "date": "1901",
+                "location": "Österreichische Galerie Belvedere, Vienna"
+            },
+            {
+                "title": "The Tree of Life",
+                "type": "painting",
+                "date": "1905",
+                "location": "Museum of Applied Arts, Vienna"
+            },
+            {
+                "title": "Beethoven Frieze",
+                "type": "painting",
+                "date": "1902",
+                "location": "Secession Building, Vienna"
+            },
+            {
+                "title": "Portrait of Eugenia Primavesi",
+                "type": "painting",
+                "date": "1913-1914",
+                "location": "Neue Galerie New York"
+            },
+            {
+                "title": "Adele Bloch-Bauer II",
+                "type": "painting",
+                "date": "1912",
+                "location": "Private Collection"
+            }
+        ]
+    },
+    {
+        "title": "The Renaissance: A Cultural Rebirth",
+        "author": "Emily Johnson",
+        "publication_date": "2022-09-30",
+        "actions": [
+            {
+                "title": "Theory of General Relativity",
+                "type": "scientific theory",
+                "date": "1915",
+                "location": "Berlin, Germany"
+            },
+            {
+                "title": "Photoelectric Effect",
+                "type": "scientific discovery",
+                "date": "1905",
+                "location": "Bern, Switzerland"
+            },
+            {
+                "title": "Mass-Energy Equivalence (E=mc^2)",
+                "type": "scientific principle",
+                "date": "1905",
+                "location": "Bern, Switzerland"
+            },
+            {
+                "title": "Brownian Motion",
+                "type": "scientific discovery",
+                "date": "1905",
+                "location": "Bern, Switzerland"
+            },
+            {
+                "title": "Unified Field Theory",
+                "type": "scientific theory",
+                "date": "1930s",
+                "location": "Princeton, USA"
+            },
+            {
+                "title": "Nobel Prize in Physics",
+                "type": "award",
+                "date": "1921",
+                "location": "Stockholm, Sweden"
+            }
+        ]
+    },
+    {
+        "title": "Genghis Khan: The Rise of the Mongol Empire",
+        "author": "David Brown",
+        "publication_date": "2024-01-10",
+        "actions": []
+    },
+    {
+        "title": "The French Revolution: A Turning Point in History",
+        "author": "Sarah Davis",
+        "publication_date": "2023-07-20",
+        "actions": []
+    },
+    {
+        "title": "The Industrial Revolution: Impact on Society",
+        "author": "Michael Wilson",
+        "publication_date": "2022-12-05",
+        "actions": []
+    },
+    {
+        "title": "The Fall of Rome: A Historical Analysis",
+        "author": "John Smith",
+        "publication_date": "2023-05-15",
+        "actions": []
+    },
+    {
+        "title": "The Renaissance: A Cultural Rebirth",
+        "author": "Emily Johnson",
+        "publication_date": "2022-09-30",
+        "actions": []
+    },
+    {
+        "title": "Genghis Khan: The Rise of the Mongol Empire",
+        "author": "David Brown",
+        "publication_date": "2024-01-10",
+        "actions": []
+    },
+    {
+        "title": "The French Revolution: A Turning Point in History",
+        "author": "Sarah Davis",
+        "publication_date": "2023-07-20",
+        "actions": []
+    },
+    {
+        "title": "The Industrial Revolution: Impact on Society",
+        "author": "Michael Wilson",
+        "publication_date": "2022-12-05",
+        "actions": []
+    }
 ]

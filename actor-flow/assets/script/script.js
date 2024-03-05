@@ -64,6 +64,8 @@ function search_autocomplete(){
 function load_data(){
 
     const title_box = document.getElementById('articles_box');
+    const articles_count_box = document.getElementById('articles_count');
+    const articles_actions_box = document.getElementById('articles_actions');
     let output = ''
 
     fetch('assets/data/data.json')
@@ -75,17 +77,32 @@ function load_data(){
         })
         .then(data => {
 
-            data.forEach((item,i) => {
+            // sort
+            data.sort((a, b) => {
+                return a.publication_date - b.publication_date;
+            });
 
+            // filter
+            let searchString = ''
+            filtered_data = data.filter(a => a.author.includes(searchString));
+            // filtered_data = data
+
+            const articles = filtered_data.length
+            
+            let all_actions = 0
+
+            // loop data
+            filtered_data.forEach((item,i) => {
+
+                let bg = ''
                 let title = item.title;
                 let author = item.author;
                 let date = item.publication_date;
-                let bg = ''
+                let actions_count = item.actions.length
 
                 if (i % 2 == 0) {
                     bg = 'bg'
                 }
-
 
                 output += '<li class="' + bg + '"">';
                 output += '<div class="article item">'
@@ -104,7 +121,14 @@ function load_data(){
 
                 output += '</div>'
 
-                output += '<div class="timeline item">...</div>'
+                output += '<div class="article_timeline item">' 
+                if (actions_count > 0) {
+                    output += actions_count + ' actions'
+
+                    all_actions += actions_count
+                }
+                output += '</div>'
+
                 output += '<div class="info item">info</div>'
                 output += '<div class="link item"><a href="#">link</a></div>'
 
@@ -113,8 +137,10 @@ function load_data(){
 
             });
 
+            articles_count_box.innerHTML = articles
             title_box.innerHTML = output
-            
+            articles_actions_box.innerHTML = all_actions
+                
             console.log(data);
         
         })
