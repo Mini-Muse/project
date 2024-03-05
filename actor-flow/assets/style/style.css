@@ -178,7 +178,7 @@ black_lines     #797373
     padding: 0 20px;
 
     display: grid;
-    grid-template-columns: 2fr 4fr 2fr 0.25fr;
+    grid-template-columns: 2fr 4fr 1.5fr 0.25fr;
     grid-column-gap: 10px;
     column-gap: ;
 }
@@ -196,7 +196,7 @@ black_lines     #797373
 
 #articles_box li {
     display: grid;
-    grid-template-columns: 2fr 4fr 2fr 0.25fr;
+    grid-template-columns: 2fr 4fr 1.5fr 0.25fr;
     grid-column-gap: 10px;
     border-bottom: 1px solid #bcbcbc;
     padding: 0 20px;
@@ -210,22 +210,22 @@ black_lines     #797373
 .article {
 }
 
-    .article_title {
+    #article_title {
         font-family: "Source Serif 4", Arial, sans-serif;
         font-weight: bold;
+        margin-bottom: 0.5rem;
     }
 
-.timeline {
+#timeline {
     border-left: 1px solid #bcbcbc;
     border-right: 1px solid #bcbcbc;
-    padding-left: 10px;
 }
 
-.info {
+#info {
     border-right: 1px solid #bcbcbc;
 }
 
-.link {
+#link {
 }
 
 

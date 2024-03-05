@@ -63,6 +63,58 @@ function search_autocomplete(){
 
 function load_data(){
 
+    const title_box = document.getElementById('articles_box');
+    let output = ''
+
+    fetch('assets/data/data.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); 
+        })
+        .then(data => {
+
+            data.forEach((item) => {
+
+                title = item.title;
+                author = item.author;
+                date = item.publication_date;
+
+                output += '<li>';
+                output += '<div class="article item">'
+
+                    output += '<div id="article_title">'
+                    output += title
+                    output += '</div>'
+
+                    output += '<div id="author">'
+                    output += 'by ' + author
+                    output += '</div>'
+
+                    output += '<div id="author">'
+                    output += date
+                    output += '</div>'
+
+                output += '</div>'
+
+                output += '<div class="timeline item">timeline</div>'
+                output += '<div class="info item">info</div>'
+                output += '<div class="link item"><a href="#">link</a></div>'
+
+                output += '</div>'
+                output += '</li>'
+
+            });
+
+            title_box.innerHTML = output
+            
+            console.log(data);
+        
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
 }
 
 
@@ -70,6 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
     menu();
     search_autocomplete();
 
-    // load_data();
+    load_data();
 });
 
