@@ -78,16 +78,11 @@ lines = #8F8F8F
 	background-color: white;
 }
 
-
 /* -------- search options -------- */ 
-
-#search_options {
-
-}
 
 #search_box {
 	font-family: "Source Serif 4", Arial, sans-serif;
-	height: 12rem;
+	height: 9rem;
 	border-bottom: 1px solid #8F8F8F;
 	padding: 20px;
 	display: flex;
@@ -109,16 +104,17 @@ lines = #8F8F8F
 	font-weight: bold;
 	font-size: 4.5rem;
 	width: 95%;
+    background-color: transparent;
 }
 
 #autocomplete_list {
     list-style: none;
     padding: 0;
     margin: 0;
-    border: 1px solid #ccc;
+    border: 1px solid #8F8F8F;
     position: absolute;
     background-color: white;
-    width: 80%;
+    width: 89%;
     height: 10rem;
     overflow-y: scroll;
     display: none;
@@ -131,6 +127,25 @@ lines = #8F8F8F
 
 #autocomplete_list li:hover {
     background-color: #f0f0f0;
+}
+
+/* -------- filter and sort -------- */ 
+
+#filter_sort_options {
+    height: 5rem;
+    border-bottom: 1px solid #8F8F8F;
+    display: flex;
+    justify-content: space-between;
+}
+
+#filter_sort_options .controller {
+    width: 50%;
+    padding: 0 20px;
+    line-height: 5rem;
+}
+
+#filter_sort_options .controller:first-child {
+    border-right: 1px solid #8F8F8F;;
 }
 
 /* -------- other -------- */ 
@@ -183,7 +198,7 @@ lines = #8F8F8F
     }
 
     .menu .current {
-		color: #ccc;
+		color: #8F8F8F;
 	}
 
 	/* -------- search options -------- */ 
@@ -191,4 +206,24 @@ lines = #8F8F8F
 	#query input[type=text] {
 		font-size: 2rem;
 	}
+
+    #autocomplete_list {
+        width: 77.5%;
+    }
+
+    .lens {
+        display: none;
+    }
+
+    #search_box .content{
+        margin: 0;
+    }
+
+    #query input[type=text] {
+        width: 100%;
+    }
+
+    #autocomplete_list {
+        width: 91%;
+    }
 }
