@@ -7,6 +7,14 @@ a {
 	text-decoration: none;
 }
 
+/* -------- colors -------- 
+
+gray  = #D9D9D9
+lines = #8F8F8F
+
+ -------- menu -------- */ 
+
+
 #navbar, #navbar a {
     color: black;
 }
@@ -14,8 +22,7 @@ a {
 #navbar {
     background-color: #D9D9D9;
     height: 3.5rem;
-    border-bottom: 1px solid gray;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid #8F8F8F;
 }
 
 .box {
@@ -23,14 +30,6 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;	
-}
-
-.container {
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .navbar-header {
@@ -66,7 +65,6 @@ a {
     padding: 0 20px;
     font-weight: normal;
     height: 3.5rem;
-    background-color: white;
     line-height: 3.5rem;
 }
 
@@ -76,10 +74,57 @@ a {
     font-size: 1rem;
 }
 
+.menu .current {
+	background-color: white;
+}
+
+
+/* -------- search options -------- */ 
+
+#search_options {
+
+}
+
+#search_box {
+	font-family: "Source Serif 4", Arial, sans-serif;
+	height: 12rem;
+	border-bottom: 1px solid #8F8F8F;
+	padding: 20px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#query {
+	margin-bottom: 0.5rem;
+	width: 100%;
+}
+
+#search_box .content {
+	margin-left: 1rem;
+}
+
+#query input[type=text] {
+	font-family: "Source Serif 4", Arial, sans-serif;
+	font-weight: bold;
+	font-size: 4.5rem;
+	width: 100%;
+}
+
+/* -------- other -------- */ 
+
+.container {
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 @media screen and (max-width: 768px) {
-/*	#navbar {
-		height: 2rem;
-	}*/
+
+	/* -------- menu -------- */ 
 
     .menu {
         display: none;
@@ -105,12 +150,23 @@ a {
 
     .menu li {
         padding: 10px 20px;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid #D9D9D9;
         height: 2.5rem;
         line-height: 2.5rem;
+        background-color: white;
     }
 
     .menu li:first-child {
-    	border-top: 1px solid gray;
+    	border-top: 1px solid #D9D9D9;
     }
+
+    .menu .current {
+		color: #ccc;
+	}
+
+	/* -------- search options -------- */ 
+
+	#query input[type=text] {
+		font-size: 2rem;
+	}
 }
