@@ -108,7 +108,29 @@ lines = #8F8F8F
 	font-family: "Source Serif 4", Arial, sans-serif;
 	font-weight: bold;
 	font-size: 4.5rem;
-	width: 100%;
+	width: 95%;
+}
+
+#autocomplete_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    position: absolute;
+    background-color: white;
+    width: 80%;
+    height: 10rem;
+    overflow-y: scroll;
+    display: none;
+}
+
+#autocomplete_list li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#autocomplete_list li:hover {
+    background-color: #f0f0f0;
 }
 
 /* -------- other -------- */ 
