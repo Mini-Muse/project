@@ -17,6 +17,12 @@ black_lines     #797373
  -------- menu -------- */ 
 
 
+/* -------- colors -------- */
+
+.bg {
+    background-color: #f6f6f6;
+}
+
 #navbar, #navbar a {
     color: black;
 }
@@ -191,7 +197,7 @@ black_lines     #797373
 /* -------- articles -------- */ 
 
 #articles {
-    margin: 0;
+    margin: 0 0 3rem;
 }
 
 #articles_box li {
@@ -214,6 +220,14 @@ black_lines     #797373
         font-family: "Source Serif 4", Arial, sans-serif;
         font-weight: bold;
         margin-bottom: 0.5rem;
+    }
+
+    #article_author {
+        margin-bottom: 0.5rem;
+    }
+
+    #article_date {
+        margin-bottom: 1rem;
     }
 
 #timeline {

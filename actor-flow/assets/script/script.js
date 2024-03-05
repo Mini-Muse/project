@@ -75,30 +75,36 @@ function load_data(){
         })
         .then(data => {
 
-            data.forEach((item) => {
+            data.forEach((item,i) => {
 
-                title = item.title;
-                author = item.author;
-                date = item.publication_date;
+                let title = item.title;
+                let author = item.author;
+                let date = item.publication_date;
+                let bg = ''
 
-                output += '<li>';
+                if (i % 2 == 0) {
+                    bg = 'bg'
+                }
+
+
+                output += '<li class="' + bg + '"">';
                 output += '<div class="article item">'
 
                     output += '<div id="article_title">'
                     output += title
                     output += '</div>'
 
-                    output += '<div id="author">'
+                    output += '<div id="article_author">'
                     output += 'by ' + author
                     output += '</div>'
 
-                    output += '<div id="author">'
+                    output += '<div id="article_date">'
                     output += date
                     output += '</div>'
 
                 output += '</div>'
 
-                output += '<div class="timeline item">timeline</div>'
+                output += '<div class="timeline item">...</div>'
                 output += '<div class="info item">info</div>'
                 output += '<div class="link item"><a href="#">link</a></div>'
 
