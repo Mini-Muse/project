@@ -19,6 +19,7 @@ function search_autocomplete(){
         "Cleopatra VII",
         "Elizabeth I",
         "Genghis Khan",
+        "Gustav Klimt",
         "Joan of Arc",
         "Julius Caesar",
         "Leonardo da Vinci",
@@ -58,10 +59,17 @@ function search_autocomplete(){
         autocompleteList.appendChild(listItem);
       });
     }
+}
+
+function load_data(){
 
 }
+
+
 document.addEventListener('DOMContentLoaded', function() {
     menu();
     search_autocomplete();
+
+    // load_data();
 });
 

@@ -5,12 +5,14 @@ body {
 
 a {
 	text-decoration: none;
+    color: #7c71f8;
 }
 
 /* -------- colors -------- 
 
-gray  = #D9D9D9
-lines = #8F8F8F
+gray_bg         #D9D9D9
+gray_lines      #bcbcbc
+black_lines     #797373
 
  -------- menu -------- */ 
 
@@ -22,7 +24,10 @@ lines = #8F8F8F
 #navbar {
     background-color: #D9D9D9;
     height: 3.5rem;
-    border-bottom: 1px solid #8F8F8F;
+    border-bottom: 1px solid #797373;
+    position: fixed;
+    width: 100%;
+    top: 0;
 }
 
 .box {
@@ -80,10 +85,14 @@ lines = #8F8F8F
 
 /* -------- search options -------- */ 
 
+#search_options {
+    margin-top: 3.5rem;
+}
+
 #search_box {
 	font-family: "Source Serif 4", Arial, sans-serif;
 	height: 9rem;
-	border-bottom: 1px solid #8F8F8F;
+	border-bottom: 1px solid #bcbcbc;
 	padding: 20px;
 	display: flex;
 	justify-content: flex-start;
@@ -111,7 +120,7 @@ lines = #8F8F8F
     list-style: none;
     padding: 0;
     margin: 0;
-    border: 1px solid #8F8F8F;
+    border: 1px solid #bcbcbc;
     position: absolute;
     background-color: white;
     width: 89%;
@@ -132,8 +141,8 @@ lines = #8F8F8F
 /* -------- filter and sort -------- */ 
 
 #filter_sort_options {
-    height: 5rem;
-    border-bottom: 1px solid #8F8F8F;
+    height: 5.5rem;
+    border-bottom: 1px solid #797373;
     display: flex;
     justify-content: space-between;
 }
@@ -145,17 +154,78 @@ lines = #8F8F8F
 }
 
 #filter_sort_options .controller:first-child {
-    border-right: 1px solid #8F8F8F;;
+    border-right: 1px solid #bcbcbc;
 }
 
-/* -------- other -------- */ 
+/* -------- data recap -------- */ 
 
-.container {
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#data_recap {
+    border-bottom: 1px solid #797373;
+}
+
+#data_recap .recap {
+    height: 4rem;
+    line-height: 4rem;
+    padding: 0 20px;
+}
+
+/* -------- timeline -------- */ 
+
+#timeline .recap {
+    border-bottom: 1px solid #bcbcbc;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0 20px;
+
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr 0.25fr;
+    grid-column-gap: 10px;
+    column-gap: ;
+}
+
+#timeline .recap .shift {
+    background-color: #f6f6f6;
+    grid-column-start: 2;
+}
+
+/* -------- articles -------- */ 
+
+#articles {
+    margin: 0;
+}
+
+#articles_box li {
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr 0.25fr;
+    grid-column-gap: 10px;
+    border-bottom: 1px solid #bcbcbc;
+    padding: 0 20px;
+}
+
+#articles_box li .item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.article {
+}
+
+    .article_title {
+        font-family: "Source Serif 4", Arial, sans-serif;
+        font-weight: bold;
+    }
+
+.timeline {
+    border-left: 1px solid #bcbcbc;
+    border-right: 1px solid #bcbcbc;
+    padding-left: 10px;
+}
+
+.info {
+    border-right: 1px solid #bcbcbc;
+}
+
+.link {
 }
 
 
@@ -198,7 +268,7 @@ lines = #8F8F8F
     }
 
     .menu .current {
-		color: #8F8F8F;
+		color: #bcbcbc;
 	}
 
 	/* -------- search options -------- */ 
