@@ -5,7 +5,7 @@
 }
 
 #search_box {
-	font-family: "Source Serif 4", Arial, sans-serif;
+	font-family: "Source Serif 4", Times, serif;
 	height: 9rem;
 	border-bottom: 1px solid #bcbcbc;
 	padding: 20px;
@@ -24,7 +24,7 @@
 }
 
 #query input[type=text] {
-	font-family: "Source Serif 4", Arial, sans-serif;
+	font-family: "Source Serif 4", Times, serif;
 	font-weight: bold;
 	font-size: 4.5rem;
 	width: 95%;
@@ -151,7 +151,7 @@
 }
 
     #article_title {
-        font-family: "Source Serif 4", Arial, sans-serif;
+        font-family: "Source Serif 4", Times, serif;
         font-weight: bold;
         margin-bottom: 0.5rem;
     }

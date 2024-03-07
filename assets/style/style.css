@@ -8,7 +8,7 @@
     align-items: center;
     display: flex;
     justify-content: space-evenly;
-    font-family: "Source Serif 4", Arial, sans-serif;
+    font-family: "Source Serif 4", Times, serif;
 }
 
 #cover p {
