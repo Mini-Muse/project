@@ -111,21 +111,20 @@ function load_data(){
 
                 output += '<div class="article_timeline item" style="display: flex;">'
                 colors = [
-                    'chocolate',
-                    '#b6adad',
-                    'violet',
-                    'tomato',
-                    'lightblue'
+                    '#F0E3CB',
+                    '#C9DFE5',
+                    '#E0BBB6',
+                    '#BAB7DE',
+                    '#C1DDAB'
                 ] 
 
                 // let random = 
                 for (let i = 0; i < Math.floor(Math.random(5)*7 + 1); i++) {
 
-                    output += '<div style="background-color:'+ colors[Math.floor(Math.random(5))+1] +'; width: 5px; height: 100%; margin-left:' +  ((Math.random(10)*20) + 3)  +'%' + ';"></div>'
+                    randomColor = colors[Math.floor(Math.random() * colors.length)];  
+                    output += '<div style="background-color:'+ randomColor +'; width: 5px; height: 100%; margin-left:' +  ((Math.random(10)*20) + 3)  +'%' + ';"></div>'
                     
-                    // Math.floor(Math.random(colors.length + 1))
-                    // console.log(i)
-                    // console.log(Math.floor(Math.random(5))+1)
+                    console.log(randomColor)
                 }
 
                 // if (actions_count > 0) {
