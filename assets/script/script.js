@@ -1,3 +1,15 @@
+function menu(){
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+
+    menuToggle.addEventListener('click', function() {
+        menu.classList.toggle('active');
+        const expanded = menu.getAttribute('aria-expanded') === 'true' || false;
+        menu.setAttribute('aria-expanded', !expanded);
+    });
+
+}
+
 function load_footer(){
     const footer_box = document.getElementById('footer');
     let footer_url = 'assets/content/footer.html';
@@ -20,4 +32,5 @@ function load_footer(){
 
 document.addEventListener("DOMContentLoaded", function(){
     load_footer()
+    menu()
 });
