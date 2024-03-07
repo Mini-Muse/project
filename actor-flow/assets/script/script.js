@@ -121,12 +121,30 @@ function load_data(){
 
                 output += '</div>'
 
-                output += '<div class="article_timeline item">' 
-                if (actions_count > 0) {
-                    output += actions_count + ' actions'
+                output += '<div class="article_timeline item" style="display: flex;">'
+                colors = [
+                    'chocolate',
+                    '#b6adad',
+                    'violet',
+                    'tomato',
+                    'lightblue'
+                ] 
 
-                    all_actions += actions_count
+                // let random = 
+                for (let i = 0; i < Math.floor(Math.random(5)*7 + 1); i++) {
+                    console.log(i)
+
+                    output += '<div style="background-color:'+ colors[Math.floor(Math.random(5))+1] +'; width: 5px; height: 100%; margin-left:' +  ((Math.random(10)*20) + 3)  +'%' + ';"></div>'
+                    
+                    // Math.floor(Math.random(colors.length + 1))
+                    console.log(Math.floor(Math.random(5))+1)
                 }
+
+                // if (actions_count > 0) {
+                //     output += actions_count + ' actions'
+
+                //     all_actions += actions_count
+                // }
                 output += '</div>'
 
                 output += '<div class="info item">info</div>'
