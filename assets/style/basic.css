@@ -108,18 +108,6 @@ black_lines     #797373
     margin-bottom: 2.5rem;
 }
 
-@media screen and (max-width: 768px) {
-    #cover p {
-        width: 100%;
-    }
-
-    #cover p {
-        width: 100%;
-        font-size: 1.5rem;
-        line-height: 2.5rem;
-    }
-}
-
 
 @media screen and (max-width: 768px) {
 
