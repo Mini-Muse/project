@@ -89,10 +89,35 @@ black_lines     #797373
 	background-color: white;
 }
 
+
 /* -------- footer -------- */
 
 #footer {
     padding: 20px;
+}
+
+#footer strong {
+    font-weight: bold;
+}
+
+#footer li {
+    margin-bottom: 1rem;
+}
+
+#footer div {
+    margin-bottom: 2.5rem;
+}
+
+@media screen and (max-width: 768px) {
+    #cover p {
+        width: 100%;
+    }
+
+    #cover p {
+        width: 100%;
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+    }
 }
 
 
