@@ -123,8 +123,7 @@ function load_data(){
 
                     randomColor = colors[Math.floor(Math.random() * colors.length)];  
                     output += '<div style="background-color:'+ randomColor +'; width: 5px; height: 100%; margin-left:' +  ((Math.random(10)*20) + 3)  +'%' + ';"></div>'
-                    
-                    console.log(randomColor)
+                    // console.log(randomColor)
                 }
 
                 // if (actions_count > 0) {
@@ -156,7 +155,6 @@ function load_data(){
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    menu();
     search_autocomplete();
 
     load_data();
