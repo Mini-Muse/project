@@ -201,6 +201,7 @@
 
     .menu.active {
         display: flex;
+        border-bottom: 1px solid #797373;
     }
 
     .menu li {
@@ -213,6 +214,10 @@
 
     .menu li:first-child {
     	border-top: 1px solid #D9D9D9;
+    }
+
+    .menu li:last-child {
+        border-bottom: none;
     }
 
     .menu .current {
