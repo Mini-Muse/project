@@ -132,12 +132,12 @@ function load_data(){
 
                 // let random = 
                 for (let i = 0; i < Math.floor(Math.random(5)*7 + 1); i++) {
-                    console.log(i)
 
                     output += '<div style="background-color:'+ colors[Math.floor(Math.random(5))+1] +'; width: 5px; height: 100%; margin-left:' +  ((Math.random(10)*20) + 3)  +'%' + ';"></div>'
                     
                     // Math.floor(Math.random(colors.length + 1))
-                    console.log(Math.floor(Math.random(5))+1)
+                    // console.log(i)
+                    // console.log(Math.floor(Math.random(5))+1)
                 }
 
                 // if (actions_count > 0) {
@@ -159,7 +159,7 @@ function load_data(){
             title_box.innerHTML = output
             articles_actions_box.innerHTML = all_actions
                 
-            console.log(data);
+            // console.log(data);
         
         })
         .catch(error => {
