@@ -34,6 +34,7 @@ black_lines     #797373
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 1;
 }
 
 .box {

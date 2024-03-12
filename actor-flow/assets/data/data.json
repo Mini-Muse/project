@@ -3,43 +3,26 @@
         "title": "The Fall of Rome: A Historical Analysis",
         "author": "John Smith",
         "publication_date": "2023-05-15",
+        "link":"#",
         "actions":
         [
             {
-                "title": "The Kiss",
-                "type": "painting",
-                "date": 1907,
-                "location": "Österreichische Galerie Belvedere, Vienna"
+                "title": "Birth of Napoleon Bonaparte",
+                "type": "Birth",
+                "date": "1769-08-15",
+                "location": "Ajaccio, Corsica, France"
             },
             {
-                "title": "Judith and the Head of Holofernes",
-                "type": "painting",
-                "date": 1901,
-                "location": "Österreichische Galerie Belvedere, Vienna"
+                "title": "Enrolls in military school",
+                "type": "Education",
+                "date": "1779",
+                "location": "France"
             },
             {
-                "title": "The Tree of Life",
-                "type": "painting",
-                "date": 1905,
-                "location": "Museum of Applied Arts, Vienna"
-            },
-            {
-                "title": "Beethoven Frieze",
-                "type": "painting",
-                "date": 1902,
-                "location": "Secession Building, Vienna"
-            },
-            {
-                "title": "Portrait of Eugenia Primavesi",
-                "type": "painting",
-                "date": 1913,
-                "location": "Neue Galerie New York"
-            },
-            {
-                "title": "Adele Bloch-Bauer II",
-                "type": "painting",
-                "date": 1912,
-                "location": "Private Collection"
+                "title": "Graduates from military school",
+                "type": "Education",
+                "date": "1785",
+                "location": "France"
             }
         ]
     },
@@ -47,43 +30,20 @@
         "title": "The Renaissance: A Cultural Rebirth",
         "author": "Emily Johnson",
         "publication_date": "2022-09-30",
+        "link":"#",
         "actions":
         [
             {
-                "title": "Theory of General Relativity",
-                "type": "scientific theory",
-                "date": 1915,
-                "location": "Berlin, Germany"
+                "title": "Begins military career",
+                "type": "Military Career",
+                "date": "1785",
+                "location": "France"
             },
             {
-                "title": "Photoelectric Effect",
-                "type": "scientific discovery",
-                "date": 1905,
-                "location": "Bern, Switzerland"
-            },
-            {
-                "title": "Mass-Energy Equivalence (E=mc^2)",
-                "type": "scientific principle",
-                "date": 1905,
-                "location": "Bern, Switzerland"
-            },
-            {
-                "title": "Brownian Motion",
-                "type": "scientific discovery",
-                "date": 1905,
-                "location": "Bern, Switzerland"
-            },
-            {
-                "title": "Unified Field Theory",
-                "type": "scientific theory",
-                "date": 1930,
-                "location": "Princeton, USA"
-            },
-            {
-                "title": "Nobel Prize in Physics",
-                "type": "award",
-                "date": 1921,
-                "location": "Stockholm, Sweden"
+                "title": "Promoted to captain",
+                "type": "Military Career",
+                "date": "1792",
+                "location": "France"
             }
         ]
     },
@@ -91,69 +51,14 @@
         "title": "Albert Einstein: A Scientific Legacy",
         "author": "John Smith",
         "publication_date": "2023-05-15",
+        "link":"#",
         "actions":
         [
             {
-                "title": "Theory of General Relativity",
-                "type": "scientific theory",
-                "date": 1915,
-                "location": "Berlin, Germany"
-            },
-            {
-                "title": "Photoelectric Effect",
-                "type": "scientific discovery",
-                "date": 1905,
-                "location": "Bern, Switzerland"
-            },
-            {
-                "title": "Mass-Energy Equivalence (E=mc^2)",
-                "type": "scientific principle",
-                "date": 1905,
-                "location": "Bern, Switzerland"
-            },
-            {
-                "title": "Brownian Motion",
-                "type": "scientific discovery",
-                "date": 1905,
-                "location": "Bern, Switzerland"
-            },
-            {
-                "title": "Unified Field Theory",
-                "type": "scientific theory",
-                "date": 1930,
-                "location": "Princeton, USA"
-            },
-            {
-                "title": "Nobel Prize in Physics",
-                "type": "award",
-                "date": 1921,
-                "location": "Stockholm, Sweden"
-            }
-        ]
-    },
-    {
-        "title": "Leonardo da Vinci: Renaissance Polymath",
-        "author": "Sophia Martinez",
-        "publication_date": "2023-08-20",
-        "actions":
-        [
-            {
-                "title": "Mona Lisa",
-                "type": "artwork",
-                "date": 1503,
-                "location": "Florence, Italy"
-            },
-            {
-                "title": "The Last Supper",
-                "type": "artwork",
-                "date": 1495,
-                "location": "Milan, Italy"
-            },
-            {
-                "title": "Vitruvian Man",
-                "type": "drawing",
-                "date": 1490,
-                "location": "Italy"
+                "title": "Leads French forces at Toulon",
+                "type": "Military Campaign",
+                "date": "1793",
+                "location": "Toulon, France"
             }
         ]
     },
@@ -161,19 +66,14 @@
         "title": "Elizabeth I: The Virgin Queen",
         "author": "Michael Brown",
         "publication_date": "2023-09-18",
+        "link":"#",
         "actions":
         [
-            {
-                "title": "Defeat of the Spanish Armada",
-                "type": "military victory",
-                "date": 1588,
-                "location": "English Channel"
-            },
-            {
-                "title": "Golden Age of England",
-                "type": "cultural flourishing",
-                "date": 1598,
-                "location": "England"
+           {
+                "title": "Promoted to brigadier general",
+                "type": "Military Campaign",
+                "date": "1793",
+                "location": "Toulon, France"
             }
         ]
     },
@@ -181,59 +81,26 @@
         "title": "Napoleon Bonaparte: Emperor of France",
         "author": "Daniel Lee",
         "publication_date": "2023-07-25",
+        "link":"#",
         "actions":
         [
             {
-                "title": "Napoleonic Wars",
-                "type": "military campaigns",
-                "date": 1803,
-                "location": "Europe"
+                "title": "Promoted to brigadier general",
+                "type": "Military Campaign",
+                "date": "1793",
+                "location": "Toulon, France"
             },
             {
-                "title": "Napoleonic Code",
-                "type": "legal reform",
-                "date": 1804,
-                "location": "France"
-            }
-        ]
-    },
-    {
-        "title": "Genghis Khan: Mongol Conqueror",
-        "author": "Jessica Adams",
-        "publication_date": "2023-06-14",
-        "actions":
-        [
-            {
-                "title": "Conquest of Eurasia",
-                "type": "military campaign",
-                "date": 1200,
-                "location": "Asia and Europe"
+                "title": "Signs Treaty of Campo Formio",
+                "type": "Diplomatic Event",
+                "date": "1797",
+                "location": "Campo Formio, Italy"
             },
             {
-                "title": "Establishment of the Mongol Empire",
-                "type": "political achievement",
-                "date": 1206,
-                "location": "Mongolia"
-            }
-        ]
-    },
-    {
-        "title": "Joan of Arc: French Heroine",
-        "author": "Robert Johnson",
-        "publication_date": "2023-12-09",
-        "actions":
-        [
-            {
-                "title": "Battle of Orleans",
-                "type": "military victory",
-                "date": 1429,
-                "location": "Orleans, France"
-            },
-            {
-                "title": "Liberation of Orléans",
-                "type": "military action",
-                "date": 1429,
-                "location": "Orleans, France"
+                "title": "Reinterred in Les Invalides",
+                "type": "Burial",
+                "date": "1861-12-02",
+                "location": "Paris, France"
             }
         ]
     }

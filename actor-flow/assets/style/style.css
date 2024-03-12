@@ -189,6 +189,11 @@
     box-shadow:inset 0px 0px 0px 2px #8b7f7f;
 }
 
+/* -------- timeline -------- */ 
+.the_axis {
+    opacity: 0.5;
+} 
+
 @media screen and (max-width: 768px) {
 
 	/* -------- menu -------- */ 
