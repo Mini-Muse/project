@@ -148,6 +148,7 @@
 }
 
 .article {
+
 }
 
     #article_title {
@@ -168,6 +169,11 @@
         margin-bottom: 1rem;
     }
 
+.act {
+    width: 5px; 
+    height: 100%; 
+}
+
 #timeline {
 /*    border-left: 1px solid #bcbcbc;
     border-right: 1px solid #bcbcbc;*/
@@ -176,10 +182,6 @@
 #info {
     border-right: 1px solid #bcbcbc;
 }
-
-#link {
-}
-
 
 @media screen and (max-width: 768px) {
 

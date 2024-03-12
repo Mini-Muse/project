@@ -49,6 +49,39 @@ function search_autocomplete(){
     }
 }
 
+function timeline_labels() {
+    let labels = document.getElementsByClassName('act');
+    let info_boxes = document.getElementsByClassName('info_box');
+
+    function empty_infobox(){
+        for (let i = 0; i < info_boxes.length; i++) {
+            info_boxes[i].innerHTML = ''
+        }
+    }
+
+    for (let item = 0; item < labels.length; item++) {
+        labels[item].addEventListener("mouseover",function(e) {
+
+            let per = this.getAttribute('data-per') 
+            let art = this.getAttribute('data-art') 
+            let act = this.getAttribute('data-act')
+
+            let title = this.getAttribute('data-tit') 
+            let date = this.getAttribute('data-dat') 
+            let location = this.getAttribute('data-loc') 
+
+            // print text
+            empty_infobox()
+            let the_info_box = document.getElementById('info_box_' + art);
+            the_info_box.innerHTML = title + '<br/>' + date + '<br/>' + location
+            // the_info_box.innerHTML = per + ' ' + art + ' ' + act
+
+            console.log(per,art,act)
+
+        })
+    }
+}
+
 function load_data(){
 
     const title_box = document.getElementById('articles_box');
@@ -87,7 +120,6 @@ function load_data(){
             // filtered_data = data
 
             const articles = filtered_data.length
-            
             let all_actions = 0
 
             // loop data
@@ -97,8 +129,10 @@ function load_data(){
                 let title = item.title;
                 let author = item.author;
                 let date = item.publication_date;
+                let actions = item.actions
                 let actions_count = item.actions.length
                 let link = '#'
+                let actor_id = 1
 
                 if (i % 2 == 0) {
                     bg = 'bg'
@@ -132,22 +166,28 @@ function load_data(){
                     '#C1DDAB'
                 ] 
 
-                // let random = 
-                for (let i = 0; i < Math.floor(Math.random(5)*7 + 1); i++) {
+
+                actions.sort((a, b) => {
+                    return a.date - b.date;
+                });
+
+                for (let a = 0; a < actions.length; a++) {
+
+                    all_actions += a
 
                     randomColor = colors[Math.floor(Math.random() * colors.length)];  
-                    output += '<div style="background-color:'+ randomColor +'; width: 5px; height: 100%; margin-left:' +  ((Math.random(10)*20) + 3)  +'%' + ';"></div>'
+                    metadata = 'data-per="' + actor_id + '" data-art="' + i + '"' + 'data-act="' + a + '" '
+                    metadata += 'data-tit="' + actions[a].title + '"'
+                    metadata += 'data-dat="' + actions[a].date + '"'
+                    metadata += 'data-loc="' + actions[a].location + '"'
+                
+                    output += '<div class="act" ' + metadata + 'style="background-color:'+ randomColor +'; margin-left:' +  ((Math.random(10)*15) + 3)  +'%' + ';"></div>'
                     // console.log(randomColor)
                 }
 
-                // if (actions_count > 0) {
-                //     output += actions_count + ' actions'
-
-                //     all_actions += actions_count
-                // }
                 output += '</div>'
 
-                output += '<div class="info item">info</div>'
+                output += '<div class="info_box item" id="info_box_' + i + '"></div>'
 
                 output += '</div>'
                 output += '</li>'
@@ -157,8 +197,9 @@ function load_data(){
             articles_count_box.innerHTML = articles
             title_box.innerHTML = output
             articles_actions_box.innerHTML = all_actions
-                
             // console.log(data);
+
+            timeline_labels();
         
         })
         .catch(error => {
@@ -171,5 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
     search_autocomplete();
 
     load_data();
+    
 });
 
