@@ -112,7 +112,7 @@
     padding: 0 20px;
 
     display: grid;
-    grid-template-columns: 2fr 7.5fr 2fr 0.5fr;
+    grid-template-columns: 2fr 7.5fr 1.5fr;
     grid-column-gap: 10px;
 }
 
@@ -136,7 +136,7 @@
 
 #articles_box li {
     display: grid;
-    grid-template-columns: 2fr 7.5fr 2fr 0.5fr;
+    grid-template-columns: 2fr 7.5fr 1.5fr;
     grid-column-gap: 10px;
     border-bottom: 1px solid #bcbcbc;
     padding: 0 20px;
@@ -154,6 +154,10 @@
         font-family: "Source Serif 4", Times, serif;
         font-weight: bold;
         margin-bottom: 0.5rem;
+    }
+
+    #article_title a {
+        text-decoration: underline;
     }
 
     #article_author {

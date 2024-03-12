@@ -98,6 +98,7 @@ function load_data(){
                 let author = item.author;
                 let date = item.publication_date;
                 let actions_count = item.actions.length
+                let link = '#'
 
                 if (i % 2 == 0) {
                     bg = 'bg'
@@ -107,7 +108,9 @@ function load_data(){
                 output += '<div class="article item">'
 
                     output += '<div id="article_title">'
+                    output += '<a href="' + link + '">'
                     output += title
+                    output += '</a>'
                     output += '</div>'
 
                     output += '<div id="article_author">'
@@ -145,7 +148,6 @@ function load_data(){
                 output += '</div>'
 
                 output += '<div class="info item">info</div>'
-                output += '<div class="link item"><a href="#">link</a></div>'
 
                 output += '</div>'
                 output += '</li>'
