@@ -220,10 +220,8 @@ function load_data(){
                     if (fix_date(action.date) > endDate ) {
                         endDate = action.date;
                     }
-                    console.log(startDate,endDate)
                 })
             });
-            console.log(startDate,endDate)
 
             // loop data
             filtered_data.forEach((item,i) => {

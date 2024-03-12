@@ -23,6 +23,12 @@
                 "type": "Education",
                 "date": "1785",
                 "location": "France"
+            },
+            {
+                "title": "Body returned to France for burial",
+                "type": "Repatriation",
+                "date": "1840-12-15",
+                "location": "France"
             }
         ]
     },
@@ -59,6 +65,18 @@
                 "type": "Military Campaign",
                 "date": "1793",
                 "location": "Toulon, France"
+            },
+            {
+                "title": "Exiled to Elba",
+                "type": "Exile",
+                "date": "1814",
+                "location": "Elba"
+            },
+             {
+                "title": "Defeated at Battle of Waterloo",
+                "type": "Military Defeat",
+                "date": "1815",
+                "location": "Waterloo, Belgium"
             }
         ]
     },
@@ -74,7 +92,20 @@
                 "type": "Military Campaign",
                 "date": "1793",
                 "location": "Toulon, France"
+            },
+            {
+                "title": "Defeats Austrian and Russian armies at Austerlitz",
+                "type": "Military Victory",
+                "date": "1805",
+                "location": "Austerlitz, Austria"
+            },
+             {
+                "title": "Institutes the Continental System",
+                "type": "Economic Policy",
+                "date": "1806",
+                "location": "Continental Europe"
             }
+
         ]
     },
     {
@@ -101,6 +132,25 @@
                 "type": "Burial",
                 "date": "1861-12-02",
                 "location": "Paris, France"
+            }
+        ]
+    },
+    {
+        "title": "The Industrial Revolution: Impact on Society",
+        "author": "Michael Wilson",
+        "publication_date": "2022-12-05",
+        "actions": [
+            {
+                "title": "Arrested during Robespierre's Reign of Terror",
+                "type": "Political Event",
+                "date": "1794",
+                "location": "France"
+            },
+            {
+                "title": "Leads French army in Italy Campaign",
+                "type": "Military Campaign",
+                "date": "1796",
+                "location": "Northern Italy"
             }
         ]
     }
