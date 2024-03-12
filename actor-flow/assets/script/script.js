@@ -270,8 +270,6 @@ function load_data(){
 
                 // timeline ---------------
 
-                
-
                 let timeline_box = list_item.append('div')
                     .attr('id',function(d){
                         return 'timeline_' + i 
@@ -297,12 +295,11 @@ function load_data(){
                     .append("g")
 
                 let xScale = d3.scaleTime()
-                    // .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
-                    .domain([parseDate(startDate), parseDate(endDate)])
+                    .domain([parseDate(startDate), parseDate(endDate)]) // "1750-01-01"
                     .range([0, box_w - margin[1] - margin[3]] )
 
                 let action_items = actions_box.append("rect")
-                    .attr("class", "timeline-point")
+                    .attr("class", "act")
                     .attr("x", function(d){
                         return xScale(parseDate(fix_date(d.date)))
                     })
@@ -318,6 +315,26 @@ function load_data(){
                         randomColor = colors[Math.floor(Math.random() * colors.length)]; 
                         return randomColor
                     })
+                    .attr("data-per",1)
+                    .attr("data-art",i)
+                    .attr("data-act", function(d,index){
+                        return index
+                    })
+                    .attr("data-tit", function(d){
+                        return d.title
+                    })
+                    .attr("data-dat", function(d){
+                        return d.date
+                    })
+                    .attr("data-loc", function(d){
+                        return d.location
+                    })
+
+
+            // let title = this.getAttribute('data-tit') 
+            // let date = this.getAttribute('data-dat') 
+            // let location = this.getAttribute('data-loc') 
+
 
                 // xAxis
 
@@ -327,12 +344,17 @@ function load_data(){
                 //     .attr("class","the_axis")
                 //     .call(xAxis)
 
+                // infobox  ---------------
+
+                let action_box = list_item.append("div")
+                    .attr("id", "info_box_" + i)
+                    .attr("class","info_box")
+
             });
             
             let overall_timeline = document.getElementById('overall_timeline')
             w_ = overall_timeline.offsetWidth;
             h_ = overall_timeline.offsetHeight;
-            console.log(w_)
 
             let overall_axis = d3.select("#overall_timeline")
                 .append('svg')
@@ -355,7 +377,7 @@ function load_data(){
             articles_count_box.innerHTML = articles
             articles_actions_box.innerHTML = all_actions
 
-            // timeline_labels();
+            timeline_labels();
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
