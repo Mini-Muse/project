@@ -56,10 +56,16 @@ function load_data(){
     const articles_actions_box = document.getElementById('articles_actions');
     let output = ''
 
-    fetch('https://minimuse.nlp.idsia.ch/actionflows/1')
-        .then(data => {
-            console.log(data)
-    })
+    // fetch('https://minimuse.nlp.idsia.ch/actionflows/1',{ // ../../dummy-data/mini-muse-dummy-data.py
+    //     method: 'GET',
+    //     // mode: 'no-cors',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     .then(data => {
+    //         console.log(data)
+    //     })
 
     fetch('assets/data/data.json')
         .then(response => {
