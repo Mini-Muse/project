@@ -6,6 +6,18 @@ colors = [
     '#C1DDAB'
 ] 
 
+function fix_date(date){
+    let new_date;
+
+    if (date.length == 4){
+        new_date = String(date) + '-01-01'
+    }
+    else {
+        new_date = String(date)
+    }    
+    return new_date
+}
+
 function search_autocomplete(){
     const searchBox = document.getElementById('query_search');
     const autocompleteList = document.getElementById('autocomplete_list');
@@ -160,6 +172,7 @@ function load_data(){
     let output = ''
     let the_data;
 
+
     // fetch('https://minimuse.nlp.idsia.ch/actionflows/1',{ // ../../dummy-data/mini-muse-dummy-data.py
     //     method: 'GET',
     //     // mode: 'no-cors',
@@ -192,6 +205,25 @@ function load_data(){
 
             const articles = filtered_data.length
             let all_actions = 0
+
+            // start and end date
+            startDate = fix_date(filtered_data[0].actions[0].date);
+            endDate = fix_date(filtered_data[0].actions[0].date);
+
+            filtered_data.forEach(event => {
+                actions = event.actions
+
+                actions.forEach(action => {                    
+                    if (fix_date(action.date) < startDate ) {
+                        startDate = action.date;
+                    }
+                    if (fix_date(action.date) > endDate ) {
+                        endDate = action.date;
+                    }
+                    console.log(startDate,endDate)
+                })
+            });
+            console.log(startDate,endDate)
 
             // loop data
             filtered_data.forEach((item,i) => {
@@ -242,7 +274,6 @@ function load_data(){
 
                 let margin = [10,20,10,20]
 
-
                 let timeline_box = list_item.append('div')
                     .attr('id',function(d){
                         return 'timeline_' + i 
@@ -268,31 +299,22 @@ function load_data(){
                     .append("g")
 
                 let xScale = d3.scaleTime()
-                    .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
+                    // .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
+                    .domain([parseDate(startDate), parseDate(endDate)])
                     .range([0, box_w - margin[1] - margin[3]] )
 
                 let action_items = actions_box.append("rect")
                     .attr("class", "timeline-point")
                     .attr("x", function(d){
-
-                        if (d.date.length == 4){
-                            date_ = String(d.date) + '-01-01'
-                        }
-                        else {
-                            date_ = String(d.date)
-                        }                        
-                        return xScale(parseDate(date_))
-
+                        return xScale(parseDate(fix_date(d.date)))
                     })
                     .attr("y",0)
                     .attr("width",7)
                     .attr("height",box_h - margin[0]) //  - margin[0] - margin[3]
                     .attr("r", 5)
                     .attr("data-date", function(d){
-                        let date_ = String(d.date)
-                        let date = xScale(new Date(date_)) //new Date() 
-                        
-                        return date_
+                        let date = xScale(new Date(fix_date(d.date))) 
+                        return date
                     })
                     .attr("fill",function(d){
                         randomColor = colors[Math.floor(Math.random() * colors.length)]; 
