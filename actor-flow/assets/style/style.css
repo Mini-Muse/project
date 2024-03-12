@@ -145,6 +145,7 @@
 #articles_box li .item {
     padding-top: 10px;
     padding-bottom: 10px;
+/*    height: 10px;*/
 }
 
 .article {
@@ -193,6 +194,10 @@
 .the_axis {
     opacity: 0.5;
 } 
+
+.domain {
+    display: none;
+}
 
 @media screen and (max-width: 768px) {
 

@@ -107,7 +107,7 @@ function make_timeline(box,data,index){
     // const timeline_box = document.getElementById('timeline_' + index)
     let box_w = box.offsetWidth;
     let box_h = box.offsetHeight;
-    let margin = [10,20,10,20]
+    let margin = [10,10,10,10]
 
     let svg = d3.select(box)
         .append('svg')
@@ -208,7 +208,8 @@ function load_data(){
                         return bg
                     })
 
-                // article
+                // article ---------------
+
                 let article_box = list_item.append('div')
                     .attr('class','article item')
 
@@ -239,30 +240,36 @@ function load_data(){
 
                 let parseDate = d3.timeParse("%Y-%m-%d");
 
-                let box_w = '100%' //timeline_box.offsetWidth;
-                let box_h = '100px' //timeline_box.offsetHeight;
                 let margin = [10,20,10,20]
 
-                let xScale = d3.scaleTime()
-                    .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
-                    .range([margin[0], 800])
 
                 let timeline_box = list_item.append('div')
                     .attr('id',function(d){
                         return 'timeline_' + i 
                     })
-                    .attr('class','article_timeline item')
+                    .attr('class','article_timeline')
+
+                t_box = document.getElementById('timeline_' + i )
+
+                let box_w = t_box.offsetWidth;
+                let box_h = 120 // t_box.offsetHeight;
 
                 // timeline_container
                 let timeline_container = timeline_box.append('svg')
                     .attr("width", box_w)
                     .attr("height", box_h)
-                    .attr("transform","translate(0,0)") 
 
-                let actions_box = timeline_container.selectAll("g")
+                let plot = timeline_container.append('g')
+                    .attr("transform","translate(" + 0 + "," + margin[0] + ")") 
+
+                let actions_box = plot.selectAll("g")
                     .data(item.actions)
                     .enter()
                     .append("g")
+
+                let xScale = d3.scaleTime()
+                    .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
+                    .range([0, box_w - margin[1] - margin[3]] )
 
                 let action_items = actions_box.append("rect")
                     .attr("class", "timeline-point")
@@ -274,13 +281,12 @@ function load_data(){
                         else {
                             date_ = String(d.date)
                         }                        
-                        console.log(date_)
                         return xScale(parseDate(date_))
 
                     })
                     .attr("y",0)
                     .attr("width",7)
-                    .attr("height",box_h)
+                    .attr("height",box_h - margin[0]) //  - margin[0] - margin[3]
                     .attr("r", 5)
                     .attr("data-date", function(d){
                         let date_ = String(d.date)
@@ -294,8 +300,8 @@ function load_data(){
                     })
 
                 let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y"));
-                timeline_container.append("g")
-                    .attr("transform", 'translate(0,80)')
+                plot.append("g")
+                    .attr("transform", 'translate(' + margin[0] +',80)')
                     .attr("class","the_axis")
                     .call(xAxis);
 
