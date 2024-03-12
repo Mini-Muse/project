@@ -92,6 +92,25 @@ function timeline_labels() {
     }
 }
 
+function make_timeline(data,index){
+
+    let selection = '#timeline_' + index
+    const timeline_box = document.getElementById('timeline_' + index)
+    let box_w = timeline_box.offsetWidth;
+    let box_h = timeline_box.offsetHeight;
+
+    let svg = d3.select(selection)
+        .append('svg')
+        .attr("width", box_w)
+        .attr("height", box_h);
+
+    let xScale = d3.scaleTime()
+        .domain([new Date("2022-01-01"), new Date("2022-12-31")])
+        .range([50, 350]);
+
+
+}
+
 function load_data(){
 
     const title_box = document.getElementById('articles_box');
@@ -167,35 +186,39 @@ function load_data(){
 
                 output += '</div>'
 
-                output += '<div class="article_timeline item" style="display: flex;">'
-                colors = [
-                    '#F0E3CB',
-                    '#C9DFE5',
-                    '#E0BBB6',
-                    '#BAB7DE',
-                    '#C1DDAB'
-                ] 
-
-
                 actions.sort((a, b) => {
                     return a.date - b.date;
                 });
 
-                for (let a = 0; a < actions.length; a++) {
-
-                    all_actions += a
-
-                    randomColor = colors[Math.floor(Math.random() * colors.length)];  
-                    metadata = 'data-per="' + actor_id + '" data-art="' + i + '"' + 'data-act="' + a + '" '
-                    metadata += 'data-tit="' + actions[a].title + '"'
-                    metadata += 'data-dat="' + actions[a].date + '"'
-                    metadata += 'data-loc="' + actions[a].location + '"'
+                // timeline
+                output += '<div id="timeline_' + i + '"class="article_timeline item" style="display: flex;">'
                 
-                    output += '<div class="act" ' + metadata + 'style="background-color:'+ randomColor +'; margin-left:' +  ((Math.random(10)*15) + 3)  +'%' + ';"></div>'
-                    // console.log(randomColor)
-                }
+
+                // colors = [
+                //     '#F0E3CB',
+                //     '#C9DFE5',
+                //     '#E0BBB6',
+                //     '#BAB7DE',
+                //     '#C1DDAB'
+                // ] 
+
+                
+                // for (let a = 0; a < actions.length; a++) {
+
+                //     all_actions += a
+
+                //     randomColor = colors[Math.floor(Math.random() * colors.length)];  
+                //     metadata = 'data-per="' + actor_id + '" data-art="' + i + '"' + 'data-act="' + a + '" '
+                //     metadata += 'data-tit="' + actions[a].title + '"'
+                //     metadata += 'data-dat="' + actions[a].date + '"'
+                //     metadata += 'data-loc="' + actions[a].location + '"'
+                
+                //     output += '<div class="act" ' + metadata + 'style="background-color:'+ randomColor +'; margin-left:' +  ((Math.random(10)*15) + 3)  +'%' + ';"></div>'
+                //     // console.log(randomColor)
+                // }
 
                 output += '</div>'
+
 
                 output += '<div class="info_box item" id="info_box_' + i + '"></div>'
 
@@ -204,13 +227,23 @@ function load_data(){
 
             });
 
+            // timeline
+            // filtered_data.forEach((item,i) => {
+            //     make_timelines(data,i)
+            // })
+
             articles_count_box.innerHTML = articles
             title_box.innerHTML = output
             articles_actions_box.innerHTML = all_actions
-            // console.log(data);
 
-            timeline_labels();
-        
+            // make timeline
+            timeline_boxes = document.getElementsByClassName('article_timeline');
+            for (let i = 0; i < timeline_boxes.length; i++) {
+                make_timeline(data,i)
+            }    
+            // console.log(data);
+            // timeline_labels();
+            
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

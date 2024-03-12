@@ -8,43 +8,37 @@
             {
                 "title": "The Kiss",
                 "type": "painting",
-                "date": "1907",
+                "date": 1907,
                 "location": "Österreichische Galerie Belvedere, Vienna"
-            },
-            {
-                "title": "Portrait of Adele Bloch-Bauer I",
-                "type": "painting",
-                "date": "1907",
-                "location": "Neue Galerie New York"
             },
             {
                 "title": "Judith and the Head of Holofernes",
                 "type": "painting",
-                "date": "1901",
+                "date": 1901,
                 "location": "Österreichische Galerie Belvedere, Vienna"
             },
             {
                 "title": "The Tree of Life",
                 "type": "painting",
-                "date": "1905",
+                "date": 1905,
                 "location": "Museum of Applied Arts, Vienna"
             },
             {
                 "title": "Beethoven Frieze",
                 "type": "painting",
-                "date": "1902",
+                "date": 1902,
                 "location": "Secession Building, Vienna"
             },
             {
                 "title": "Portrait of Eugenia Primavesi",
                 "type": "painting",
-                "date": "1913",
+                "date": 1913,
                 "location": "Neue Galerie New York"
             },
             {
                 "title": "Adele Bloch-Bauer II",
                 "type": "painting",
-                "date": "1912",
+                "date": 1912,
                 "location": "Private Collection"
             }
         ]
@@ -58,37 +52,37 @@
             {
                 "title": "Theory of General Relativity",
                 "type": "scientific theory",
-                "date": "1915",
+                "date": 1915,
                 "location": "Berlin, Germany"
             },
             {
                 "title": "Photoelectric Effect",
                 "type": "scientific discovery",
-                "date": "1905",
+                "date": 1905,
                 "location": "Bern, Switzerland"
             },
             {
                 "title": "Mass-Energy Equivalence (E=mc^2)",
                 "type": "scientific principle",
-                "date": "1905",
+                "date": 1905,
                 "location": "Bern, Switzerland"
             },
             {
                 "title": "Brownian Motion",
                 "type": "scientific discovery",
-                "date": "1905",
+                "date": 1905,
                 "location": "Bern, Switzerland"
             },
             {
                 "title": "Unified Field Theory",
                 "type": "scientific theory",
-                "date": "1930",
+                "date": 1930,
                 "location": "Princeton, USA"
             },
             {
                 "title": "Nobel Prize in Physics",
                 "type": "award",
-                "date": "1921",
+                "date": 1921,
                 "location": "Stockholm, Sweden"
             }
         ]
@@ -102,37 +96,37 @@
             {
                 "title": "Theory of General Relativity",
                 "type": "scientific theory",
-                "date": "1915",
+                "date": 1915,
                 "location": "Berlin, Germany"
             },
             {
                 "title": "Photoelectric Effect",
                 "type": "scientific discovery",
-                "date": "1905",
+                "date": 1905,
                 "location": "Bern, Switzerland"
             },
             {
                 "title": "Mass-Energy Equivalence (E=mc^2)",
                 "type": "scientific principle",
-                "date": "1905",
+                "date": 1905,
                 "location": "Bern, Switzerland"
             },
             {
                 "title": "Brownian Motion",
                 "type": "scientific discovery",
-                "date": "1905",
+                "date": 1905,
                 "location": "Bern, Switzerland"
             },
             {
                 "title": "Unified Field Theory",
                 "type": "scientific theory",
-                "date": "1930",
+                "date": 1930,
                 "location": "Princeton, USA"
             },
             {
                 "title": "Nobel Prize in Physics",
                 "type": "award",
-                "date": "1921",
+                "date": 1921,
                 "location": "Stockholm, Sweden"
             }
         ]
@@ -146,60 +140,20 @@
             {
                 "title": "Mona Lisa",
                 "type": "artwork",
-                "date": "1503-1506",
+                "date": 1503,
                 "location": "Florence, Italy"
             },
             {
                 "title": "The Last Supper",
                 "type": "artwork",
-                "date": "1495-1498",
+                "date": 1495,
                 "location": "Milan, Italy"
             },
             {
                 "title": "Vitruvian Man",
                 "type": "drawing",
-                "date": "c. 1490",
+                "date": 1490,
                 "location": "Italy"
-            }
-        ]
-    },
-    {
-        "title": "Cleopatra VII: Queen of Egypt",
-        "author": "David Thompson",
-        "publication_date": "2023-11-12",
-        "actions":
-        [
-            {
-                "title": "Alliance with Julius Caesar",
-                "type": "political maneuver",
-                "date": "48 BC",
-                "location": "Alexandria, Egypt"
-            },
-            {
-                "title": "Relationship with Mark Antony",
-                "type": "romantic involvement",
-                "date": "41-30 BC",
-                "location": "Rome, Italy / Alexandria, Egypt"
-            }
-        ]
-    },
-    {
-        "title": "Julius Caesar: Roman Statesman and General",
-        "author": "Emma White",
-        "publication_date": "2023-10-05",
-        "actions":
-        [
-            {
-                "title": "Conquest of Gaul",
-                "type": "military campaign",
-                "date": "58-50 BC",
-                "location": "Gaul (modern France)"
-            },
-            {
-                "title": "Crossing the Rubicon",
-                "type": "political action",
-                "date": "49 BC",
-                "location": "Northern Italy"
             }
         ]
     },
@@ -212,13 +166,13 @@
             {
                 "title": "Defeat of the Spanish Armada",
                 "type": "military victory",
-                "date": "1588",
+                "date": 1588,
                 "location": "English Channel"
             },
             {
                 "title": "Golden Age of England",
                 "type": "cultural flourishing",
-                "date": "Late 16th century",
+                "date": 1598,
                 "location": "England"
             }
         ]
@@ -232,13 +186,13 @@
             {
                 "title": "Napoleonic Wars",
                 "type": "military campaigns",
-                "date": "1803-1815",
+                "date": 1803,
                 "location": "Europe"
             },
             {
                 "title": "Napoleonic Code",
                 "type": "legal reform",
-                "date": "1804",
+                "date": 1804,
                 "location": "France"
             }
         ]
@@ -252,13 +206,13 @@
             {
                 "title": "Conquest of Eurasia",
                 "type": "military campaign",
-                "date": "13th century",
+                "date": 1200,
                 "location": "Asia and Europe"
             },
             {
                 "title": "Establishment of the Mongol Empire",
                 "type": "political achievement",
-                "date": "1206",
+                "date": 1206,
                 "location": "Mongolia"
             }
         ]
@@ -272,13 +226,13 @@
             {
                 "title": "Battle of Orleans",
                 "type": "military victory",
-                "date": "1429",
+                "date": 1429,
                 "location": "Orleans, France"
             },
             {
                 "title": "Liberation of Orléans",
                 "type": "military action",
-                "date": "1429",
+                "date": 1429,
                 "location": "Orleans, France"
             }
         ]
