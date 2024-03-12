@@ -105,6 +105,14 @@
 }
 /* -------- timeline -------- */ 
 
+#timeline_recap{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 3.5rem;
+    background-color: white;
+}
+
+
 #timeline_recap .recap_b {
     border-bottom: 1px solid #bcbcbc;
     height: 1.5rem;
@@ -123,7 +131,7 @@
 }
 
 #timeline_recap .recap_b .shift {
-    background-color: #f6f6f6;
+/*    background-color: #f6f6f6;*/
     grid-column-start: 2;
 }
 

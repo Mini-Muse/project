@@ -172,6 +172,8 @@ function load_data(){
     let output = ''
     let the_data;
 
+    let parseDate = d3.timeParse("%Y-%m-%d");
+    let margin = [10,20,10,20]
 
     // fetch('https://minimuse.nlp.idsia.ch/actionflows/1',{ // ../../dummy-data/mini-muse-dummy-data.py
     //     method: 'GET',
@@ -268,9 +270,7 @@ function load_data(){
 
                 // timeline ---------------
 
-                let parseDate = d3.timeParse("%Y-%m-%d");
-
-                let margin = [10,20,10,20]
+                
 
                 let timeline_box = list_item.append('div')
                     .attr('id',function(d){
@@ -319,13 +319,38 @@ function load_data(){
                         return randomColor
                     })
 
-                let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y"));
-                plot.append("g")
-                    .attr("transform", 'translate(' + margin[0] +',80)')
-                    .attr("class","the_axis")
-                    .call(xAxis);
+                // xAxis
+
+                // let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y"));
+                // plot.append("g")
+                //     .attr("transform", 'translate(' + margin[0] +',80)')
+                //     .attr("class","the_axis")
+                //     .call(xAxis)
 
             });
+            
+            let overall_timeline = document.getElementById('overall_timeline')
+            w_ = overall_timeline.offsetWidth;
+            h_ = overall_timeline.offsetHeight;
+            console.log(w_)
+
+            let overall_axis = d3.select("#overall_timeline")
+                .append('svg')
+                .attr("width",w_)
+                .attr("height",h_ - 1) 
+
+            let plot = overall_axis.append("g")
+
+            let xScale = d3.scaleTime()
+                // .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
+                .domain([parseDate(startDate), parseDate(endDate)])
+                .range([0, w_ - margin[1] - margin[3]] )
+
+            let xAxis = d3.axisTop(xScale).tickFormat(d3.timeFormat("%Y"));
+                plot.append("g")
+                    .attr("transform", 'translate(' + margin[0] +',20)')
+                    .attr("class","the_axis")
+                    .call(xAxis)
 
             articles_count_box.innerHTML = articles
             articles_actions_box.innerHTML = all_actions
