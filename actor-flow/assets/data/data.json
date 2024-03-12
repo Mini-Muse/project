@@ -25,10 +25,10 @@
                 "location": "France"
             },
             {
-                "title": "Body returned to France for burial",
-                "type": "Repatriation",
-                "date": "1840-12-15",
-                "location": "France"
+                "title": "Dies in exile on Saint Helena",
+                "type": "Death",
+                "date": "1821-05-05",
+                "location": "Saint Helena, South Atlantic"
             }
         ]
     },
@@ -128,10 +128,10 @@
                 "location": "Campo Formio, Italy"
             },
             {
-                "title": "Reinterred in Les Invalides",
-                "type": "Burial",
-                "date": "1861-12-02",
-                "location": "Paris, France"
+                "title": "Escapes from Elba",
+                "type": "Escape",
+                "date": "1815",
+                "location": "Elba"
             }
         ]
     },

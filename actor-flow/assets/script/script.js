@@ -100,7 +100,7 @@ function timeline_labels() {
             // print text
             empty_infobox()
             let the_info_box = document.getElementById('info_box_' + art);
-            the_info_box.innerHTML = title + '<br/>' + date + '<br/>' + location
+            the_info_box.innerHTML = '<span style="font-weight:bold;">' + date + '</span><br/>' + title + '<br/>' + location
             // console.log(per,art,act)
 
             // highlight element
@@ -215,7 +215,9 @@ function load_data(){
             filtered_data.forEach(event => {
                 actions = event.actions
 
-                actions.forEach(action => {                    
+                actions.forEach(action => { 
+                    all_actions += 1
+
                     if (fix_date(action.date) < startDate ) {
                         startDate = action.date;
                     }
@@ -305,7 +307,7 @@ function load_data(){
                     })
                     .attr("y",0)
                     .attr("width",7)
-                    .attr("height",box_h - margin[0]) //  - margin[0] - margin[3]
+                    .attr("height",box_h - margin[0] -  5) //  - margin[0] - margin[3]
                     .attr("r", 5)
                     .attr("data-date", function(d){
                         let date = xScale(new Date(fix_date(d.date))) 
@@ -329,12 +331,6 @@ function load_data(){
                     .attr("data-loc", function(d){
                         return d.location
                     })
-
-
-            // let title = this.getAttribute('data-tit') 
-            // let date = this.getAttribute('data-dat') 
-            // let location = this.getAttribute('data-loc') 
-
 
                 // xAxis
 

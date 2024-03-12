@@ -204,10 +204,8 @@
 } 
 
 .select_action {
-    /*-webkit-box-shadow:inset 0px 0px 0px 2px #8b7f7f;
-    -moz-box-shadow:inset 0px 0px 0px 2px #8b7f7f;
-    box-shadow:inset 0px 0px 0px 2px #8b7f7f;*/
     stroke:rgb(0,0,0);
+    stroke-align: inset;
 }
 
 .act {
