@@ -183,6 +183,12 @@
     border-right: 1px solid #bcbcbc;
 }
 
+.select_action {
+    -webkit-box-shadow:inset 0px 0px 0px 2px #8b7f7f;
+    -moz-box-shadow:inset 0px 0px 0px 2px #8b7f7f;
+    box-shadow:inset 0px 0px 0px 2px #8b7f7f;
+}
+
 @media screen and (max-width: 768px) {
 
 	/* -------- menu -------- */ 

@@ -52,10 +52,17 @@ function search_autocomplete(){
 function timeline_labels() {
     let labels = document.getElementsByClassName('act');
     let info_boxes = document.getElementsByClassName('info_box');
+    let acts = document.getElementsByClassName('act');
 
     function empty_infobox(){
         for (let i = 0; i < info_boxes.length; i++) {
             info_boxes[i].innerHTML = ''
+        }
+    }
+
+    function remove_highlights(){
+        for (let i = 0; i < acts.length; i++) {
+            acts[i].classList.remove('select_action')
         }
     }
 
@@ -74,9 +81,12 @@ function timeline_labels() {
             empty_infobox()
             let the_info_box = document.getElementById('info_box_' + art);
             the_info_box.innerHTML = title + '<br/>' + date + '<br/>' + location
-            // the_info_box.innerHTML = per + ' ' + art + ' ' + act
+            // console.log(per,art,act)
 
-            console.log(per,art,act)
+            // highlight element
+            remove_highlights()
+            this.classList.add('select_action')
+            // this.style.backgroundColor = 'red'
 
         })
     }
