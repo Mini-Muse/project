@@ -96,11 +96,18 @@ function timeline_labels() {
             let title = this.getAttribute('data-tit') 
             let date = this.getAttribute('data-dat') 
             let location = this.getAttribute('data-loc') 
+            let extract = this.getAttribute('data-ext') 
 
             // print text
             empty_infobox()
             let the_info_box = document.getElementById('info_box_' + art);
-            the_info_box.innerHTML = '<span style="font-weight:bold;">' + date + '</span><br/>' + title + '<br/>' + location
+            
+            let output = '';
+            output += '<span style="font-weight:bold;">' + date + '</span><br/>' + location + '<br/><br/>' 
+            output += title + '<br/>' + extract.slice(0, 20)
+
+            
+            the_info_box.innerHTML = output
             // console.log(per,art,act)
 
             // highlight element
@@ -203,15 +210,16 @@ function load_data(){
 
             // filter
             let searchString = ''
-            filtered_data = data // data.filter(a => a.author.includes(searchString));
-            // filtered_data = data
+            filtered_data = data[0].documents // data.filter(a => a.author.includes(searchString));
+            console.log(filtered_data)
 
             const articles = filtered_data.length
             let all_actions = 0
 
             // start and end date
             startDate = fix_date(filtered_data[0].actions[0].date.value);
-            endDate = fix_date(filtered_data[0].actions[0].date.value);
+            endDate = fix_date(filtered_data[0].actions[0].date.value); 
+            // console.log(filtered_data[0].actions[0]) // .date.value
 
             filtered_data.forEach(event => {
                 actions = event.actions
@@ -272,7 +280,7 @@ function load_data(){
                     .attr('id','article_date')
                     .append('text')
                     .text(function(d){
-                        return item.publication_date
+                        return item.year
                     })
 
                 // timeline ---------------
@@ -335,6 +343,9 @@ function load_data(){
                     })
                     .attr("data-loc", function(d){
                         return d.location.name
+                    })
+                    .attr("data-ext", function(d){
+                        return d.extract.value
                     })
 
                 // xAxis

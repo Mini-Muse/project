@@ -1,56 +1,276 @@
 [
     {
         "actionflow_id": 1,
-        "document_id": 1,
-        "title": "Historical Magazine Title 1",
-        "author": "John Smith",
-        "volume": "Volume 1",
-        "issue": "Issue 1",
-        "type": "Magazine",
-        "publisher": "Historical Society Publications",
-        "year": 1920,
-        "actor": {"actor_id": 1, "name": "John Doe", "role": "Author"},
-        "actions": [{
-            "action_id": 1, 
-            "name": "Wrote",
-            "date": {"date_id": 1, "name": "Publication Date", "value": "1920-01-15"},
-            "location": {"location_id": 1, "name": "New York City", "country": "USA"}
+        "actor": {
+            "actor_id": 1,
+            "name": "John Doe",
+            "role": "Author"
         },
-        {
-            "action_id": 2, 
-            "name": "Protest",
-            "date": {"date_id": 3, "name": "Publication Date", "value": "1923-12-15"},
-            "location": {"location_id": 3, "name": "Madrid", "country": "Spain"}
-        },
-        {
-            "action_id": 4, 
-            "name": "Decide",
-            "date": {"date_id": 3, "name": "Publication Date", "value": "1926-01-15"},
-            "location": {"location_id": 3, "name": "Madrid", "country": "Spain"}
-        }]
+        "documents": [
+            {
+                "document_id": 1,
+                "title": "Historical Magazine Title 1",
+                "author": "John Smith",
+                "volume": "Volume 1",
+                "issue": "Issue 1",
+                "type": "Magazine",
+                "publisher": "Historical Society Publications",
+                "year": 1920,
+                "link": "#",
+                "actions": [
+                    {
+                        "action_id": 1,
+                        "name": "Wrote",
+                        "date": {
+                            "date_id": 1,
+                            "name": "Publication Date",
+                            "value": "1921-01-15"
+                        },
+                        "location": {
+                            "location_id": 1,
+                            "name": "New York City",
+                            "country": "USA"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    },
+                    {
+                        "action_id": 2,
+                        "name": "Protest",
+                        "date": {
+                            "date_id": 3,
+                            "name": "Publication Date",
+                            "value": "1923-03-15"
+                        },
+                        "location": {
+                            "location_id": 3,
+                            "name": "Madrid",
+                            "country": "Spain"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    },
+                    {
+                        "action_id": 4,
+                        "name": "Decide",
+                        "date": {
+                            "date_id": 3,
+                            "name": "Publication Date",
+                            "value": "1926-10-15"
+                        },
+                        "location": {
+                            "location_id": 3,
+                            "name": "Madrid",
+                            "country": "Spain"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    }
+                ]
+            },
+            {
+                "document_id": 3,
+                "title": "Historical Magazine Title 3",
+                "author": "John Smith",
+                "volume": "Volume 3",
+                "issue": "Issue 3",
+                "type": "Magazine",
+                "publisher": "Historical Society Publications",
+                "year": 1922,
+                "link": "#",
+                "actions": [
+                    {
+                        "action_id": 1,
+                        "name": "Wrote",
+                        "date": {
+                            "date_id": 1,
+                            "name": "Publication Date",
+                            "value": "1920-01-15"
+                        },
+                        "location": {
+                            "location_id": 1,
+                            "name": "New York City",
+                            "country": "USA"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    },
+                    {
+                        "action_id": 2,
+                        "name": "Protest",
+                        "date": {
+                            "date_id": 3,
+                            "name": "Publication Date",
+                            "value": "1923-12-15"
+                        },
+                        "location": {
+                            "location_id": 3,
+                            "name": "Madrid",
+                            "country": "Spain"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    },
+                    {
+                        "action_id": 4,
+                        "name": "Decide",
+                        "date": {
+                            "date_id": 3,
+                            "name": "Publication Date",
+                            "value": "1926-01-15"
+                        },
+                        "location": {
+                            "location_id": 3,
+                            "name": "Madrid",
+                            "country": "Spain"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    }
+                ]
+            }
+        ]
     },
     {
         "actionflow_id": 2,
-        "document_id": 2,
-        "title": "Historical Magazine Title 2",
-        "author": "Emily Johnson",
-        "volume": "Volume 2",
-        "issue": "Issue 2",
-        "type": "Magazine",
-        "publisher": "Historical Society Publications",
-        "year": 1921,
-        "actor": {"actor_id": 2, "name": "Jane Smith", "role": "Editor"},
-        "actions": [{
-            "action_id": 1, 
-            "name": "Edited",
-            "date": {"date_id": 2, "name": "Publication Date", "value": "1930-01-15"},
-            "location": {"location_id": 2, "name": "London", "country": "UK"}
+        "actor": {
+            "actor_id": 2, "name": "Jane Smith", "role": "Editor"
         },
-        {
-            "action_id": 2, 
-            "name": "Protest",
-            "date": {"date_id": 3, "name": "Publication Date", "value": "1932-12-15"},
-            "location": {"location_id": 3, "name": "Madrid", "country": "Spain"} 
-        }]    
+        "documents": [
+            {
+                "document_id": 1,
+                "title": "Historical Magazine Title 1",
+                "author": "John Smith",
+                "volume": "Volume 1",
+                "issue": "Issue 1",
+                "type": "Magazine",
+                "publisher": "Historical Society Publications",
+                "year": 1920,
+                "link": "#",
+                "actions": [
+                    {
+                        "action_id": 1,
+                        "name": "Wrote",
+                        "date": {
+                            "date_id": 1,
+                            "name": "Publication Date",
+                            "value": "1925-01-15"
+                        },
+                        "location": {
+                            "location_id": 1,
+                            "name": "New York City",
+                            "country": "USA"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    },
+                    {
+                        "action_id": 2,
+                        "name": "Protest",
+                        "date": {
+                            "date_id": 3,
+                            "name": "Publication Date",
+                            "value": "1927-12-15"
+                        },
+                        "location": {
+                            "location_id": 3,
+                            "name": "Madrid",
+                            "country": "Spain"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    },
+                    {
+                        "action_id": 4,
+                        "name": "Decide",
+                        "date": {
+                            "date_id": 3,
+                            "name": "Publication Date",
+                            "value": "1929-01-15"
+                        },
+                        "location": {
+                            "location_id": 3,
+                            "name": "Madrid",
+                            "country": "Spain"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    }
+                ]
+            },
+            {
+                "document_id": 3,
+                "title": "Historical Magazine Title 3",
+                "author": "John Smith",
+                "volume": "Volume 3",
+                "issue": "Issue 3",
+                "type": "Magazine",
+                "publisher": "Historical Society Publications",
+                "year": 1922,
+                "link": "#",
+                "actions": [
+                    {
+                        "action_id": 1,
+                        "name": "Wrote",
+                        "date": {
+                            "date_id": 1,
+                            "name": "Publication Date",
+                            "value": "1934-01-15"
+                        },
+                        "location": {
+                            "location_id": 1,
+                            "name": "New York City",
+                            "country": "USA"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    },
+                    {
+                        "action_id": 2,
+                        "name": "Protest",
+                        "date": {
+                            "date_id": 3,
+                            "name": "Publication Date",
+                            "value": "1943-12-15"
+                        },
+                        "location": {
+                            "location_id": 3,
+                            "name": "Madrid",
+                            "country": "Spain"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    },
+                    {
+                        "action_id": 4,
+                        "name": "Decide",
+                        "date": {
+                            "date_id": 3,
+                            "name": "Publication Date",
+                            "value": "1949-01-15"
+                        },
+                        "location": {
+                            "location_id": 3,
+                            "name": "Madrid",
+                            "country": "Spain"
+                        },
+                        "extract": {
+                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+                        }
+                    }
+                ]
+            }
+        ]
     }
 ]
