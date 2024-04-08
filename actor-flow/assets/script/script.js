@@ -194,42 +194,46 @@ function load_data(){
             return response.json(); 
         })
         .then(data => {
-            console.log(data)
+            // console.log(data)
 
             // sort
             data.sort((a, b) => {
-                return a.publication_date - b.publication_date;
+                return a.year - b.year;
             });
 
             // filter
             let searchString = ''
-            filtered_data = data.filter(a => a.author.includes(searchString));
+            filtered_data = data // data.filter(a => a.author.includes(searchString));
             // filtered_data = data
 
             const articles = filtered_data.length
             let all_actions = 0
 
             // start and end date
-            startDate = fix_date(filtered_data[0].actions[0].date);
-            endDate = fix_date(filtered_data[0].actions[0].date);
+            startDate = fix_date(filtered_data[0].actions[0].date.value);
+            endDate = fix_date(filtered_data[0].actions[0].date.value);
 
             filtered_data.forEach(event => {
                 actions = event.actions
 
                 actions.forEach(action => { 
+                    // console.log(action)
+
                     all_actions += 1
 
-                    if (fix_date(action.date) < startDate ) {
-                        startDate = action.date;
+                    if (fix_date(action.date.value) < startDate ) {
+                        startDate = action.date.value;
                     }
-                    if (fix_date(action.date) > endDate ) {
-                        endDate = action.date;
+                    if (fix_date(action.date.value) > endDate ) {
+                        endDate = action.date.value;
                     }
                 })
             });
+            // console.log(startDate,endDate)
 
             // loop data
             filtered_data.forEach((item,i) => {
+                // console.log(item)
 
                 let container = d3.select('#articles_box')
 
@@ -304,14 +308,14 @@ function load_data(){
                 let action_items = actions_box.append("rect")
                     .attr("class", "act")
                     .attr("x", function(d){
-                        return xScale(parseDate(fix_date(d.date)))
+                        return xScale(parseDate(fix_date(d.date.value)))
                     })
                     .attr("y",0)
                     .attr("width",7)
                     .attr("height",box_h - margin[0] -  5) //  - margin[0] - margin[3]
                     .attr("r", 5)
                     .attr("data-date", function(d){
-                        let date = xScale(new Date(fix_date(d.date))) 
+                        let date = xScale(new Date(fix_date(d.date.value))) 
                         return date
                     })
                     .attr("fill",function(d){
@@ -324,13 +328,13 @@ function load_data(){
                         return index
                     })
                     .attr("data-tit", function(d){
-                        return d.title
+                        return d.name
                     })
                     .attr("data-dat", function(d){
-                        return d.date
+                        return d.date.value
                     })
                     .attr("data-loc", function(d){
-                        return d.location
+                        return d.location.name
                     })
 
                 // xAxis
