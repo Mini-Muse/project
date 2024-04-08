@@ -231,6 +231,14 @@ function load_data(){
             const articles = filtered_data.length
             let all_actions = 0
 
+
+            const actor_name_a = document.getElementById('actor_name_a');
+            const actor_name_b = document.getElementById('actor_name_b');
+
+            actor = data[0].actor.name;
+            actor_name_a.innerHTML = actor;
+            actor_name_b.innerHTML = actor;
+            
             // start and end date
             startDate = fix_date(filtered_data[0].actions[0].date.value);
             endDate = fix_date(filtered_data[0].actions[0].date.value); 
@@ -407,6 +415,7 @@ function load_data(){
             articles_actions_box.innerHTML = all_actions
 
             timeline_labels();
+
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
