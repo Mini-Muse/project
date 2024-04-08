@@ -8,7 +8,7 @@ colors = [
 
 function get_color(value){
     const categoryColors = {
-        "Protest": "#F0E3CB",
+        "Protest": "#efd295",
         "Decide": "#C9DFE5",
         "Order": "#E0BBB6"
     };
@@ -232,12 +232,12 @@ function load_data(){
             let all_actions = 0
 
 
-            const actor_name_a = document.getElementById('actor_name_a');
-            const actor_name_b = document.getElementById('actor_name_b');
+            // const actor_name_a = document.getElementById('actor_name_a');
+            // const actor_name_b = document.getElementById('actor_name_b');
 
-            actor = data[0].actor.name;
-            actor_name_a.innerHTML = actor;
-            actor_name_b.innerHTML = actor;
+            // actor = data[0].actor.name;
+            // actor_name_a.innerHTML = actor;
+            // actor_name_b.innerHTML = actor;
             
             // start and end date
             startDate = fix_date(filtered_data[0].actions[0].date.value);

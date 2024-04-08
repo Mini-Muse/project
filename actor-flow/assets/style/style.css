@@ -87,6 +87,7 @@
 
 .recap .detail {
     display: flex;
+    align-items: center;
 }
 
 .recap .detail .value {
