@@ -20,7 +20,7 @@
                 "actions": [
                     {
                         "action_id": 1,
-                        "name": "Wrote",
+                        "name": "Order",
                         "date": {
                             "date_id": 1,
                             "name": "Publication Date",
@@ -84,7 +84,7 @@
                 "actions": [
                     {
                         "action_id": 1,
-                        "name": "Wrote",
+                        "name": "Order",
                         "date": {
                             "date_id": 1,
                             "name": "Publication Date",
@@ -156,7 +156,7 @@
                 "actions": [
                     {
                         "action_id": 1,
-                        "name": "Wrote",
+                        "name": "Order",
                         "date": {
                             "date_id": 1,
                             "name": "Publication Date",
@@ -220,7 +220,7 @@
                 "actions": [
                     {
                         "action_id": 1,
-                        "name": "Wrote",
+                        "name": "Order",
                         "date": {
                             "date_id": 1,
                             "name": "Publication Date",

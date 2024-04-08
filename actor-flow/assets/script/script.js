@@ -6,6 +6,20 @@ colors = [
     '#C1DDAB'
 ] 
 
+function get_color(value){
+    const categoryColors = {
+        "Protest": "#F0E3CB",
+        "Decide": "#C9DFE5",
+        "Order": "#E0BBB6"
+    };
+
+    if (categoryColors.hasOwnProperty(value)) {
+        return categoryColors[value];
+    } else {
+        return "#000000";
+    }
+}
+
 function fix_date(date){
     let new_date;
 
@@ -104,7 +118,8 @@ function timeline_labels() {
             
             let output = '';
             output += '<span style="font-weight:bold;">' + date + '</span><br/>' + location + '<br/><br/>' 
-            output += title + '<br/>' + extract.slice(0, 20)
+            output += '<span class="action_cat" style="background-color:' + get_color(title) +'">' + title + '</span>'
+            output += '<p>' + extract.slice(0, 20) + '</p>'
 
             
             the_info_box.innerHTML = output
@@ -327,8 +342,10 @@ function load_data(){
                         return date
                     })
                     .attr("fill",function(d){
-                        randomColor = colors[Math.floor(Math.random() * colors.length)]; 
-                        return randomColor
+                        // randomColor = colors[Math.floor(Math.random() * colors.length)]; 
+                        // return randomColor
+                        // console.log(get_color(d.name))
+                        return get_color(d.name)
                     })
                     .attr("data-per",1)
                     .attr("data-art",i)

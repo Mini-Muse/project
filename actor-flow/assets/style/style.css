@@ -188,15 +188,25 @@
     border-right: 1px solid #bcbcbc;*/
 }
 
-.info_box {
-    padding: 10px;
-}
-
 #info {
     border-right: 1px solid #bcbcbc;
 }
 
+.info_box {
+    padding: 10px;
+}
 
+.info_box p {
+    line-height: 120%;
+    margin-top: .25rem;
+}
+
+.action_cat {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    padding: 0 3px;
+}
 
 /* -------- timeline -------- */ 
 .the_axis {
