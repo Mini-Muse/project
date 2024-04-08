@@ -1,0 +1,54 @@
+[
+    {
+        "action":
+        {
+            "action_id": 1,
+            "name": "Wrote"
+        },
+        "actionflow_id": 1,
+        "actor":
+        {
+            "actor_id": 1,
+            "name": "John Doe",
+            "role": "Author"
+        },
+        "date":
+        {
+            "date_id": 1,
+            "name": "Publication Date",
+            "value": "1920-01-15"
+        },
+        "location":
+        {
+            "country": "USA",
+            "location_id": 1,
+            "name": "New York City"
+        }
+    },
+    {
+        "action":
+        {
+            "action_id": 2,
+            "name": "Edited"
+        },
+        "actionflow_id": 2,
+        "actor":
+        {
+            "actor_id": 2,
+            "name": "Jane Smith",
+            "role": "Editor"
+        },
+        "date":
+        {
+            "date_id": 2,
+            "name": "Publication Date",
+            "value": "1921-02-20"
+        },
+        "location":
+        {
+            "country": "UK",
+            "location_id": 2,
+            "name": "London"
+        }
+    }
+]

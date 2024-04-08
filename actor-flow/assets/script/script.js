@@ -186,7 +186,7 @@ function load_data(){
     //         console.log(data)
     //     })
 
-    fetch('assets/data/data.json')
+    fetch('assets/data/data_.json') // assets/data/data.json
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -194,6 +194,7 @@ function load_data(){
             return response.json(); 
         })
         .then(data => {
+            console.log(data)
 
             // sort
             data.sort((a, b) => {
