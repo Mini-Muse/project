@@ -261,6 +261,7 @@ function get_statistics(data){
     let years = 0;
 
     const actorCount = {};
+    const articleCount = {};
 
     // get number of actors ---------------
     data.forEach(item => {
@@ -276,10 +277,10 @@ function get_statistics(data){
     data.forEach(item => {
         item.forEach(action => {
             const actorName = action.document.document_id;
-            actorCount[actorName] = (actorCount[actorName] || 0) + 1;
+            articleCount[actorName] = (articleCount[actorName] || 0) + 1;
         })
     });
-    articles = Object.keys(actorCount).length;
+    articles = Object.keys(articleCount).length;
 
 
     // get number of actions ---------------
