@@ -23,7 +23,7 @@
         "date": {
             "date_id": 1,
             "name": "Publication Date",
-            "value": "1910-10-15"
+            "value": "1918-01-01"
         },  
         "action": {
             "action_id": 1,
@@ -247,7 +247,7 @@
         "date": {
             "date_id": 2,
             "name": "Publication Date",
-            "value": "1929-12-20"
+            "value": "1923-12-20"
         },  
         "action": {
             "action_id": 2,

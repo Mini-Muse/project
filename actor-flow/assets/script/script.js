@@ -337,7 +337,7 @@ function display_data(data){
     let all_actions = 0
     
     let parseDate = d3.timeParse("%Y-%m-%d"); // %Y
-    let timeline_margin = [10,20,10,20]
+    let timeline_margin = [10,10,10,10]
 
     let box_w;
     let box_h; 
@@ -362,6 +362,11 @@ function display_data(data){
         })
     });
     // console.log(startDate,endDate)
+
+
+    let xScale; // = d3.scaleTime()
+    //     .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
+    //     .range([0, box_w - margin[1] - margin[3]] )
 
     // display data
     data.forEach((item,i) => {
@@ -432,6 +437,11 @@ function display_data(data){
         box_w = t_box.offsetWidth;
         box_h = 120 // t_box.offsetHeight;
 
+
+        xScale = d3.scaleTime()
+            .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
+            .range([0, box_w - timeline_margin[1] - timeline_margin[3]] )
+
         // timeline_container
         let timeline_container = timeline_box.append('svg')
             .attr("width", box_w)
@@ -444,10 +454,6 @@ function display_data(data){
             .data(item)
             .enter()
             .append("g")
-
-        let xScale = d3.scaleTime()
-            .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
-            .range([0, box_w - margin[1] - margin[3]] )
 
         let action_items = actions_box.append("rect")
             .attr("class", "act")
@@ -510,11 +516,15 @@ function display_data(data){
 
     let plot = overall_axis.append("g")
 
-    let xScale = d3.scaleTime()
-        // .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
-        .domain([parseDate(startDate), parseDate(endDate)])
-        // .range([0, w_]) // w_ - margin[1] - margin[3]] 
-        .range([0, box_w - margin[1] - margin[3]] )
+    // xScale = d3.scaleTime()
+    //         .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
+    //         .range([0, box_w - margin[1] - margin[3]] )
+
+    // xScale = d3.scaleTime()
+    //     // .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
+    //     .domain([parseDate(startDate), parseDate(endDate)])
+    //     // .range([0, w_]) // w_ - margin[1] - margin[3]] 
+    //     .range([0, box_w - margin[1] - margin[3]] )
 
 
         // .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
