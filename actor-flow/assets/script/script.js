@@ -579,9 +579,19 @@ function get_articles(data){
 
     function display_articles(id){
 
+        // filter articles by actor id
         const documentsRelatedToActorId = data.filter(item => {
             return item.actor.actor_id == id
         })
+        // console.log(documentsRelatedToActorId)
+
+        
+        const actorsInSameDocument = data
+            .filter(item => item.actor.actor_id != id) // Filter out actor with actor_id 1
+            .map(item => item.actor) // Extract actor objects
+            .filter((actor, index, self) => self.findIndex(a => a.actor_id === actor.actor_id) === index); // Filter unique actors based on actor_id
+        // console.log(actorsInSameDocument)
+
         const documentsData = documentsRelatedToActorId.map(item => item.document);
 
         // Filter out duplicate objects based on document_id
@@ -594,7 +604,7 @@ function get_articles(data){
                 return true;
             }
         });
-        console.log(uniqueDocuments);
+        // console.log(uniqueDocuments);
 
         // display articles  ---------------
 
@@ -621,8 +631,8 @@ function get_articles(data){
 
             output += '<div class="row_article">'
             output += '<p><a href="' + link + '">' + title + '</a></p>'
-            output += '<p>' + author + '</p>'
-            output += '<p>' + year + '</p>'
+            output += '<p>by ' + author + ', ' + year +'</p><br/>'
+            output += '<p>other actors: ' + '...' + '</p>'
             output += '</div>'
 
             new_html.innerHTML = output
