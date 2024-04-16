@@ -398,6 +398,8 @@ function display_data(data){
 
         let actor_name_box = article_box.append('div')
             .attr('id','actor_name_box')
+            .append('div')
+            
 
         let actor_name =  actor_name_box.append('p')
             .text(function(d){
