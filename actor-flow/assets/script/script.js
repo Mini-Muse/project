@@ -375,6 +375,9 @@ function display_data(data){
 
         // list background
         let list_item = container.append('li')
+            .attr('id',function (d,i) {
+                return 'actor_id_' + item[0].actor.actor_id
+            })
             .attr('class',function (d,i) {
                 bg = ''
                 if (i % 2 == 0) {
@@ -382,7 +385,6 @@ function display_data(data){
                 }
                 return bg
             })
-
 
         // actor box ---------------
 
@@ -558,25 +560,105 @@ function display_data(data){
 }
 
 function get_articles(data){
-    // console.log(data)
 
     open_boxes = document.getElementsByClassName("open_box");
+    article_boxes = document.getElementsByClassName("article_boxes");
+
 
     for (let item = 0; item < open_boxes.length; item++) {
         open_boxes[item].addEventListener("click",function(e) {
             the_id = open_boxes[item].id
             the_actor_id = the_id.replace('open_box_','')
-            get_articles(the_actor_id)
+            display_articles(the_actor_id)
         })
     }
 
-    function get_articles(id){
+    function display_articles(id){
+
+        const documentsRelatedToActorId = data.filter(item => {
+            return item.actor.actor_id == id
+        })
+        const documentsData = documentsRelatedToActorId.map(item => item.document);
+
+        // Filter out duplicate objects based on document_id
+        const uniqueDocumentIds = new Set();
+        const uniqueDocuments = documentsData.filter(item => {
+            if (uniqueDocumentIds.has(item.document_id)) {
+                return false;
+            } else {
+                uniqueDocumentIds.add(item.document_id);
+                return true;
+            }
+        });
+        console.log(uniqueDocuments);
+
+        // display articles  ---------------
+
+        // remove list of articles
+        for (let item = 0; item < article_boxes.length; item++) {
+            article_boxes[item].remove();
+        }
+
+        let output = ''
+        let new_html = document.createElement('div');
+        new_html.id = 'the_box_' + id;
+        new_html.classList.add('article_boxes');
+        
+        const actor_line = document.getElementById('actor_id_' + id);
+
+        for (let item = 0; item < uniqueDocuments.length; item++) {
+        // uniqueDocuments.forEach(item => {
+            console.log(uniqueDocuments[item])
+
+            let title = uniqueDocuments[item].title
+            let link = '#'
+            let author = 'author name' //uniqueDocuments[item].author
+            let date = 0
+            let year = uniqueDocuments[item].year
+
+            output += '<p><a href="' + link + '">' + title + '</p>'
+            output += '<p>' + author + '</p>'
+            output += '<p>' + year + '</p>'
+
+            new_html.innerHTML = output
+            actor_line.append(new_html)
+        }
+
+        // output += uniqueDocuments
+
+
+
 
         // filter all actionflows of the actor
-        const filteredArray = data.filter(item => {
-            return item.actor.actor_id == id;
-        });
-        console.log(filteredArray)
+        // const filteredArray = data.filter(item => {
+        //     return item.actor.actor_id == id;
+        // });
+        // // console.log(filteredArray)
+
+
+
+        // // group objects by article
+        // const articles = filteredArray.reduce((acc, obj) => {
+        //     const actorName = obj.document.document_id;
+        //     if (!acc[actorName]) {
+        //         acc[actorName] = [];
+        //     }
+        //     acc[actorName].push(obj);
+        //     return acc;
+        // }, []);
+        // const articles_array = Object.values(articles);
+        // console.log(articles_array)
+
+
+
+        // append list of articles
+        // for (let item = 0; item < articles_array.length; item++) {
+        //     console.log(articles_array[item])
+        // }
+
+
+
+
     }
 }
 
