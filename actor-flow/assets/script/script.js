@@ -388,8 +388,12 @@ function display_data(data){
 
         // actor box ---------------
 
+
         let article_box = list_item.append('div')
-            .attr('class','actor item')
+            .attr('class','actor_row')
+
+        // let article_item = article_box.append('div')
+        //     .attr('class','actor item')
 
         let actor_name_box = article_box.append('div')
             .attr('id','actor_name_box')
@@ -408,9 +412,9 @@ function display_data(data){
 
         // timeline box ---------------
         
-        let timeline_box = list_item.append('div')
+        let timeline_box = article_box.append('div')
             .attr('id',function(d){
-                return 'timeline_' + i 
+                return 'timeline_' + i
             })
             .attr('class','article_timeline')
 
@@ -508,14 +512,14 @@ function display_data(data){
 
         // })
 
-        let action_box = list_item.append("div")
+        let action_box = article_box.append("div")
             .attr("id", function(d){
                 id = item[0].actor.actor_id
                 return "info_box_" + id
             }) 
             .attr("class","info_box")
 
-        let open_box = list_item.append("div")
+        let open_box = article_box.append("div")
             .attr("id", function (d) {
                 id = item[0].actor.actor_id
                 return "open_box_" + id
@@ -607,8 +611,7 @@ function get_articles(data){
         const actor_line = document.getElementById('actor_id_' + id);
 
         for (let item = 0; item < uniqueDocuments.length; item++) {
-        // uniqueDocuments.forEach(item => {
-            console.log(uniqueDocuments[item])
+            // console.log(uniqueDocuments[item])
 
             let title = uniqueDocuments[item].title
             let link = '#'
@@ -616,49 +619,15 @@ function get_articles(data){
             let date = 0
             let year = uniqueDocuments[item].year
 
-            output += '<p><a href="' + link + '">' + title + '</p>'
+            output += '<div class="row_article">'
+            output += '<p><a href="' + link + '">' + title + '</a></p>'
             output += '<p>' + author + '</p>'
             output += '<p>' + year + '</p>'
+            output += '</div>'
 
             new_html.innerHTML = output
             actor_line.append(new_html)
         }
-
-        // output += uniqueDocuments
-
-
-
-
-        // filter all actionflows of the actor
-        // const filteredArray = data.filter(item => {
-        //     return item.actor.actor_id == id;
-        // });
-        // // console.log(filteredArray)
-
-
-
-        // // group objects by article
-        // const articles = filteredArray.reduce((acc, obj) => {
-        //     const actorName = obj.document.document_id;
-        //     if (!acc[actorName]) {
-        //         acc[actorName] = [];
-        //     }
-        //     acc[actorName].push(obj);
-        //     return acc;
-        // }, []);
-        // const articles_array = Object.values(articles);
-        // console.log(articles_array)
-
-
-
-        // append list of articles
-        // for (let item = 0; item < articles_array.length; item++) {
-        //     console.log(articles_array[item])
-        // }
-
-
-
-
     }
 }
 

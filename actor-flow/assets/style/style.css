@@ -136,14 +136,14 @@
     grid-column-start: 2;
 }
 
-/* -------- articles -------- */ 
+/* -------- actors -------- */ 
 
 #actors {
     margin: 0 0 5rem;
     font-size: 0.9rem;
 }
 
-#actors_box li {
+#actors_box li .actor_row {
     display: grid;
     grid-template-columns: 2fr 7fr 1.5fr 0.5fr;
     grid-column-gap: 10px;
@@ -151,7 +151,7 @@
     padding: 0 20px;
 }
 
-#actors_box li .item {
+#actors_box li .actor_row div {
     padding-top: 10px;
     padding-bottom: 10px;
 /*    height: 10px;*/
@@ -241,6 +241,25 @@
 
 .domain {
     display: none;
+}
+
+/* -------- article_boxes -------- */ 
+.article_boxes {
+/*    display: grid;
+    grid-template-columns: 2fr 7fr 1.5fr 0.5fr;
+    grid-column-gap: 10px;*/
+/*    padding: 0 20px;*/
+    border-bottom: 1px solid #bcbcbc;
+    background-color: white;
+}
+
+.row_article {
+    padding: 10px 20px;
+    border-bottom: 1px solid #bcbcbc;
+}
+
+.row_article:last-child {
+    border-bottom: none;
 }
 
 @media screen and (max-width: 768px) {
