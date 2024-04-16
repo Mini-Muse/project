@@ -10,6 +10,19 @@ const margin = [10,10,10,10]
 
 const action_width = 8;
 
+// function date_years(date,n,count) {
+//     let output;
+//     if (count == 'minus'){
+//         output = new Date(date.setFullYear(date.getFullYear() - n)); 
+//     }
+//     else {
+//         output = new Date(date.setFullYear(date.getFullYear() + n)); 
+//     }
+//     return output
+// }
+// date = new Date(1990,10,2,'minus')
+// console.log(date_years(date,2))
+
 function get_color(value){
     const categoryColors = {
         "Wrote": "#efd295",
@@ -235,13 +248,85 @@ async function load_data(){
     // });
     // console.log(data)
 
-    display_data(actionflows_array)   
+    display_data(actionflows_array)
+    get_statistics(actionflows_array)   
        
+}
+
+function get_statistics(data){
+    console.log(data)
+
+    let actors = 0;
+    let articles = 0;
+    let actions = 0;
+    let years = 0;
+
+    const actorCount = {};
+
+    // get number of actors ---------------
+    data.forEach(item => {
+        item.forEach(action => {
+            const actorName = action.actor.actor_id;
+            actorCount[actorName] = (actorCount[actorName] || 0) + 1;
+        })
+    });
+    actors = Object.keys(actorCount).length;
+
+
+    // get number of articles ---------------
+    data.forEach(item => {
+        item.forEach(action => {
+            const actorName = action.document.document_id;
+            actorCount[actorName] = (actorCount[actorName] || 0) + 1;
+        })
+    });
+    articles = Object.keys(actorCount).length;
+
+
+    // get number of actions ---------------
+    data.forEach((item,i) => {
+        item.forEach((action,a) => {
+            actions += 1
+        })
+    })
+
+
+    // get number of years ---------------
+    let startDate = fix_date(data[0][0].date.value);
+    let endDate = startDate 
+
+    data.forEach(item => {
+        item.forEach(event => {
+            date = event.date.value
+            if (fix_date(date) < startDate ) {
+                startDate = date;
+            }
+            if (fix_date(date) > endDate ) {
+                endDate = date;
+            }
+        })
+    });
+    year_a = parseInt(startDate.toString().slice(0, 4))
+    year_b = parseInt(endDate.toString().slice(0, 4))
+    years = year_b - year_a
+
+
+    // get containers ---------------
+    const actor_count = document.getElementById('actor_count');
+    const articles_actions = document.getElementById('articles_actions');
+    const total_actions = document.getElementById('total_actions');
+    const timespan_actions = document.getElementById('timespan_actions');
+
+    // display statistics ---------------
+    actor_count.innerHTML = actors;
+    articles_actions.innerHTML = articles;
+    total_actions.innerHTML = actions;
+    timespan_actions.innerHTML = years;
 }
 
 
 function display_data(data){
-    console.log(data)
+    // console.log(data)
 
      // // filter
     // let searchString = ''
@@ -250,18 +335,12 @@ function display_data(data){
 
     // const articles = filtered_data.length
     let all_actions = 0
-
-    // // const actor_name_a = document.getElementById('actor_name_a');
-    // // const actor_name_b = document.getElementById('actor_name_b');
-
-    // // actor = data[0].actor.name;
-    // // actor_name_a.innerHTML = actor;
-    // // actor_name_b.innerHTML = actor;
     
-
     let parseDate = d3.timeParse("%Y-%m-%d"); // %Y
-    let margin = [10,20,10,20]
+    let timeline_margin = [10,20,10,20]
 
+    let box_w;
+    let box_h; 
 
     // get start and end date ---------------
     let startDate = fix_date(data[0][0].date.value);
@@ -350,8 +429,8 @@ function display_data(data){
 
         t_box = document.getElementById('timeline_' + i )
 
-        let box_w = t_box.offsetWidth;
-        let box_h = 120 // t_box.offsetHeight;
+        box_w = t_box.offsetWidth;
+        box_h = 120 // t_box.offsetHeight;
 
         // timeline_container
         let timeline_container = timeline_box.append('svg')
@@ -359,7 +438,7 @@ function display_data(data){
             .attr("height", box_h)
 
         let plot = timeline_container.append('g')
-            .attr("transform","translate(" + 0 + "," + margin[0] + ")") 
+            .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
 
         let actions_box = plot.selectAll("g")
             .data(item)
@@ -374,8 +453,7 @@ function display_data(data){
             .attr("class", "act")
             .attr("x", function(d){
                 let the_date = new Date(fix_date(d.date.value)) // parseDate(fix_date(d.date.value)))
-                // console.log(fix_date(the_date))
-                return xScale(the_date) 
+                return xScale(the_date) -  (action_width/2)
             })
             .attr("y",0)
             .attr("width",action_width)
@@ -435,16 +513,17 @@ function display_data(data){
     let xScale = d3.scaleTime()
         // .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
         .domain([parseDate(startDate), parseDate(endDate)])
-        .range([0, w_ - margin[1] - margin[3]] )
+        // .range([0, w_]) // w_ - margin[1] - margin[3]] 
+        .range([0, box_w - margin[1] - margin[3]] )
+
+
+        // .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
 
     let xAxis = d3.axisTop(xScale).tickFormat(d3.timeFormat("%Y"));
         plot.append("g")
             .attr("transform", 'translate(' + margin[0] +',20)')
             .attr("class","the_axis")
             .call(xAxis)
-
-    // articles_count_box.innerHTML = articles
-    // articles_actions_box.innerHTML = all_actions
 
     timeline_labels();
 }
