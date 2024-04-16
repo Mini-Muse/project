@@ -80,7 +80,7 @@
 
 #data_recap .recap {
     display: grid;
-    grid-template-columns: 3fr 3fr 6fr 1fr;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
     grid-column-gap: 10px;
     padding: 20px 20px;
 }
@@ -161,14 +161,21 @@
 
 }
 
-    #article_title {
+    #actor_name_box {
         font-family: "Source Serif 4", Times, serif;
-        font-weight: bold;
         margin-bottom: 0.5rem;
     }
 
-    #article_title a {
-        text-decoration: underline;
+    .actor_name {
+        font-weight: bold;
+    }
+
+    .actor_role {
+        font-weight: normal;
+    }
+
+    .actor_role {
+        font-weight: normal;
     }
 
     #article_author {

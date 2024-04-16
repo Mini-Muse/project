@@ -1,276 +1,258 @@
 [
     {
-        "actionflow_id": 1,
+        "action_relation_id": 1,
         "actor": {
             "actor_id": 1,
             "name": "John Doe",
             "role": "Author"
         },
-        "documents": [
-            {
-                "document_id": 1,
-                "title": "Historical Magazine Title 1",
-                "author": "John Smith",
-                "volume": "Volume 1",
-                "issue": "Issue 1",
-                "type": "Magazine",
-                "publisher": "Historical Society Publications",
-                "year": 1920,
-                "link": "#",
-                "actions": [
-                    {
-                        "action_id": 1,
-                        "name": "Order",
-                        "date": {
-                            "date_id": 1,
-                            "name": "Publication Date",
-                            "value": "1921-01-15"
-                        },
-                        "location": {
-                            "location_id": 1,
-                            "name": "New York City",
-                            "country": "USA"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    },
-                    {
-                        "action_id": 2,
-                        "name": "Protest",
-                        "date": {
-                            "date_id": 3,
-                            "name": "Publication Date",
-                            "value": "1923-03-15"
-                        },
-                        "location": {
-                            "location_id": 3,
-                            "name": "Madrid",
-                            "country": "Spain"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    },
-                    {
-                        "action_id": 4,
-                        "name": "Decide",
-                        "date": {
-                            "date_id": 3,
-                            "name": "Publication Date",
-                            "value": "1926-10-15"
-                        },
-                        "location": {
-                            "location_id": 3,
-                            "name": "Madrid",
-                            "country": "Spain"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    }
-                ]
-            },
-            {
-                "document_id": 3,
-                "title": "Historical Magazine Title 3",
-                "author": "John Smith",
-                "volume": "Volume 3",
-                "issue": "Issue 3",
-                "type": "Magazine",
-                "publisher": "Historical Society Publications",
-                "year": 1922,
-                "link": "#",
-                "actions": [
-                    {
-                        "action_id": 1,
-                        "name": "Order",
-                        "date": {
-                            "date_id": 1,
-                            "name": "Publication Date",
-                            "value": "1920-01-15"
-                        },
-                        "location": {
-                            "location_id": 1,
-                            "name": "New York City",
-                            "country": "USA"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    },
-                    {
-                        "action_id": 2,
-                        "name": "Protest",
-                        "date": {
-                            "date_id": 3,
-                            "name": "Publication Date",
-                            "value": "1923-12-15"
-                        },
-                        "location": {
-                            "location_id": 3,
-                            "name": "Madrid",
-                            "country": "Spain"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    },
-                    {
-                        "action_id": 4,
-                        "name": "Decide",
-                        "date": {
-                            "date_id": 3,
-                            "name": "Publication Date",
-                            "value": "1926-01-15"
-                        },
-                        "location": {
-                            "location_id": 3,
-                            "name": "Madrid",
-                            "country": "Spain"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    }
-                ]
-            }
-        ]
+        "document": {
+            "document_id": 1,
+            "title": "Historical Magazine Title 1",
+            "volume": "Volume 1",
+            "issue": "Issue 1",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1920
+        },
+        "location": {
+            "location_id": 1,
+            "name": "New York City",
+            "country": "USA"
+        },
+        "date": {
+            "date_id": 1,
+            "name": "Publication Date",
+            "value": "1910-10-15"
+        },  
+        "action": {
+            "action_id": 1,
+            "name": "Edited"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+    },    
+    {
+        "action_relation_id": 3,
+        "actor": {
+            "actor_id": 1,
+            "name": "John Doe",
+            "role": "Author"
+        },
+        "document": {
+            "document_id": 1,
+            "title": "Historical Magazine Title 1",
+            "volume": "Volume 1",
+            "issue": "Issue 1",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1920
+        },
+        "location": {
+            "location_id": 2,
+            "name": "London",
+            "country": "UK"
+        },
+        "date": {
+            "date_id": 2,
+            "name": "Publication Date",
+            "value": "1921-02-20"
+        },  
+        "action": {
+            "action_id": 1,
+            "name": "Wrote"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
     },
     {
-        "actionflow_id": 2,
+        "action_relation_id": 2,
         "actor": {
-            "actor_id": 2, "name": "Jane Smith", "role": "Editor"
+            "actor_id": 2,
+            "name": "Jane Smith",
+            "role": "Editor"
         },
-        "documents": [
-            {
-                "document_id": 1,
-                "title": "Historical Magazine Title 1",
-                "author": "John Smith",
-                "volume": "Volume 1",
-                "issue": "Issue 1",
-                "type": "Magazine",
-                "publisher": "Historical Society Publications",
-                "year": 1920,
-                "link": "#",
-                "actions": [
-                    {
-                        "action_id": 1,
-                        "name": "Order",
-                        "date": {
-                            "date_id": 1,
-                            "name": "Publication Date",
-                            "value": "1925-01-15"
-                        },
-                        "location": {
-                            "location_id": 1,
-                            "name": "New York City",
-                            "country": "USA"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    },
-                    {
-                        "action_id": 2,
-                        "name": "Protest",
-                        "date": {
-                            "date_id": 3,
-                            "name": "Publication Date",
-                            "value": "1927-12-15"
-                        },
-                        "location": {
-                            "location_id": 3,
-                            "name": "Madrid",
-                            "country": "Spain"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    },
-                    {
-                        "action_id": 4,
-                        "name": "Decide",
-                        "date": {
-                            "date_id": 3,
-                            "name": "Publication Date",
-                            "value": "1929-01-15"
-                        },
-                        "location": {
-                            "location_id": 3,
-                            "name": "Madrid",
-                            "country": "Spain"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    }
-                ]
-            },
-            {
-                "document_id": 3,
-                "title": "Historical Magazine Title 3",
-                "author": "John Smith",
-                "volume": "Volume 3",
-                "issue": "Issue 3",
-                "type": "Magazine",
-                "publisher": "Historical Society Publications",
-                "year": 1922,
-                "link": "#",
-                "actions": [
-                    {
-                        "action_id": 1,
-                        "name": "Order",
-                        "date": {
-                            "date_id": 1,
-                            "name": "Publication Date",
-                            "value": "1934-01-15"
-                        },
-                        "location": {
-                            "location_id": 1,
-                            "name": "New York City",
-                            "country": "USA"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    },
-                    {
-                        "action_id": 2,
-                        "name": "Protest",
-                        "date": {
-                            "date_id": 3,
-                            "name": "Publication Date",
-                            "value": "1943-12-15"
-                        },
-                        "location": {
-                            "location_id": 3,
-                            "name": "Madrid",
-                            "country": "Spain"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    },
-                    {
-                        "action_id": 4,
-                        "name": "Decide",
-                        "date": {
-                            "date_id": 3,
-                            "name": "Publication Date",
-                            "value": "1949-01-15"
-                        },
-                        "location": {
-                            "location_id": 3,
-                            "name": "Madrid",
-                            "country": "Spain"
-                        },
-                        "extract": {
-                            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
-                        }
-                    }
-                ]
-            }
-        ]
+        "document": {
+            "document_id": 1,
+            "title": "Historical Magazine Title 1",
+            "volume": "Volume 1",
+            "issue": "Issue 1",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1920
+        },
+        "location": {
+            "location_id": 1,
+            "name": "New York City",
+            "country": "USA"
+        },
+        "date": {
+            "date_id": 1,
+            "name": "Publication Date",
+            "value": "1920-04-15"
+        },  
+        "action": {
+            "action_id": 2,
+            "name": "Edited"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+    },
+    {
+        "action_relation_id": 4,
+        "actor": {
+            "actor_id": 2,
+            "name": "Jane Smith",
+            "role": "Editor"
+        },
+        "document": {
+            "document_id": 1,
+            "title": "Historical Magazine Title 1",
+            "volume": "Volume 1",
+            "issue": "Issue 1",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1920
+        },
+        "location": {
+            "location_id": 2,
+            "name": "London",
+            "country": "UK"
+        },
+        "date": {
+            "date_id": 2,
+            "name": "Publication Date",
+            "value": "1921-05-20"
+        },  
+        "action": {
+            "action_id": 2,
+            "name": "Edited"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rh"
+    },
+    {
+        "action_relation_id": 5,
+        "actor": {
+            "actor_id": 1,
+            "name": "John Doe",
+            "role": "Author"
+        },
+        "document": {
+            "document_id": 3,
+            "title": "Historical Magazine Title 3",
+            "volume": "Volume 3",
+            "issue": "Issue 3",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1922
+        },
+        "location": {
+            "location_id": 1,
+            "name": "New York City",
+            "country": "USA"
+        },
+        "date": {
+            "date_id": 1,
+            "name": "Publication Date",
+            "value": "1920-01-15"
+        },  
+        "action": {
+            "action_id": 1,
+            "name": "Wrote"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+    },    
+    {
+        "action_relation_id": 6,
+        "actor": {
+            "actor_id": 1,
+            "name": "John Doe",
+            "role": "Author"
+        },
+        "document": {
+            "document_id": 3,
+            "title": "Historical Magazine Title 3",
+            "volume": "Volume 3",
+            "issue": "Issue 3",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1922
+        },
+        "location": {
+            "location_id": 2,
+            "name": "London",
+            "country": "UK"
+        },
+        "date": {
+            "date_id": 2,
+            "name": "Publication Date",
+            "value": "1921-09-20"
+        },  
+        "action": {
+            "action_id": 1,
+            "name": "Wrote"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urn"
+    },
+    {
+        "action_relation_id": 7,
+        "actor": {
+            "actor_id": 2,
+            "name": "Jane Smith",
+            "role": "Editor"
+        },
+        "document": {
+            "document_id": 3,
+            "title": "Historical Magazine Title 3",
+            "volume": "Volume 3",
+            "issue": "Issue 3",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1922
+        },
+        "location": {
+            "location_id": 1,
+            "name": "New York City",
+            "country": "USA"
+        },
+        "date": {
+            "date_id": 1,
+            "name": "Publication Date",
+            "value": "1920-10-15"
+        },  
+        "action": {
+            "action_id": 2,
+            "name": "Edited"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhoncus sed."
+    },
+    {
+        "action_relation_id": 8,
+        "actor": {
+            "actor_id": 2,
+            "name": "Jane Smith",
+            "role": "Editor"
+        },
+        "document": {
+            "document_id": 3,
+            "title": "Historical Magazine Title 3",
+            "volume": "Volume 3",
+            "issue": "Issue 3",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1922
+        },
+        "location": {
+            "location_id": 2,
+            "name": "London",
+            "country": "UK"
+        },
+        "date": {
+            "date_id": 2,
+            "name": "Publication Date",
+            "value": "1929-12-20"
+        },  
+        "action": {
+            "action_id": 2,
+            "name": "Wrote"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhon"
     }
 ]
