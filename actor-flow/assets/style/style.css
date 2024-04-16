@@ -138,27 +138,28 @@
 
 /* -------- articles -------- */ 
 
-#articles {
+#actors {
     margin: 0 0 5rem;
     font-size: 0.9rem;
 }
 
-#articles_box li {
+#actors_box li {
     display: grid;
-    grid-template-columns: 2fr 7.5fr 1fr;
+    grid-template-columns: 2fr 7fr 1.5fr 0.5fr;
     grid-column-gap: 10px;
     border-bottom: 1px solid #bcbcbc;
     padding: 0 20px;
 }
 
-#articles_box li .item {
+#actors_box li .item {
     padding-top: 10px;
     padding-bottom: 10px;
 /*    height: 10px;*/
 }
 
-.article {
-
+.actor {
+    display: flex;
+    align-items: center;
 }
 
     #actor_name_box {
@@ -207,6 +208,14 @@
 .info_box p {
     line-height: 120%;
     margin-top: .25rem;
+}
+
+.open_box {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    justify-content: center;
 }
 
 .action_cat {

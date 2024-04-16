@@ -10,6 +10,8 @@ const margin = [10,10,10,10]
 
 const action_width = 8;
 
+let raw_data;
+
 // function date_years(date,n,count) {
 //     let output;
 //     if (count == 'minus'){
@@ -121,7 +123,7 @@ function timeline_labels() {
         labels[item].addEventListener("mouseover",function(e) {
 
             let per = this.getAttribute('data-per') 
-            let art = this.getAttribute('data-art') 
+            // let art = this.getAttribute('data-art') 
             let act = this.getAttribute('data-act')
 
             let title = this.getAttribute('data-tit') 
@@ -131,16 +133,15 @@ function timeline_labels() {
 
             // print text
             empty_infobox()
-            let the_info_box = document.getElementById('info_box_' + art);
+            let the_info_box = document.getElementById('info_box_' + act);
             
             let output = '';
             output += '<span style="font-weight:bold;">' + date + '</span><br/>' + location + '<br/><br/>' 
             output += '<span class="action_cat" style="background-color:' + get_color(title) +'">' + title + '</span>'
             output += '<p>' + extract.slice(0, 20) + '</p>'
 
-            
             the_info_box.innerHTML = output
-            // console.log(per,art,act)
+            // console.log(per,act)
 
             // highlight element
             remove_highlights()
@@ -223,6 +224,7 @@ async function load_data(){
     })
     .then(json => {
         data = json
+        raw_data = json
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -237,10 +239,7 @@ async function load_data(){
         acc[actorName].push(obj);
         return acc;
     }, []);
-    // console.log(actionflows);
-
     const actionflows_array = Object.values(actionflows);
-    // console.log(actionflows_array[0])
 
     // sort
     // data.sort((a, b) => {
@@ -254,7 +253,7 @@ async function load_data(){
 }
 
 function get_statistics(data){
-    console.log(data)
+    // console.log(data)
 
     let actors = 0;
     let articles = 0;
@@ -370,12 +369,13 @@ function display_data(data){
 
     // display data
     data.forEach((item,i) => {
+        // console.log(item)
 
-        let container = d3.select('#articles_box')
+        let container = d3.select('#actors_box')
 
         // list background
         let list_item = container.append('li')
-            .attr('class',function (d) {
+            .attr('class',function (d,i) {
                 bg = ''
                 if (i % 2 == 0) {
                     bg = 'bg'
@@ -387,7 +387,7 @@ function display_data(data){
         // actor box ---------------
 
         let article_box = list_item.append('div')
-            .attr('class','article item')
+            .attr('class','actor item')
 
         let actor_name_box = article_box.append('div')
             .attr('id','actor_name_box')
@@ -473,9 +473,11 @@ function display_data(data){
                 return get_color(d.action.name)
             })
             .attr("data-per",1)
-            .attr("data-art",i)
+            .attr("data-art", function(d){
+                return d.document.document_id
+            })
             .attr("data-act", function(d,index){
-                return index
+                return d.actor.actor_id
             })
             .attr("data-tit", function(d){
                 return d.action.name
@@ -499,10 +501,26 @@ function display_data(data){
 
         // infobox  ---------------
 
+        // item.forEach((action,i) => {
+        //     console.log(action)
+
+        // })
+
         let action_box = list_item.append("div")
-            .attr("id", "info_box_" + i)
+            .attr("id", function(d){
+                id = item[0].actor.actor_id
+                return "info_box_" + id
+            }) 
             .attr("class","info_box")
 
+        let open_box = list_item.append("div")
+            .attr("id", function (d) {
+                id = item[0].actor.actor_id
+                return "open_box_" + id
+            })
+            .attr("class","open_box")
+            .append("p")
+            .text("↓")
     });
     
     let overall_timeline = document.getElementById('overall_timeline')
@@ -536,6 +554,30 @@ function display_data(data){
             .call(xAxis)
 
     timeline_labels();
+    get_articles(raw_data);
+}
+
+function get_articles(data){
+    // console.log(data)
+
+    open_boxes = document.getElementsByClassName("open_box");
+
+    for (let item = 0; item < open_boxes.length; item++) {
+        open_boxes[item].addEventListener("click",function(e) {
+            the_id = open_boxes[item].id
+            the_actor_id = the_id.replace('open_box_','')
+            get_articles(the_actor_id)
+        })
+    }
+
+    function get_articles(id){
+
+        // filter all actionflows of the actor
+        const filteredArray = data.filter(item => {
+            return item.actor.actor_id == id;
+        });
+        console.log(filteredArray)
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
