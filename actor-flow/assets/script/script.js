@@ -15,6 +15,7 @@ let raw_data;
 let year_a = 1900;
 let year_b = 1900;
 
+const shift = 2;
 // function date_years(date,n,count) {
 //     let output;
 //     if (count == 'minus'){
@@ -310,9 +311,9 @@ function get_statistics(data){
         })
     });
 
-    const shift = 2;
-    year_a = parseInt(startDate.toString().slice(0, 4)) - shift
-    year_b = parseInt(endDate.toString().slice(0, 4)) + shift
+    
+    year_a = parseInt(startDate.toString().slice(0, 4)) 
+    year_b = parseInt(endDate.toString().slice(0, 4))
     years = year_b - year_a
     console.log(year_a,year_b)
 
@@ -452,8 +453,9 @@ function display_data(data){
         box_w = t_box.offsetWidth;
         box_h = 120 // t_box.offsetHeight;
 
-        let date_a = year_a.toString() + '-01-01'
-        let date_b = year_b.toString() + '-01-01'
+        let date_a = (year_a - shift).toString() + '-01-01'
+        let date_b = (year_b + shift).toString() + '-01-01'
+        console.log(year_a,year_b)
 
         xScale = d3.scaleTime()
             .domain([parseDate(date_a), parseDate(date_b)]) // 1920 // "1750-01-01"
@@ -476,7 +478,7 @@ function display_data(data){
             .attr("class", "act")
             .attr("x", function(d){
                 let the_date = new Date(fix_date(d.date.value)) // parseDate(fix_date(d.date.value)))
-                return xScale(the_date) + (action_width/1)
+                return xScale(the_date)  + (action_width/1)
             })
             .attr("y",0)
             .attr("width",action_width)
