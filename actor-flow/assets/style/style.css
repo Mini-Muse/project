@@ -189,6 +189,11 @@
         margin-bottom: 1rem;
     }
 
+    .article_timeline {
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+    }
+
 .act {
 /*    width: 10px; 
     height: 100%; */
