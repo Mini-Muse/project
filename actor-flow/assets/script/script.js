@@ -12,6 +12,9 @@ const action_width = 8;
 
 let raw_data;
 
+let year_a = 1900;
+let year_b = 1900;
+
 // function date_years(date,n,count) {
 //     let output;
 //     if (count == 'minus'){
@@ -152,56 +155,56 @@ function timeline_labels() {
     }
 }
 
-function make_timeline(box,data,index){
-    console.log(data[0].actions)
+// function make_timeline(box,data,index){
+//     // console.log(data[0].actions)
 
-    // let selection = '#timeline_' + index
-    // const timeline_box = document.getElementById('timeline_' + index)
-    let box_w = box.offsetWidth;
-    let box_h = box.offsetHeight;
+//     // let selection = '#timeline_' + index
+//     // const timeline_box = document.getElementById('timeline_' + index)
+//     let box_w = box.offsetWidth;
+//     let box_h = box.offsetHeight;
 
-    let svg = d3.select(box)
-        .append('svg')
-        .attr("width", box_w) // box_w - (margin[0] + margin[3])
-        .attr("height", box_h)
-        .attr("transform","translate(0,0)") // " + margin[0] + "," + margin[1] + ")"  
+//     let svg = d3.select(box)
+//         .append('svg')
+//         .attr("width", box_w) // box_w - (margin[0] + margin[3])
+//         .attr("height", box_h)
+//         .attr("transform","translate(0,0)") // " + margin[0] + "," + margin[1] + ")"  
 
-    console.log(d3.select(box))
+//     console.log(d3.select(box))
 
-    let xScale = d3.scaleTime()
-        .domain([new Date("1400-01-01"), new Date("2022-12-31")])
-        .range([0, box_w])
+//     let xScale = d3.scaleTime()
+//         .domain([new Date("1400-01-01"), new Date("2022-12-31")])
+//         .range([0, box_w])
 
-    let xAxis = d3.axisBottom(xScale)
-        .ticks(5)
-        .tickFormat(d3.timeFormat("%Y"));
+//     let xAxis = d3.axisBottom(xScale)
+//         .ticks(5)
+//         .tickFormat(d3.timeFormat("%Y"));
 
-    svg.append("g")
-        .attr("transform", "translate(0, 50)")
-        .call(xAxis);
+//     svg.append("g")
+//         .attr("transform", "translate(0, 50)")
+//         .call(xAxis);
 
-    svg.selectAll("circle")
-        .data(data.actions)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d){
-            console.log(d.date)
-            // xScale(new Date(d.date))
-            // console.log(d.date)
-        })
-        .attr("cy", 25)
-        .attr("r", 5)
-        .style("fill", "steelblue");
+//     svg.selectAll("circle")
+//         .data(data.actions)
+//         .enter()
+//         .append("circle")
+//         .attr("cx", function(d){
+//             console.log(d.date)
+//             // xScale(new Date(d.date))
+//             // console.log(d.date)
+//         })
+//         .attr("cy", 25)
+//         .attr("r", 5)
+//         .style("fill", "steelblue");
 
-    // svg.selectAll("text")
-    //     .data(data.actions)
-    //     .enter().append("text")
-    //     .attr("x", d => xScale(new Date(d.date)))
-    //     .attr("y", 75)
-    //     .text(d => d.name)
-    //     .style("text-anchor", "middle")
-    //     .style("font-size", "12px");
-}
+//     // svg.selectAll("text")
+//     //     .data(data.actions)
+//     //     .enter().append("text")
+//     //     .attr("x", d => xScale(new Date(d.date)))
+//     //     .attr("y", 75)
+//     //     .text(d => d.name)
+//     //     .style("text-anchor", "middle")
+//     //     .style("font-size", "12px");
+// }
 
 async function load_data(){
 
@@ -247,8 +250,8 @@ async function load_data(){
     // });
     // console.log(data)
 
-    display_data(actionflows_array)
     get_statistics(actionflows_array)   
+    display_data(actionflows_array)
        
 }
 
@@ -306,9 +309,12 @@ function get_statistics(data){
             }
         })
     });
-    year_a = parseInt(startDate.toString().slice(0, 4))
-    year_b = parseInt(endDate.toString().slice(0, 4))
+
+    const shift = 2;
+    year_a = parseInt(startDate.toString().slice(0, 4)) - shift
+    year_b = parseInt(endDate.toString().slice(0, 4)) + shift
     years = year_b - year_a
+    console.log(year_a,year_b)
 
 
     // get containers ---------------
@@ -446,9 +452,11 @@ function display_data(data){
         box_w = t_box.offsetWidth;
         box_h = 120 // t_box.offsetHeight;
 
+        let date_a = year_a.toString() + '-01-01'
+        let date_b = year_b.toString() + '-01-01'
 
         xScale = d3.scaleTime()
-            .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
+            .domain([parseDate(date_a), parseDate(date_b)]) // 1920 // "1750-01-01"
             .range([0, box_w - timeline_margin[1] - timeline_margin[3]] )
 
         // timeline_container
@@ -468,7 +476,7 @@ function display_data(data){
             .attr("class", "act")
             .attr("x", function(d){
                 let the_date = new Date(fix_date(d.date.value)) // parseDate(fix_date(d.date.value)))
-                return xScale(the_date) -  (action_width/2)
+                return xScale(the_date) + (action_width/1)
             })
             .attr("y",0)
             .attr("width",action_width)
@@ -556,11 +564,14 @@ function display_data(data){
 
         // .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
 
-    let xAxis = d3.axisTop(xScale).tickFormat(d3.timeFormat("%Y"));
-        plot.append("g")
-            .attr("transform", 'translate(' + margin[0] +',20)')
-            .attr("class","the_axis")
-            .call(xAxis)
+    let xAxis = d3.axisTop(xScale)
+        .tickFormat(d3.timeFormat("%Y"))
+        .ticks(10)
+    
+    let the_xAxis = plot.append("g")
+        .attr("transform", 'translate(' + margin[0] +',20)')
+        .attr("class","the_axis")
+        .call(xAxis)
 
     timeline_labels();
     get_articles(raw_data);
