@@ -311,12 +311,10 @@ function get_statistics(data){
         })
     });
 
-    
     year_a = parseInt(startDate.toString().slice(0, 4)) 
     year_b = parseInt(endDate.toString().slice(0, 4))
     years = year_b - year_a
-    console.log(year_a,year_b)
-
+    // console.log(year_a,year_b)
 
     // get containers ---------------
     const actor_count = document.getElementById('actor_count');
@@ -455,7 +453,7 @@ function display_data(data){
 
         let date_a = (year_a - shift).toString() + '-01-01'
         let date_b = (year_b + shift).toString() + '-01-01'
-        console.log(year_a,year_b)
+        // console.log(year_a,year_b)
 
         xScale = d3.scaleTime()
             .domain([parseDate(date_a), parseDate(date_b)]) // 1920 // "1750-01-01"

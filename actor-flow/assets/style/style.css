@@ -230,6 +230,7 @@
     text-transform: uppercase;
     color: white;
     padding: 0 3px;
+    border-radius: 5px;
 }
 
 /* -------- timeline -------- */ 
