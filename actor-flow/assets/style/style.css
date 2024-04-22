@@ -270,6 +270,10 @@
     border-bottom: none;
 }
 
+.row_article p {
+    margin-bottom: 0.1rem;
+}
+
 @media screen and (max-width: 768px) {
 
 	/* -------- menu -------- */ 

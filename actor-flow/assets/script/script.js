@@ -642,10 +642,12 @@ function get_articles(data){
             let author = 'author name' //uniqueDocuments[item].author
             let date = 0
             let year = uniqueDocuments[item].year
+            let issue = uniqueDocuments[item].issue
 
             output += '<div class="row_article">'
             output += '<p><a href="' + link + '">' + title + '</a></p>'
-            output += '<p>by ' + author + ', ' + year +'</p><br/>'
+            output += '<p>by ' + author + '</p>'
+            output += '<p>' + year + ', ' + issue + '</p><br/>'
             output += '<p>other actors: ' + '...' + '</p>'
             output += '</div>'
 
