@@ -536,7 +536,10 @@ function display_data(data){
                 return "open_box_" + id
             })
             .attr("class","open_box")
+            .attr("data-open","false")
             .append("p")
+            .attr("id","open_box_icon_" + id)
+            .attr("class","arrow_box")
             .text("↓")
     });
     
@@ -582,13 +585,26 @@ function get_articles(data){
     open_boxes = document.getElementsByClassName("open_box");
     article_boxes = document.getElementsByClassName("article_boxes");
 
-
     for (let item = 0; item < open_boxes.length; item++) {
         open_boxes[item].addEventListener("click",function(e) {
             the_id = open_boxes[item].id
+            id = the_id.replace('open_box_','')
             the_actor_id = the_id.replace('open_box_','')
+
+            switch_arrow(id)
             display_articles(the_actor_id)
         })
+    }
+
+    function switch_arrow(id){
+        arrow_boxes = document.getElementsByClassName("arrow_box");  
+
+        for (let i = 0; i < arrow_boxes.length; i++) {
+            arrow_boxes[i].innerHTML = '&darr;'
+        }
+
+        my_arrow = document.getElementById("open_box_icon_" + id)
+        my_arrow.innerHTML = '&uarr;'
     }
 
     function display_articles(id){
@@ -599,7 +615,6 @@ function get_articles(data){
         })
         // console.log(documentsRelatedToActorId)
 
-        
         const actorsInSameDocument = data
             .filter(item => item.actor.actor_id != id) // Filter out actor with actor_id 1
             .map(item => item.actor) // Extract actor objects
