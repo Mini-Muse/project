@@ -8,7 +8,7 @@ const colors = [
 
 const margin = [10,10,10,10]
 
-const action_width = 8;
+const action_width = 10;
 
 let raw_data;
 
