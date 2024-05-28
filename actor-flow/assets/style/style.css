@@ -56,26 +56,31 @@
 /* -------- filter and sort -------- */ 
 
 #filter_sort_options {
-    height: 5.5rem;
-    border-bottom: 1px solid #797373;
+    border-bottom: 1px solid #bbb;
     display: flex;
     justify-content: space-between;
 }
 
 #filter_sort_options .controller {
-    width: 50%;
-    padding: 0 20px;
-    line-height: 5rem;
+/*    height: 6.5rem;*/
+    width: 45%;
+    padding: 5rem 0.5rem 20px;
+/*    line-height: 5rem;*/
 }
 
-#filter_sort_options .controller:first-child {
+#filter_sort_options .controller {
     border-right: 1px solid #bcbcbc;
+}
+
+#filter_sort_options #help{
+    width: 10%;
+    padding: 5rem 0.5rem 20px;
 }
 
 /* -------- data recap -------- */ 
 
 #data_recap {
-    border-bottom: 1px solid #797373;
+    border-bottom: 1px solid #bbb;
 }
 
 #data_recap .recap {
@@ -298,7 +303,7 @@
 
     .menu.active {
         display: flex;
-        border-bottom: 1px solid #797373;
+        border-bottom: 1px solid #bbb;
     }
 
     .menu li {
