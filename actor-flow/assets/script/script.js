@@ -55,56 +55,56 @@ function fix_date(date){
     return new_date
 }
 
-function search_autocomplete(){
-    const searchBox = document.getElementById('query_search');
-    const autocompleteList = document.getElementById('autocomplete_list');
+// function search_autocomplete(){
+//     const searchBox = document.getElementById('query_search');
+//     const autocompleteList = document.getElementById('autocomplete_list');
 
-    const data = [
-        "Albert Einstein",
-        "Cleopatra VII",
-        "Elizabeth I",
-        "Genghis Khan",
-        "Gustav Klimt",
-        "Joan of Arc",
-        "Julius Caesar",
-        "Leonardo da Vinci",
-        "Mahatma Gandhi",
-        "Martin Luther King Jr.",
-        "Napoleon Bonaparte"
-    ]
+//     const data = [
+//         "Albert Einstein",
+//         "Cleopatra VII",
+//         "Elizabeth I",
+//         "Genghis Khan",
+//         "Gustav Klimt",
+//         "Joan of Arc",
+//         "Julius Caesar",
+//         "Leonardo da Vinci",
+//         "Mahatma Gandhi",
+//         "Martin Luther King Jr.",
+//         "Napoleon Bonaparte"
+//     ]
 
-    searchBox.addEventListener('input', handleInput);
-    document.body.addEventListener("click", remove_list);
+//     searchBox.addEventListener('input', handleInput);
+//     document.body.addEventListener("click", remove_list);
 
-    function remove_list(){
-        autocomplete_list.style.display = 'none';
-    }
+//     function remove_list(){
+//         autocomplete_list.style.display = 'none';
+//     }
 
-    function handleInput() {
-        const searchTerm = searchBox.value.toLowerCase();
-        const filteredData = data.filter(item => item.toLowerCase().includes(searchTerm));
+//     function handleInput() {
+//         const searchTerm = searchBox.value.toLowerCase();
+//         const filteredData = data.filter(item => item.toLowerCase().includes(searchTerm));
 
-        autocomplete_list.style.display = 'block';
-        displayAutocompleteResults(filteredData);
-    }
+//         autocomplete_list.style.display = 'block';
+//         displayAutocompleteResults(filteredData);
+//     }
 
-    function displayAutocompleteResults(results) {
-      autocompleteList.innerHTML = '';
+//     function displayAutocompleteResults(results) {
+//       autocompleteList.innerHTML = '';
 
-      results.forEach(result => {
-        const listItem = document.createElement('li');
-        listItem.textContent = result;
-        listItem.addEventListener('click', () => {
-            searchBox.value = result;
-            autocompleteList.innerHTML = '';
+//       results.forEach(result => {
+//         const listItem = document.createElement('li');
+//         listItem.textContent = result;
+//         listItem.addEventListener('click', () => {
+//             searchBox.value = result;
+//             autocompleteList.innerHTML = '';
 
-            remove_list()
-        });
+//             remove_list()
+//         });
 
-        autocompleteList.appendChild(listItem);
-      });
-    }
-}
+//         autocompleteList.appendChild(listItem);
+//       });
+//     }
+// }
 
 function timeline_labels() {
     let labels = document.getElementsByClassName('act');
@@ -218,7 +218,7 @@ async function load_data(){
     let data;
 
     await fetch('assets/data/data_.json') 
-    // await fetch('https://minimuse.nlp.idsia.ch/actionflows  ') 
+    // await fetch('https://minimuse.nlp.idsia.ch/actionflows') 
     // assets/data/data.json 
     .then(response => {
         if (!response.ok) {
@@ -581,30 +581,51 @@ function display_data(data){
 }
 
 function get_articles(data){
-
+    // console.log(data)
     open_boxes = document.getElementsByClassName("open_box");
-    article_boxes = document.getElementsByClassName("article_boxes");
 
+    // open lists
     for (let item = 0; item < open_boxes.length; item++) {
         open_boxes[item].addEventListener("click",function(e) {
+
+            open = open_boxes[item].getAttribute('data-open')
+
             the_id = open_boxes[item].id
             id = the_id.replace('open_box_','')
             the_actor_id = the_id.replace('open_box_','')
 
-            switch_arrow(id)
-            display_articles(the_actor_id)
+            if (open == 'false'){
+                if (document.getElementById('the_box_' + id)){
+                    the_box = document.getElementById('the_box_' + id)
+                    the_box.style.display = 'block'
+                }
+
+                display_articles(the_actor_id)
+                open_boxes[item].setAttribute('data-open','true')
+
+                switch_arrow(id,'true')
+            }
+            else {
+                if (document.getElementById('the_box_' + id)){
+                    the_box = document.getElementById('the_box_' + id)
+                    the_box.style.display = 'none'
+                }
+                open_boxes[item].setAttribute('data-open','false')
+
+                switch_arrow(id,'false')
+            }
         })
     }
 
-    function switch_arrow(id){
-        arrow_boxes = document.getElementsByClassName("arrow_box");  
-
-        for (let i = 0; i < arrow_boxes.length; i++) {
-            arrow_boxes[i].innerHTML = '&darr;'
-        }
-
+    function switch_arrow(id,open){
         my_arrow = document.getElementById("open_box_icon_" + id)
-        my_arrow.innerHTML = '&uarr;'
+
+        if (open == 'false'){
+            my_arrow.innerHTML = '&darr;'
+        }
+        else {
+            my_arrow.innerHTML = '&uarr;'
+        }
     }
 
     function display_articles(id){
@@ -613,13 +634,11 @@ function get_articles(data){
         const documentsRelatedToActorId = data.filter(item => {
             return item.actor.actor_id == id
         })
-        // console.log(documentsRelatedToActorId)
 
         const actorsInSameDocument = data
             .filter(item => item.actor.actor_id != id) // Filter out actor with actor_id 1
             .map(item => item.actor) // Extract actor objects
             .filter((actor, index, self) => self.findIndex(a => a.actor_id === actor.actor_id) === index); // Filter unique actors based on actor_id
-        // console.log(actorsInSameDocument)
 
         const documentsData = documentsRelatedToActorId.map(item => item.document);
 
@@ -633,13 +652,18 @@ function get_articles(data){
                 return true;
             }
         });
-        // console.log(uniqueDocuments);
 
         // display articles  ---------------
 
-        // remove list of articles
-        for (let item = 0; item < article_boxes.length; item++) {
-            article_boxes[item].remove();
+        article_boxes = document.querySelectorAll(".article_boxes");
+
+        if (article_boxes){
+
+            article_boxes.forEach(div => {
+                if (div.id == 'the_box_' + id) {
+                    div.remove()
+                }
+            });
         }
 
         let output = ''
@@ -650,7 +674,6 @@ function get_articles(data){
         const actor_line = document.getElementById('actor_id_' + id);
 
         for (let item = 0; item < uniqueDocuments.length; item++) {
-            // console.log(uniqueDocuments[item])
 
             let title = uniqueDocuments[item].title
             let link = '#'
@@ -673,9 +696,8 @@ function get_articles(data){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    search_autocomplete();
+    // search_autocomplete();
 
     load_data();
     
 });
-
