@@ -147,8 +147,45 @@ function get_statistics(data){
     timespan_actions.innerHTML = years;
 }
 
+function chat_with_NLP(){
+    const chatBox = document.getElementById('question_chat_box');
+    const theNLPBox = document.getElementById('reply_chat_box');
+
+    document.getElementById('send_button').addEventListener('click', function() {
+        const input = document.getElementById('chat_input');
+        const message = input.value.trim();
+        
+        if (message) {
+            addMessageToChatBox(message);
+            input.value = '';
+        }
+    });
+
+    function addMessageToChatBox(message) {
+        
+        const messageElement = document.createElement('div');
+        messageElement.className = 'my_chat_message';
+        messageElement.textContent = message;
+        
+        chatBox.innerHTML = '';
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;  // Scroll to the bottom
+
+        theNLPBox.innerHTML = ''
+        setTimeout(load_NLP_reply,1000)
+    }
+
+    function load_NLP_reply() {
+        
+
+        theNLPBox.innerHTML = 'message received ...'
+    }
+
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
-    load_data();
+    load_data()
+    chat_with_NLP()
 
 });
