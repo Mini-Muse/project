@@ -254,17 +254,19 @@ function chat_with_NLP(){
         count_prompts += 1
         let output = ''
         
+        box_id = 'msg_' + count_prompts
         const messageSent = document.createElement('div');
         messageSent.className = 'message_sent';
+        messageSent.id = box_id
 
-        output += '<div class="chat_question" id="msg_' + count_prompts + '">' + message +  '</div>'
-        output += '<div class="chat_reply" id="reply_' + count_prompts + '"></div>'
+        output += '<div class="chat_question">' + message +  '</div>'
+        // output += '<div class="chat_reply" id="reply_' + count_prompts + '"></div>'
 
         messageSent.innerHTML = output
 
         chat.appendChild(messageSent);
         chat.scrollTop = chat.scrollHeight;  // Scroll to the bottom
-        box_id = 'reply_' + count_prompts.toString()
+        //'reply_' + count_prompts.toString()
 
         // setTimeout(load_NLP_reply(box_id),100)
         waitAndRun(load_NLP_reply, box_id, message)
@@ -283,14 +285,19 @@ function chat_with_NLP(){
 
 
     function load_NLP_reply(box_id, message) {
-        box = document.getElementById(box_id)
-        id = box_id.replace('reply_','')
+        // box = document.getElementById(box_id)
+        // id = box_id.replace('reply_','')
 
         // prepare data to be sent to the server
-        documentId = id
+        documentId = document.getElementById('chat').getAttribute('data-document')
         query = message
 
-        box.innerHTML = 'question ' + id +' received ...'
+        const messageReceived = document.createElement('div');
+        messageReceived.className = 'chat_reply';
+        messageReceived.textContent = 'question ' + count_prompts + ' about document ' + documentId + ' ...';
+
+        the_messageSent = document.getElementById(box_id)
+        the_messageSent.appendChild(messageReceived)
 
         get_NLP_reply(documentId,query)
 
