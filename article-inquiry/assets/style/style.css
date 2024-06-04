@@ -57,17 +57,40 @@
     border-bottom: 1px solid #bcbcbc;
 }
 
-.article_box:last-child {
+/*.article_box:last-child {
     border-bottom: none;
-}
+}*/
 
 .article_box:hover {
+    background-color: white;
+}
+
+.selected {
     background-color: white;
 }
 
 .article_title {
     font-weight: bold;
 }
+
+#the_title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#the_info {
+    margin-top: 0.5rem;
+}
+
+#the_abstract {
+    margin-top: 2rem;
+    line-height: 120%;
+}
+
+#the_abstract h2 {
+    font-weight: bold;
+}
+
 
 /* -------- prompt box -------- */ 
 
