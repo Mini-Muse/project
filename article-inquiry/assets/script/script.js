@@ -1,3 +1,7 @@
+let documents_data;
+let actor_data;
+let reply_data;
+
 async function load_data(){
 
     const title_box = document.getElementById('articles_box');
@@ -33,15 +37,14 @@ async function load_data(){
         return response.json(); 
     })
     .then(json => {
-        data = json
-        // console.log(raw_data)
+        actor_data = json
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
     });
 
     // group objects by actor name
-    const actionflows = data.reduce((acc, obj) => {
+    const actionflows = actor_data.reduce((acc, obj) => {
         const actorName = obj.actor.name;
         if (!acc[actorName]) {
             acc[actorName] = [];
@@ -54,7 +57,8 @@ async function load_data(){
     list_articles(documents_data)
     get_statistics(actionflows_array)   
     load_article_info(documents_data)
-       
+
+    chat_with_NLP()
 }
 
 function list_articles(data){
@@ -156,9 +160,9 @@ function load_article_info(data){
     article_item.forEach(item => {
         item.addEventListener('click', function() {
             document_id = parseInt(item.getAttribute('data-id'))
-
-
             display_info(document_id)
+
+            chat_with_NLP()
         })
     })
 
@@ -190,9 +194,19 @@ function load_article_info(data){
                 output += '<p>Abstract lorem ipsum ...</p>'
                 output += '</div>'
 
+                output += '<div id="the_actors">'
+                output += '<h2>Actors</h2>'
+                output += '<ul>'
+                output += '<li>...</li>'
+                output += '<li>...</li>'
+                output += '</ul>'
+                output += '</div>'
+
                 article_info_box.innerHTML = output
             }
         })
+
+        article_info_box.setAttribute('data-document',id)
     }
     display_info(id)
 }
@@ -205,7 +219,21 @@ function chat_with_NLP(){
     const send_button = document.getElementById('send_button')
     const chat = document.getElementById('chat')
 
-    send_button.addEventListener('click', function() {
+    document_id = document.getElementById('article_info_box').getAttribute('data-document')
+    chat.setAttribute("data-document", document_id);
+
+    chat.innerHTML = ''
+    // console.log(document_id)
+
+    document.addEventListener('keypress',  function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            send_prompt()
+        }
+    })
+    send_button.addEventListener('click', send_prompt)
+
+    function send_prompt(){
         const input = document.getElementById('chat_input');
         const message = input.value.trim();
         
@@ -213,7 +241,7 @@ function chat_with_NLP(){
             addMessageToChatBox(message);
             input.value = '';
         }
-    });
+    }
 
     function addMessageToChatBox(message) {
         
@@ -233,27 +261,51 @@ function chat_with_NLP(){
         box_id = 'reply_' + count.toString()
 
         // setTimeout(load_NLP_reply(box_id),100)
-        waitAndRun(load_NLP_reply, box_id)
+        waitAndRun(load_NLP_reply, box_id, message)
             // .then(function() {
             //     console.log(box_id);
             // });
     }
 
-    function waitAndRun(func, argument) {
+    function waitAndRun(func, argument_a, argument_b) {
         return new Promise(function(resolve) {
             setTimeout(resolve, 1000);
         }).then(function() {
-            func(argument);
+            func(argument_a, argument_b);
         });
     }
 
 
-    function load_NLP_reply(box_id) {
+    function load_NLP_reply(box_id, message) {
         box = document.getElementById(box_id)
         id = box_id.replace('reply_','')
-        console.log(box_id, box)
+
+        // prepare data to be sent to the server
+        documentId = id
+        query = message
 
         box.innerHTML = 'question ' + id +' received ...'
+
+        get_NLP_reply(documentId,query)
+
+        async function get_NLP_reply(documentId,query){
+            url = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId=' + documentId +'&query=' + query 
+
+            await fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); 
+            })
+            .then(json => {
+                reply_data = json
+                console.log(reply_data)
+            })
+            .catch(error => {
+                console.error('There was a problem with the prompt fetch operation:', error);
+            });
+        }
     }
 
 }
@@ -261,6 +313,5 @@ function chat_with_NLP(){
 document.addEventListener('DOMContentLoaded', function() {
 
     load_data()
-    chat_with_NLP()
 
 });

@@ -81,12 +81,12 @@
     margin-top: 0.5rem;
 }
 
-#the_abstract {
+#the_abstract, #the_actors {
     margin-top: 2rem;
     line-height: 120%;
 }
 
-#the_abstract h2 {
+#the_abstract h2, #the_actors h2 {
     font-weight: bold;
 }
 
@@ -95,9 +95,9 @@
 
 #chat {
     min-height: 40vh;
+    max-height: 60vh;
     border-bottom: 1px solid #ddd;
     padding: 20px;
-    max-height: 70vh;
     overflow-x: scroll;
 }
 
@@ -118,6 +118,7 @@
     align-items: center;
     padding: 10px;
     background-color: #f9f9f9;
+    width: auto;
 }
 
 .input_box input[type="text"] {
