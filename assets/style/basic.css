@@ -148,6 +148,7 @@ black_lines     #BBB
 /* -------- filter and sort -------- */ 
 
 #filter_sort_options {
+    margin-top: 3.5rem;
     border-bottom: 1px solid #bbb;
     display: flex;
     justify-content: space-between;
