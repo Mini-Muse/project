@@ -308,7 +308,7 @@ highlight       #4538d8
     }
 
     .menu li a {
-        padding: 10px 20px;
+/*        padding: 10px 20px;*/
         width: 100%;
         height: 2.5rem;
         line-height: 2.5rem;
@@ -321,4 +321,11 @@ highlight       #4538d8
     .menu .current {
 		color: #bcbcbc;
 	}
+
+    #help_box p {
+        font-size: 1rem;
+        line-height: 140%;
+        position: relative;
+        top: 1.5rem;
+    }
 }
