@@ -95,10 +95,17 @@
 /* -------- prompt box -------- */ 
 
 #chat {
-    min-height: 300px;
+    min-height: 40vh;
     border-bottom: 1px solid #ddd;
+    padding: 20px;
+    max-height: 70vh;
+    overflow-x: scroll;
 }
-#question_chat_box {
+
+.message_sent {
+    margin-bottom: 2.5rem;
+}
+/*#question_chat_box {
     overflow-y: auto;
     padding: 20px;
 }
@@ -106,7 +113,7 @@
 #reply_chat_box {
     padding: 0 20px 20px;
 }
-
+*/
 .input_box {
     display: flex;
     align-items: center;
@@ -144,10 +151,15 @@
     background-color: #0056b3;
 }
 
-.my_chat_message {
+.chat_question {
     background-color: #f3f3f3;
     border-radius: 20px;
     padding: 15px;
+    margin-bottom: 15px;
     line-height: 140%;
 }
 
+.chat_reply {
+    margin-bottom: 20px;
+    line-height: 140%;
+}

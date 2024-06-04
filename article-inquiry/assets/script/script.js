@@ -194,10 +194,16 @@ function load_article_info(data){
 }
 
 function chat_with_NLP(){
-    const chatBox = document.getElementById('question_chat_box');
-    const theNLPBox = document.getElementById('reply_chat_box');
+    // const chatBox = document.getElementById('question_chat_box');
+    // const theNLPBox = document.getElementById('reply_chat_box');
 
-    document.getElementById('send_button').addEventListener('click', function() {
+    let count = 0
+    let box_id = '';
+
+    const send_button = document.getElementById('send_button')
+    const chat = document.getElementById('chat')
+
+    send_button.addEventListener('click', function() {
         const input = document.getElementById('chat_input');
         const message = input.value.trim();
         
@@ -209,20 +215,45 @@ function chat_with_NLP(){
 
     function addMessageToChatBox(message) {
         
-        const messageElement = document.createElement('div');
-        messageElement.className = 'my_chat_message';
-        messageElement.textContent = message;
+        count += 1
+        let output = ''
         
-        chatBox.innerHTML = '';
-        chatBox.appendChild(messageElement);
-        chatBox.scrollTop = chatBox.scrollHeight;  // Scroll to the bottom
+        const messageSent = document.createElement('div');
+        messageSent.className = 'message_sent';
 
-        theNLPBox.innerHTML = ''
-        setTimeout(load_NLP_reply,1000)
+        output += '<div class="chat_question" id="msg_' + count + '">' + message +  '</div>'
+        output += '<div class="chat_reply" id="reply_' + count + '"></div>'
+
+        messageSent.innerHTML = output
+
+        chat.appendChild(messageSent);
+        chat.scrollTop = chat.scrollHeight;  // Scroll to the bottom
+        box_id = 'reply_' + count.toString()
+        console.log(count)
+
+        // setTimeout(load_NLP_reply(box_id),100)
+        waitAndRun(load_NLP_reply, box_id)
+            .then(function() {
+                console.log(box_id);
+            }   
+        );
     }
 
-    function load_NLP_reply() {
-        theNLPBox.innerHTML = 'message received ...'
+    function waitAndRun(func, argument) {
+        return new Promise(function(resolve) {
+            setTimeout(resolve, 1000);
+        }).then(function() {
+            func(argument);
+        });
+    }
+
+
+    function load_NLP_reply(box_id) {
+        box = document.getElementById(box_id)
+        id = box_id.replace('reply_','')
+        console.log(box_id, box)
+
+        box.innerHTML = 'message ' + id +' received ...'
     }
 
 }
