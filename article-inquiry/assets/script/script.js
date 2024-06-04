@@ -157,10 +157,6 @@ function load_article_info(data){
         item.addEventListener('click', function() {
             document_id = parseInt(item.getAttribute('data-id'))
 
-            article_item.forEach(item => {
-                item.classList.remove('selected');
-            })
-            item.classList.add('selected')
 
             display_info(document_id)
         })
@@ -168,6 +164,14 @@ function load_article_info(data){
 
     function display_info(id){
         let output = ''
+
+        article_item.forEach(item => {
+            item.classList.remove('selected');
+
+            if (item.getAttribute('data-id') == id){
+               item.classList.add('selected') 
+            }
+        })
 
         data.forEach(item => {
             if (item.document_id == id){
@@ -194,8 +198,6 @@ function load_article_info(data){
 }
 
 function chat_with_NLP(){
-    // const chatBox = document.getElementById('question_chat_box');
-    // const theNLPBox = document.getElementById('reply_chat_box');
 
     let count = 0
     let box_id = '';
@@ -229,14 +231,12 @@ function chat_with_NLP(){
         chat.appendChild(messageSent);
         chat.scrollTop = chat.scrollHeight;  // Scroll to the bottom
         box_id = 'reply_' + count.toString()
-        console.log(count)
 
         // setTimeout(load_NLP_reply(box_id),100)
         waitAndRun(load_NLP_reply, box_id)
-            .then(function() {
-                console.log(box_id);
-            }   
-        );
+            // .then(function() {
+            //     console.log(box_id);
+            // });
     }
 
     function waitAndRun(func, argument) {
@@ -253,7 +253,7 @@ function chat_with_NLP(){
         id = box_id.replace('reply_','')
         console.log(box_id, box)
 
-        box.innerHTML = 'message ' + id +' received ...'
+        box.innerHTML = 'question ' + id +' received ...'
     }
 
 }
