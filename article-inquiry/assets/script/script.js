@@ -8,8 +8,24 @@ async function load_data(){
 
     let data;
 
-    await fetch('assets/data/data_.json') // assets/data/data.json 
-    // await fetch('https://minimuse.nlp.idsia.ch/actionflows') 
+    // documents
+    await fetch('https://minimuse.nlp.idsia.ch/documents')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); 
+    })
+    .then(json => {
+        documents_data = json
+        // console.log(raw_data)
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+
+    // actors
+    await fetch('assets/data/data_.json')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -18,8 +34,7 @@ async function load_data(){
     })
     .then(json => {
         data = json
-        raw_data = json
-        console.log(raw_data)
+        // console.log(raw_data)
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -36,8 +51,100 @@ async function load_data(){
     }, []);
     const actionflows_array = Object.values(actionflows);
 
+    list_articles(documents_data)
     get_statistics(actionflows_array)   
        
+}
+
+function list_articles(data){
+    articles_box = document.getElementById('articles_box')
+
+    console.log(data)
+
+    let output = ''
+
+    data.forEach(item => {
+        output += '<div class="article_box">'
+        output += '<span class="article_title">' + item.title + '</span><br/>'
+        output += '<span class="article_author">by ' + 'author' + ', </span>'
+        output += '<span class="article_date">' + item.year + '</span>'
+        output += '</div>'
+    })
+
+    articles_box.innerHTML = output
+}
+
+function get_statistics(data){
+    // console.log(data)
+
+    let actors = 0;
+    let articles = 0;
+    let actions = 0;
+    let years = 0;
+
+    const actorCount = {};
+    const articleCount = {};
+
+    // get number of actors ---------------
+    data.forEach(item => {
+        item.forEach(action => {
+            const actorName = action.actor.actor_id;
+            actorCount[actorName] = (actorCount[actorName] || 0) + 1;
+        })
+    });
+    actors = Object.keys(actorCount).length;
+
+
+    // get number of articles ---------------
+    data.forEach(item => {
+        item.forEach(action => {
+            const actorName = action.document.document_id;
+            articleCount[actorName] = (articleCount[actorName] || 0) + 1;
+        })
+    });
+    articles = Object.keys(articleCount).length;
+
+
+    // get number of actions ---------------
+    data.forEach((item,i) => {
+        item.forEach((action,a) => {
+            actions += 1
+        })
+    })
+
+
+    // get number of years ---------------
+    let startDate = fix_date(data[0][0].date.value);
+    let endDate = startDate 
+
+    data.forEach(item => {
+        item.forEach(event => {
+            date = event.date.value
+            if (fix_date(date) < startDate ) {
+                startDate = date;
+            }
+            if (fix_date(date) > endDate ) {
+                endDate = date;
+            }
+        })
+    });
+
+    year_a = parseInt(startDate.toString().slice(0, 4)) 
+    year_b = parseInt(endDate.toString().slice(0, 4))
+    years = year_b - year_a
+    // console.log(year_a,year_b)
+
+    // get containers ---------------
+    const actor_count = document.getElementById('actor_count');
+    const articles_actions = document.getElementById('articles_actions');
+    const total_actions = document.getElementById('total_actions');
+    const timespan_actions = document.getElementById('timespan_actions');
+
+    // display statistics ---------------
+    actor_count.innerHTML = actors;
+    articles_actions.innerHTML = articles;
+    total_actions.innerHTML = actions;
+    timespan_actions.innerHTML = years;
 }
 
 document.addEventListener('DOMContentLoaded', function() {

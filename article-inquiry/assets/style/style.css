@@ -27,22 +27,44 @@
 
 #main {
     display: flex;
-    padding: 0 20px;
     border-bottom: 1px solid #bcbcbc;
 }
 
-#articles_box, #article_info_box, #prompt_box {
-    padding: 20px 20px 20px 0;
+#article_info_box, #prompt_box {
+    padding: 20px;
 }
 
 #articles_box {
     width: 16%;
+    cursor: pointer;
+    background-color: #f6f6f6;
 }
 
 #article_info_box {
     width: 32%;
+    border-left: 1px solid #bcbcbc;
 }
 
 #prompt_box {
     width: 48%;
+    border-left: 1px solid #bcbcbc;
+}
+
+/* -------- articles box -------- */ 
+
+.article_box {
+    padding: 20px;
+    border-bottom: 1px solid #bcbcbc;
+}
+
+.article_box:last-child {
+    border-bottom: none;
+}
+
+.article_box:hover {
+    background-color: white;
+}
+
+.article_title {
+    font-weight: bold;
 }
