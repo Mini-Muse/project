@@ -1,8 +1,8 @@
 /* -------- timeline recap -------- */ 
 
 #timeline_recap{
-    position: -webkit-sticky;
-    position: sticky;
+/*    position: -webkit-sticky;
+    position: sticky;*/
     top: 3.5rem;
     background-color: white;
 }
@@ -13,7 +13,6 @@
     height: 2rem;
     line-height: 1.5rem;
     padding: 0 20px;
-
     display: grid;
     grid-template-columns: 2fr 7.5fr 1fr;
     grid-column-gap: 10px;
