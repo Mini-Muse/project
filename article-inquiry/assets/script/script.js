@@ -2,6 +2,8 @@ let documents_data;
 let actor_data;
 let reply_data;
 
+let count_prompts = 0;
+
 async function load_data(){
 
     const title_box = document.getElementById('articles_box');
@@ -162,6 +164,7 @@ function load_article_info(data){
             document_id = parseInt(item.getAttribute('data-id'))
             display_info(document_id)
 
+            count_prompts = 0;
             chat_with_NLP()
         })
     })
@@ -213,7 +216,6 @@ function load_article_info(data){
 
 function chat_with_NLP(){
 
-    let count = 0
     let box_id = '';
 
     const send_button = document.getElementById('send_button')
@@ -245,20 +247,20 @@ function chat_with_NLP(){
 
     function addMessageToChatBox(message) {
         
-        count += 1
+        count_prompts += 1
         let output = ''
         
         const messageSent = document.createElement('div');
         messageSent.className = 'message_sent';
 
-        output += '<div class="chat_question" id="msg_' + count + '">' + message +  '</div>'
-        output += '<div class="chat_reply" id="reply_' + count + '"></div>'
+        output += '<div class="chat_question" id="msg_' + count_prompts + '">' + message +  '</div>'
+        output += '<div class="chat_reply" id="reply_' + count_prompts + '"></div>'
 
         messageSent.innerHTML = output
 
         chat.appendChild(messageSent);
         chat.scrollTop = chat.scrollHeight;  // Scroll to the bottom
-        box_id = 'reply_' + count.toString()
+        box_id = 'reply_' + count_prompts.toString()
 
         // setTimeout(load_NLP_reply(box_id),100)
         waitAndRun(load_NLP_reply, box_id, message)
