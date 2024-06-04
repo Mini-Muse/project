@@ -1,0 +1,48 @@
+/* -------- timeline recap -------- */ 
+
+#timeline_recap{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 3.5rem;
+    background-color: white;
+}
+
+
+#timeline_recap .recap_b {
+    border-bottom: 1px solid #bcbcbc;
+    height: 2rem;
+    line-height: 1.5rem;
+    padding: 0 20px;
+
+    display: grid;
+    grid-template-columns: 2fr 7.5fr 1fr;
+    grid-column-gap: 10px;
+}
+
+#timeline_recap .recap_b .shift {
+    grid-column-start: 2;
+}
+
+/* -------- main -------- */ 
+
+#main {
+    display: flex;
+    padding: 0 20px;
+    border-bottom: 1px solid #bcbcbc;
+}
+
+#articles_box, #article_info_box, #prompt_box {
+    padding: 20px 20px 20px 0;
+}
+
+#articles_box {
+    width: 16%;
+}
+
+#article_info_box {
+    width: 32%;
+}
+
+#prompt_box {
+    width: 48%;
+}

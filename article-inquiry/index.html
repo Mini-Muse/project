@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/style/reset.css">
     <link rel="stylesheet" type="text/css" href="../assets/style/basic.css">
     <link rel="stylesheet" type="text/css" href="assets/style/style.css">
-    <title>Actor flow | Mini-Muse Project</title>
+    <title>Article inquiry | Mini-Muse Project</title>
 </head>
 <body>
     
@@ -32,15 +32,68 @@
         </div>
     </nav>
 
-    <section>
-        Article inquiry
+    <section id="search_options">
+        <div id="filter_sort_options">
+            <div id="filter" class="controller">Filter</div>
+            <div id="sort" class="controller">Sort</div>
+            <div id="help" class="info">Info</div>
+        </div>
     </section>
+
+    <section id="data_recap">
+        <div class="recap">
+            <div class="detail">
+                <div id="actor_count" class="value">0</div> 
+                <div class="label">
+                    <span class="small_recap">
+                        actors
+                    </span>        
+                </div>
+            </div>
+            <div class="detail">
+                <div id="articles_actions" class="value">0</div> 
+                <div class="label">
+                    <span class="small_recap">
+                        articles
+                    </span>        
+                </div>
+            </div>
+            <div class="detail">
+                <div id="total_actions" class="value">0</div> 
+                <div class="label">
+                    <span class="small_recap">
+                        total actions undertaken
+                    </span>        
+                </div>
+            </div>
+            <div class="detail">
+                <div id="timespan_actions" class="value">0</div> 
+                <div class="label">
+                    <span class="small_recap">
+                        years (timespan of actions)
+                    </span>        
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline_recap">
+        <div class="recap_b" style="text-align: center;">
+            <div class="shift" id="overall_timeline"></div>
+        </div>
+    </section>
+
+    <main id="main">
+        <section id="articles_box">articles_box</section>
+        <section id="article_info_box">article_info_box</section>
+        <section id="prompt_box">prompt_box</section>
+    </main>
 
 
     <div id="footer"></div>
 
     <script type="text/javascript" src="https://d3js.org/d3.v7.min.js"></script>
     <script type="text/javascript" src="../assets/script/script.js"></script>
-    <!-- <script type="text/javascript" src="assets/script/script.js"></script> -->
+    <script type="text/javascript" src="assets/script/script.js"></script>
 </body>
 </html>

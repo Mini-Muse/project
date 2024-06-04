@@ -90,6 +90,117 @@ black_lines     #BBB
 	background-color: white;
 }
 
+/* -------- search options -------- */ 
+
+#search_options {
+    margin-top: 3.5rem;
+}
+
+#search_box {
+    font-family: "Source Serif 4", Times, serif;
+    height: 9rem;
+    border-bottom: 1px solid #bcbcbc;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#query {
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+
+#search_box .content {
+    margin-left: 1rem;
+}
+
+#query input[type=text] {
+    font-family: "Source Serif 4", Times, serif;
+    font-weight: bold;
+    font-size: 4.5rem;
+    width: 95%;
+    background-color: transparent;
+}
+
+#autocomplete_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #bcbcbc;
+    position: absolute;
+    background-color: white;
+    width: 50%;
+    height: 10rem;
+    overflow-y: scroll;
+    display: none;
+}
+
+#autocomplete_list li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#autocomplete_list li:hover {
+    background-color: #f0f0f0;
+}
+
+/* -------- filter and sort -------- */ 
+
+#filter_sort_options {
+    border-bottom: 1px solid #bbb;
+    display: flex;
+    justify-content: space-between;
+}
+
+#filter_sort_options .controller {
+/*    height: 6.5rem;*/
+    width: 45%;
+    padding: 5rem 0.5rem 20px;
+/*    line-height: 5rem;*/
+}
+
+#filter_sort_options .controller {
+    border-right: 1px solid #bcbcbc;
+}
+
+#filter_sort_options #help{
+    width: 10%;
+    padding: 5rem 0.5rem 20px;
+}
+
+/* -------- data recap -------- */ 
+
+#data_recap {
+    border-bottom: 1px solid #bbb;
+}
+
+#data_recap .recap {
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+    grid-column-gap: 10px;
+    padding: 20px 20px;
+}
+
+.recap .detail {
+    display: flex;
+    align-items: center;
+}
+
+.recap .detail .value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.recap .detail .label {
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+}
+
+.small_recap {
+    font-size: 0.9rem;
+}
 
 /* -------- footer -------- */
 
