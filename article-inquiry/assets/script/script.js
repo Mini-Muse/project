@@ -192,12 +192,12 @@ function load_article_info(data){
                 output += '<span>' + item.volume + '</span>'
                 output += '</div>'
 
-                output += '<div id="the_abstract">'
+                output += '<div id="the_abstract" class="info_box">'
                 output += '<h2>Abstract</h2>'
                 output += '<p>Abstract lorem ipsum ...</p>'
                 output += '</div>'
 
-                output += '<div id="the_actors">'
+                output += '<div id="the_actors" class="info_box">'
                 output += '<h2>Actors</h2>'
                 output += '<ul>'
                 output += '<li>...</li>'
@@ -205,6 +205,10 @@ function load_article_info(data){
                 output += '</ul>'
                 output += '</div>'
 
+                link = 'https://www.e-periodica.ch/digbib/view?pid=szg-006%3A2023%3A73%3A%3A4#4'
+                output += '<div id="read" class="info_box"><a href="' + link + '" target="blank">Read the article</a></div>'
+                // &#128279;
+                // &#x1F517;
                 article_info_box.innerHTML = output
             }
         })

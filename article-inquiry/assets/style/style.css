@@ -81,15 +81,14 @@
     margin-top: 0.5rem;
 }
 
-#the_abstract, #the_actors {
-    margin-top: 2rem;
-    line-height: 120%;
-}
-
 #the_abstract h2, #the_actors h2 {
     font-weight: bold;
 }
 
+.info_box {
+    margin-top: 2rem;
+    line-height: 120%;
+}
 
 /* -------- prompt box -------- */ 
 
