@@ -22,18 +22,6 @@ let year_a = 1900;
 let year_b = 1900;
 
 const shift = 2;
-// function date_years(date,n,count) {
-//     let output;
-//     if (count == 'minus'){
-//         output = new Date(date.setFullYear(date.getFullYear() - n)); 
-//     }
-//     else {
-//         output = new Date(date.setFullYear(date.getFullYear() + n)); 
-//     }
-//     return output
-// }
-// date = new Date(1990,10,2,'minus')
-// console.log(date_years(date,2))
 
 function get_color(value){
     const categoryColors = {
@@ -493,7 +481,7 @@ function get_articles(data){
             output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
             
             output += '<div></div>'
-            output += '<div class="go_to_article" style="color: gray"><a href="' + link + '">→</a></div>'
+            output += '<div class="go_to_article"><a href="' + link + '" style="color: gray">&rarr;</a></div>'
 
             output += '</div>'
 
@@ -590,8 +578,7 @@ function get_statistics(data){
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // search_autocomplete();
 
     load_data();
-    
+
 });
