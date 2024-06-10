@@ -137,7 +137,7 @@
     stroke-align: inset;
 }
 
-.act {
+.actor_timeline .act {
     cursor: pointer;
 }
 
@@ -160,7 +160,7 @@
     border-bottom: 1px solid #bcbcbc;
 
     display: grid;
-    grid-template-columns: 2fr 7.5fr 1fr;
+    grid-template-columns: 2fr 7fr 1.5fr 0.5fr;
     grid-column-gap: 10px;
 }
 
@@ -170,6 +170,10 @@
 
 .article_row p {
     margin-bottom: 0.1rem;
+}
+
+.article_timeline svg {
+    opacity: .5;
 }
 
 @media screen and (max-width: 768px) {

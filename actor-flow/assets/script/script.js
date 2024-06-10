@@ -13,6 +13,9 @@ const action_width = 10;
 
 let raw_data;
 
+const tick_size_large = 120;
+const tick_size_small = 60;
+
 let parseDate = d3.timeParse("%Y-%m-%d"); // %Y
 
 let year_a = 1900;
@@ -46,11 +49,12 @@ function get_color(value){
     }
 }
 
-function make_timeline(individual_timeline,id,timeline_box){
-    t_box = document.getElementById('timeline_' + id )
+function make_timeline(individual_timeline_data,the_container,tick_size){
+    timeline_box = document.getElementById(the_container) //  'timeline_' + id )
+    // console.log(the_container)
 
-    box_w = t_box.offsetWidth;
-    box_h = 120 // t_box.offsetHeight;
+    box_w = timeline_box.offsetWidth;
+    box_h = tick_size // t_box.offsetHeight;
 
     let date_a = (year_a - shift).toString() + '-01-01'
     let date_b = (year_b + shift).toString() + '-01-01'
@@ -61,7 +65,7 @@ function make_timeline(individual_timeline,id,timeline_box){
         .range([0, box_w - timeline_margin[1] - timeline_margin[3]] )
 
     // timeline_container
-    let timeline_container = d3.select('#' + timeline_box).append('svg')
+    let timeline_container = d3.select(timeline_box).append('svg')
         .attr("width", box_w)
         .attr("height", box_h)
 
@@ -69,7 +73,7 @@ function make_timeline(individual_timeline,id,timeline_box){
         .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
 
     let actions_box = plot.selectAll("g")
-        .data(individual_timeline)
+        .data(individual_timeline_data)
         .enter()
         .append("g")
 
@@ -116,13 +120,6 @@ function make_timeline(individual_timeline,id,timeline_box){
     //     .attr("transform", 'translate(' + margin[0] +',80)')
     //     .attr("class","the_axis")
     //     .call(xAxis)
-
-    // infobox  ---------------
-
-    // item.forEach((action,i) => {
-    //     console.log(action)
-
-    // })
 
 }
 
@@ -294,7 +291,6 @@ function display_timeline(data, container){
             .attr('id','actor_name_box')
             .append('div')
             
-
         let actor_name =  actor_name_box.append('p')
             .text(function(d){
                 return item[0].actor.name
@@ -309,7 +305,7 @@ function display_timeline(data, container){
 
         // timeline box ---------------
         
-        let timeline_box = article_box.append('div')
+        let timeline_box_ = article_box.append('div')
             .attr('id',function(d){
                 return 'timeline_' + i
             })
@@ -317,7 +313,7 @@ function display_timeline(data, container){
 
         // timeline ---------------
 
-        make_timeline(item,i,'timeline_' + i)
+        make_timeline(item,'timeline_' + i,tick_size_large)
 
         // details ---------------
 
@@ -473,8 +469,7 @@ function get_articles(data){
         const actor_line = document.getElementById('actor_id_' + id);
 
         for (let item = 0; item < uniqueDocuments.length; item++) {
-            console.log(uniqueDocuments[item])
-            console.log(data)
+            // console.log(item)
 
             let title = uniqueDocuments[item].title
             let link = '#'
@@ -493,20 +488,24 @@ function get_articles(data){
                 output += '<p>other actors: ' + '...' + '</span>'
             output += '</div>'
 
-            output += '<div class="article_timeline" id="article_timeline_' + id +'">...</div>'
+            output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
             
             output += '</div>'
-
 
             new_html.innerHTML = output
             actor_line.append(new_html)
 
-            // display_article_timeline("a",id) 
+        }
 
-            // display_timeline(raw_data, 'article_timeline_' + doc_id)
+        // await the timeline box loading
+        for (let item = 0; item < uniqueDocuments.length; item++) {
 
-            d3.select('#article_timeline_' + id)
+            let doc_id = uniqueDocuments[item].document_id
+            const filtered_data = raw_data.filter(item => item.actor.actor_id == id && item.document.document_id === doc_id);
+            const the_container = 'article_timeline_' + id + '_' + doc_id
+            // console.log(filtered_data,the_container)
 
+            make_timeline(filtered_data,the_container,tick_size_small)
 
         }
     }
