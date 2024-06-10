@@ -15,7 +15,7 @@
     padding: 0 20px;
 
     display: grid;
-    grid-template-columns: 2fr 7.5fr 1fr;
+    grid-template-columns: 2fr 7fr 1.5fr 0.5fr;
     grid-column-gap: 10px;
 }
 
@@ -83,7 +83,7 @@
         margin-bottom: 1rem;
     }
 
-    .article_timeline {
+    .actor_timeline {
         border-left: 1px solid #dbdbdb;
         border-right: 1px solid #dbdbdb;
     }

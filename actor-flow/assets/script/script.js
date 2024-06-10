@@ -7,10 +7,13 @@ const colors = [
 ] 
 
 const margin = [10,10,10,10]
+const timeline_margin = [10,10,10,10]
 
 const action_width = 10;
 
 let raw_data;
+
+let parseDate = d3.timeParse("%Y-%m-%d"); // %Y
 
 let year_a = 1900;
 let year_b = 1900;
@@ -43,56 +46,85 @@ function get_color(value){
     }
 }
 
-// function search_autocomplete(){
-//     const searchBox = document.getElementById('query_search');
-//     const autocompleteList = document.getElementById('autocomplete_list');
+function make_timeline(individual_timeline,id,timeline_box){
+    t_box = document.getElementById('timeline_' + id )
 
-//     const data = [
-//         "Albert Einstein",
-//         "Cleopatra VII",
-//         "Elizabeth I",
-//         "Genghis Khan",
-//         "Gustav Klimt",
-//         "Joan of Arc",
-//         "Julius Caesar",
-//         "Leonardo da Vinci",
-//         "Mahatma Gandhi",
-//         "Martin Luther King Jr.",
-//         "Napoleon Bonaparte"
-//     ]
+    box_w = t_box.offsetWidth;
+    box_h = 120 // t_box.offsetHeight;
 
-//     searchBox.addEventListener('input', handleInput);
-//     document.body.addEventListener("click", remove_list);
+    let date_a = (year_a - shift).toString() + '-01-01'
+    let date_b = (year_b + shift).toString() + '-01-01'
+    // console.log(year_a,year_b)
 
-//     function remove_list(){
-//         autocomplete_list.style.display = 'none';
-//     }
+    xScale = d3.scaleTime()
+        .domain([parseDate(date_a), parseDate(date_b)]) // 1920 // "1750-01-01"
+        .range([0, box_w - timeline_margin[1] - timeline_margin[3]] )
 
-//     function handleInput() {
-//         const searchTerm = searchBox.value.toLowerCase();
-//         const filteredData = data.filter(item => item.toLowerCase().includes(searchTerm));
+    // timeline_container
+    let timeline_container = d3.select('#' + timeline_box).append('svg')
+        .attr("width", box_w)
+        .attr("height", box_h)
 
-//         autocomplete_list.style.display = 'block';
-//         displayAutocompleteResults(filteredData);
-//     }
+    let plot = timeline_container.append('g')
+        .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
 
-//     function displayAutocompleteResults(results) {
-//       autocompleteList.innerHTML = '';
+    let actions_box = plot.selectAll("g")
+        .data(individual_timeline)
+        .enter()
+        .append("g")
 
-//       results.forEach(result => {
-//         const listItem = document.createElement('li');
-//         listItem.textContent = result;
-//         listItem.addEventListener('click', () => {
-//             searchBox.value = result;
-//             autocompleteList.innerHTML = '';
+    let action_items = actions_box.append("rect")
+        .attr("class", "act")
+        .attr("x", function(d){
+            let the_date = new Date(fix_date(d.date.value)) // parseDate(fix_date(d.date.value)))
+            return xScale(the_date)  + (action_width/1)
+        })
+        .attr("y",0)
+        .attr("width",action_width)
+        .attr("height",box_h - margin[0] -  5) //  - margin[0] - margin[3]
+        .attr("r", 5)
+        .attr("data-date", function(d){
+            let date = xScale(new Date(fix_date(d.date.value))) 
+            return date
+        })
+        .attr("fill",function(d){
+            return get_color(d.action.name)
+        })
+        .attr("data-per",1)
+        .attr("data-art", function(d){
+            return d.document.document_id
+        })
+        .attr("data-act", function(d,index){
+            return d.actor.actor_id
+        })
+        .attr("data-tit", function(d){
+            return d.action.name
+        })
+        .attr("data-dat", function(d){
+            return d.date.value
+        })
+        .attr("data-loc", function(d){
+            return d.location.name
+        })
+        .attr("data-ext", function(d){
+            return d.extract
+        })
 
-//             remove_list()
-//         });
+    // xAxis  ---------------
+    // let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y"));
+    // plot.append("g")
+    //     .attr("transform", 'translate(' + margin[0] +',80)')
+    //     .attr("class","the_axis")
+    //     .call(xAxis)
 
-//         autocompleteList.appendChild(listItem);
-//       });
-//     }
-// }
+    // infobox  ---------------
+
+    // item.forEach((action,i) => {
+    //     console.log(action)
+
+    // })
+
+}
 
 function timeline_labels() {
     let labels = document.getElementsByClassName('act');
@@ -144,57 +176,6 @@ function timeline_labels() {
     }
 }
 
-// function make_timeline(box,data,index){
-//     // console.log(data[0].actions)
-
-//     // let selection = '#timeline_' + index
-//     // const timeline_box = document.getElementById('timeline_' + index)
-//     let box_w = box.offsetWidth;
-//     let box_h = box.offsetHeight;
-
-//     let svg = d3.select(box)
-//         .append('svg')
-//         .attr("width", box_w) // box_w - (margin[0] + margin[3])
-//         .attr("height", box_h)
-//         .attr("transform","translate(0,0)") // " + margin[0] + "," + margin[1] + ")"  
-
-//     console.log(d3.select(box))
-
-//     let xScale = d3.scaleTime()
-//         .domain([new Date("1400-01-01"), new Date("2022-12-31")])
-//         .range([0, box_w])
-
-//     let xAxis = d3.axisBottom(xScale)
-//         .ticks(5)
-//         .tickFormat(d3.timeFormat("%Y"));
-
-//     svg.append("g")
-//         .attr("transform", "translate(0, 50)")
-//         .call(xAxis);
-
-//     svg.selectAll("circle")
-//         .data(data.actions)
-//         .enter()
-//         .append("circle")
-//         .attr("cx", function(d){
-//             console.log(d.date)
-//             // xScale(new Date(d.date))
-//             // console.log(d.date)
-//         })
-//         .attr("cy", 25)
-//         .attr("r", 5)
-//         .style("fill", "steelblue");
-
-//     // svg.selectAll("text")
-//     //     .data(data.actions)
-//     //     .enter().append("text")
-//     //     .attr("x", d => xScale(new Date(d.date)))
-//     //     .attr("y", 75)
-//     //     .text(d => d.name)
-//     //     .style("text-anchor", "middle")
-//     //     .style("font-size", "12px");
-// }
-
 async function load_data(){
 
     const title_box = document.getElementById('articles_box');
@@ -232,7 +213,7 @@ async function load_data(){
         return acc;
     }, []);
     const actionflows_array = Object.values(actionflows);
-
+    // console.log(actionflows_array)
     // sort
     // data.sort((a, b) => {
     //     return new Date(a.date.value) - new Date(b.date.value);
@@ -240,12 +221,12 @@ async function load_data(){
     // console.log(data)
 
     get_statistics(actionflows_array)   
-    display_data(actionflows_array)
-       
+    display_timeline(actionflows_array,'actors_box')
+
 }
 
-function display_data(data){
-    // console.log(data)
+function display_timeline(data, container){
+    // console.log(data,container)
 
      // // filter
     // let searchString = ''
@@ -254,9 +235,6 @@ function display_data(data){
 
     // const articles = filtered_data.length
     let all_actions = 0
-    
-    let parseDate = d3.timeParse("%Y-%m-%d"); // %Y
-    let timeline_margin = [10,10,10,10]
 
     let box_w;
     let box_h; 
@@ -264,7 +242,7 @@ function display_data(data){
     // get start and end date ---------------
     let startDate = fix_date(data[0][0].date.value);
     let endDate = startDate 
-    // console.log(startDate,endDate)
+    console.log(data)
 
     data.forEach(item => {
         item.forEach(event => {
@@ -282,19 +260,16 @@ function display_data(data){
     });
     // console.log(startDate,endDate)
 
-
-    let xScale; // = d3.scaleTime()
-    //     .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
-    //     .range([0, box_w - margin[1] - margin[3]] )
+    let xScale; 
 
     // display data
     data.forEach((item,i) => {
         // console.log(item)
 
-        let container = d3.select('#actors_box')
+        let the_container = d3.select('#' + container)
 
         // list background
-        let list_item = container.append('li')
+        let list_item = the_container.append('li')
             .attr('id',function (d,i) {
                 return 'actor_id_' + item[0].actor.actor_id
             })
@@ -338,104 +313,13 @@ function display_data(data){
             .attr('id',function(d){
                 return 'timeline_' + i
             })
-            .attr('class','article_timeline')
-
-        // let article_author = article_box.append('div')
-        //     .attr('id','article_author')
-        //     .append('text')
-        //     .text(function(d){
-        //         return 'by ' + item.author
-        //     })
-
-        // let article_date = article_box.append('div')
-        //     .attr('id','article_date')
-        //     .append('text')
-        //     .text(function(d){
-        //         return item.year
-        //     })
+            .attr('class','actor_timeline')
 
         // timeline ---------------
 
-        // item.forEach((action,a) => {
-        //     console.log(action)
-        // })
+        make_timeline(item,i,'timeline_' + i)
 
-        t_box = document.getElementById('timeline_' + i )
-
-        box_w = t_box.offsetWidth;
-        box_h = 120 // t_box.offsetHeight;
-
-        let date_a = (year_a - shift).toString() + '-01-01'
-        let date_b = (year_b + shift).toString() + '-01-01'
-        // console.log(year_a,year_b)
-
-        xScale = d3.scaleTime()
-            .domain([parseDate(date_a), parseDate(date_b)]) // 1920 // "1750-01-01"
-            .range([0, box_w - timeline_margin[1] - timeline_margin[3]] )
-
-        // timeline_container
-        let timeline_container = timeline_box.append('svg')
-            .attr("width", box_w)
-            .attr("height", box_h)
-
-        let plot = timeline_container.append('g')
-            .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
-
-        let actions_box = plot.selectAll("g")
-            .data(item)
-            .enter()
-            .append("g")
-
-        let action_items = actions_box.append("rect")
-            .attr("class", "act")
-            .attr("x", function(d){
-                let the_date = new Date(fix_date(d.date.value)) // parseDate(fix_date(d.date.value)))
-                return xScale(the_date)  + (action_width/1)
-            })
-            .attr("y",0)
-            .attr("width",action_width)
-            .attr("height",box_h - margin[0] -  5) //  - margin[0] - margin[3]
-            .attr("r", 5)
-            .attr("data-date", function(d){
-                let date = xScale(new Date(fix_date(d.date.value))) 
-                return date
-            })
-            .attr("fill",function(d){
-                return get_color(d.action.name)
-            })
-            .attr("data-per",1)
-            .attr("data-art", function(d){
-                return d.document.document_id
-            })
-            .attr("data-act", function(d,index){
-                return d.actor.actor_id
-            })
-            .attr("data-tit", function(d){
-                return d.action.name
-            })
-            .attr("data-dat", function(d){
-                return d.date.value
-            })
-            .attr("data-loc", function(d){
-                return d.location.name
-            })
-            .attr("data-ext", function(d){
-                return d.extract
-            })
-
-        // xAxis  ---------------
-        // let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y"));
-        // plot.append("g")
-        //     .attr("transform", 'translate(' + margin[0] +',80)')
-        //     .attr("class","the_axis")
-        //     .call(xAxis)
-
-        // infobox  ---------------
-
-        // item.forEach((action,i) => {
-        //     console.log(action)
-
-        // })
+        // details ---------------
 
         let action_box = article_box.append("div")
             .attr("id", function(d){
@@ -452,11 +336,17 @@ function display_data(data){
             .attr("class","open_box")
             .attr("data-open","false")
             .append("p")
-            .attr("id","open_box_icon_" + id)
+            .attr("id", function (d) {
+                id = item[0].actor.actor_id
+                return 'open_box_icon_' + id
+            })
             .attr("class","arrow_box")
             .text("↓")
+
     });
     
+    // overall timeline ---------------
+
     let overall_timeline = document.getElementById('overall_timeline')
     w_ = overall_timeline.offsetWidth;
     h_ = overall_timeline.offsetHeight;
@@ -468,18 +358,13 @@ function display_data(data){
 
     let plot = overall_axis.append("g")
 
-    // xScale = d3.scaleTime()
-    //         .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
-    //         .range([0, box_w - margin[1] - margin[3]] )
+    let date_a = (year_a - shift).toString() + '-01-01'
+    let date_b = (year_b + shift).toString() + '-01-01'
+    // console.log(year_a,year_b)
 
-    // xScale = d3.scaleTime()
-    //     // .domain([parseDate("1750-01-01"), parseDate("1890-12-31")])
-    //     .domain([parseDate(startDate), parseDate(endDate)])
-    //     // .range([0, w_]) // w_ - margin[1] - margin[3]] 
-    //     .range([0, box_w - margin[1] - margin[3]] )
-
-
-        // .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
+    xScale = d3.scaleTime()
+        .domain([parseDate(date_a), parseDate(date_b)]) // 1920 // "1750-01-01"
+        .range([0, w_ - timeline_margin[1] - timeline_margin[3]] )
 
     let xAxis = d3.axisTop(xScale)
         .tickFormat(d3.timeFormat("%Y"))
@@ -588,6 +473,8 @@ function get_articles(data){
         const actor_line = document.getElementById('actor_id_' + id);
 
         for (let item = 0; item < uniqueDocuments.length; item++) {
+            console.log(uniqueDocuments[item])
+            console.log(data)
 
             let title = uniqueDocuments[item].title
             let link = '#'
@@ -595,29 +482,34 @@ function get_articles(data){
             let date = 0
             let year = uniqueDocuments[item].year
             let issue = uniqueDocuments[item].issue
+            let doc_id = uniqueDocuments[item].document_id
 
             output += '<div class="article_row">'
 
             output += '<div>'
-                output += '<span><a href="' + link + '">' + title + '</a></span>'
-                output += '<span>by ' + author + '</span>'
+                output += '<span><a href="' + link + '">' + title + '</a></span><br/>'
+                output += '<span>by ' + author + '</span><br/>'
                 output += '<span>' + year + ', ' + issue + '</span><br/>'
                 output += '<p>other actors: ' + '...' + '</span>'
             output += '</div>'
 
-            output += '<div class="actor_timeline">...</div>'
+            output += '<div class="article_timeline" id="article_timeline_' + id +'">...</div>'
             
             output += '</div>'
 
 
             new_html.innerHTML = output
             actor_line.append(new_html)
+
+            // display_article_timeline("a",id) 
+
+            // display_timeline(raw_data, 'article_timeline_' + doc_id)
+
+            d3.select('#article_timeline_' + id)
+
+
         }
     }
-}
-
-function display_actor_timeline(data) {
-    console.log(data)
 }
 
 function get_statistics(data){
