@@ -155,16 +155,20 @@
     background-color: white;
 }
 
-.row_article {
+.article_row {
     padding: 10px 20px;
     border-bottom: 1px solid #bcbcbc;
+
+    display: grid;
+    grid-template-columns: 2fr 7.5fr 1fr;
+    grid-column-gap: 10px;
 }
 
-.row_article:last-child {
+.article_row:last-child {
     border-bottom: none;
 }
 
-.row_article p {
+.article_row p {
     margin-bottom: 0.1rem;
 }
 

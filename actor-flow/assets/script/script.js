@@ -596,17 +596,28 @@ function get_articles(data){
             let year = uniqueDocuments[item].year
             let issue = uniqueDocuments[item].issue
 
-            output += '<div class="row_article">'
-            output += '<p><a href="' + link + '">' + title + '</a></p>'
-            output += '<p>by ' + author + '</p>'
-            output += '<p>' + year + ', ' + issue + '</p><br/>'
-            output += '<p>other actors: ' + '...' + '</p>'
+            output += '<div class="article_row">'
+
+            output += '<div>'
+                output += '<span><a href="' + link + '">' + title + '</a></span>'
+                output += '<span>by ' + author + '</span>'
+                output += '<span>' + year + ', ' + issue + '</span><br/>'
+                output += '<p>other actors: ' + '...' + '</span>'
             output += '</div>'
+
+            output += '<div class="actor_timeline">...</div>'
+            
+            output += '</div>'
+
 
             new_html.innerHTML = output
             actor_line.append(new_html)
         }
     }
+}
+
+function display_actor_timeline(data) {
+    console.log(data)
 }
 
 function get_statistics(data){
