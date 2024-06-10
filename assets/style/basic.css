@@ -189,7 +189,7 @@ highlight       #4538d8
 /*    margin-bottom: 10px;*/
 }
 
-#sort .select {
+#sort .select, #filter .select  {
     left: -5px;
     border: none;
     width: 100%;

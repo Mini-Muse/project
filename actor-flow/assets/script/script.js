@@ -88,13 +88,36 @@ async function load_data(){
     // })
 
     get_statistics(actionflows_array)   
-    display_timeline(actionflows_array,'actors_box','name')
+    display_timeline(actionflows_array,'actors_box','all','name')
 
 }
 
-function display_timeline(data, container, sort){
-    // console.log(data,container,sort)
+function display_timeline(data, container, filter, sort){
+    // console.log(data,container,filter,sort)
 
+    let filteredArray
+
+    if (filter == 'all') {
+        filteredArray = data
+    }
+    else {
+        if (filter == 'authors'){
+            filteredArray = data.map(subArray => subArray
+                .filter(obj => obj.actor.role === "Author")
+            )
+            .filter(subArray => subArray.length > 0)
+        }
+        else if (filter == 'editors'){
+            filteredArray = data.map(subArray => subArray
+                .filter(obj => obj.actor.role === "Editor")
+            )
+            .filter(subArray => subArray.length > 0)
+        }
+    }
+
+    // console.log(filteredArray)
+
+    // sort 
     const sort_authors = (a, b) => {
         const nameA = a[0].actor.name.toUpperCase();
         const nameB = b[0].actor.name.toUpperCase();
@@ -116,11 +139,13 @@ function display_timeline(data, container, sort){
     };
 
     if (sort == 'name'){
-        data.sort(sort_authors);
+        data = filteredArray.sort(sort_authors);
     }
     else {
-        data.sort(sort_date);
+        data = filteredArray.sort(sort_date);
     }
+
+    get_statistics(data) 
 
     let all_actions = 0
 
@@ -169,7 +194,6 @@ function display_timeline(data, container, sort){
             })
 
         // actor box ---------------
-
 
         let article_box = list_item.append('div')
             .attr('class','actor_row')
@@ -480,24 +504,49 @@ function get_statistics(data){
 }
 
 function sort_data(){
-    const selectElement = document.getElementById('the_sort');
+    const the_sort = document.getElementById('the_sort');
+    const the_filter = document.getElementById('the_filter'); //.options[e.selectedIndex].text;
+    
     timelines = document.getElementById('actors_box')
     ov_timeline = document.getElementById('overall_timeline')
 
-    selectElement.addEventListener('change', (event) => {
+    the_sort.addEventListener('change', (event) => {
         const sort = event.target.value;
+        filter = the_filter.value
 
         timelines.innerHTML = ''
         ov_timeline.innerHTML = ''
 
-        display_timeline(actionflows_array,'actors_box',sort)
+        display_timeline(actionflows_array,'actors_box',filter,sort)
+        // console.log(sort,filter)
     });
 }
 
+function filter_data(){
+    const the_sort = document.getElementById('the_sort');
+    const the_filter = document.getElementById('the_filter');
+
+
+    timelines = document.getElementById('actors_box')
+    ov_timeline = document.getElementById('overall_timeline')
+
+    the_filter.addEventListener('change', (event) => {
+        const filter = event.target.value;
+        sort = the_sort.value
+
+        timelines.innerHTML = ''
+        ov_timeline.innerHTML = ''
+        
+        display_timeline(actionflows_array,'actors_box',filter,sort)
+        // console.log(sort,filter)
+    })
+
+}
 
 document.addEventListener('DOMContentLoaded', function() {
 
     load_data();
     sort_data();
+    filter_data();
 
 });
