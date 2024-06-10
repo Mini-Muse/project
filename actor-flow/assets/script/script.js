@@ -491,8 +491,6 @@ function sort_data(){
         ov_timeline.innerHTML = ''
 
         display_timeline(actionflows_array,'actors_box',sort)
-        console.log(sort)
-
     });
 }
 
