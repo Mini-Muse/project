@@ -164,7 +164,7 @@ highlight       #4538d8
 #filter_sort_options .controller div {
     padding-left: 1rem;
     padding-right: 1rem;
-    padding-top: 2.5rem;
+    padding-top: 3rem;
 }
 
 #filter_sort_options #help {
@@ -189,7 +189,7 @@ highlight       #4538d8
     top: -5px;
     border-bottom: 1px solid #d6d5d5;
     background-color: #fff;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 /* -------- help -------- */ 

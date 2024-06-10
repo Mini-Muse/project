@@ -67,7 +67,7 @@
         "action_relation_id": 2,
         "actor": {
             "actor_id": 2,
-            "name": "Jane Smith",
+            "name": "Albert Smith",
             "role": "Editor"
         },
         "document": {
@@ -99,7 +99,7 @@
         "action_relation_id": 4,
         "actor": {
             "actor_id": 2,
-            "name": "Jane Smith",
+            "name": "Albert Smith",
             "role": "Editor"
         },
         "document": {
@@ -195,7 +195,7 @@
         "action_relation_id": 7,
         "actor": {
             "actor_id": 2,
-            "name": "Jane Smith",
+            "name": "Albert Smith",
             "role": "Editor"
         },
         "document": {
@@ -227,7 +227,7 @@
         "action_relation_id": 8,
         "actor": {
             "actor_id": 2,
-            "name": "Jane Smith",
+            "name": "Albert Smith",
             "role": "Editor"
         },
         "document": {
@@ -259,7 +259,7 @@
         "action_relation_id": 9,
         "actor": {
             "actor_id": 2,
-            "name": "Jane Smith",
+            "name": "Albert Smith",
             "role": "Editor"
         },
         "document": {
