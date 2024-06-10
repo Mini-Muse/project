@@ -111,7 +111,7 @@
     margin-top: .25rem;
 }
 
-.open_box {
+.open_box, .go_to_article {
     display: flex;
     align-items: center;
     cursor: pointer;

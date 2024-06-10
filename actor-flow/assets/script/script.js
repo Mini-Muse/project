@@ -413,7 +413,9 @@ function get_articles(data){
     }
 
     function switch_arrow(id,open){
-        my_arrow = document.getElementById("open_box_icon_" + id)
+        my_arrow = document.getElementById('open_box_icon_' + id)
+        // console.log('open_box_icon_' + id)
+        // console.log(my_arrow,id,open)
 
         if (open == 'false'){
             my_arrow.innerHTML = '&darr;'
@@ -481,15 +483,18 @@ function get_articles(data){
 
             output += '<div class="article_row">'
 
-            output += '<div>'
-                output += '<span><a href="' + link + '">' + title + '</a></span><br/>'
-                output += '<span>by ' + author + '</span><br/>'
-                output += '<span>' + year + ', ' + issue + '</span><br/>'
-                output += '<p>other actors: ' + '...' + '</span>'
+            output += '<div class="article_info">'
+                output += '<p><a href="' + link + '">' + title + '</a></p>'
+                output += '<p>by ' + author + '</p>'
+                output += '<p>' + year + ', ' + issue + '</p>'
+                output += '<p>other actors: ' + '...' + '</p>'
             output += '</div>'
 
             output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
             
+            output += '<div></div>'
+            output += '<div class="go_to_article" style="color: gray"><a href="' + link + '">→</a></div>'
+
             output += '</div>'
 
             new_html.innerHTML = output
