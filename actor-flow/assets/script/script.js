@@ -83,9 +83,9 @@ async function load_data(){
     // });
     // console.log(data)
 
-    actionflows_array.forEach(subArray => {
-        subArray.sort((a, b) => a.actor.name.localeCompare(b.actor.name))  
-    })
+    // actionflows_array.forEach(subArray => {
+    //     subArray.sort((a, b) => a.actor.name.localeCompare(b.actor.name))  
+    // })
 
     get_statistics(actionflows_array)   
     display_timeline(actionflows_array,'actors_box','name')
@@ -93,41 +93,34 @@ async function load_data(){
 }
 
 function display_timeline(data, container, sort){
-    console.log(data,container,sort)
+    // console.log(data,container,sort)
 
-    let new_sort = []
+    const sort_authors = (a, b) => {
+        const nameA = a[0].actor.name.toUpperCase();
+        const nameB = b[0].actor.name.toUpperCase();
 
-    // sort array
-    data.forEach(subArray => {
-        console.log(subArray[0].actor.name)
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    };
 
-        // subArray.sort((a, b) => new Date(a.date.value) - new Date(b.date.value));
+    const sort_date = (a, b) => {
+        const dateA = new Date(a[0].date.value);
+        const dateB = new Date(b[0].date.value);
 
-        subArray.sort((a, b) => a.actor.name.localeCompare(b.actor.name))
-            // console.log(a.actor.name)
+        return dateA - dateB;
+    };
 
-        // if (sort == 'name'){
-        //     subArray.sort((a, b) => a.actor.name.localeCompare(
-        //         b.actor.name, 
-        //         undefined, 
-        //         { sensitivity: 'base' }
-        //     ));
-        // }
-        // else {
-        //     subArray.sort((a, b) => new Date(a.date.value) - new Date(b.date.value));
-        // }
-
-    });
-
-    data.forEach(item => {
-        new_sort.push(item)
-    })
-
-    console.log(new_sort)
-
-
-    console.log(data[0][0].actor)
-
+    if (sort == 'name'){
+        data.sort(sort_authors);
+    }
+    else {
+        data.sort(sort_date);
+    }
 
     let all_actions = 0
 
