@@ -286,5 +286,37 @@
             "name": "Wrote"
         },
         "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhon"
+    },
+    {
+        "action_relation_id": 10,
+        "actor": {
+            "actor_id": 3,
+            "name": "Oliver Bean",
+            "role": "Editor"
+        },
+        "document": {
+            "document_id": 3,
+            "title": "Historical Magazine Title 3",
+            "volume": "Volume 3",
+            "issue": "Issue 3",
+            "type": "Magazine",
+            "publisher": "Historical Society Publications",
+            "year": 1922
+        },
+        "location": {
+            "location_id": 2,
+            "name": "London",
+            "country": "UK"
+        },
+        "date": {
+            "date_id": 2,
+            "name": "Publication Date",
+            "value": "1922-06-21"
+        },  
+        "action": {
+            "action_id": 8,
+            "name": "Wrote"
+        },
+        "extract": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus orci, non pulvinar eros condimentum at. In posuere dolor erat, sit amet faucibus urna rhon"
     }
 ]

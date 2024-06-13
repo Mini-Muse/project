@@ -421,7 +421,7 @@ function get_articles(data){
             list_actors = actor_per_article[item]
 
             for (let i = 0; i < list_actors.length; i++) {
-                console.log(list_actors[i], actor)
+                // console.log(list_actors[i], actor)
 
                 if (list_actors[i] != actor){
                     the_other_actors += '<span>' + list_actors[i] + ' <span/>'
