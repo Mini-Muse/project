@@ -100,15 +100,6 @@ async function load_data(){
     }, []);
     actionflows_array = Object.values(actionflows);
     // console.log(actionflows_array)
-    // sort
-    // data.sort((a, b) => {
-    //     return new Date(a.date.value) - new Date(b.date.value);
-    // });
-    // console.log(data)
-
-    // actionflows_array.forEach(subArray => {
-    //     subArray.sort((a, b) => a.actor.name.localeCompare(b.actor.name))  
-    // })
 
     get_statistics(actionflows_array)   
     display_timeline(actionflows_array,'actors_box','all','name')
@@ -159,8 +150,16 @@ function display_timeline(data, container, filter, sort){
         return dateA - dateB;
     };
 
+    const sort_action = (a, b) => {
+        return b.length - a.length;
+    }
+
     if (sort == 'name'){
         data = filteredArray.sort(sort_authors);
+    }
+    else  if (sort == 'actions'){ // number of action
+        // data = sort_action(filteredArray)
+        data = filteredArray.sort(sort_action);
     }
     else {
         data = filteredArray.sort(sort_date);
@@ -357,8 +356,6 @@ function get_articles(data){
 
     function switch_arrow(id,open){
         my_arrow = document.getElementById('open_box_icon_' + id)
-        // console.log('open_box_icon_' + id)
-        // console.log(my_arrow,id,open)
 
         if (open == 'false'){
             my_arrow.innerHTML = '&darr;'
@@ -455,7 +452,7 @@ function get_articles(data){
             output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
             
             output += '<div></div>'
-            output += '<div class="go_to_article"><a href="' + link + '" style="color: gray">&rarr;</a></div>'
+            output += '<div class="go_to_article"></div>' //<a href="' + link + '" style="color: gray">&rarr;</a></div>'
 
             output += '</div>'
 
