@@ -15,6 +15,7 @@ const action_width = 10;
 
 let raw_data;
 let actionflows_array;
+let actor_per_article;
 
 const tick_size_large = 120;
 const tick_size_small = 60;
@@ -38,6 +39,28 @@ function get_color(value){
     } else {
         return "#000000";
     }
+}
+
+function get_actors_per_article(data){
+    const grouped = {};
+
+    data.forEach(item => {
+
+        item.forEach(obj => {
+            const docId = obj.document.document_id;
+            const actorName = obj.actor.name;
+            // console.log(docId,actorName)
+
+            if (!grouped[docId]) {
+                grouped[docId] = new Set();
+            }
+
+            grouped[docId].add(actorName);
+        })
+    });
+    // console.log(grouped)
+    //return Object.values(grouped);
+    return Object.values(grouped).map(set => Array.from(set));
 }
 
 async function load_data(){
@@ -115,8 +138,6 @@ function display_timeline(data, container, filter, sort){
         }
     }
 
-    // console.log(filteredArray)
-
     // sort 
     const sort_authors = (a, b) => {
         const nameA = a[0].actor.name.toUpperCase();
@@ -155,6 +176,9 @@ function display_timeline(data, container, filter, sort){
     // get start and end date ---------------
     let startDate = fix_date(data[0][0].date.value);
     let endDate = startDate 
+
+    // set an array of actors per article
+    actor_per_article = get_actors_per_article(data)
 
     data.forEach(item => {
         item.forEach(event => {
@@ -245,6 +269,10 @@ function display_timeline(data, container, filter, sort){
             })
             .attr("class","open_box")
             .attr("data-open","false")
+            .attr("data-actor", function(d){
+                actor = item[0].actor.name
+                return actor
+            })
             .append("p")
             .attr("id", function (d) {
                 id = item[0].actor.actor_id
@@ -298,6 +326,7 @@ function get_articles(data){
         open_boxes[item].addEventListener("click",function(e) {
 
             open = open_boxes[item].getAttribute('data-open')
+            the_actor_name = open_boxes[item].getAttribute('data-actor')
 
             the_id = open_boxes[item].id
             id = the_id.replace('open_box_','')
@@ -309,7 +338,7 @@ function get_articles(data){
                     the_box.style.display = 'block'
                 }
 
-                display_articles(the_actor_id)
+                display_articles(the_actor_id,the_actor_name)
                 open_boxes[item].setAttribute('data-open','true')
 
                 switch_arrow(id,'true')
@@ -339,7 +368,7 @@ function get_articles(data){
         }
     }
 
-    function display_articles(id){
+    function display_articles(id,actor){
 
         // filter articles by actor id
         const documentsRelatedToActorId = data.filter(item => {
@@ -384,9 +413,21 @@ function get_articles(data){
         
         const actor_line = document.getElementById('actor_id_' + id);
 
+        let count = 0
+        // console.log(actor_per_article)
         for (let item = 0; item < uniqueDocuments.length; item++) {
-            // console.log(item)
+            
+            the_other_actors = ''
+            list_actors = actor_per_article[item]
 
+            for (let i = 0; i < list_actors.length; i++) {
+                // console.log(list_actors[i], actor)
+
+                if (list_actors[i] != actor){
+                    the_other_actors += '<span>' + list_actors[i] + ' <span/>'
+                }
+            }
+            
             let title = uniqueDocuments[item].title
             let link = '#'
             let author = 'author name' //uniqueDocuments[item].author
@@ -401,7 +442,7 @@ function get_articles(data){
                 output += '<p><a href="' + link + '">' + title + '</a></p>'
                 output += '<p>by ' + author + '</p>'
                 output += '<p>' + year + ', ' + issue + '</p>'
-                output += '<p>other actors: ' + '...' + '</p>'
+                output += '<p>other actors: ' +  the_other_actors + '</p>'
             output += '</div>'
 
             output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
@@ -414,7 +455,9 @@ function get_articles(data){
             new_html.innerHTML = output
             actor_line.append(new_html)
 
+            count++
         }
+        // console.log(other_actors)
 
         // await the timeline box loading
         for (let item = 0; item < uniqueDocuments.length; item++) {
