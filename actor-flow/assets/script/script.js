@@ -410,18 +410,25 @@ function get_articles(data){
         
         const actor_line = document.getElementById('actor_id_' + id);
 
-        let count = 0
         // console.log(actor_per_article)
         for (let item = 0; item < uniqueDocuments.length; item++) {
+            // console.log(actor_per_article[item])
+            // let count_actors = 0
             
             the_other_actors = ''
-            list_actors = actor_per_article[item]
 
+            list_actors = actor_per_article[item].filter((the_actor) => the_actor != actor)
+            // console.log(list_actors)
+
+            // add commas
             for (let i = 0; i < list_actors.length; i++) {
-                // console.log(list_actors[i], actor)
+                // console.log(list_actors[i])
 
-                if (list_actors[i] != actor){
-                    the_other_actors += '<span>' + list_actors[i] + ' <span/>'
+                if (i == list_actors.length - 1){
+                    the_other_actors += '<span>' + list_actors[i] + '<span/>'
+                }
+                else {
+                    the_other_actors += '<span>' + list_actors[i] + ', <span/>'
                 }
             }
             
@@ -440,7 +447,8 @@ function get_articles(data){
                 output += '<p>by ' + author + '</p>'
                 output += '<p>' + year + ', ' + issue + '</p>'
 
-                if (list_actors.length > 1){
+                
+                if (list_actors.length > 0){
                     output += '<p>other actors: ' +  the_other_actors + '</p>'
                 }
                 else {
@@ -459,7 +467,7 @@ function get_articles(data){
             new_html.innerHTML = output
             actor_line.append(new_html)
 
-            count++
+            
         }
         // console.log(other_actors)
 
