@@ -164,8 +164,12 @@ highlight       #4538d8
 #filter_sort_options .controller div {
     padding-left: 1rem;
     padding-right: 1rem;
-    padding-top: 4rem;
-    display: flex;
+    padding-top: 2.5rem;
+}
+
+#filter_sort_options .select {
+    margin-top: 0.5rem;
+    padding: .5rem 0;
 }
 
 #filter_sort_options .controller p {
