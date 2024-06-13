@@ -421,7 +421,7 @@ function get_articles(data){
             list_actors = actor_per_article[item]
 
             for (let i = 0; i < list_actors.length; i++) {
-                // console.log(list_actors[i], actor)
+                console.log(list_actors[i], actor)
 
                 if (list_actors[i] != actor){
                     the_other_actors += '<span>' + list_actors[i] + ' <span/>'
@@ -442,7 +442,14 @@ function get_articles(data){
                 output += '<p><a href="' + link + '">' + title + '</a></p>'
                 output += '<p>by ' + author + '</p>'
                 output += '<p>' + year + ', ' + issue + '</p>'
-                output += '<p>other actors: ' +  the_other_actors + '</p>'
+
+                if (list_actors.length > 1){
+                    output += '<p>other actors: ' +  the_other_actors + '</p>'
+                }
+                else {
+                    output += '<p>no other actors detected</p>'
+                }
+
             output += '</div>'
 
             output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
