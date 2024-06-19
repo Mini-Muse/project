@@ -31,11 +31,14 @@
     </nav>
 
     <div id="filter_sort_options">
-        <div id="filter" class="controller">
-            <div>Filter</div>
-        </div>
-        <div id="sort" class="controller">
-            <div>Sort</div>
+        <div id="sort" class="controller" style="width: calc(100% - 7.25rem)">
+            <div>
+                <p class="option">Sort</p>
+                <select name="subjects" id="the_sort" class="select select_round">
+                    <option value="date">by publication date</option>
+                    <option value="author">by author name</option>
+                </select>
+            </div>
         </div>
         <div id="help" class="info">
             <div>ⓘ</div>

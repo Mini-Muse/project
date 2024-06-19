@@ -1,3 +1,6 @@
+const documents_API = 'https://minimuse.nlp.idsia.ch/documents'
+const actors_API = 'assets/data/data_.json'
+
 let documents_data;
 let actor_data;
 let reply_data;
@@ -15,7 +18,7 @@ async function load_data(){
     let data;
 
     // documents
-    await fetch('https://minimuse.nlp.idsia.ch/documents')
+    await fetch(documents_API)
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -31,7 +34,7 @@ async function load_data(){
     });
 
     // actors
-    await fetch('assets/data/data_.json')
+    await fetch(actors_API)
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
