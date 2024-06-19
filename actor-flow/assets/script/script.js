@@ -18,7 +18,7 @@ let actionflows_array;
 let actor_per_article;
 
 const tick_size_large = 120;
-const tick_size_small = 60;
+const tick_size_small = 100;
 
 let parseDate = d3.timeParse("%Y-%m-%d"); // %Y
 
