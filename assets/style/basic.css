@@ -300,6 +300,25 @@ highlight       #4538d8
     font-size: 0.9rem;
 }
 
+/* -------- actors -------- */ 
+
+.meta:first-child {
+    margin-bottom: 1rem;
+}
+
+.other_actors_container {
+    display: flex;
+}
+
+.actor_chips {
+    background-color: #ccc;
+    font-weight: bold;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 5px;
+    margin-right: 3px;
+}
+
 /* -------- footer -------- */
 
 #footer {

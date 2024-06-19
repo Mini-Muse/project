@@ -422,14 +422,15 @@ function get_articles(data){
 
             // add commas
             for (let i = 0; i < list_actors.length; i++) {
-                // console.log(list_actors[i])
 
-                if (i == list_actors.length - 1){
-                    the_other_actors += '<span>' + list_actors[i] + '<span/>'
-                }
-                else {
-                    the_other_actors += '<span>' + list_actors[i] + ', <span/>'
-                }
+                the_other_actors += '<span class="actor_chips">' + list_actors[i] + '</span>'
+
+                // if (i == list_actors.length - 1){
+                //     the_other_actors += '<span class="actor_chips">' + list_actors[i] + '<span/>'
+                // }
+                // else {
+                //     the_other_actors += '<span class="actor_chips">' + list_actors[i] + ', <span/>'
+                // }
             }
             
             let title = uniqueDocuments[item].title
@@ -443,17 +444,24 @@ function get_articles(data){
             output += '<div class="article_row">'
 
             output += '<div class="article_info">'
+                output += '<div class="meta">'
                 output += '<p><a href="' + link + '">' + title + '</a></p>'
                 output += '<p>by ' + author + '</p>'
                 output += '<p>' + year + ', ' + issue + '</p>'
-
+                output += '</div>'
                 
+                output += '<div class="meta">'
                 if (list_actors.length > 0){
-                    output += '<p>other actors: ' +  the_other_actors + '</p>'
+                    output += '<p style="font-weight: 200;">other actors</p>'
+
+                    output += '<div class="other_actors_container">'
+                    output += the_other_actors
+                    output += '</div>'
                 }
                 else {
                     output += '<p>no other actors detected</p>'
                 }
+                output += '</div>'
 
             output += '</div>'
 
