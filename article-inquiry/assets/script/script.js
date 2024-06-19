@@ -188,7 +188,7 @@ function get_statistics(data){
 }
 
 function load_article_info(data){
-    console.log(data)
+    // console.log(data)
 
     let id = data[0].document_id
     
@@ -198,6 +198,7 @@ function load_article_info(data){
     article_item.forEach(item => {
         item.addEventListener('click', function() {
             document_id = parseInt(item.getAttribute('data-id'))
+
             display_info(document_id)
 
             count_prompts = 0;
@@ -206,6 +207,8 @@ function load_article_info(data){
     })
 
     function display_info(id){
+        // console.log(actor_data)
+
         let output = ''
 
         article_item.forEach(item => {
@@ -215,6 +218,23 @@ function load_article_info(data){
                item.classList.add('selected') 
             }
         })
+
+        const all_act_doc = actor_data.filter((item) => item.document.document_id === id)
+        const actors = all_act_doc.map(item => item.actor);
+        const list_actors = Array.from(new Set(actors.map(a => a.actor_id))).map(id => actors.find(a => a.actor_id === id));
+
+        list_actors.sort((a, b) => {
+            let nameA = a.name;
+            let nameB = b.name;
+            return nameA.localeCompare(nameB);
+        });
+        // console.log(list_actors)
+
+        let the_other_actors = ''
+        for (let i = 0; i < list_actors.length; i++) {
+            actor = list_actors[i].name
+            the_other_actors += '<span class="actor_chips">' + actor + '</span>'
+        }
 
         data.forEach(item => {
             if (item.document_id == id){
@@ -233,12 +253,19 @@ function load_article_info(data){
                 output += '<p>Abstract lorem ipsum ...</p>'
                 output += '</div>'
 
-                output += '<div id="the_actors" class="info_box">'
-                output += '<h2 style="font-weight: normal;">Actors</h2>'
-                output += '<ul>'
-                output += '<li>...</li>'
-                output += '<li>...</li>'
-                output += '</ul>'
+                output += '<div class="meta" style="margin-top: 2rem;">'
+                if (list_actors.length > 0){
+                    output += '<p style="font-weight: 200; margin-bottom: .5rem;">other actors</p>'
+                    output += '<div class="other_actors_container">'
+                    output += the_other_actors
+                    output += '</div>'
+                }
+                else {
+                    output += '<p>no other actors detected</p>'
+                }
+                output += '</div>'
+
+
                 output += '</div>'
 
                 link = 'https://www.e-periodica.ch/digbib/view?pid=szg-006%3A2023%3A73%3A%3A4#4'
@@ -356,7 +383,6 @@ function chat_with_NLP(){
             });
         }
     }
-
 }
 
 function sort_data(){
@@ -372,7 +398,6 @@ function sort_data(){
         list_articles(documents_data, sort)
     });
 }
-
 
 document.addEventListener('DOMContentLoaded', function() {
 
