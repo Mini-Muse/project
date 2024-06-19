@@ -66,11 +66,42 @@ async function load_data(){
     chat_with_NLP()
 }
 
-function list_articles(data){
+function list_articles(data, sort){
     articles_box = document.getElementById('articles_box')
 
+    let sorted_data
+
+    const sort_date = (a, b) => {
+        const dateA = new Date(a.year);
+        const dateB = new Date(b.year);
+
+        return dateA - dateB;
+    };
+
+    const sort_author = (a, b) => { // to be changed
+        const nameA = a.issue; //a[0].actor.name.toUpperCase();
+        const nameB = b.issue; //b[0].actor.name.toUpperCase();
+
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    };
+
+    if (sort == 'date'){
+        sorted_data = data.sort(sort_date);
+    }
+    else {
+        sorted_data = data.sort(sort_author);
+    }
+
+    articles_box.innerHTML = ''
+
     let output = ''
-    data.forEach(item => {
+    sorted_data.forEach(item => {
         output += '<div class="article_box" data-id="' + item.document_id + '">'
         output += '<span class="article_title">' + item.title + '</span><br/>'
         output += '<span class="article_author">by ' + 'author' + ', </span>'
@@ -79,6 +110,8 @@ function list_articles(data){
     })
 
     articles_box.innerHTML = output
+
+    load_article_info(data)
 }
 
 function get_statistics(data){
@@ -326,8 +359,25 @@ function chat_with_NLP(){
 
 }
 
+function sort_data(){
+    
+    const the_sort = document.getElementById('the_sort')
+    const article_list = document.getElementById('articles_box')
+
+    the_sort.addEventListener('change', (event) => {
+        const sort = event.target.value;
+
+        article_list.innerHTML = ''
+
+        list_articles(documents_data, sort)
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
     load_data()
+
+    sort_data()
 
 });
