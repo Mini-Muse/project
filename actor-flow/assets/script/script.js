@@ -452,7 +452,7 @@ function get_articles(data){
                 
                 output += '<div class="meta">'
                 if (list_actors.length > 0){
-                    output += '<p style="font-weight: 200;">other actors</p>'
+                    output += '<p>other actors</p>'
 
                     output += '<div class="other_actors_container">'
                     output += the_other_actors

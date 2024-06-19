@@ -255,13 +255,13 @@ function load_article_info(data){
 
                 output += '<div class="meta" style="margin-top: 2rem;">'
                 if (list_actors.length > 0){
-                    output += '<p style="font-weight: 200; margin-bottom: .5rem;">other actors</p>'
+                    output += '<p style="margin-bottom: .5rem;">actors</p>'
                     output += '<div class="other_actors_container">'
                     output += the_other_actors
                     output += '</div>'
                 }
                 else {
-                    output += '<p>no other actors detected</p>'
+                    output += '<p>no actors detected</p>'
                 }
                 output += '</div>'
 
