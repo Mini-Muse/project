@@ -234,7 +234,7 @@ function load_article_info(data){
                 output += '</div>'
 
                 output += '<div id="the_actors" class="info_box">'
-                output += '<h2>Actors</h2>'
+                output += '<h2 style="font-weight: normal;">Actors</h2>'
                 output += '<ul>'
                 output += '<li>...</li>'
                 output += '<li>...</li>'
