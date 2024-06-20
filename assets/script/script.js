@@ -42,6 +42,63 @@ function fix_date(date){
     return new_date
 }
 
+function error_message(container){
+
+    const quotes = [
+        {
+            "name": "Winston Churchill",
+            "quote": "History is written by the victors."
+        },
+        {
+            "name": "William Shakespeare",
+            "quote": "There is a history in all men's lives."
+        },
+        {
+            "name": "Marshall McLuhan",
+            "quote": "Only the vanquished remember history."
+        },
+        {
+            "name": "Martin Luther King, Jr.",
+            "quote": "We are not makers of history. We are made by history."
+        },
+        {
+            "name": "Napoleon Bonaparte",
+            "quote": "History is a set of lies agreed upon."
+        },
+        {
+            "name": "Pearl S. Buck",
+            "quote": "If you want to understand today you have to search yesterday."
+        },
+        {
+            "name": "Herman Hesse",
+            "quote": "To study history means submitting yourself to chaos, but nevertheless retaining your faith in order and meaning."
+        }
+    ]
+
+    const error_message = 'So sorry, we couldn\'t find what you were looking for. <br/>Please try again later.'
+    const randomIndex = Math.floor(Math.random() * quotes.length);
+
+    let output = ''
+
+    // error
+    output += '<div id="error_quote">'
+
+    output += '<div class="error_box">'
+    output += error_message
+    output += '</div>'
+
+    // quote
+    output += '<div class="quote_box">'
+    output += '<div class="quote">' + quotes[randomIndex].quote + '</div>'
+    output += '<div>' + quotes[randomIndex].name + '</div>'
+    output += '</div>'
+
+    output += '</div>'
+
+    container.innerHTML = output
+    
+}
+
 document.addEventListener("DOMContentLoaded", function(){
     load_footer()
     menu()

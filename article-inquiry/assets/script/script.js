@@ -4,6 +4,7 @@ const actors_API = '../assets/data/data_.json'
 let documents_data;
 let actor_data;
 let reply_data;
+let container;
 
 let count_prompts = 0;
 
@@ -12,6 +13,7 @@ async function load_data(){
     const title_box = document.getElementById('articles_box');
     const articles_count_box = document.getElementById('articles_count');
     const articles_actions_box = document.getElementById('articles_actions');
+
     let output = ''
     let the_data;
 
@@ -27,10 +29,11 @@ async function load_data(){
     })
     .then(json => {
         documents_data = json
-        // console.log(raw_data)
     })
     .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
+        console.error('There was a problem with the document fetch operation:', error);
+
+        error_message(main)
     });
 
     // actors
@@ -43,31 +46,68 @@ async function load_data(){
     })
     .then(json => {
         actor_data = json
+        console.log(actor_data)
+
+        // group objects by actor name
+        const actionflows = actor_data.reduce((acc, obj) => {
+            const actorName = obj.actor.name;
+            if (!acc[actorName]) {
+                acc[actorName] = [];
+            }
+            acc[actorName].push(obj);
+            return acc;
+        }, []);
+        const actionflows_array = Object.values(actionflows);
+
+        build_page()
+
+        list_articles(documents_data)
+        get_statistics(actionflows_array)   
+        load_article_info(documents_data)
+
+        chat_with_NLP()
+    
     })
     .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
+        console.error('There was a problem with the actor fetch operation:', error);
+
+        error_message(main)
+
     });
+}
 
-    // group objects by actor name
-    const actionflows = actor_data.reduce((acc, obj) => {
-        const actorName = obj.actor.name;
-        if (!acc[actorName]) {
-            acc[actorName] = [];
-        }
-        acc[actorName].push(obj);
-        return acc;
-    }, []);
-    const actionflows_array = Object.values(actionflows);
+function build_page(){
 
-    list_articles(documents_data)
-    get_statistics(actionflows_array)   
-    load_article_info(documents_data)
+    container = document.getElementById('main');
 
-    chat_with_NLP()
+    // articles list
+    const articles_box = document.createElement("div");
+    articles_box.id = 'articles_box';
+    container.appendChild(articles_box)
+
+    // selected article
+    const article_box = document.createElement("div");
+    article_box.id = 'the_article_box';
+
+    const article_info_box = document.createElement("div");
+    article_info_box.id = 'article_info_box';
+
+    article_box.appendChild(article_info_box)
+    container.appendChild(article_box)
+
+    // prompt
+    const prompt_box = document.createElement("div");
+    prompt_box.id = 'prompt_box';
+
+    const prompt_html = '<div id="chat"></div><div class="input_box"><input type="text" id="chat_input" placeholder="Ask a question about the selected article ..." /><button id="send_button">➔</button></div>'
+
+    prompt_box.innerHTML = prompt_html
+
+    container.appendChild(prompt_box)
+
 }
 
 function list_articles(data, sort){
-    articles_box = document.getElementById('articles_box')
 
     let sorted_data
 
@@ -191,9 +231,8 @@ function load_article_info(data){
     // console.log(data)
 
     let id = data[0].document_id
-    
+
     const article_item = document.querySelectorAll('.article_box')
-    const article_info_box = document.getElementById('article_info_box')
 
     article_item.forEach(item => {
         item.addEventListener('click', function() {
@@ -272,11 +311,12 @@ function load_article_info(data){
                 output += '<div id="read" class="info_box"><a href="' + link + '" target="blank">Read the article</a></div>'
                 // &#128279;
                 // &#x1F517;
-                article_info_box.innerHTML = output
+
+                document.getElementById('article_info_box').innerHTML = output
             }
         })
 
-        article_info_box.setAttribute('data-document',id)
+        document.getElementById('article_info_box').setAttribute('data-document',id)
     }
     display_info(id)
 }
