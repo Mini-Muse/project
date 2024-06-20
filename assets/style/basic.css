@@ -308,6 +308,7 @@ highlight       #4538d8
 
 .other_actors_container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .actor_chips {
@@ -317,6 +318,7 @@ highlight       #4538d8
     padding: 3px 5px;
     border-radius: 5px;
     margin-right: 3px;
+    margin-bottom: 3px;
 }
 
 /* -------- footer -------- */
