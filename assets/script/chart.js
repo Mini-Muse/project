@@ -1,6 +1,6 @@
 const margin = [10,10,10,10]
 const timeline_margin = [10,10,10,10]
-const tick_size_large = 120;
+const tick_size_large = 100;
 const tick_size_small = 100;
 
 let parseDate = d3.timeParse("%Y-%m-%d"); // %Y

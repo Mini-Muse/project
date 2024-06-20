@@ -100,10 +100,14 @@ function build_page(){
 
     container = document.getElementById('main');
 
-    // articles list
+    // column articles
+    // --------------------
     articles_box = document.createElement("div");
     articles_box.id = 'articles_box';
     container.appendChild(articles_box)
+
+    // column single article
+    // --------------------
 
     // selected article
     const article_box = document.createElement("div");
@@ -123,7 +127,7 @@ function build_page(){
 
     prompt_box.innerHTML = prompt_html
 
-    container.appendChild(prompt_box)
+    article_box.appendChild(prompt_box)
 
 }
 
@@ -168,9 +172,11 @@ function list_articles(article_data, documentflows_array, sort){
         output += '<div class="article_box" data-id="' + document_id + '">'
         
         output += '<div class="the_meta">'
+            output += '<div>'
             output += '<span class="article_title">' + item.title + '</span><br/>'
             output += '<span class="article_author">by ' + 'author' + ', </span>'
             output += '<span class="article_date">' + item.year + '</span>'
+            output += '</div>'
         output += '</div>'
 
         output += '<div class="the_timeline">'
@@ -216,7 +222,7 @@ function list_articles(article_data, documentflows_array, sort){
         ).filter(subArray => subArray.length > 0);
         filteredArray = filteredArray[0]
  
-        make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,50,action_width_small)
+        make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,tick_size_large,action_width_large)
     })
 
     load_article_info(sorted_article_data)

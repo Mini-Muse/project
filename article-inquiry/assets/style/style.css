@@ -6,10 +6,11 @@
     top: 3.5rem;
     background-color: white;
     line-height: 3rem;
+    z-index: 2;
 }
 
 #timeline_recap .recap {
-    height: 4rem;
+    height: 2rem;
     line-height: 3rem;
     padding: 0 20px;
 }
@@ -20,8 +21,14 @@
     line-height: 1.5rem;
 }
 
-#timeline_recap .recap_b .shift {
-    grid-column-start: 1;
+.shift {
+    width: 60%;
+}
+
+.second_shift {
+    display: grid;
+    grid-template-columns: .6fr 1fr;
+    grid-column-gap: 10px;
 }
 
 
@@ -33,40 +40,38 @@
 }
 
 #articles_box {
-    width: 30%;
+    width: 60%;
     cursor: pointer;
     background-color: #f6f6f6;
 }
 
-#overall_timeline {
-    width: calc(30% - 40px);
-    margin: 0 20px;
-}
 
 #the_article_box {
-    width: 30%;
-    border-left: 1px solid #bcbcbc;
-}
-
-#prompt_box {
     width: 40%;
     border-left: 1px solid #bcbcbc;
+
 }
+
+/* #overall_timeline #prompt_box */ 
 
 /* -------- articles box -------- */ 
 
 #article_info_box{
     padding: 20px;
+    min-height: 20vh;
+    border-bottom: 1px dashed #bcbcbc;
+    box-shadow: 0px 5px 5px 1px rgba(200, 200, 200, .3);
+    position: relative;
+    z-index: 1;
 }   
 
 .article_box {
-/*    padding: 20px;*/
+    min-height: 120px;
     border-bottom: 1px solid #bcbcbc;
+    display: grid;
+    grid-template-columns: .6fr 1fr;
+    grid-column-gap: 10px;
 }
-
-/*.article_box:last-child {
-    border-bottom: none;
-}*/
 
 .article_box:hover {
     background-color: white;
@@ -99,23 +104,22 @@
 }
 
 .the_meta {
-    padding: 20px 20px 0px 10px;
+    border-right: 1px solid #bcbcbc;
 }
 
-/*.the_meta:first-child {
-    margin-bottom: 1rem;
-}*/
+.the_meta div {
+    padding: 20px 20px 0 20px;
+}
 
 .the_timeline {
-    padding: 0px 20px 15px 10px;
-
+    height: 5rem;
+    margin-top: .4rem;
 }
-
 
 /* -------- prompt box -------- */ 
 
 #chat {
-    min-height: 40vh;
+    min-height: 25vh;
     max-height: 60vh;
     border-bottom: 1px solid #ddd;
     padding: 20px;

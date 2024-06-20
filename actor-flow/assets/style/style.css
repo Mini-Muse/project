@@ -1,6 +1,6 @@
 /* -------- timeline recap -------- */ 
 
-#timeline_recap{
+#timeline_recap {
     position: -webkit-sticky;
     position: sticky;
     top: 3.5rem;
@@ -21,7 +21,7 @@
 }
 
 #timeline_recap .recap {
-    height: 4rem;
+    height: 2rem;
     line-height: 3rem;
     padding: 0 20px;
 }
@@ -44,6 +44,7 @@
     grid-column-gap: 10px;
     border-bottom: 1px solid #bcbcbc;
     padding: 0 20px;
+    min-height: 120px;
 }
 
 #actors_box li .actor_row div {
