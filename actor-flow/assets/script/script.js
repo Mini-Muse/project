@@ -1,67 +1,11 @@
 const API_actionflow = '../assets/data/data_.json' // 'https://minimuse.nlp.idsia.ch/actionflows' 'assets/data/data.json'
 
-const colors = [
-    '#F0E3CB',
-    '#C9DFE5',
-    '#E0BBB6',
-    '#BAB7DE',
-    '#C1DDAB'
-] 
-
-const margin = [10,10,10,10]
-const timeline_margin = [10,10,10,10]
-
-const action_width = 10;
-
 let raw_data;
 let actionflows_array;
 let actor_per_article;
 
-const tick_size_large = 120;
-const tick_size_small = 100;
-
-let parseDate = d3.timeParse("%Y-%m-%d"); // %Y
-
-let year_a = 1900;
-let year_b = 1900;
-
-const shift = 2;
-
-function get_color(value){
-    const categoryColors = {
-        "Wrote": "#efd295",
-        "Edited": "#C9DFE5",
-        "Order": "#E0BBB6"
-    };
-
-    if (categoryColors.hasOwnProperty(value)) {
-        return categoryColors[value];
-    } else {
-        return "#000000";
-    }
-}
-
-function get_actors_per_article(data){
-    const grouped = {};
-
-    data.forEach(item => {
-
-        item.forEach(obj => {
-            const docId = obj.document.document_id;
-            const actorName = obj.actor.name;
-            // console.log(docId,actorName)
-
-            if (!grouped[docId]) {
-                grouped[docId] = new Set();
-            }
-
-            grouped[docId].add(actorName);
-        })
-    });
-    // console.log(grouped)
-    //return Object.values(grouped);
-    return Object.values(grouped).map(set => Array.from(set));
-}
+let startDate
+let endDate
 
 async function load_data(){
 
@@ -177,8 +121,8 @@ function display_timeline(data, container, filter, sort){
     let box_h; 
 
     // get start and end date ---------------
-    let startDate = fix_date(data[0][0].date.value);
-    let endDate = startDate 
+    startDate = fix_date(data[0][0].date.value);
+    endDate = startDate 
 
     // set an array of actors per article
     actor_per_article = get_actors_per_article(data)
@@ -254,7 +198,7 @@ function display_timeline(data, container, filter, sort){
 
         // timeline ---------------
 
-        make_timeline(item,'timeline_' + i,tick_size_large)
+        make_timeline(item,'timeline_' + i,startDate,endDate,tick_size_large,action_width_large)
 
         // details ---------------
 
@@ -491,7 +435,10 @@ function get_articles(data){
             const the_container = 'article_timeline_' + id + '_' + doc_id
             // console.log(filtered_data,the_container)
 
-            make_timeline(filtered_data,the_container,tick_size_small)
+            make_timeline(filtered_data,the_container,startDate,endDate,tick_size_small,action_width_large)
+
+            // (individual_timeline_data,the_container,startDate,endDate,tick_size,action_width)
+
 
         }
     }

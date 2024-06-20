@@ -52,7 +52,7 @@
 }   
 
 .article_box {
-    padding: 20px;
+/*    padding: 20px;*/
     border-bottom: 1px solid #bcbcbc;
 }
 
@@ -89,6 +89,20 @@
     margin-top: 2rem;
     line-height: 120%;
 }
+
+.the_meta {
+    padding: 20px 20px 0px 10px;
+}
+
+/*.the_meta:first-child {
+    margin-bottom: 1rem;
+}*/
+
+.the_timeline {
+    padding: 0px 20px 20px 10px;
+
+}
+
 
 /* -------- prompt box -------- */ 
 

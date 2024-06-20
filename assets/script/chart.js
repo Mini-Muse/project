@@ -1,17 +1,80 @@
-function make_timeline(individual_timeline_data,the_container,tick_size){
+const margin = [10,10,10,10]
+const timeline_margin = [10,10,10,10]
+const tick_size_large = 120;
+const tick_size_small = 100;
+
+let parseDate = d3.timeParse("%Y-%m-%d"); // %Y
+
+let year_a = 1900;
+let year_b = 1900;
+
+const shift = 2;
+
+const action_width_large = 10;
+const action_width_small = 4;
+
+const colors = [
+    '#F0E3CB',
+    '#C9DFE5',
+    '#E0BBB6',
+    '#BAB7DE',
+    '#C1DDAB'
+] 
+
+function get_color(value){
+    const categoryColors = {
+        "Wrote": "#efd295",
+        "Edited": "#C9DFE5",
+        "Order": "#E0BBB6"
+    };
+
+    if (categoryColors.hasOwnProperty(value)) {
+        return categoryColors[value];
+    } else {
+        return "#000000";
+    }
+}
+
+function get_actors_per_article(data){
+    const grouped = {};
+
+    data.forEach(item => {
+
+        item.forEach(obj => {
+            const docId = obj.document.document_id;
+            const actorName = obj.actor.name;
+            // console.log(docId,actorName)
+
+            if (!grouped[docId]) {
+                grouped[docId] = new Set();
+            }
+
+            grouped[docId].add(actorName);
+        })
+    });
+    // console.log(grouped)
+    //return Object.values(grouped);
+    return Object.values(grouped).map(set => Array.from(set));
+}
+
+function make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size,action_width){
+    // console.log(individual_timeline_data)
+    // console.log(timeline_box)
+    
     timeline_box = document.getElementById(the_container) //  'timeline_' + id )
-    // console.log(the_container)
 
     box_w = timeline_box.offsetWidth;
     box_h = tick_size // t_box.offsetHeight;
 
-    let date_a = (year_a - shift).toString() + '-01-01'
-    let date_b = (year_b + shift).toString() + '-01-01'
-    // console.log(year_a,year_b)
+    // years ---------------
+
+    let my_data = individual_timeline_data
+    // console.log(my_data[0].date.value)
 
     xScale = d3.scaleTime()
-        .domain([parseDate(date_a), parseDate(date_b)]) // 1920 // "1750-01-01"
+        .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
         .range([0, box_w - timeline_margin[1] - timeline_margin[3]] )
+        // console.log(startDate,endDate)
 
     // timeline_container
     let timeline_container = d3.select(timeline_box).append('svg')
@@ -22,7 +85,7 @@ function make_timeline(individual_timeline_data,the_container,tick_size){
         .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
 
     let actions_box = plot.selectAll("g")
-        .data(individual_timeline_data)
+        .data(my_data)
         .enter()
         .append("g")
 
@@ -30,7 +93,8 @@ function make_timeline(individual_timeline_data,the_container,tick_size){
         .attr("class", "act")
         .attr("x", function(d){
             let the_date = new Date(fix_date(d.date.value)) // parseDate(fix_date(d.date.value)))
-            return xScale(the_date)  + (action_width/1)
+            let x_pos = xScale(the_date) + (action_width/1)
+            return x_pos
         })
         .attr("y",0)
         .attr("width",action_width)

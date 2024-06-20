@@ -2,11 +2,19 @@ const documents_API = 'https://minimuse.nlp.idsia.ch/documents'
 const actors_API = '../assets/data/data_.json'
 
 let documents_data;
+let documentflows_array;
 let actor_data;
 let reply_data;
 let container;
 
+let articles_box;
+
 let count_prompts = 0;
+
+let date_a
+let date_b 
+let startDate
+let endDate
 
 async function load_data(){
 
@@ -46,7 +54,7 @@ async function load_data(){
     })
     .then(json => {
         actor_data = json
-        console.log(actor_data)
+        // console.log(actor_data)
 
         // group objects by actor name
         const actionflows = actor_data.reduce((acc, obj) => {
@@ -59,9 +67,21 @@ async function load_data(){
         }, []);
         const actionflows_array = Object.values(actionflows);
 
+        // group objects by document id
+        const documentflows = actor_data.reduce((acc, obj) => {
+            const documentId = obj.document.document_id;
+            if (!acc[documentId]) {
+                acc[documentId] = [];
+            }
+            acc[documentId].push(obj);
+            return acc;
+        }, []);
+        documentflows_array = Object.values(documentflows);
+        // console.log(documentflows_array)
+
         build_page()
 
-        list_articles(documents_data)
+        list_articles(documents_data, documentflows_array, 'date')
         get_statistics(actionflows_array)   
         load_article_info(documents_data)
 
@@ -71,7 +91,7 @@ async function load_data(){
     .catch(error => {
         console.error('There was a problem with the actor fetch operation:', error);
 
-        error_message(main)
+        // error_message(main)
 
     });
 }
@@ -81,7 +101,7 @@ function build_page(){
     container = document.getElementById('main');
 
     // articles list
-    const articles_box = document.createElement("div");
+    articles_box = document.createElement("div");
     articles_box.id = 'articles_box';
     container.appendChild(articles_box)
 
@@ -107,13 +127,14 @@ function build_page(){
 
 }
 
-function list_articles(data, sort){
+function list_articles(article_data, documentflows_array, sort){
+    console.log(documentflows_array)
 
-    let sorted_data
+    let sorted_article_data
 
     const sort_date = (a, b) => {
-        const dateA = new Date(a.year);
-        const dateB = new Date(b.year);
+        const dateA = new Date(b.year);
+        const dateB = new Date(a.year);
 
         return dateA - dateB;
     };
@@ -132,26 +153,73 @@ function list_articles(data, sort){
     };
 
     if (sort == 'date'){
-        sorted_data = data.sort(sort_date);
+        sorted_article_data = article_data.sort(sort_date);
     }
     else {
-        sorted_data = data.sort(sort_author);
+        sorted_article_data = article_data.sort(sort_author);
     }
 
     articles_box.innerHTML = ''
 
     let output = ''
-    sorted_data.forEach(item => {
-        output += '<div class="article_box" data-id="' + item.document_id + '">'
-        output += '<span class="article_title">' + item.title + '</span><br/>'
-        output += '<span class="article_author">by ' + 'author' + ', </span>'
-        output += '<span class="article_date">' + item.year + '</span>'
+    sorted_article_data.forEach(item => {
+        const document_id = item.document_id
+
+        output += '<div class="article_box" data-id="' + document_id + '">'
+        
+        output += '<div class="the_meta">'
+            output += '<span class="article_title">' + item.title + '</span><br/>'
+            output += '<span class="article_author">by ' + 'author' + ', </span>'
+            output += '<span class="article_date">' + item.year + '</span>'
         output += '</div>'
+
+        output += '<div class="the_timeline">'
+        output += '<div id="the_timeline_' + document_id + '"></div>'
+        output += '</div></div>'
+
+        output += '</div>'
+        
     })
 
     articles_box.innerHTML = output
 
-    load_article_info(data)
+    let startDate = fix_date(documentflows_array[0][0].date.value) 
+    let endDate = startDate 
+    // console.log(startDate)
+
+    year_a = parseInt(startDate.toString().slice(0, 4)) 
+    year_b = parseInt(endDate.toString().slice(0, 4))
+
+    date_a = (year_a - shift).toString() + '-01-01'
+    date_b = (year_b + shift).toString() + '-01-01'
+
+    documentflows_array.forEach(item => {
+        item.forEach(event => {
+            date = event.date.value
+            // console.log(date)
+
+            if (fix_date(date) < startDate ) {
+                startDate = date;
+            }
+            if (fix_date(date) > endDate ) {
+                endDate = date;
+            }
+        })
+    });
+    // console.log(startDate,endDate)
+
+    sorted_article_data.forEach(item => {
+        const document_id = item.document_id
+        
+        let filteredArray = documentflows_array.map(subArray => 
+            subArray.filter(item => item.document.document_id === document_id)
+        ).filter(subArray => subArray.length > 0);
+        filteredArray = filteredArray[0]
+ 
+        make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,50,action_width_small)
+    })
+
+    load_article_info(sorted_article_data)
 }
 
 function get_statistics(data){
@@ -428,14 +496,15 @@ function chat_with_NLP(){
 function sort_data(){
     
     const the_sort = document.getElementById('the_sort')
-    const article_list = document.getElementById('articles_box')
 
     the_sort.addEventListener('change', (event) => {
+        const article_list = document.getElementById('articles_box')
+
         const sort = event.target.value;
 
         article_list.innerHTML = ''
 
-        list_articles(documents_data, sort)
+        list_articles(documents_data, documentflows_array, sort)
     });
 }
 
