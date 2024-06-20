@@ -11,7 +11,7 @@ let year_b = 1900;
 const shift = 2;
 
 const action_width_large = 10;
-const action_width_small = 4;
+const action_width_small = action_width_large/3*2;
 
 const colors = [
     '#F0E3CB',
