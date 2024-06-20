@@ -58,8 +58,7 @@ function get_actors_per_article(data){
 }
 
 function make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size,action_width){
-    // console.log(individual_timeline_data)
-    // console.log(timeline_box)
+    console.log(startDate,endDate)
     
     timeline_box = document.getElementById(the_container) //  'timeline_' + id )
 
@@ -87,13 +86,12 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
     let actions_box = plot.selectAll("g")
         .data(my_data)
         .enter()
-        .append("g")
 
     let action_items = actions_box.append("rect")
         .attr("class", "act")
         .attr("x", function(d){
-            let the_date = new Date(fix_date(d.date.value)) // parseDate(fix_date(d.date.value)))
-            let x_pos = xScale(the_date) + (action_width/1)
+            let the_date = new Date(fix_date(d.date.value))
+            let x_pos = xScale(the_date) - (action_width/2) // + (action_width/1)
             return x_pos
         })
         .attr("y",0)
@@ -184,4 +182,39 @@ function timeline_labels() {
 
         })
     }
+}
+
+function overall_timeline(container,startDate,endDate){
+    console.log(startDate,endDate)
+
+    let overall_timeline = document.getElementById(container)
+    w_ = overall_timeline.offsetWidth;
+    h_ = overall_timeline.offsetHeight;
+
+    overall_timeline.innerHTML = ''
+
+    let overall_axis = d3.select('#' + container)
+        .append('svg')
+        .attr("width",w_)
+        .attr("height", 20) // h_ - 1 
+
+    let plot = overall_axis.append("g")
+        .attr("transform", 'translate(' + margin[0] + ',' + 20 + ')')
+
+    xScale = d3.scaleTime()
+        .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
+        .range([0, w_ - timeline_margin[1] - timeline_margin[0]] )
+
+    let tick_count = 15
+    if (w_ < 300) {
+        tick_count = 5
+    }
+
+    let xAxis = d3.axisTop(xScale)
+        .tickFormat(d3.timeFormat("%Y"))
+        .ticks(tick_count)
+    
+    let the_xAxis = plot.append("g")
+        .attr("class","the_axis")
+        .call(xAxis)
 }

@@ -128,24 +128,6 @@
     border-radius: 5px;
 }
 
-/* -------- timeline -------- */ 
-.the_axis {
-    opacity: 0.5;
-} 
-
-.select_action {
-    stroke:rgb(0,0,0);
-    stroke-align: inset;
-}
-
-.actor_timeline .act {
-    cursor: pointer;
-}
-
-.domain {
-    display: none;
-}
-
 /* -------- article_boxes -------- */ 
 .article_boxes {
 /*    display: grid;

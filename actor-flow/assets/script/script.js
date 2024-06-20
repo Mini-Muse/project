@@ -1,4 +1,4 @@
-const API_actionflow = '../assets/data/data_.json' // 'https://minimuse.nlp.idsia.ch/actionflows' 'assets/data/data.json'
+const API_actionflow = '../../assets/data/data_.json' // 'https://minimuse.nlp.idsia.ch/actionflows' 'assets/data/data.json'
 
 let raw_data;
 let actionflows_array;
@@ -229,36 +229,8 @@ function display_timeline(data, container, filter, sort){
             .text("↓")
 
     });
-    
-    // overall timeline ---------------
 
-    let overall_timeline = document.getElementById('overall_timeline')
-    w_ = overall_timeline.offsetWidth;
-    h_ = overall_timeline.offsetHeight;
-
-    let overall_axis = d3.select("#overall_timeline")
-        .append('svg')
-        .attr("width",w_)
-        .attr("height",h_ - 1) 
-
-    let plot = overall_axis.append("g")
-
-    let date_a = (year_a - shift).toString() + '-01-01'
-    let date_b = (year_b + shift).toString() + '-01-01'
-    // console.log(year_a,year_b)
-
-    xScale = d3.scaleTime()
-        .domain([parseDate(date_a), parseDate(date_b)]) // 1920 // "1750-01-01"
-        .range([0, w_ - timeline_margin[1] - timeline_margin[3]] )
-
-    let xAxis = d3.axisTop(xScale)
-        .tickFormat(d3.timeFormat("%Y"))
-        .ticks(10)
-    
-    let the_xAxis = plot.append("g")
-        .attr("transform", 'translate(' + margin[0] +',20)')
-        .attr("class","the_axis")
-        .call(xAxis)
+    overall_timeline('overall_timeline',startDate,endDate)
 
     timeline_labels();
     get_articles(raw_data);

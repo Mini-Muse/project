@@ -321,6 +321,25 @@ highlight       #4538d8
     margin-bottom: 3px;
 }
 
+
+/* -------- timeline -------- */ 
+.the_axis {
+    opacity: 0.5;
+} 
+
+.select_action {
+    stroke:rgb(0,0,0);
+    stroke-align: inset;
+}
+
+.actor_timeline .act {
+    cursor: pointer;
+}
+
+.domain {
+    display: none;
+}
+
 /* -------- footer -------- */
 
 #footer {

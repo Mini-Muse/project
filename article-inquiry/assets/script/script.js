@@ -1,5 +1,5 @@
 const documents_API = 'https://minimuse.nlp.idsia.ch/documents'
-const actors_API = '../assets/data/data_.json'
+const actors_API = '../../assets/data/data_.json'
 
 let documents_data;
 let documentflows_array;
@@ -220,6 +220,8 @@ function list_articles(article_data, documentflows_array, sort){
     })
 
     load_article_info(sorted_article_data)
+
+    overall_timeline('overall_timeline',startDate,endDate)
 }
 
 function get_statistics(data){
