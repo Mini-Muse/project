@@ -205,7 +205,7 @@ function overall_timeline(container,startDate,endDate){
         .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
         .range([0, w_ - timeline_margin[1] - timeline_margin[0]] )
 
-    let tick_count = 15
+    let tick_count = 10
     if (w_ < 300) {
         tick_count = 5
     }

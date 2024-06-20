@@ -1,4 +1,4 @@
-const API_actionflow = '../../assets/data/data_.json' // 'https://minimuse.nlp.idsia.ch/actionflows' 'assets/data/data.json'
+const API_actionflow = '../assets/data/data_.json' // 'https://minimuse.nlp.idsia.ch/actionflows' 'assets/data/data.json'
 
 let raw_data;
 let actionflows_array;
