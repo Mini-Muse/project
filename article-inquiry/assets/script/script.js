@@ -1,5 +1,5 @@
 const documents_API = 'https://minimuse.nlp.idsia.ch/documents'
-const actors_API = 'assets/data/data_.json'
+const actors_API = '../assets/data/data_.json'
 
 let documents_data;
 let actor_data;
