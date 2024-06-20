@@ -1,4 +1,4 @@
-const API_actionflow = '../assets/data/data_.json' // 'https://minimuse.nlp.idsia.ch/actionflows' 'assets/data/data.json'
+const API_actionflow = '.../assets/data/data_.json' // 'https://minimuse.nlp.idsia.ch/actionflows' 'assets/data/data.json'
 
 const colors = [
     '#F0E3CB',
@@ -26,6 +26,37 @@ let year_a = 1900;
 let year_b = 1900;
 
 const shift = 2;
+
+const quotes = [
+    {
+        "name": "Winston Churchill",
+        "quote": "History is written by the victors."
+    },
+    {
+        "name": "William Shakespeare",
+        "quote": "There is a history in all men's lives."
+    },
+    {
+        "name": "Marshall McLuhan",
+        "quote": "Only the vanquished remember history."
+    },
+    {
+        "name": "Martin Luther King, Jr.",
+        "quote": "We are not makers of history. We are made by history."
+    },
+    {
+        "name": "Napoleon Bonaparte",
+        "quote": "History is a set of lies agreed upon."
+    },
+    {
+        "name": "Pearl S. Buck",
+        "quote": "If you want to understand today you have to search yesterday."
+    },
+    {
+        "name": "Herman Hesse",
+        "quote": "To study history means submitting yourself to chaos, but nevertheless retaining your faith in order and meaning."
+    }
+]
 
 function get_color(value){
     const categoryColors = {
@@ -65,7 +96,8 @@ function get_actors_per_article(data){
 
 async function load_data(){
 
-    const title_box = document.getElementById('articles_box');
+    // const title_box = document.getElementById('articles_box');
+    const actors_box = document.getElementById('actors_box');
     const articles_count_box = document.getElementById('articles_count');
     const articles_actions_box = document.getElementById('articles_actions');
     let output = ''
@@ -84,26 +116,49 @@ async function load_data(){
         data = json
         raw_data = json
         console.log(raw_data)
+
+        // group objects by actor name
+        const actionflows = data.reduce((acc, obj) => {
+            const actorName = obj.actor.name;
+            if (!acc[actorName]) {
+                acc[actorName] = [];
+            }
+            acc[actorName].push(obj);
+            return acc;
+        }, []);
+        actionflows_array = Object.values(actionflows);
+        // console.log(actionflows_array)
+
+        get_statistics(actionflows_array)   
+        display_timeline(actionflows_array,'actors_box','all','name')
+
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
+
+        const error_message = 'So sorry, we couldn\'t find what you were looking for. <br/>Please try again later.'
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        console.log(randomIndex)
+
+        let output = ''
+
+        // error
+        output += '<div id="error_quote">'
+
+        output += '<li class="error_box">'
+        output += error_message
+        output += '</li>'
+
+        // quote
+        output += '<li class="quote_box">'
+        output += '<div class="quote">' + quotes[randomIndex].quote + '</div>'
+        output += '<div>' + quotes[randomIndex].name + '</div>'
+        output += '</li>'
+
+        output += '</div>'
+
+        actors_box.innerHTML = output
     });
-
-    // group objects by actor name
-    const actionflows = data.reduce((acc, obj) => {
-        const actorName = obj.actor.name;
-        if (!acc[actorName]) {
-            acc[actorName] = [];
-        }
-        acc[actorName].push(obj);
-        return acc;
-    }, []);
-    actionflows_array = Object.values(actionflows);
-    // console.log(actionflows_array)
-
-    get_statistics(actionflows_array)   
-    display_timeline(actionflows_array,'actors_box','all','name')
-
 }
 
 function display_timeline(data, container, filter, sort){

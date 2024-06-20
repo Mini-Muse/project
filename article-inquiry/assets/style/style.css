@@ -29,27 +29,27 @@
     border-bottom: 1px solid #bcbcbc;
 }
 
-#article_box {
-    width: 32%;
-    border-left: 1px solid #bcbcbc;
-}
-
-#article_info_box{
-    padding: 20px;
-}   
-
 #articles_box {
-    width: 16%;
+    width: 20%;
     cursor: pointer;
     background-color: #f6f6f6;
 }
 
+#article_box {
+    width: 30%;
+    border-left: 1px solid #bcbcbc;
+}
+
 #prompt_box {
-    width: 54%;
+    width: 50%;
     border-left: 1px solid #bcbcbc;
 }
 
 /* -------- articles box -------- */ 
+
+#article_info_box{
+    padding: 20px;
+}   
 
 .article_box {
     padding: 20px;
