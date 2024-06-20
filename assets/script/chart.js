@@ -58,7 +58,7 @@ function get_actors_per_article(data){
 }
 
 function make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size,action_width){
-    console.log(startDate,endDate)
+    // console.log(startDate,endDate)
     
     timeline_box = document.getElementById(the_container) //  'timeline_' + id )
 
@@ -185,7 +185,7 @@ function timeline_labels() {
 }
 
 function overall_timeline(container,startDate,endDate){
-    console.log(startDate,endDate)
+    // console.log(startDate,endDate)
 
     let overall_timeline = document.getElementById(container)
     w_ = overall_timeline.offsetWidth;

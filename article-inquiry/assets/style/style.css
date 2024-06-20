@@ -24,10 +24,6 @@
     grid-column-start: 1;
 }
 
-#overall_timeline {
-    width: calc(20% - 40px);
-    margin: 0 20px;
-}
 
 /* -------- main -------- */ 
 
@@ -37,9 +33,14 @@
 }
 
 #articles_box {
-    width: 20%;
+    width: 30%;
     cursor: pointer;
     background-color: #f6f6f6;
+}
+
+#overall_timeline {
+    width: calc(30% - 40px);
+    margin: 0 20px;
 }
 
 #the_article_box {
@@ -48,7 +49,7 @@
 }
 
 #prompt_box {
-    width: 50%;
+    width: 40%;
     border-left: 1px solid #bcbcbc;
 }
 
