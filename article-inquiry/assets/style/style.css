@@ -46,15 +46,16 @@
 #main {
     display: flex;
     border-bottom: 1px solid #bcbcbc;
-/*    max-height: 60vh;
-    overflow-x: scroll;*/
+}
+
+#the_article_box, #articles_box {
+    max-height: 65vh;
 }
 
 #articles_box {
     width: 50%;
     cursor: pointer;
     background-color: #f6f6f6;
-    max-height: 70vh;
     overflow-y: scroll;
 }
 
@@ -62,10 +63,8 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    height: 70vh;
     overflow-y: scroll;
     border-left: 1px solid #bcbcbc;
-/*    position: relative;*/
 }
 
 /* #overall_timeline #prompt_box */ 
