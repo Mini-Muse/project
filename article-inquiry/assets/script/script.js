@@ -121,14 +121,18 @@ function build_page(){
 
     // prompt
     const prompt_box = document.createElement("div");
-    prompt_box.id = 'prompt_box';
+    prompt_box.id = 'chat';
 
-    const prompt_html = '<div id="chat"></div><div class="input_box"><input type="text" id="chat_input" placeholder="Ask a question about the selected article ..." /><button id="send_button">➔</button></div>'
+    const input_box = document.createElement("div");
+    input_box.id = 'input_box';
 
-    prompt_box.innerHTML = prompt_html
+    let output = ''
+    const input = '<input type="text" id="chat_input" placeholder="Ask a question about the selected article ..." /><button id="send_button">➔</button>'
 
     article_box.appendChild(prompt_box)
 
+    article_box.appendChild(input_box)
+    input_box.innerHTML = input
 }
 
 function list_articles(article_data, documentflows_array, sort){
@@ -166,6 +170,8 @@ function list_articles(article_data, documentflows_array, sort){
     articles_box.innerHTML = ''
 
     let output = ''
+
+    // for (let x = 0; x <= 100; x++){
     sorted_article_data.forEach(item => {
         const document_id = item.document_id
 
@@ -180,12 +186,16 @@ function list_articles(article_data, documentflows_array, sort){
         output += '</div>'
 
         output += '<div class="the_timeline">'
-        output += '<div id="the_timeline_' + document_id + '"></div>'
-        output += '</div></div>'
-
+            output += '<div id="the_timeline_' + document_id + '"></div>'
         output += '</div>'
-        
+
+        output += '<div class="the_arrow">'
+        output += '&rarr;'
+        output += '</div>'
+
+        output += '</div>'  
     })
+    // }
 
     articles_box.innerHTML = output
 
@@ -478,7 +488,7 @@ function chat_with_NLP(){
         the_messageSent = document.getElementById(box_id)
         the_messageSent.appendChild(messageReceived)
 
-        get_NLP_reply(documentId,query)
+        // get_NLP_reply(documentId,query)
 
         async function get_NLP_reply(documentId,query){
             url = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId=' + documentId +'&query=' + query 
