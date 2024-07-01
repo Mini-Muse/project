@@ -13,7 +13,7 @@
 #cover p {
     width: 70%;
     font-size: 2.75rem;
-    line-height: 3.75rem;
+    line-height: 140%;
 }
 
 /* -------- content -------- */
@@ -48,11 +48,14 @@
     #cover p {
         width: 95%;
         font-size: 2.5rem;
-        line-height: 3.5rem;
     }
 
     #content article { 
         width: 95%;
+    }
+
+    #content h2 {
+        margin-bottom: 1rem;
     }
 }
 
@@ -64,7 +67,6 @@
 
     #cover p {
         font-size: 1.25rem;
-        line-height: 2.25rem;
     }
 
     #content article {
