@@ -2,6 +2,7 @@ body {
 	font-family: "Source Sans 3", Arial, sans-serif;
   	font-optical-sizing: auto;
     line-height: 140%;
+    background-color: #fefefe;
 }
 
 a {
@@ -20,6 +21,9 @@ gray_lines      #bcbcbc
 black_lines     #BBB
 highlight       #4538d8
 
+blue            #0e2a8f
+background      #fefefe
+
  -------- menu -------- */ 
 
 
@@ -30,17 +34,17 @@ highlight       #4538d8
 }
 
 #navbar, #navbar a {
-    color: black;
+    color: white;
 }
 
 #navbar {
-    background-color: #D9D9D9;
+    background-color: #0e2a8f;
+    border-bottom: 1px solid #0e2a8f;
     height: 3.5rem;
-    border-bottom: 1px solid #BBB;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 2;
+    z-index: 3;
 }
 
 .box {
@@ -97,7 +101,8 @@ highlight       #4538d8
 }
 
 .menu .current {
-	background-color: white;
+	background-color: #fafafa;
+    color: black;
 }
 
 /* -------- search options -------- */ 
