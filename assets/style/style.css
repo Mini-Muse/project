@@ -4,7 +4,6 @@
     margin: 3.5rem auto 0;
     background-color: #f8f8f8;
     height: 70vh;
-    padding: 20px;
     align-items: center;
     display: flex;
     justify-content: space-evenly;
@@ -17,16 +16,43 @@
     line-height: 3.75rem;
 }
 
+/* -------- content -------- */
+
+#content { 
+    margin: 3.5rem auto 0;
+    border-bottom: 1px solid #BBB;
+}
+
+#content article {
+    width: 70%;
+    margin: 0 auto 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#content article h2 {
+    width: 25%;
+    font-weight: bold;
+}
+
+#content article p {
+    width: calc(75% - 1rem);
+    line-height: 140%;
+}
+
+/* -------- media queries -------- */
+
+
 @media screen and (max-width: 768px) {
 
     #cover p {
-        width: 100%;
-    }
-
-    #cover p {
-        width: 100%;
+        width: 95%;
         font-size: 2.5rem;
         line-height: 3.5rem;
+    }
+
+    #content article { 
+        width: 95%;
     }
 }
 
@@ -40,4 +66,15 @@
         font-size: 1.25rem;
         line-height: 2.25rem;
     }
+
+    #content article {
+        display: block;
+        width: 95%;
+    }
+
+    #content article h2, #content article p {
+        width: 95%;
+    }
+
+
 }
