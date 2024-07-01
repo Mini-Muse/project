@@ -168,7 +168,7 @@ function timeline_labels() {
             let the_info_box = document.getElementById('info_box_' + act);
             
             let output = '';
-            output += '<span style="font-weight:bold;">' + date + '</span><br/>' + location + '<br/><br/>' 
+            output += '<span style="font-weight:bold;">' + date + '</span><br/>' + location + '<br/>' 
             output += '<span class="action_cat" style="background-color:' + get_color(title) +'">' + title + '</span>'
             output += '<p>' + extract.slice(0, 20) + '</p>'
 
