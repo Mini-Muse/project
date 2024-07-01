@@ -77,6 +77,7 @@ background      #fefefe
     padding: 10px 20px;
     display: none;
     color: white;
+    width: 3rem;
 }
 
 .menu {
@@ -435,6 +436,7 @@ background      #fefefe
     	
     .menu-toggle {
     	display: block;
+        width: 15%;
     }
 
     .menu.active {

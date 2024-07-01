@@ -2,10 +2,25 @@ function menu(){
     const menuToggle = document.querySelector('.menu-toggle');
     const menu = document.querySelector('.menu');
 
+    let active = false
+
     menuToggle.addEventListener('click', function() {
         menu.classList.toggle('active');
         const expanded = menu.getAttribute('aria-expanded') === 'true' || false;
         menu.setAttribute('aria-expanded', !expanded);
+
+        if (active == false) {
+            active = true
+
+            menuToggle.innerHTML = 'X'
+        }
+        else {
+            active = false
+
+            menuToggle.innerHTML = 'menu'
+        }
+
+        console.log('click')
     });
 
 }
@@ -100,6 +115,8 @@ function error_message(container){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
+
     load_footer()
     menu()
+
 });
