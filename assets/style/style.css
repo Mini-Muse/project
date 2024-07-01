@@ -21,6 +21,8 @@
 #home_timeline {
     width: 100%;
     height: 100px;
+    border-top: 1px solid #BBB;
+    border-bottom: 1px solid #BBB;
 }
 
 /* -------- content -------- */
@@ -58,13 +60,12 @@
 
 
     #cover {
-        width: 95%;
         line-height: 100%;
         margin: 0 auto;
     }
 
     #title {
-        width: 100%;
+        width: 95%;
     }
 
     #cover p {
