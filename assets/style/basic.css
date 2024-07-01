@@ -350,9 +350,18 @@ background      #fefefe
 
 /* -------- footer -------- */
 
+#footer_home {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#footer_internal {
+    margin: 0 20px;
+}
+
 #footer {
-    margin: 6rem auto 7.5rem;
-    width: 70%;
+    margin: 6rem auto;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -370,7 +379,7 @@ background      #fefefe
 }
 
 .footer_logo a img {
-    max-width: 60%;
+    max-width: 70%;
     height: auto;
     position: relative;
     top: 5px;
@@ -456,10 +465,6 @@ background      #fefefe
         line-height: 2.5rem;
     }
 
-/*    .menu li:first-child {
-    	border-top: 1px solid #D9D9D9;
-    }*/
-
     .menu .current {
 		color: white;
         opacity: .4;
@@ -472,9 +477,10 @@ background      #fefefe
         top: 1.5rem;
     }
 
-    #footer {
+    #footer_home {
         width: 95%;
     }
+    
 }
 
 

@@ -19,10 +19,7 @@ function menu(){
 
             menuToggle.innerHTML = 'menu'
         }
-
-        console.log('click')
     });
-
 }
 
 function load_footer(){
@@ -117,6 +114,6 @@ function error_message(container){
 document.addEventListener("DOMContentLoaded", function(){
 
     load_footer()
-    menu()
+    // menu()
 
 });

@@ -1,19 +1,16 @@
 /* -------- cover -------- */
 
 #cover { 
-    margin: 3.5rem auto 0;
-/*    background-color: #f8f8f8;*/
-    height: 50vh;
-    align-items: center;
-    display: flex;
-    justify-content: space-evenly;
+    margin: 8rem auto;
     font-family: "Source Sans 3", Times, sans-serif;
+    font-size: 2.1rem;
+    width: 60%;
+    line-height: 140%;
 }
 
-#cover p {
-    width: 70%;
-    font-size: 2.5rem;
-    line-height: 140%;
+#cover h1 {
+    color: #0e2a8f;
+    font-weight: bold;
 }
 
 /* -------- content -------- */
@@ -24,7 +21,7 @@
 }
 
 #content article {
-    width: 70%;
+    width: 60%;
     margin: 0 auto 3rem;
     display: flex;
     justify-content: space-between;
@@ -49,8 +46,13 @@
 
 @media screen and (max-width: 768px) {
 
-    #cover p {
+
+    #cover {
         width: 95%;
+        line-height: 120%;
+    }
+
+    #cover p {
         font-size: 2rem;
     }
 
@@ -66,7 +68,7 @@
 @media screen and (max-width: 600px) {
 
     #cover { 
-        height: 50vh;
+/*        height: 50vh;*/
     }
 
     #cover p {

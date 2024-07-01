@@ -529,7 +529,8 @@ function sort_data(){
 document.addEventListener('DOMContentLoaded', function() {
 
     load_data()
-
     sort_data()
+
+    menu()
 
 });

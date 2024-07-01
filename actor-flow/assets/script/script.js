@@ -535,4 +535,5 @@ document.addEventListener('DOMContentLoaded', function() {
     sort_data();
     filter_data();
 
+    menu()
 });
