@@ -359,6 +359,14 @@ background      #fefefe
     margin: 0 20px;
 }
 
+#footer_home img {
+    max-width: 70%;
+}
+
+#footer_internal img {
+    max-width: 45%;
+}
+
 #footer {
     margin: 6rem auto;
     width: 100%;
@@ -370,6 +378,12 @@ background      #fefefe
     width: 25%;   
 }
 
+.footer_logo a img {
+    height: auto;
+    position: relative;
+    top: 5px;
+}
+
 .footer_div {
     width: calc(37.5% - 1rem);
 }
@@ -378,12 +392,6 @@ background      #fefefe
     margin-bottom: 1rem;
 }
 
-.footer_logo a img {
-    max-width: 70%;
-    height: auto;
-    position: relative;
-    top: 5px;
-}
 
 
 /* -------- error message -------- */ 
