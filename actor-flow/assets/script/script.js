@@ -411,7 +411,6 @@ function get_articles(data){
 
             // (individual_timeline_data,the_container,startDate,endDate,tick_size,action_width)
 
-
         }
     }
 }

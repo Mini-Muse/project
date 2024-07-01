@@ -58,7 +58,7 @@ function get_actors_per_article(data){
 }
 
 function make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size,action_width){
-    // console.log(startDate,endDate)
+    console.log(individual_timeline_data)
     
     timeline_box = document.getElementById(the_container) //  'timeline_' + id )
 

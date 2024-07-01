@@ -1,16 +1,26 @@
 /* -------- cover -------- */
 
 #cover { 
-    margin: 8rem auto;
     font-family: "Source Sans 3", Times, sans-serif;
-    font-size: 2.1rem;
-    width: 60%;
+    font-size: 2.3rem;
+    width: 100%;
     line-height: 140%;
+    margin-bottom: 5rem;
 }
 
 #cover h1 {
     color: #0e2a8f;
     font-weight: bold;
+}
+
+#title {
+    margin: 10rem auto 8rem;
+    width: 60%;
+}
+
+#home_timeline {
+    width: 100%;
+    height: 100px;
 }
 
 /* -------- content -------- */
@@ -49,7 +59,12 @@
 
     #cover {
         width: 95%;
-        line-height: 120%;
+        line-height: 100%;
+        margin: 0 auto;
+    }
+
+    #title {
+        width: 100%;
     }
 
     #cover p {

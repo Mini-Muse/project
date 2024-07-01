@@ -114,6 +114,5 @@ function error_message(container){
 document.addEventListener("DOMContentLoaded", function(){
 
     load_footer()
-    // menu()
 
 });
