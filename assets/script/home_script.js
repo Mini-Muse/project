@@ -221,6 +221,6 @@ function home_timeline(){
 
 document.addEventListener("DOMContentLoaded", function(){
 
-    home_timeline()
+    // home_timeline()
 
 });
