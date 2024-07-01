@@ -441,9 +441,9 @@ highlight       #4538d8
         line-height: 2.5rem;
     }
 
-    .menu li:first-child {
+/*    .menu li:first-child {
     	border-top: 1px solid #D9D9D9;
-    }
+    }*/
 
     .menu .current {
 		color: #bcbcbc;
