@@ -361,6 +361,13 @@ highlight       #4538d8
     margin-bottom: 1rem;
 }
 
+.footer_logo a img {
+    max-width: 85%;
+    height: auto;
+    position: relative;
+    top: 5px;
+}
+
 
 /* -------- error message -------- */ 
 
@@ -472,6 +479,10 @@ highlight       #4538d8
 
     .footer_logo, .footer_div {
         width: 100%;   
+    }
+
+    .footer_logo a img {
+        max-width: 45%;
     }
 
 }
