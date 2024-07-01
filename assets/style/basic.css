@@ -362,7 +362,7 @@ highlight       #4538d8
 }
 
 .footer_logo a img {
-    max-width: 85%;
+    max-width: 60%;
     height: auto;
     position: relative;
     top: 5px;
@@ -482,7 +482,7 @@ highlight       #4538d8
     }
 
     .footer_logo a img {
-        max-width: 45%;
+        max-width: 35%;
     }
 
 }

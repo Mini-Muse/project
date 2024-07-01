@@ -12,7 +12,7 @@
 
 #cover p {
     width: 70%;
-    font-size: 2.75rem;
+    font-size: 2.5rem;
     line-height: 140%;
 }
 
@@ -35,9 +35,13 @@
     font-weight: bold;
 }
 
-#content article p {
+#content article p, #content article ul {
     width: calc(75% - 1rem);
     line-height: 140%;
+}
+
+#content article ul li {
+    margin-bottom: 1rem;
 }
 
 /* -------- media queries -------- */
@@ -47,7 +51,7 @@
 
     #cover p {
         width: 95%;
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     #content article { 
@@ -66,7 +70,7 @@
     }
 
     #cover p {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
     }
 
     #content article {
