@@ -449,8 +449,6 @@ highlight       #4538d8
         top: 1.5rem;
     }
 
-    /* -------- footer -------- */ 
-
     #footer {
         width: 95%;
     }
@@ -473,7 +471,7 @@ highlight       #4538d8
     }
 
     .footer_logo, .footer_div {
-        width: 95%;   
+        width: 100%;   
     }
 
 }
