@@ -184,6 +184,28 @@ function timeline_labels() {
     }
 }
 
+function getDaysDifference(date1, date2) {
+    // Convert strings to Date objects
+    const dateObj1 = new Date(date1);
+    const dateObj2 = new Date(date2);
+
+    // Ensure date1 is not before date2 (for positive difference)
+    // if (dateObj1 < dateObj2) {
+    //     [dateObj1, dateObj2] = [dateObj2, dateObj1]; // Swap dates if needed
+    // }
+
+    // Calculate the difference in milliseconds
+    const timeDifference = dateObj1.getTime() - dateObj2.getTime();
+
+    // Convert milliseconds to days and round down to the nearest whole day
+    const dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+    // Format the difference as YYYY-MM-DD
+    // const formattedDifference = new Date(dayDifference).toISOString().slice(0, 10);
+
+    return dayDifference;
+}
+
 function overall_timeline(container,startDate,endDate){
     // console.log(startDate,endDate)
 
@@ -205,13 +227,23 @@ function overall_timeline(container,startDate,endDate){
         .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
         .range([0, w_ - timeline_margin[1] - timeline_margin[0]] )
 
-    let tick_count = 10
-    if (w_ < 500) {
-        tick_count = 5 // d3.timeYear.every(2) //5
+
+    let timeFormat = d3.timeFormat("%Y")
+    let difference = getDaysDifference(startDate, endDate)
+    if (difference < (365*2)) {
+        timeFormat = d3.timeFormat("%Y.%m")
     }
 
+    let tick_count = 10
+    if (w_ < 550) {
+        tick_count = 5 // d3.timeYear.every(2) //5
+        timeFormat = d3.timeFormat("%Y")
+    }
+
+    console.log(difference)
+
     let xAxis = d3.axisTop(xScale)
-        .tickFormat(d3.timeFormat("%Y"))
+        .tickFormat(timeFormat)
         .ticks(tick_count)
     
     let the_xAxis = plot.append("g")
