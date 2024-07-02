@@ -237,7 +237,6 @@ function overall_timeline(container,startDate,endDate){
     let tick_count = 10
     if (w_ < 550) {
         tick_count = 5 // d3.timeYear.every(2) //5
-        timeFormat = d3.timeFormat("%Y")
     }
 
     console.log(difference)
