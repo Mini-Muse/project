@@ -385,7 +385,7 @@ function load_article_info(data){
 
                 output += '<div class="meta" style="margin-top: 2rem;">'
                 if (list_actors.length > 0){
-                    output += '<p style="margin-bottom: .5rem;">actors</p>'
+                    output += '<p>actors</p>'
                     output += '<div class="other_actors_container">'
                     output += the_other_actors
                     output += '</div>'
@@ -399,7 +399,7 @@ function load_article_info(data){
                 output += '</div>'
 
                 link = 'https://www.e-periodica.ch/digbib/view?pid=szg-006%3A2023%3A73%3A%3A4#4'
-                output += '<div id="read" class="info_box"><a href="' + link + '" target="blank">Read the article</a></div>'
+                output += '<div id="read" class="info_box"><a href="' + link + '" target="blank">Read the article ...</a></div>'
                 // &#128279;
                 // &#x1F517;
 

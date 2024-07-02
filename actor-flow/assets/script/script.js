@@ -1,8 +1,11 @@
-const API_actionflow = '../assets/data/data_.json' // 'https://minimuse.nlp.idsia.ch/actionflows' 'assets/data/data.json'
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
+// const API_actionflow = '../assets/data/data_.json'
 
-let raw_data;
-let actionflows_array;
-let actor_per_article;
+const API_document = 'https://minimuse.nlp.idsia.ch/documents/'
+
+let raw_data
+let actionflows_array
+let actor_per_article
 
 let startDate
 let endDate
@@ -238,6 +241,7 @@ function display_timeline(data, container, filter, sort){
 
 function get_articles(data){
     // console.log(data)
+
     open_boxes = document.getElementsByClassName("open_box");
 
     // open lists
@@ -285,133 +289,176 @@ function get_articles(data){
         }
     }
 
-    function display_articles(id,actor){
+    function display_articles(actor_id,actor){
+        // console.log(actor_id,actor)
+
+        actor_id = parseInt(actor_id)
 
         // filter articles by actor id
         const documentsRelatedToActorId = data.filter(item => {
-            return item.actor.actor_id == id
+            return item.actor.actor_id == actor_id
         })
 
-        const actorsInSameDocument = data
-            .filter(item => item.actor.actor_id != id) // Filter out actor with actor_id 1
-            .map(item => item.actor) // Extract actor objects
-            .filter((actor, index, self) => self.findIndex(a => a.actor_id === actor.actor_id) === index); // Filter unique actors based on actor_id
+        // get documents id and filter out duplicate documents
+        const documentsData = documentsRelatedToActorId.map(item => item.document_id);
+        const uniqueDocumentIds = [...new Set(documentsData)];
 
-        const documentsData = documentsRelatedToActorId.map(item => item.document);
+        // const all_actors = data
+        //     // .filter(item => item.actor.actor_id != actor_id) // filter out actor with actor_id == something
+        //     .map(item => item.actor) // extract actor objects
+        //     .filter((actor, index, self) => self.findIndex(a => a.actor_id === actor.actor_id) === index); // Filter unique actors based on actor_id
+        // // console.log(all_actors)
 
-        // Filter out duplicate objects based on document_id
-        const uniqueDocumentIds = new Set();
-        const uniqueDocuments = documentsData.filter(item => {
-            if (uniqueDocumentIds.has(item.document_id)) {
-                return false;
-            } else {
-                uniqueDocumentIds.add(item.document_id);
-                return true;
+        async function callApisAndGetJson(uniqueDocumentIds) {
+            const results = [];
+
+            for (const document_id of uniqueDocumentIds) {
+                try {
+                    const API_document_id = API_document + document_id
+                    const response = await fetch(API_document_id);
+                
+                    if (!response.ok) {
+                        throw new Error('API call failed with status: ' + response.status);
+                    }
+
+                    const jsonData = await response.json();
+                    results.push(jsonData);
+                } 
+                catch (error) {
+                    console.error(`Error calling API: ${error.message}`);
+                }
+          }
+          return results;
+        }
+
+        callApisAndGetJson(uniqueDocumentIds) 
+            .then(article_data => {
+                actor_data = data
+                all_data = []
+
+                // filter only actions mentioned in the selected article
+                for (const doc of article_data) {
+
+                    const actions = actor_data
+                        .filter(document_ => document_.document_id == doc.document_id)
+                        // .filter((document, index, self) => self.findIndex(a => a.actor_id === actor.actor_id) === index);
+
+                    const actors = actions
+                        .map(item => item.actor)
+
+                    const unique_actors = actors.filter((actor, index, self) =>
+                        index === self.findIndex((t) => (
+                            t.actor_id === actor.actor_id && t.name === actor.name && t.role === actor.role
+                        ))
+                    );
+                    // console.log(unique_actors)
+
+                    doc.actors = unique_actors
+                    all_data.push(doc)
+
+                }
+
+                show_articles(all_data,actor_id)
+            })
+            .catch(error => {
+                console.error("Error calling APIs:", error);
+            });
+    }
+}
+
+function show_articles(data,actor_id) {
+    
+    article_boxes = document.querySelectorAll(".article_boxes");
+
+    if (article_boxes){
+        article_boxes.forEach(div => {
+            if (div.id == 'the_box_' + id) {
+                div.remove()
             }
         });
+    }
 
-        // display articles  ---------------
+    let output = ''
+    let new_html = document.createElement('div');
+    new_html.id = 'the_box_' + id;
+    new_html.classList.add('article_boxes');
+    
+    const actor_line = document.getElementById('actor_id_' + id);
 
-        article_boxes = document.querySelectorAll(".article_boxes");
-
-        if (article_boxes){
-
-            article_boxes.forEach(div => {
-                if (div.id == 'the_box_' + id) {
-                    div.remove()
-                }
-            });
-        }
-
-        let output = ''
-        let new_html = document.createElement('div');
-        new_html.id = 'the_box_' + id;
-        new_html.classList.add('article_boxes');
+    // console.log(actor_per_article)
+    for (let item = 0; item < data.length; item++) {
+        // console.log(data[item])
+        // let count_actors = 0
         
-        const actor_line = document.getElementById('actor_id_' + id);
+        the_other_actors = ''
 
-        // console.log(actor_per_article)
-        for (let item = 0; item < uniqueDocuments.length; item++) {
-            // console.log(actor_per_article[item])
-            // let count_actors = 0
+        list_actors = data[item].actors.filter((the_actor) => the_actor.actor_id != actor_id)
+        // console.log(list_actors)
+
+        // add commas
+        for (let i = 0; i < list_actors.length; i++) {
+            the_other_actors += '<span class="actor_chips">' + list_actors[i].name + '</span>'
+        }
+        
+        let title = data[item].title
+        let link = '#'
+        let author = data[item].author_name
+        let date = 0
+        let year = data[item].year
+        let issue = data[item].issue
+        let doc_id = data[item].document_id
+        // console.log(data[item])
+
+        output += '<div class="article_row">'
+
+        output += '<div class="article_info">'
+            output += '<div class="meta">'
+            output += '<p><a href="' + link + '">' + title + '</a></p>'
+            output += '<p>by ' + author + '</p>'
+            output += '<p>' + year + ', ' + issue + '</p>'
+            output += '</div>'
             
-            the_other_actors = ''
+            output += '<div class="meta">'
+            if (list_actors.length > 0){
+                output += '<p>other actors</p>'
 
-            list_actors = actor_per_article[item].filter((the_actor) => the_actor != actor)
-            // console.log(list_actors)
-
-            // add commas
-            for (let i = 0; i < list_actors.length; i++) {
-
-                the_other_actors += '<span class="actor_chips">' + list_actors[i] + '</span>'
-
-                // if (i == list_actors.length - 1){
-                //     the_other_actors += '<span class="actor_chips">' + list_actors[i] + '<span/>'
-                // }
-                // else {
-                //     the_other_actors += '<span class="actor_chips">' + list_actors[i] + ', <span/>'
-                // }
+                output += '<div class="other_actors_container">'
+                output += the_other_actors
+                output += '</div>'
             }
-            
-            let title = uniqueDocuments[item].title
-            let link = '#'
-            let author = 'author name' //uniqueDocuments[item].author
-            let date = 0
-            let year = uniqueDocuments[item].year
-            let issue = uniqueDocuments[item].issue
-            let doc_id = uniqueDocuments[item].document_id
-
-            output += '<div class="article_row">'
-
-            output += '<div class="article_info">'
-                output += '<div class="meta">'
-                output += '<p><a href="' + link + '">' + title + '</a></p>'
-                output += '<p>by ' + author + '</p>'
-                output += '<p>' + year + ', ' + issue + '</p>'
-                output += '</div>'
-                
-                output += '<div class="meta">'
-                if (list_actors.length > 0){
-                    output += '<p>other actors</p>'
-
-                    output += '<div class="other_actors_container">'
-                    output += the_other_actors
-                    output += '</div>'
-                }
-                else {
-                    output += '<p>no other actors detected</p>'
-                }
-                output += '</div>'
-
+            // else {
+            //     output += '<p>no other actors detected</p>'
+            // }
             output += '</div>'
 
-            output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
-            
-            output += '<div></div>'
-            output += '<div class="go_to_article"></div>' //<a href="' + link + '" style="color: gray">&rarr;</a></div>'
+        output += '</div>'
 
-            output += '</div>'
+        output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
+        
+        output += '<div></div>'
+        output += '<div class="go_to_article"></div>' //<a href="' + link + '" style="color: gray">&rarr;</a></div>'
 
-            new_html.innerHTML = output
-            actor_line.append(new_html)
+        output += '</div>'
 
-            
-        }
-        // console.log(other_actors)
+        new_html.innerHTML = output
+        actor_line.append(new_html)
 
-        // await the timeline box loading
-        for (let item = 0; item < uniqueDocuments.length; item++) {
+        
+    }
+    // console.log(other_actors)
 
-            let doc_id = uniqueDocuments[item].document_id
-            const filtered_data = raw_data.filter(item => item.actor.actor_id == id && item.document.document_id === doc_id);
-            const the_container = 'article_timeline_' + id + '_' + doc_id
-            // console.log(filtered_data,the_container)
+    // await the timeline box loading
+    for (let item = 0; item < data.length; item++) {
 
-            make_timeline(filtered_data,the_container,startDate,endDate,tick_size_small,action_width_large)
+        let doc_id = data[item].document_id
+        const filtered_data = raw_data.filter(item => item.actor.actor_id == id && item.document_id === doc_id);
+        const the_container = 'article_timeline_' + id + '_' + doc_id
+        // console.log(filtered_data,the_container)
 
-            // (individual_timeline_data,the_container,startDate,endDate,tick_size,action_width)
+        make_timeline(filtered_data,the_container,startDate,endDate,tick_size_small,action_width_large)
 
-        }
+        // (individual_timeline_data,the_container,startDate,endDate,tick_size,action_width)
+
     }
 }
 
@@ -439,7 +486,7 @@ function get_statistics(data){
     // get number of articles ---------------
     data.forEach(item => {
         item.forEach(action => {
-            const actorName = action.document.document_id;
+            const actorName = action.document_id;
             articleCount[actorName] = (articleCount[actorName] || 0) + 1;
         })
     });

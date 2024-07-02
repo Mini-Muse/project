@@ -6,15 +6,7 @@
             "name": "John Doe",
             "role": "Author"
         },
-        "document": {
-            "document_id": 1,
-            "title": "Historical Magazine Title 1",
-            "volume": "Volume 1",
-            "issue": "Issue 1",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1920
-        },
+        "document_id": 1,
         "location": {
             "location_id": 1,
             "name": "New York City",
@@ -38,15 +30,7 @@
             "name": "John Doe",
             "role": "Author"
         },
-        "document": {
-            "document_id": 1,
-            "title": "Historical Magazine Title 1",
-            "volume": "Volume 1",
-            "issue": "Issue 1",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1920
-        },
+        "document_id": 1,
         "location": {
             "location_id": 2,
             "name": "London",
@@ -70,15 +54,7 @@
             "name": "Albert Smith",
             "role": "Editor"
         },
-        "document": {
-            "document_id": 1,
-            "title": "Historical Magazine Title 1",
-            "volume": "Volume 1",
-            "issue": "Issue 1",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1920
-        },
+        "document_id": 1,
         "location": {
             "location_id": 1,
             "name": "New York City",
@@ -102,15 +78,7 @@
             "name": "Albert Smith",
             "role": "Editor"
         },
-        "document": {
-            "document_id": 1,
-            "title": "Historical Magazine Title 1",
-            "volume": "Volume 1",
-            "issue": "Issue 1",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1920
-        },
+        "document_id": 1,
         "location": {
             "location_id": 2,
             "name": "London",
@@ -134,15 +102,7 @@
             "name": "John Doe",
             "role": "Author"
         },
-        "document": {
-            "document_id": 2,
-            "title": "Historical Magazine Title 3",
-            "volume": "Volume 3",
-            "issue": "Issue 3",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1922
-        },
+        "document_id": 2,
         "location": {
             "location_id": 1,
             "name": "New York City",
@@ -166,15 +126,7 @@
             "name": "John Doe",
             "role": "Author"
         },
-        "document": {
-            "document_id": 2,
-            "title": "Historical Magazine Title 3",
-            "volume": "Volume 3",
-            "issue": "Issue 3",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1922
-        },
+        "document_id": 2,
         "location": {
             "location_id": 2,
             "name": "London",
@@ -198,15 +150,7 @@
             "name": "Albert Smith",
             "role": "Editor"
         },
-        "document": {
-            "document_id": 2,
-            "title": "Historical Magazine Title 3",
-            "volume": "Volume 3",
-            "issue": "Issue 3",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1922
-        },
+        "document_id": 2,
         "location": {
             "location_id": 1,
             "name": "New York City",
@@ -230,15 +174,7 @@
             "name": "Albert Smith",
             "role": "Editor"
         },
-        "document": {
-            "document_id": 2,
-            "title": "Historical Magazine Title 3",
-            "volume": "Volume 3",
-            "issue": "Issue 3",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1922
-        },
+        "document_id": 2,
         "location": {
             "location_id": 2,
             "name": "London",
@@ -262,15 +198,7 @@
             "name": "Albert Smith",
             "role": "Editor"
         },
-        "document": {
-            "document_id": 2,
-            "title": "Historical Magazine Title 3",
-            "volume": "Volume 3",
-            "issue": "Issue 3",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1922
-        },
+        "document_id": 2,
         "location": {
             "location_id": 2,
             "name": "London",
@@ -294,15 +222,7 @@
             "name": "Oliver Bean",
             "role": "Editor"
         },
-        "document": {
-            "document_id": 2,
-            "title": "Historical Magazine Title 3",
-            "volume": "Volume 3",
-            "issue": "Issue 3",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1922
-        },
+        "document_id": 2,
         "location": {
             "location_id": 2,
             "name": "London",
@@ -326,15 +246,7 @@
             "name": "John Doe",
             "role": "Author"
         },
-        "document": {
-            "document_id": 1,
-            "title": "Historical Magazine Title 1",
-            "volume": "Volume 1",
-            "issue": "Issue 1",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1920
-        },
+        "document_id": 2,
         "location": {
             "location_id": 1,
             "name": "New York City",
@@ -358,15 +270,7 @@
             "name": "John Doe",
             "role": "Author"
         },
-        "document": {
-            "document_id": 1,
-            "title": "Historical Magazine Title 1",
-            "volume": "Volume 1",
-            "issue": "Issue 1",
-            "type": "Magazine",
-            "publisher": "Historical Society Publications",
-            "year": 1920
-        },
+        "document_id": 2,
         "location": {
             "location_id": 1,
             "name": "New York City",

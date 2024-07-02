@@ -41,14 +41,14 @@ function get_actors_per_article(data){
     data.forEach(item => {
 
         item.forEach(obj => {
-            const docId = obj.document.document_id;
+            const docId = obj.document_id;
             const actorName = obj.actor.name;
             // console.log(docId,actorName)
 
             if (!grouped[docId]) {
                 grouped[docId] = new Set();
             }
-
+            
             grouped[docId].add(actorName);
         })
     });
@@ -58,7 +58,7 @@ function get_actors_per_article(data){
 }
 
 function make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size,action_width){
-    console.log(individual_timeline_data)
+    // console.log(individual_timeline_data)
     
     timeline_box = document.getElementById(the_container) //  'timeline_' + id )
 
@@ -107,7 +107,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         })
         .attr("data-per",1)
         .attr("data-art", function(d){
-            return d.document.document_id
+            return d.document_id
         })
         .attr("data-act", function(d,index){
             return d.actor.actor_id
@@ -168,9 +168,9 @@ function timeline_labels() {
             let the_info_box = document.getElementById('info_box_' + act);
             
             let output = '';
-            output += '<span style="font-weight:bold;">' + date + '</span><br/>' + location + '<br/>' 
+            output += '<span style="font-weight:bold;">' + date + '</span><span>, ' + location + '</span><br/>' 
             output += '<span class="action_cat" style="background-color:' + get_color(title) +'">' + title + '</span>'
-            output += '<p>' + extract.slice(0, 20) + '</p>'
+            output += '<p>' + extract + '</p>' // .slice(0, 20)
 
             the_info_box.innerHTML = output
             // console.log(per,act)
@@ -206,8 +206,8 @@ function overall_timeline(container,startDate,endDate){
         .range([0, w_ - timeline_margin[1] - timeline_margin[0]] )
 
     let tick_count = 10
-    if (w_ < 300) {
-        tick_count = 5
+    if (w_ < 500) {
+        tick_count = 5 // d3.timeYear.every(2) //5
     }
 
     let xAxis = d3.axisTop(xScale)
