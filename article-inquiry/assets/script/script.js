@@ -1,5 +1,8 @@
 const documents_API = 'https://minimuse.nlp.idsia.ch/documents'
-const actors_API = '../assets/data/data_.json'
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
+// const API_actionflow =  '../assets/data/data_.json'
+
+const NLP_algorithm = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId='
 
 let documents_data;
 let documentflows_array;
@@ -45,7 +48,7 @@ async function load_data(){
     });
 
     // actors
-    await fetch(actors_API)
+    await fetch(API_actionflow)
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -54,7 +57,7 @@ async function load_data(){
     })
     .then(json => {
         actor_data = json
-        // console.log(actor_data)
+        console.log(actor_data)
 
         // group objects by actor name
         const actionflows = actor_data.reduce((acc, obj) => {
@@ -69,7 +72,7 @@ async function load_data(){
 
         // group objects by document id
         const documentflows = actor_data.reduce((acc, obj) => {
-            const documentId = obj.document.document_id;
+            const documentId = obj.document_id;
             if (!acc[documentId]) {
                 acc[documentId] = [];
             }
@@ -173,6 +176,8 @@ function list_articles(article_data, documentflows_array, sort){
 
     // for (let x = 0; x <= 100; x++){
     sorted_article_data.forEach(item => {
+        console.log(item)
+
         const document_id = item.document_id
 
         output += '<div class="article_box" data-id="' + document_id + '">'
@@ -180,7 +185,7 @@ function list_articles(article_data, documentflows_array, sort){
         output += '<div class="the_meta">'
             output += '<div>'
             output += '<span class="article_title">' + item.title + '</span><br/>'
-            output += '<span class="article_author">by ' + 'author' + ', </span>'
+            output += '<span class="article_author">by ' + item.author_name + ', </span>'
             output += '<span class="article_date">' + item.year + '</span>'
             output += '</div>'
         output += '</div>'
@@ -228,7 +233,7 @@ function list_articles(article_data, documentflows_array, sort){
         const document_id = item.document_id
         
         let filteredArray = documentflows_array.map(subArray => 
-            subArray.filter(item => item.document.document_id === document_id)
+            subArray.filter(item => item.document_id === document_id)
         ).filter(subArray => subArray.length > 0);
         filteredArray = filteredArray[0]
  
@@ -264,7 +269,7 @@ function get_statistics(data){
     // get number of articles ---------------
     data.forEach(item => {
         item.forEach(action => {
-            const actorName = action.document.document_id;
+            const actorName = action.document_id;
             articleCount[actorName] = (articleCount[actorName] || 0) + 1;
         })
     });
@@ -344,7 +349,7 @@ function load_article_info(data){
             }
         })
 
-        const all_act_doc = actor_data.filter((item) => item.document.document_id === id)
+        const all_act_doc = actor_data.filter((item) => item.document_id === id)
         const actors = all_act_doc.map(item => item.actor);
         const list_actors = Array.from(new Set(actors.map(a => a.actor_id))).map(id => actors.find(a => a.actor_id === id));
 
@@ -367,7 +372,7 @@ function load_article_info(data){
                 output += '<div id="the_title">' + item.title + '</div>'
 
                 output += '<div id="the_info">'
-                output += '<span>by author, </span>'
+                output += '<span>'  + item.author_name + ', </span>'
                 output += '<span>' + item.year + ', </span>'
                 output += '<span>' + item.issue + ', </span>'
                 output += '<span>' + item.volume + '</span>'
@@ -375,7 +380,7 @@ function load_article_info(data){
 
                 output += '<div id="the_abstract" class="info_box">'
                 output += '<h2>Abstract</h2>'
-                output += '<p>Abstract lorem ipsum ...</p>'
+                output += '<p>' + item.abstract + '</p>'
                 output += '</div>'
 
                 output += '<div class="meta" style="margin-top: 2rem;">'
@@ -472,7 +477,6 @@ function chat_with_NLP(){
         });
     }
 
-
     function load_NLP_reply(box_id, message) {
         // box = document.getElementById(box_id)
         // id = box_id.replace('reply_','')
@@ -487,11 +491,10 @@ function chat_with_NLP(){
 
         the_messageSent = document.getElementById(box_id)
         the_messageSent.appendChild(messageReceived)
-
         // get_NLP_reply(documentId,query)
 
         async function get_NLP_reply(documentId,query){
-            url = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId=' + documentId +'&query=' + query 
+            url = NLP_algorithm + documentId +'&query=' + query 
 
             await fetch(url)
             .then(response => {
