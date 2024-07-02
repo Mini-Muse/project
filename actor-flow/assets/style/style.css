@@ -16,7 +16,7 @@
     padding: 0 20px;
 
     display: grid;
-    grid-template-columns: 2fr 7fr 1.5fr 0.5fr;
+    grid-template-columns: 1fr 5fr 2.5fr 0.5fr;
     grid-column-gap: 10px;
 }
 
@@ -27,7 +27,6 @@
 }
 
 #timeline_recap .recap_b .shift {
-/*    background-color: #f6f6f6;*/
     grid-column-start: 2;
 }
 
@@ -35,12 +34,11 @@
 
 #actors {
     margin: 0 0 5rem;
-/*    font-size: 0.9rem;*/
 }
 
 #actors_box li .actor_row {
     display: grid;
-    grid-template-columns: 2fr 7fr 1.5fr 0.5fr;
+    grid-template-columns: 1fr 5fr 2.5fr 0.5fr;
     grid-column-gap: 10px;
     border-bottom: 1px solid #bcbcbc;
     padding: 0 20px;
@@ -50,7 +48,6 @@
 #actors_box li .actor_row div {
     padding-top: 10px;
     padding-bottom: 10px;
-/*    height: 10px;*/
 }
 
 .actor {
@@ -89,15 +86,15 @@
         border-right: 1px solid #dbdbdb;
     }
 
-.act {
-/*    width: 10px; 
-    height: 100%; */
+/*.act {
+    width: 10px; 
+    height: 100%; 
 }
 
 #timeline {
-/*    border-left: 1px solid #bcbcbc;
-    border-right: 1px solid #bcbcbc;*/
-}
+    border-left: 1px solid #bcbcbc;
+    border-right: 1px solid #bcbcbc;
+}*/
 
 #info {
     border-right: 1px solid #bcbcbc;
