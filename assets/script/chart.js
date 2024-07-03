@@ -239,8 +239,6 @@ function overall_timeline(container,startDate,endDate){
         tick_count = 5 // d3.timeYear.every(2) //5
     }
 
-    console.log(difference)
-
     let xAxis = d3.axisTop(xScale)
         .tickFormat(timeFormat)
         .ticks(tick_count)

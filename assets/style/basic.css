@@ -22,7 +22,7 @@ black_lines     #BBB
 highlight       #4538d8
 
 blue            #0e2a8f
-background      #fefefe
+background      #f7f8ff / #fefefe
 
  -------- menu -------- */ 
 
@@ -216,7 +216,7 @@ background      #fefefe
     width: 100%;
     top: -5px;
     border-top: 1px solid #ececec;
-    background-color: #fff;
+    background-color: #fefefe;
     font-size: 1rem;
     -webkit-appearance: none;
 }
