@@ -85,6 +85,10 @@ body {
         font-size: 2rem;
     }
 
+    #content {
+        font-size: 1rem;
+    }
+
     #content article { 
         width: 95%;
     }
