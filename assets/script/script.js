@@ -39,7 +39,59 @@ function load_footer(){
 
     fetch(footer_url)
         .then(response => response.text())
-        .then(text => footer.innerHTML = text);
+        .then(text => footer.innerHTML = text)
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function access_window(){
+    const access_content = '../assets/content/access.html';
+    const access_window = document.getElementById('access_window');
+    const coockie_name = 'access'
+
+    if (!getCookie(coockie_name)) {
+
+        fetch(access_content)
+            .then(response => response.text())
+            .then(text => {
+                access_window.innerHTML = text
+                access_window.style.opacity = '1'
+
+                const close_modal = document.getElementById('close_modal');
+                const cancel_button = document.getElementById('cancel');
+
+                close_modal.addEventListener("click", remove_modal);
+                cancel_button.addEventListener("click", remove_modal);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+        document.onkeydown = function(evt) {
+            if (evt.key === "Escape" || evt.key === "Esc"){
+                remove_modal()
+            }
+        };
+    }
+    else {
+        access_window.remove()
+    }
+
+    function remove_modal(){
+        set_coockie(coockie_name)
+        access_window.remove()
+    }
+
+    function set_coockie(coockie_name) {
+        document.cookie = coockie_name + '=no_psw; path=/'
+    }
+
+}
+
+function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
 }
 
 function fix_date(date){

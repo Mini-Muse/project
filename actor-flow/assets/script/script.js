@@ -577,9 +577,11 @@ function filter_data(){
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    load_data();
-    sort_data();
-    filter_data();
+    load_data()
+    sort_data()
+    filter_data()
 
     menu()
+    access_window()
+
 });

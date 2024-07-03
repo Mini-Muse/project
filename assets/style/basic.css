@@ -426,6 +426,89 @@ background      #f7f8ff / #fefefe
     margin-bottom: .5rem;
 }
 
+/* -------- access window -------- */
+
+#access_window {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #0e2a8f;
+    color: white;
+    z-index: 4;
+    opacity: 0;
+    transition: .6s;
+}
+
+#access_window .text {
+    width: 60%;
+    margin: 8rem auto 10rem;
+    font-size: 1.5rem;
+    line-height: 140%;
+}
+
+#access_window section {
+    margin-bottom: 3rem;
+}
+
+#close_modal {
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 2.5rem;
+}
+
+#login_container {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+#login_container form {
+    display: flex;
+    flex-direction: column;
+}
+
+#login_container label {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+#login_container input {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#login_container button {
+    padding: 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+#login_container #enter {
+    background-color: #007bff;
+    margin-top: 2rem;
+}
+
+#login_container #enter:hover {
+    background-color: #0061ca;
+}
+
+#cancel {
+    background-color: #07468a;
+}
+
+#cancel:hover {
+    background-color: #08407d;
+}
+
 /* -------- media queries -------- */ 
 
 @media screen and (max-width: 768px) {
@@ -446,9 +529,13 @@ background      #f7f8ff / #fefefe
         background-color: #0e2a8f;
     }
 
-
     .navbar-header {
     	width: 100%;
+    }
+
+    .navbar-header .title {
+        padding: 0;
+        margin-left: 20px;
     }
     	
     .menu-toggle {
@@ -484,6 +571,14 @@ background      #f7f8ff / #fefefe
         position: relative;
         top: 1.5rem;
     }
+
+    /* -------- access window -------- */ 
+
+    #access_window .text {
+        width: 95%;
+    }
+
+    /* -------- footer -------- */ 
 
     #footer_home {
         width: 95%;

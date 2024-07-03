@@ -535,5 +535,6 @@ document.addEventListener('DOMContentLoaded', function() {
     sort_data()
 
     menu()
-
+    access_window()
+    
 });
