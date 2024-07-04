@@ -111,10 +111,27 @@
 
 .open_box, .go_to_article {
     display: flex;
-    align-items: center;
     cursor: pointer;
     font-size: 1.5rem;
+}
+
+.open_box {
+    align-items: center;
+
+}
+
+.arrow_box {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    border-radius: 100%;
+}
+
+.arrow_box:hover {
+    background-color: white;
 }
 
 .action_cat {
