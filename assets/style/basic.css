@@ -320,13 +320,13 @@ background      #f7f8ff / #fefefe
 }
 
 .actor_chips {
-    background-color: #ccc;
-    font-weight: bold;
-    color: white;
-    padding: 3px 5px;
+    background-color: white;
+    color: gray;
+    padding: 1px 5px;
+    border: 1px solid gray;
     border-radius: 5px;
     margin-right: 3px;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
 
