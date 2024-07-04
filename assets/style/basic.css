@@ -187,7 +187,7 @@ background      #f7f8ff / #fefefe
     padding: .9rem .5rem;
 }
 
-.controller p {
+.controller label {
     width: 3rem;
     position: relative;
     top: .25rem;
