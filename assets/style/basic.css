@@ -260,6 +260,8 @@ background      #f7f8ff / #fefefe
     width: calc(100% - 7.25rem - 1px);
     opacity: 0; /* Hide initially */
     transition: opacity .3s ease-in-out;
+    display: flex;
+    align-items: center;
 }
 
 #help:hover + #help_box {
@@ -271,7 +273,7 @@ background      #f7f8ff / #fefefe
     padding-left: 20px;
     padding-right: 20px;
     font-size: 1.25rem;
-    line-height: 7.25rem;
+/*    line-height: 7.25rem;*/
 }
 
 
