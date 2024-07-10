@@ -65,7 +65,7 @@ async function load_data(){
             item.forEach(event => {
                 // console.log(event.result.date)
                 if (!event.result.date) {
-                    year = getRandom(1900, 1980)
+                    year = getRandom(1900, 1950)
                     mont = getRandom(1, 12)
                     day_ = getRandom(1, 27)
 
@@ -564,7 +564,7 @@ function show_articles(data,actor_id) {
 }
 
 function get_statistics(data){
-    // console.log(data)
+    console.log(data)
 
     let actors = 0;
     let articles = 0;
@@ -579,7 +579,7 @@ function get_statistics(data){
         item.forEach(action => {
             // console.log(action.result)
             // const actorName = action.actor.actor_id;
-            const actorName = action.result.actor.Id
+            const actorName = action.result.actor.Name
             actorCount[actorName] = (actorCount[actorName] || 0) + 1;
         })
     });
@@ -589,9 +589,10 @@ function get_statistics(data){
     // get number of articles ---------------
     data.forEach(item => {
         item.forEach(action => {
-            // console.log(action)
-            const actorName = action.result.actor.Id
-            articleCount[actorName] = (articleCount[actorName] || 0) + 1;
+            console.log(action.result.articleID)
+            // const actorName = action.result.actor.Id
+            const documentID = action.result.articleID
+            articleCount[documentID] = (articleCount[documentID] || 0) + 1;
         })
     });
     articles = Object.keys(articleCount).length;
@@ -603,7 +604,6 @@ function get_statistics(data){
             actions += 1
         })
     })
-
 
     // get number of years ---------------
     // console.log(data[0][0].result)
