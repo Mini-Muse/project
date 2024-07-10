@@ -78,7 +78,7 @@ async function load_data(){
         display_timeline(actionflows_array,'actors_box','all','name')
 
         filter_data()
-        // sort_data()
+        sort_data()
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -96,12 +96,11 @@ function display_timeline(data, container, filter, sort){
     // console.log(filter,sort)
 
     let filteredArray
-    data.forEach(item => {
-        item.forEach(event => {
-            console.log(event.result.actorType[0])
-        })
-    })
-
+    // data.forEach(item => {
+    //     item.forEach(event => {
+    //         console.log(event.result.actorType[0])
+    //     })
+    // })
 
     if (filter == 'all') {
         filteredArray = data
@@ -155,8 +154,10 @@ function display_timeline(data, container, filter, sort){
     };
 
     const sort_date = (a, b) => {
-        const dateA = new Date(a[0].result.date.value);
-        const dateB = new Date(b[0].result.date.value);
+        console.log(a[0].result.date)
+
+        const dateA = new Date(a[0].result.date);
+        const dateB = new Date(b[0].result.date);
 
         return dateA - dateB;
     };
