@@ -218,7 +218,7 @@ function getDaysDifference(date1, date2) {
     // }
 
     // Calculate the difference in milliseconds
-    const timeDifference = dateObj1.getTime() - dateObj2.getTime();
+    const timeDifference = dateObj2.getTime() - dateObj1.getTime();
 
     // Convert milliseconds to days and round down to the nearest whole day
     const dayDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
@@ -253,7 +253,9 @@ function overall_timeline(container,startDate,endDate){
 
     let timeFormat = d3.timeFormat("%Y")
     let difference = getDaysDifference(startDate, endDate)
-    if (difference < (365*2)) {
+    // console.log(startDate, endDate,difference)
+
+    if (difference < (365*5)) {
         timeFormat = d3.timeFormat("%Y.%m")
     }
 
