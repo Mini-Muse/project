@@ -77,8 +77,8 @@ async function load_data(){
 
         display_timeline(actionflows_array,'actors_box','all','name')
 
+        filter_data()
         // sort_data()
-        // filter_data()
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -93,31 +93,47 @@ async function load_data(){
 }
 
 function display_timeline(data, container, filter, sort){
-    // console.log(data,container,filter,sort)
+    // console.log(filter,sort)
 
     let filteredArray
-    // filteredArray = data.map((subArray) => {
-    //     console.log(subArray)
-    //     // subArray.map((obj) => {
-    //     //     console.log(obj.result.actor)
+    data.forEach(item => {
+        item.forEach(event => {
+            console.log(event.result.actorType[0])
+        })
+    })
 
-    //     // })
-    // });
 
     if (filter == 'all') {
         filteredArray = data
     }
     else {
-        if (filter == 'authors'){
+        if (filter == 'MISC'){
             filteredArray = data.map(subArray => subArray
-                .filter(obj => obj.result.actor.role === "Author")
-
+                .filter(obj => obj.result.actorType[0] === "MISC")
             )
             .filter(subArray => subArray.length > 0)
         }
-        else if (filter == 'editors'){
+        else if (filter == 'PER'){
             filteredArray = data.map(subArray => subArray
-                .filter(obj => obj.result.actor.role === "Editor")
+                .filter(obj => obj.result.actorType[0] === "PER")
+            )
+            .filter(subArray => subArray.length > 0)
+        }
+        else if (filter == 'ORG'){
+            filteredArray = data.map(subArray => subArray
+                .filter(obj => obj.result.actorType[0] === "ORG")
+            )
+            .filter(subArray => subArray.length > 0)
+        }
+        else if (filter == 'DATE'){
+            filteredArray = data.map(subArray => subArray
+                .filter(obj => obj.result.actorType[0] === "DATE")
+            )
+            .filter(subArray => subArray.length > 0)
+        }
+        else if (filter == 'LOC'){
+            filteredArray = data.map(subArray => subArray
+                .filter(obj => obj.result.actorType[0] === "LOC")
             )
             .filter(subArray => subArray.length > 0)
         }
