@@ -11,7 +11,6 @@
 
 #timeline_recap .recap_b {
     border-bottom: 1px solid #bcbcbc;
-    height: 1.5rem;
     line-height: 1.5rem;
     padding: 0 20px;
 
@@ -41,15 +40,13 @@
 }
 
 #actors_box li .actor_row {
-    display: grid;
-    grid-template-columns: 1.5fr 5fr 2.5fr 0.5fr;
-    grid-column-gap: 10px;
-
     border-bottom: 1px solid #bcbcbc;
     padding: 0 20px;
     min-height: 120px;
-/*    display: flex;
-    justify-content: space-between;*/
+
+    display: grid;
+    grid-template-columns: 1.5fr 5fr 2.5fr 0.5fr;
+    grid-column-gap: 10px;
 }
 
 #actors_box li .actor_row div {
@@ -92,23 +89,17 @@
 .actor_timeline {
     border-left: 1px solid #dbdbdb;
     border-right: 1px solid #dbdbdb;
-/*    width: 55%;*/
 }
 
 .info_box {
     padding: 10px 10px 10px 20px;
-/*    width: 20%;*/
 }
 
 .open_box {
     align-items: center;
+    display: flex;
     justify-content: flex-end;
-/*    width: 10%;*/
 }
-
-/*#info {
-    border-right: 1px solid #bcbcbc;
-}*/
 
 .info_box p {
     line-height: 120%;
@@ -122,8 +113,8 @@
 }
 
 .arrow_box {
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
     text-align: center;
     display: flex;
     align-items: center;

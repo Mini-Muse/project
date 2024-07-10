@@ -75,7 +75,6 @@ async function load_data(){
             })
         })
 
-        // get_statistics(actionflows_array)   
         display_timeline(actionflows_array,'actors_box','all','name')
 
         // sort_data()

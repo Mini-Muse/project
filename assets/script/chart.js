@@ -134,7 +134,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
                     let text = item.Name
                     output += text
                 })
-
+                
                 return output
             }
             else {
