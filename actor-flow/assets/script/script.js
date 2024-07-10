@@ -375,12 +375,12 @@ function get_articles(data){
             innerList.filter(obj => {
                 let check_name_ = obj.result.actor.Name
                 let check_name = check_name_.replace(' ', '_')
-                console.log(check_name, actor_id)
+                // console.log(check_name, actor_id)
 
                 return check_name.toLowerCase() == actor_id.toLowerCase()
             }) // actor_id
         );
-        console.log(documentsRelatedToActorId)
+        // console.log(documentsRelatedToActorId)
 
         // get documents id and filter out duplicate documents
         // const documentsData = documentsRelatedToActorId.map(item => {
@@ -398,7 +398,7 @@ function get_articles(data){
         // // console.log(all_actors)
 
         async function callApisAndGetJson(uniqueDocumentIds) {
-            console.log(uniqueDocumentIds)
+            // console.log(uniqueDocumentIds)
 
             const doc_id = uniqueDocumentIds.map(result => result.result.articleID);
             const actor_id = uniqueDocumentIds.map(result => result.result.actor.Name);
@@ -429,12 +429,11 @@ function get_articles(data){
                 // console.log(all_documents)
 
                 const single_document = all_documents.filter(article => {
-                    console.log(doc_id, article.article.Id)
+                    // console.log(doc_id, article.article.Id)
                     return doc_id.includes(article.article.Id)
                 });
                 single_document[0].actors = actor_id
-
-                console.log(single_document)
+                // console.log(single_document)
 
                 show_articles(single_document,actor_id)
             }) 
@@ -448,7 +447,7 @@ function get_articles(data){
 }
 
 function show_articles(data,actor_id) {
-    console.log(data,actor_id)
+    // console.log(data,actor_id)
     
     article_boxes = document.querySelectorAll(".article_boxes");
 
@@ -469,15 +468,14 @@ function show_articles(data,actor_id) {
 
     // console.log(actor_per_article)
     for (let item = 0; item < data.length; item++) {
-        // console.log(data[item])
         let article = data[item].article
-        
-        console.log(article)
+        // console.log(article)
         
         the_other_actors = ''
 
-        list_actors = data[item].actors
-        console.log(list_actors)
+        const list_actors_ = data[item].actors
+        const list_actors = [...new Set(list_actors_)];
+        // console.log(list_actors)
         // list_actors = data[item].filter((obj) => {
         //     // console.log(obj)
         //     // the_actor.actor_id != actor_id
@@ -530,14 +528,12 @@ function show_articles(data,actor_id) {
 
         new_html.innerHTML = output
         actor_line.append(new_html)
-
-        
     }
     // console.log(other_actors)
 
     // await the timeline box loading
     for (let item = 0; item < data.length; item++) {
-        console.log(data[item])
+        // console.log(data[item])
 
         let doc_id = data[item].article.DocumentId
         const the_container = 'article_timeline_' + id + '_' + doc_id
