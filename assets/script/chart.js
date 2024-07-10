@@ -124,7 +124,20 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return d.result.location
         })
         .attr("data-ext", function(d){
-            return d.result.actionDetails.Text //extract
+            let output = ''
+            if (d.result.actionDetails.length > 0){
+                let array = d.result.actionDetails
+
+                array.forEach(item => {
+                    let text = item.Name
+                    output += text
+                })
+
+                return output
+            }
+            else {
+                return 'no data available'
+            }
         })
 
     // xAxis  ---------------

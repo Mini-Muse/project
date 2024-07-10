@@ -570,7 +570,7 @@ function get_statistics(data){
     // get number of articles ---------------
     data.forEach(item => {
         item.forEach(action => {
-            console.log(action)
+            // console.log(action)
             const actorName = action.result.actor.Id
             articleCount[actorName] = (articleCount[actorName] || 0) + 1;
         })
@@ -587,7 +587,7 @@ function get_statistics(data){
 
 
     // get number of years ---------------
-    console.log(data[0][0].result)
+    // console.log(data[0][0].result)
     let startDate = fix_date(data[0][0].result.date);
     let endDate = startDate 
 
