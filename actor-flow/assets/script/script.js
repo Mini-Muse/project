@@ -250,7 +250,10 @@ function display_timeline(data, container, filter, sort){
 
         let action_box = article_box.append("div")
             .attr("id", function(d){
-                id = item[0].result.actor.Id //action.Id
+                let name = item[0].result.actor.Name
+                let actor_name = name.replace(' ','_')
+
+                id = actor_name // item[0].result.actor.Id //action.Id
                 return "info_box_" + id
             }) 
             .attr("class","info_box")

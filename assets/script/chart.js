@@ -112,7 +112,9 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return d.result.articleID
         })
         .attr("data-act", function(d,index){ // actor
-            return d.result.actor.Id
+            let name = d.result.actor.Name
+            let actor_name = name.replace(' ','_')
+            return actor_name
         })
         .attr("data-tit", function(d){
             return d.result.action.Name
@@ -136,7 +138,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
                 return output
             }
             else {
-                return 'no data available'
+                return 'no keywords available'
             }
         })
 
