@@ -1,5 +1,7 @@
-const documents_API = 'https://minimuse.nlp.idsia.ch/documents'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
+const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents'
+// const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows'
+
 // const API_actionflow =  '../assets/data/data_.json'
 
 const NLP_algorithm = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId='
@@ -30,12 +32,27 @@ async function load_data(){
 
     let data;
 
+    const headers = new Headers();
+    headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
+
     // documents
-    await fetch(documents_API)
+    await fetch(documents_API, {
+        method: 'GET',
+        withCredentials: true,
+        headers: headers
+        // credentials: 'include'
+    }) 
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
+
+        if (response.status == 200) {
+            credentials = user + ',' + pass
+            set_coockie('access',credentials)
+            // remove_modal(true)
+        }
+
         return response.json(); 
     })
     .then(json => {
@@ -48,11 +65,23 @@ async function load_data(){
     });
 
     // actors
-    await fetch(API_actionflow)
+    await fetch(API_actionflow, {
+        method: 'GET',
+        withCredentials: true,
+        headers: headers
+        // credentials: 'include'
+    }) 
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
+
+        if (response.status == 200) {
+            credentials = user + ',' + pass
+            set_coockie('access',credentials)
+            remove_modal(true)
+        }
+
         return response.json(); 
     })
     .then(json => {
@@ -61,18 +90,34 @@ async function load_data(){
 
         // group objects by actor name
         const actionflows = actor_data.reduce((acc, obj) => {
-            const actorName = obj.actor.name;
+            const actorName = obj.result.actor.Name
             if (!acc[actorName]) {
                 acc[actorName] = [];
             }
             acc[actorName].push(obj);
             return acc;
         }, []);
-        const actionflows_array = Object.values(actionflows);
+        actionflows_array = Object.values(actionflows);
+
+        // // fix null date
+        actionflows_array.forEach(item => {
+            item.forEach(event => {
+                // console.log(event.result.date)
+                if (!event.result.date) {
+                    year = getRandom(1900, 1980)
+                    mont = getRandom(1, 12)
+                    day_ = getRandom(1, 27)
+
+                    event.result.date = year + '-' + mont + '-' + day_
+                    date = year + '-' + mont + '-' + day_
+                }
+            })
+        })
 
         // group objects by document id
         const documentflows = actor_data.reduce((acc, obj) => {
-            const documentId = obj.document_id;
+            console.log(obj)
+            const documentId = obj.result.articleID;
             if (!acc[documentId]) {
                 acc[documentId] = [];
             }
@@ -80,22 +125,23 @@ async function load_data(){
             return acc;
         }, []);
         documentflows_array = Object.values(documentflows);
-        // console.log(documentflows_array)
+        console.log(documentflows_array)
 
         build_page()
 
         list_articles(documents_data, documentflows_array, 'date')
-        get_statistics(actionflows_array)   
-        load_article_info(documents_data)
+        // get_statistics(actionflows_array)   
+        // load_article_info(documents_data)
 
-        chat_with_NLP()
-    
+        // chat_with_NLP()
     })
     .catch(error => {
-        console.error('There was a problem with the actor fetch operation:', error);
+        console.error('There was a problem with the fetch operation:', error);
 
-        // error_message(main)
+        // result_box = document.getElementById('result_box')
+        // result_box.innerHTML = 'The credentials are incorrect'
 
+        // error_message(actors_box)
     });
 }
 
@@ -175,18 +221,19 @@ function list_articles(article_data, documentflows_array, sort){
     let output = ''
 
     // for (let x = 0; x <= 100; x++){
-    sorted_article_data.forEach(item => {
+    sorted_article_data.forEach((item,i) => {
         console.log(item)
 
-        const document_id = item.document_id
+        const article = item.article
+        const document_id = article.DocumentId
 
-        output += '<div class="article_box" data-id="' + document_id + '">'
+        output += '<div class="article_box" data-id="' + i + '"data-doc="' + document_id + '">'
         
         output += '<div class="the_meta">'
             output += '<div>'
-            output += '<span class="article_title">' + item.title + '</span><br/>'
-            output += '<span class="article_author">by ' + item.author_name + ', </span>'
-            output += '<span class="article_date">' + item.year + '</span>'
+            output += '<span class="article_title">' + article.title + '</span><br/>'
+            output += '<span class="article_author">by ' + article.Author + ', </span>'
+            output += '<span class="article_date">' + article.VolumeYearOfPublication + '</span>'
             output += '</div>'
         output += '</div>'
 
@@ -204,7 +251,7 @@ function list_articles(article_data, documentflows_array, sort){
 
     articles_box.innerHTML = output
 
-    let startDate = fix_date(documentflows_array[0][0].date.value) 
+    let startDate = fix_date(documentflows_array[0][0].result.date) 
     let endDate = startDate 
     // console.log(startDate)
 
@@ -531,7 +578,7 @@ function sort_data(){
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    load_data()
+    // load_data()
     sort_data()
 
     menu()

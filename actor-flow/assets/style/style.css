@@ -28,6 +28,10 @@
 
 #timeline_recap .recap_b .shift {
     grid-column-start: 2;
+/*    margin-left: 15%;
+    width: 55%;
+    margin-right: calc(20px + 30%);*/
+
 }
 
 /* -------- actors -------- */ 
@@ -40,9 +44,12 @@
     display: grid;
     grid-template-columns: 1.5fr 5fr 2.5fr 0.5fr;
     grid-column-gap: 10px;
+
     border-bottom: 1px solid #bcbcbc;
     padding: 0 20px;
     min-height: 120px;
+/*    display: flex;
+    justify-content: space-between;*/
 }
 
 #actors_box li .actor_row div {
@@ -55,11 +62,12 @@
     align-items: center;
 }
 
-    #actor_name_box {
-        font-family: "Source Sans 3", Times, sans-serif;
-        display: flex;
-        align-items: center;
-    }
+#actor_name_box {
+    font-family: "Source Sans 3", Times, sans-serif;
+    display: flex;
+    align-items: center;
+/*    width: 15%;*/
+}
 
     .actor_name {
         font-weight: bold;
@@ -81,28 +89,26 @@
         margin-bottom: 1rem;
     }
 
-    .actor_timeline {
-        border-left: 1px solid #dbdbdb;
-        border-right: 1px solid #dbdbdb;
-    }
-
-/*.act {
-    width: 10px; 
-    height: 100%; 
-}
-
-#timeline {
-    border-left: 1px solid #bcbcbc;
-    border-right: 1px solid #bcbcbc;
-}*/
-
-#info {
-    border-right: 1px solid #bcbcbc;
+.actor_timeline {
+    border-left: 1px solid #dbdbdb;
+    border-right: 1px solid #dbdbdb;
+/*    width: 55%;*/
 }
 
 .info_box {
-    padding: 10px;
+    padding: 10px 10px 10px 20px;
+/*    width: 20%;*/
 }
+
+.open_box {
+    align-items: center;
+    justify-content: flex-end;
+/*    width: 10%;*/
+}
+
+/*#info {
+    border-right: 1px solid #bcbcbc;
+}*/
 
 .info_box p {
     line-height: 120%;
@@ -113,11 +119,6 @@
     display: flex;
     cursor: pointer;
     font-size: 1.5rem;
-}
-
-.open_box {
-    align-items: center;
-
 }
 
 .arrow_box {
@@ -144,23 +145,44 @@
 
 /* -------- article_boxes -------- */ 
 .article_boxes {
-/*    display: grid;
-    grid-template-columns: 2fr 7fr 1.5fr 0.5fr;
-    grid-column-gap: 10px;*/
+    display: grid;
+    grid-template-columns: 1.5fr 5fr 2.5fr 0.5fr;
+    grid-column-gap: 10px;
 /*    padding: 0 20px;*/
     border-bottom: 1px solid #bcbcbc;
     background-color: white;
 }
 
 .article_row {
-    padding: 10px 20px;
+    padding: 0 20px;
     border-bottom: 1px solid #bcbcbc;
+/*    display: flex;
+    justify-content: space-between;*/
 
     display: grid;
     grid-template-columns: 1.5fr 5fr 2.5fr 0.5fr;
     grid-column-gap: 10px;
 }
 
+    .article_info {
+        width: 15%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+    }
+
+    .article_timeline {
+        width: 55%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .empty_article_row {
+        width: 30%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
 .article_row:last-child {
     border-bottom: none;
 }

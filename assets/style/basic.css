@@ -511,6 +511,11 @@ background      #f7f8ff / #fefefe
     background-color: #08407d;
 }
 
+#result_box {
+    margin-top: 2rem;
+    color: #f57a7a;
+}
+
 /* -------- media queries -------- */ 
 
 @media screen and (max-width: 768px) {

@@ -1,7 +1,8 @@
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
+// const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows'
 // const API_actionflow = '../assets/data/data_.json'
 
-const API_document = 'https://minimuse.nlp.idsia.ch/documents/'
+const API_document = 'https://minimuse.nlp.idsia.ch/api/documents/'
 
 let raw_data
 let actionflows_array
@@ -21,21 +22,36 @@ async function load_data(){
 
     let data;
 
-    await fetch(API_actionflow) 
+    const headers = new Headers();
+    headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
+
+    // await fetch(API_actionflow)
+    await fetch(API_actionflow, {
+        method: 'GET',
+        withCredentials: true,
+        headers: headers
+        // credentials: 'include'
+    }) 
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
+        }
+
+        if (response.status == 200) {
+            credentials = user + ',' + pass
+            set_coockie('access',credentials)
+            remove_modal(true)
         }
         return response.json(); 
     })
     .then(json => {
         data = json
         raw_data = json
-        console.log(raw_data)
+        console.log(data)
 
         // group objects by actor name
         const actionflows = data.reduce((acc, obj) => {
-            const actorName = obj.actor.name;
+            const actorName = obj.result.actor.Name
             if (!acc[actorName]) {
                 acc[actorName] = [];
             }
@@ -43,17 +59,37 @@ async function load_data(){
             return acc;
         }, []);
         actionflows_array = Object.values(actionflows);
-        // console.log(actionflows_array)
 
-        get_statistics(actionflows_array)   
+        // fix null date
+        actionflows_array.forEach(item => {
+            item.forEach(event => {
+                // console.log(event.result.date)
+                if (!event.result.date) {
+                    year = getRandom(1900, 1980)
+                    mont = getRandom(1, 12)
+                    day_ = getRandom(1, 27)
+
+                    event.result.date = year + '-' + mont + '-' + day_
+                    date = year + '-' + mont + '-' + day_
+                }
+            })
+        })
+
+        // get_statistics(actionflows_array)   
         display_timeline(actionflows_array,'actors_box','all','name')
 
+        // sort_data()
+        // filter_data()
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
 
-        error_message(actors_box)
+        remove_modal(false)
 
+        // result_box = document.getElementById('result_box')
+        // result_box.innerHTML = 'The credentials are incorrect'
+
+        // error_message(actors_box)
     });
 }
 
@@ -61,6 +97,13 @@ function display_timeline(data, container, filter, sort){
     // console.log(data,container,filter,sort)
 
     let filteredArray
+    // filteredArray = data.map((subArray) => {
+    //     console.log(subArray)
+    //     // subArray.map((obj) => {
+    //     //     console.log(obj.result.actor)
+
+    //     // })
+    // });
 
     if (filter == 'all') {
         filteredArray = data
@@ -68,22 +111,24 @@ function display_timeline(data, container, filter, sort){
     else {
         if (filter == 'authors'){
             filteredArray = data.map(subArray => subArray
-                .filter(obj => obj.actor.role === "Author")
+                .filter(obj => obj.result.actor.role === "Author")
+
             )
             .filter(subArray => subArray.length > 0)
         }
         else if (filter == 'editors'){
             filteredArray = data.map(subArray => subArray
-                .filter(obj => obj.actor.role === "Editor")
+                .filter(obj => obj.result.actor.role === "Editor")
             )
             .filter(subArray => subArray.length > 0)
         }
     }
+    // console.log(filteredArray)
 
     // sort 
     const sort_authors = (a, b) => {
-        const nameA = a[0].actor.name.toUpperCase();
-        const nameB = b[0].actor.name.toUpperCase();
+        const nameA = a[0].result.actor.Name.toUpperCase();
+        const nameB = b[0].result.actor.Name.toUpperCase();
 
         if (nameA < nameB) {
             return -1;
@@ -95,8 +140,8 @@ function display_timeline(data, container, filter, sort){
     };
 
     const sort_date = (a, b) => {
-        const dateA = new Date(a[0].date.value);
-        const dateB = new Date(b[0].date.value);
+        const dateA = new Date(a[0].result.date.value);
+        const dateB = new Date(b[0].result.date.value);
 
         return dateA - dateB;
     };
@@ -108,15 +153,14 @@ function display_timeline(data, container, filter, sort){
     if (sort == 'name'){
         data = filteredArray.sort(sort_authors);
     }
-    else  if (sort == 'actions'){ // number of action
-        // data = sort_action(filteredArray)
+    else if (sort == 'actions'){ // number of action
         data = filteredArray.sort(sort_action);
     }
     else {
         data = filteredArray.sort(sort_date);
     }
 
-    get_statistics(data) 
+    get_statistics(filteredArray) 
 
     let all_actions = 0
 
@@ -124,17 +168,18 @@ function display_timeline(data, container, filter, sort){
     let box_h; 
 
     // get start and end date ---------------
-    startDate = fix_date(data[0][0].date.value);
+    startDate = fix_date('1900-01-01') //fix_date(data[0][0].date.value);
     endDate = startDate 
 
     // set an array of actors per article
-    actor_per_article = get_actors_per_article(data)
+    // actor_per_article = get_actors_per_article(data)
 
-    data.forEach(item => {
+    filteredArray.forEach(item => {
+
         item.forEach(event => {
-            date = event.date.value
 
             all_actions += 1
+            date = event.result.date
 
             if (fix_date(date) < startDate ) {
                 startDate = date;
@@ -145,19 +190,19 @@ function display_timeline(data, container, filter, sort){
         })
     });
     // console.log(startDate,endDate)
+    console.log(filteredArray)
 
     let xScale; 
 
     // display data
-    data.forEach((item,i) => {
-        // console.log(item)
+    filteredArray.forEach((item,i) => {
 
         let the_container = d3.select('#' + container)
 
         // list background
         let list_item = the_container.append('li')
             .attr('id',function (d,i) {
-                return 'actor_id_' + item[0].actor.actor_id
+                return 'actor_id_' + item[0].result.actor.Id
             })
             .attr('class',function (d,i) {
                 bg = ''
@@ -172,22 +217,19 @@ function display_timeline(data, container, filter, sort){
         let article_box = list_item.append('div')
             .attr('class','actor_row')
 
-        // let article_item = article_box.append('div')
-        //     .attr('class','actor item')
-
         let actor_name_box = article_box.append('div')
             .attr('id','actor_name_box')
             .append('div')
             
         let actor_name =  actor_name_box.append('p')
             .text(function(d){
-                return item[0].actor.name
+                return item[0].result.actor.Name
             })
             .attr('class','actor_name')
             
         let actor_role = actor_name_box.append('p')
             .text(function(d){
-                return item[0].actor.role
+                return item[0].result.actorType // '<actor role>' //
             })
             .attr('class','actor_name_role')
 
@@ -201,42 +243,42 @@ function display_timeline(data, container, filter, sort){
 
         // timeline ---------------
 
+        // console.log(i)
         make_timeline(item,'timeline_' + i,startDate,endDate,tick_size_large,action_width_large)
 
         // details ---------------
 
         let action_box = article_box.append("div")
             .attr("id", function(d){
-                id = item[0].actor.actor_id
+                id = item[0].result.actor.Id //action.Id
                 return "info_box_" + id
             }) 
             .attr("class","info_box")
 
         let open_box = article_box.append("div")
             .attr("id", function (d) {
-                id = item[0].actor.actor_id
+                id = item[0].result.actor.Id
                 return "open_box_" + id
             })
             .attr("class","open_box")
             .attr("data-open","false")
             .attr("data-actor", function(d){
-                actor = item[0].actor.name
+                actor = item[0].result.actor.Name
                 return actor
             })
             .append("p")
             .attr("id", function (d) {
-                id = item[0].actor.actor_id
+                id = item[0].result.actor.Id
                 return 'open_box_icon_' + id
             })
             .attr("class","arrow_box")
             .text("↓")
-
     });
 
     overall_timeline('overall_timeline',startDate,endDate)
 
     timeline_labels();
-    get_articles(raw_data);
+    get_articles(data);
 }
 
 function get_articles(data){
@@ -291,17 +333,24 @@ function get_articles(data){
 
     function display_articles(actor_id,actor){
         // console.log(actor_id,actor)
+        console.log(data)
 
-        actor_id = parseInt(actor_id)
+        actor_id = actor_id //parseInt(actor_id)
 
         // filter articles by actor id
-        const documentsRelatedToActorId = data.filter(item => {
-            return item.actor.actor_id == actor_id
-        })
+        const documentsRelatedToActorId = data.flatMap(innerList => 
+            innerList.filter(obj => obj.result.actor.Id === actor_id)
+        );
+        console.log(documentsRelatedToActorId)
 
         // get documents id and filter out duplicate documents
-        const documentsData = documentsRelatedToActorId.map(item => item.document_id);
+        const documentsData = documentsRelatedToActorId.map(item => {
+            return data.filter(subArray => 
+                subArray.some(item => item.result.articleID === actor_id)
+            );
+        });
         const uniqueDocumentIds = [...new Set(documentsData)];
+        console.log(documentsData)
 
         // const all_actors = data
         //     // .filter(item => item.actor.actor_id != actor_id) // filter out actor with actor_id == something
@@ -310,27 +359,60 @@ function get_articles(data){
         // // console.log(all_actors)
 
         async function callApisAndGetJson(uniqueDocumentIds) {
+            console.log(uniqueDocumentIds)
+
             const results = [];
 
             for (const document_id of uniqueDocumentIds) {
                 try {
-                    const API_document_id = API_document + document_id
-                    const response = await fetch(API_document_id);
-                
-                    if (!response.ok) {
-                        throw new Error('API call failed with status: ' + response.status);
-                    }
 
-                    const jsonData = await response.json();
-                    results.push(jsonData);
-                } 
-                catch (error) {
-                    console.error(`Error calling API: ${error.message}`);
+                    const API_document_id = API_document + document_id
+                    // const response = await fetch(API_document_id);
+
+                    const headers = new Headers();
+                    headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
+
+                    await fetch(API_document_id, {
+                        method: 'GET',
+                        withCredentials: true,
+                        headers: headers
+                        // credentials: 'include'
+                    }) 
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); 
+                    })
+                    .then(json => {
+                        data = json
+
+                        results.push(jsonData);
+                    }) 
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    })
                 }
+                catch (error) {
+                    console.error('Error calling API: ' + error.message);
+                }
+
+
+                //     const API_document_id = API_document + document_id
+                //     const response = await fetch(API_document_id);
+                
+                //     if (!response.ok) {
+                //         throw new Error('API call failed with status: ' + response.status);
+                //     }
+
+                //     const jsonData = await response.json();
+                //     results.push(jsonData);
+                // } 
           }
           return results;
         }
 
+        // remove the comments
         callApisAndGetJson(uniqueDocumentIds) 
             .then(article_data => {
                 actor_data = data
@@ -435,8 +517,8 @@ function show_articles(data,actor_id) {
 
         output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
         
-        output += '<div></div>'
-        output += '<div class="go_to_article"></div>' //<a href="' + link + '" style="color: gray">&rarr;</a></div>'
+        output += '<div class="empty_article_row"></div>'
+        //output += '<div class="go_to_article"></div>' //<a href="' + link + '" style="color: gray">&rarr;</a></div>'
 
         output += '</div>'
 
@@ -476,7 +558,9 @@ function get_statistics(data){
     // get number of actors ---------------
     data.forEach(item => {
         item.forEach(action => {
-            const actorName = action.actor.actor_id;
+            // console.log(action.result)
+            // const actorName = action.actor.actor_id;
+            const actorName = action.result.actor.Id
             actorCount[actorName] = (actorCount[actorName] || 0) + 1;
         })
     });
@@ -486,7 +570,8 @@ function get_statistics(data){
     // get number of articles ---------------
     data.forEach(item => {
         item.forEach(action => {
-            const actorName = action.document_id;
+            console.log(action)
+            const actorName = action.result.actor.Id
             articleCount[actorName] = (articleCount[actorName] || 0) + 1;
         })
     });
@@ -502,12 +587,13 @@ function get_statistics(data){
 
 
     // get number of years ---------------
-    let startDate = fix_date(data[0][0].date.value);
+    console.log(data[0][0].result)
+    let startDate = fix_date(data[0][0].result.date);
     let endDate = startDate 
 
     data.forEach(item => {
         item.forEach(event => {
-            date = event.date.value
+            date = event.result.date
             if (fix_date(date) < startDate ) {
                 startDate = date;
             }
@@ -575,13 +661,37 @@ function filter_data(){
 
 }
 
+async function fetch_credentials(){
+
+    await fetch(API_actionflow, {
+        method: 'GET',
+        withCredentials: true,
+        headers: headers
+        // credentials: 'include',
+    }) 
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); 
+    })
+    .then(json => {
+        console.log(json)
+    })
+
+    // load_data()
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 
-    load_data()
-    sort_data()
-    filter_data()
+    access_window()
+
+    // fetch_credentials()
+    // load_data()
+    // sort_data()
+    // filter_data()
 
     menu()
-    access_window()
+
 
 });

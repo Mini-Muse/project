@@ -31,7 +31,6 @@ function load_footer(){
     const pathname = window.location.pathname;
     const search = window.location.search;
     const hash = window.location.hash;
-    // console.log(pathname)
 
     if (pathname.includes('actor-flow') || pathname.includes('article-inquiry')){
         footer_url = '../assets/content/footer.html';
@@ -47,7 +46,7 @@ function load_footer(){
 
 function access_window(){
     const access_content = '../assets/content/access.html';
-    const access_window = document.getElementById('access_window');
+    let access_the_window = document.getElementById('access_window');
     const coockie_name = 'access'
 
     if (!getCookie(coockie_name)) {
@@ -55,38 +54,75 @@ function access_window(){
         fetch(access_content)
             .then(response => response.text())
             .then(text => {
-                access_window.innerHTML = text
-                access_window.style.opacity = '1'
+                access_the_window.innerHTML = text
+                access_the_window.style.opacity = '1'
 
-                const close_modal = document.getElementById('close_modal');
-                const cancel_button = document.getElementById('cancel');
+                const loginForm = document.getElementById('loginForm');
+                loginForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
 
-                close_modal.addEventListener("click", remove_modal);
-                cancel_button.addEventListener("click", remove_modal);
+                    user = document.getElementById('username').value;
+                    pass = document.getElementById('password').value;
+
+                    load_data()
+                })
+
+                close_buttons()
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             });
-
-        document.onkeydown = function(evt) {
-            if (evt.key === "Escape" || evt.key === "Esc"){
-                remove_modal()
-            }
-        };
     }
     else {
-        access_window.remove()
-    }
+        credentials = getCookie('access').split(',')
 
-    function remove_modal(){
-        set_coockie(coockie_name)
-        access_window.remove()
-    }
+        user = credentials [0]
+        pass = credentials [1]
 
-    function set_coockie(coockie_name) {
-        document.cookie = coockie_name + '=no_psw; path=/'
+        load_data()
     }
+}
 
+function remove_modal(psw){
+    // console.log(psw)
+    const access_the_window_ = document.getElementById('access_window');
+
+    if (psw == true){
+        access_the_window_.remove()
+    }
+    else {
+        const result_box = document.getElementById('result_box')
+        result_box.innerHTML = 'The credentials are incorrect'
+
+        // access_the_window_.remove()
+    }
+}
+
+function close_buttons(){
+    const close_modal = document.getElementById('close_modal');
+    const cancel_button = document.getElementById('cancel');
+    const access_the_window_ = document.getElementById('access_window');
+    
+    close_modal.addEventListener('click', () => {
+        // remove_modal(false)
+        access_the_window_.remove()
+    });
+
+    cancel_button.addEventListener('click', () => {
+        // remove_modal(false)
+        access_the_window_.remove()
+    });
+
+    // document.onkeydown = function(evt) {
+    //     if (evt.key === "Escape" || evt.key === "Esc"){
+    //         remove_modal(false)
+    //     }
+    // }
+}
+
+
+function set_coockie(coockie_name,credential) {
+    document.cookie = coockie_name + '=' +  credential + '; path=/'
 }
 
 function getCookie(name) {
@@ -142,9 +178,11 @@ function error_message(container){
     const error_message = 'So sorry, we couldn\'t find what you were looking for. <br/>Please try again later.'
     const randomIndex = Math.floor(Math.random() * quotes.length);
 
-    let output = ''
+    document.getElementById('filter_sort_options').innerHTML = ''
+    document.getElementById('data_recap').innerHTML = ''
+    document.getElementById('timeline_recap').innerHTML = ''
 
-    // error
+    let output = ''
     output += '<div id="error_quote">'
 
     output += '<div class="error_box">'
@@ -161,6 +199,17 @@ function error_message(container){
 
     container.innerHTML = output
     
+}
+
+function getRandom(min, max) {
+    random = Math.random() * (max - min) + min
+    result = Math.floor(random)
+
+    if (result < 10) {
+        result = '0' + result
+    } 
+
+    return result;
 }
 
 document.addEventListener("DOMContentLoaded", function(){

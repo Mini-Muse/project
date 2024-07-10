@@ -53,14 +53,14 @@
 }
 
 #articles_box {
-    width: 50%;
+    width: 60%;
     cursor: pointer;
     background-color: #f6f6f6;
     overflow-y: scroll;
 }
 
 #the_article_box {
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
@@ -129,16 +129,16 @@
 
 .the_meta {
     border-right: 1px solid #dbdbdb;
-    width: 33%;
+    width: 50%;
 }
 
-.the_meta div {
-    padding: 20px 20px 0 20px;
-}
+    .the_meta div {
+        padding: 20px;
+    }
 
 .the_timeline {
     height: 5rem;
-    width: 67%;
+    width: 40%;
     margin-top: .4rem;
 }
 

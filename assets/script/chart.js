@@ -23,15 +23,16 @@ const colors = [
 
 function get_color(value){
     const categoryColors = {
-        "Wrote": "#efd295",
-        "Edited": "#C9DFE5",
-        "Order": "#E0BBB6"
+        "a": "#efd295",
+        "b": "#C9DFE5"
+        // "Edited": "#C9DFE5",
+        // "Order": "#E0BBB6"
     };
 
     if (categoryColors.hasOwnProperty(value)) {
         return categoryColors[value];
     } else {
-        return "#000000";
+        return '#7fbbdb' //"#000000";
     }
 }
 
@@ -58,9 +59,9 @@ function get_actors_per_article(data){
 }
 
 function make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size,action_width){
-    // console.log(individual_timeline_data)
+    // console.log(individual_timeline_data,the_container)
     
-    timeline_box = document.getElementById(the_container) //  'timeline_' + id )
+    timeline_box = document.getElementById(the_container)
 
     box_w = timeline_box.offsetWidth;
     box_h = tick_size // t_box.offsetHeight;
@@ -68,7 +69,6 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
     // years ---------------
 
     let my_data = individual_timeline_data
-    // console.log(my_data[0].date.value)
 
     xScale = d3.scaleTime()
         .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
@@ -87,10 +87,12 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         .data(my_data)
         .enter()
 
+    // console.log(my_data[0].result.actor.Id, my_data[0].result.actor.Name)
+
     let action_items = actions_box.append("rect")
         .attr("class", "act")
         .attr("x", function(d){
-            let the_date = new Date(fix_date(d.date.value))
+            let the_date = new Date(fix_date(d.result.date))
             let x_pos = xScale(the_date) - (action_width/2) // + (action_width/1)
             return x_pos
         })
@@ -99,30 +101,30 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         .attr("height",box_h - margin[0] -  5) //  - margin[0] - margin[3]
         .attr("r", 5)
         .attr("data-date", function(d){
-            let date = xScale(new Date(fix_date(d.date.value))) 
+            let date = xScale(new Date(fix_date(d.result.date))) 
             return date
         })
         .attr("fill",function(d){
-            return get_color(d.action.name)
+            return get_color(d.result.action.Name)
         })
         .attr("data-per",1)
         .attr("data-art", function(d){
-            return d.document_id
+            return d.result.articleID
         })
-        .attr("data-act", function(d,index){
-            return d.actor.actor_id
+        .attr("data-act", function(d,index){ // actor
+            return d.result.actor.Id
         })
         .attr("data-tit", function(d){
-            return d.action.name
+            return d.result.action.Name
         })
         .attr("data-dat", function(d){
-            return d.date.value
+            return d.result.date
         })
         .attr("data-loc", function(d){
-            return d.location.name
+            return d.result.location
         })
         .attr("data-ext", function(d){
-            return d.extract
+            return d.result.actionDetails.Text //extract
         })
 
     // xAxis  ---------------
@@ -151,11 +153,12 @@ function timeline_labels() {
         }
     }
 
+    // show highlights
     for (let item = 0; item < labels.length; item++) {
         labels[item].addEventListener("mouseover",function(e) {
 
-            let per = this.getAttribute('data-per') 
             // let art = this.getAttribute('data-art') 
+            let per = this.getAttribute('data-per') 
             let act = this.getAttribute('data-act')
 
             let title = this.getAttribute('data-tit') 
@@ -165,20 +168,25 @@ function timeline_labels() {
 
             // print text
             empty_infobox()
-            let the_info_box = document.getElementById('info_box_' + act);
-            
-            let output = '';
-            output += '<span style="font-weight:bold;">' + date + '</span><span>, ' + location + '</span><br/>' 
-            output += '<span class="action_cat" style="background-color:' + get_color(title) +'">' + title + '</span>'
-            output += '<p>' + extract + '</p>' // .slice(0, 20)
 
-            the_info_box.innerHTML = output
-            // console.log(per,act)
+            if (document.getElementById('info_box_' + act)){
+                
+                let the_info_box = document.getElementById('info_box_' + act);
+                // console.log(act)
 
-            // highlight element
-            remove_highlights()
-            this.classList.add('select_action')
-            // this.style.backgroundColor = 'red'
+                let output = '';
+                output += '<span style="font-weight:bold;">' + date + '</span><span>, ' + location + '</span><br/>' 
+                output += '<span class="action_cat" style="background-color:' + get_color(title) +'">' + title + '</span>'
+                output += '<p>' + extract + '</p>' // .slice(0, 20)
+
+                the_info_box.innerHTML = output
+                // console.log(date, location, title)
+
+                // highlight element
+                remove_highlights()
+                this.classList.add('select_action')
+                // this.style.backgroundColor = 'red'
+            }
 
         })
     }
