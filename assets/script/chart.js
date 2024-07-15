@@ -12,6 +12,7 @@ const shift = 2;
 
 const action_width_large = 10;
 const action_width_small = action_width_large/3*2;
+const action_width_very_small = action_width_large/3;
 
 const colors = [
     '#F0E3CB',

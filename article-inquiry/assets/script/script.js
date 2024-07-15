@@ -1,6 +1,6 @@
 const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents'
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows'
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=50' // 1000
 
 // const API_actionflow =  '../assets/data/data_.json'
 
@@ -86,11 +86,12 @@ async function load_data(){
     })
     .then(json => {
         actor_data = json
-        console.log(actor_data)
+        // console.log(actor_data)
 
         // group objects by actor name
         const actionflows = actor_data.reduce((acc, obj) => {
             const actorName = obj.result.actor.Name
+            // console.log(obj.result)
             if (!acc[actorName]) {
                 acc[actorName] = [];
             }
@@ -98,6 +99,7 @@ async function load_data(){
             return acc;
         }, []);
         actionflows_array = Object.values(actionflows);
+        // console.log(actionflows_array)
 
         // // fix null date
         actionflows_array.forEach(item => {
@@ -116,7 +118,6 @@ async function load_data(){
 
         // group objects by document id
         const documentflows = actor_data.reduce((acc, obj) => {
-            console.log(obj)
             const documentId = obj.result.articleID;
             if (!acc[documentId]) {
                 acc[documentId] = [];
@@ -125,7 +126,7 @@ async function load_data(){
             return acc;
         }, []);
         documentflows_array = Object.values(documentflows);
-        console.log(documentflows_array)
+        // console.log(documentflows_array)
 
         build_page()
 
@@ -185,7 +186,7 @@ function build_page(){
 }
 
 function list_articles(article_data, documentflows_array, sort){
-    console.log(documentflows_array)
+    console.log(article_data,documentflows_array)
 
     let sorted_article_data
 
@@ -222,10 +223,10 @@ function list_articles(article_data, documentflows_array, sort){
 
     // for (let x = 0; x <= 100; x++){
     sorted_article_data.forEach((item,i) => {
-        console.log(item)
+        // console.log(item)
 
         const article = item.article
-        const document_id = article.DocumentId
+        const document_id = article.Id //.DocumentId
 
         output += '<div class="article_box" data-id="' + i + '"data-doc="' + document_id + '">'
         
@@ -263,7 +264,7 @@ function list_articles(article_data, documentflows_array, sort){
 
     documentflows_array.forEach(item => {
         item.forEach(event => {
-            date = event.date.value
+            date = event.result.date
             // console.log(date)
 
             if (fix_date(date) < startDate ) {
@@ -277,18 +278,30 @@ function list_articles(article_data, documentflows_array, sort){
     // console.log(startDate,endDate)
 
     sorted_article_data.forEach(item => {
-        const document_id = item.document_id
+        console.log(documentflows_array)
+        const document_id = item.article.Id //DocumentId
         
-        let filteredArray = documentflows_array.map(subArray => 
-            subArray.filter(item => item.document_id === document_id)
-        ).filter(subArray => subArray.length > 0);
-        filteredArray = filteredArray[0]
+        let filteredArray = documentflows_array.flatMap(innerArray =>
+            innerArray.filter(item => item.result.articleID === document_id)
+        );
+        console.log(filteredArray)
+
+        // let filteredArray = documentflows_array.map(subArray => {
+        //         subArray.filter(item => {
+        //             console.log(item.result.articleID, document_id)
+        //             return item.result.articleID === document_id
+        //         })
+        //     })
+            // .filter(subArray => subArray.length > 0);
+
+        // filteredArray = filteredArray[0]
+        // console.log(filteredArray)
  
-        make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,tick_size_large,action_width_large)
+        // console.log(filteredArray)
+        make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,tick_size_large,action_width_very_small)
     })
 
     load_article_info(sorted_article_data)
-
     overall_timeline('overall_timeline',startDate,endDate)
 }
 
@@ -306,7 +319,9 @@ function get_statistics(data){
     // get number of actors ---------------
     data.forEach(item => {
         item.forEach(action => {
-            const actorName = action.actor.actor_id;
+            // console.log(action.result)
+            // const actorName = action.actor.actor_id;
+            const actorName = action.result.actor.Name
             actorCount[actorName] = (actorCount[actorName] || 0) + 1;
         })
     });
@@ -316,8 +331,10 @@ function get_statistics(data){
     // get number of articles ---------------
     data.forEach(item => {
         item.forEach(action => {
-            const actorName = action.document_id;
-            articleCount[actorName] = (articleCount[actorName] || 0) + 1;
+            // console.log(action.result.articleID)
+            // const actorName = action.result.actor.Id
+            const documentID = action.result.articleID
+            articleCount[documentID] = (articleCount[documentID] || 0) + 1;
         })
     });
     articles = Object.keys(articleCount).length;
@@ -330,14 +347,14 @@ function get_statistics(data){
         })
     })
 
-
     // get number of years ---------------
-    let startDate = fix_date(data[0][0].date.value);
+    // console.log(data[0][0].result)
+    let startDate = fix_date(data[0][0].result.date);
     let endDate = startDate 
 
     data.forEach(item => {
         item.forEach(event => {
-            date = event.date.value
+            date = event.result.date
             if (fix_date(date) < startDate ) {
                 startDate = date;
             }
@@ -364,6 +381,79 @@ function get_statistics(data){
     total_actions.innerHTML = actions;
     timespan_actions.innerHTML = years;
 }
+
+// function get_statistics(data){
+//     // console.log(data)
+
+//     let actors = 0;
+//     let articles = 0;
+//     let actions = 0;
+//     let years = 0;
+
+//     const actorCount = {};
+//     const articleCount = {};
+
+//     // get number of actors ---------------
+//     data.forEach(item => {
+//         item.forEach(action => {
+//             const actorName = action.actor.actor_id;
+//             actorCount[actorName] = (actorCount[actorName] || 0) + 1;
+//         })
+//     });
+//     actors = Object.keys(actorCount).length;
+
+
+//     // get number of articles ---------------
+//     data.forEach(item => {
+//         item.forEach(action => {
+//             const actorName = action.document_id;
+//             articleCount[actorName] = (articleCount[actorName] || 0) + 1;
+//         })
+//     });
+//     articles = Object.keys(articleCount).length;
+
+
+//     // get number of actions ---------------
+//     data.forEach((item,i) => {
+//         item.forEach((action,a) => {
+//             actions += 1
+//         })
+//     })
+
+
+//     // get number of years ---------------
+//     let startDate = fix_date(data[0][0].date.value);
+//     let endDate = startDate 
+
+//     data.forEach(item => {
+//         item.forEach(event => {
+//             date = event.date.value
+//             if (fix_date(date) < startDate ) {
+//                 startDate = date;
+//             }
+//             if (fix_date(date) > endDate ) {
+//                 endDate = date;
+//             }
+//         })
+//     });
+
+//     year_a = parseInt(startDate.toString().slice(0, 4)) 
+//     year_b = parseInt(endDate.toString().slice(0, 4))
+//     years = year_b - year_a
+//     // console.log(year_a,year_b)
+
+//     // get containers ---------------
+//     const actor_count = document.getElementById('actor_count');
+//     const articles_actions = document.getElementById('articles_actions');
+//     const total_actions = document.getElementById('total_actions');
+//     const timespan_actions = document.getElementById('timespan_actions');
+
+//     // display statistics ---------------
+//     actor_count.innerHTML = actors;
+//     articles_actions.innerHTML = articles;
+//     total_actions.innerHTML = actions;
+//     timespan_actions.innerHTML = years;
+// }
 
 function load_article_info(data){
     // console.log(data)
@@ -396,6 +486,7 @@ function load_article_info(data){
             }
         })
 
+        console.log()
         const all_act_doc = actor_data.filter((item) => item.document_id === id)
         const actors = all_act_doc.map(item => item.actor);
         const list_actors = Array.from(new Set(actors.map(a => a.actor_id))).map(id => actors.find(a => a.actor_id === id));
