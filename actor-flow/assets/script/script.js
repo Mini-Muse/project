@@ -1,5 +1,5 @@
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows'
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=50'
 // const API_actionflow = '../assets/data/data_.json'
 
 const API_document = 'https://minimuse.nlp.idsia.ch/api/documents'
@@ -475,7 +475,7 @@ function show_articles(data,actor_id) {
 
         const list_actors_ = data[item].actors
         const list_actors = [...new Set(list_actors_)];
-        // console.log(list_actors)
+        console.log(list_actors)
         // list_actors = data[item].filter((obj) => {
         //     // console.log(obj)
         //     // the_actor.actor_id != actor_id

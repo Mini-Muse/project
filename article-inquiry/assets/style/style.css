@@ -22,17 +22,17 @@
 }
 
 .shift {
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: flex-start;
 }
 
 .shift div:nth-child(1) {
-    width: 33%;
+    width: 50%;
 }
 
 .shift div:nth-child(2) {
-    width: 67%;
+    width: 40%;
 }
 
 .shift div:nth-child(3) {

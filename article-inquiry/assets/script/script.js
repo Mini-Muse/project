@@ -1,7 +1,6 @@
 const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents'
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=50' // 1000
-
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=300' // 1000
 // const API_actionflow =  '../assets/data/data_.json'
 
 const NLP_algorithm = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId='
@@ -131,8 +130,8 @@ async function load_data(){
         build_page()
 
         list_articles(documents_data, documentflows_array, 'date')
+        load_article_info(documents_data)
         // get_statistics(actionflows_array)   
-        // load_article_info(documents_data)
 
         // chat_with_NLP()
     })
@@ -186,7 +185,8 @@ function build_page(){
 }
 
 function list_articles(article_data, documentflows_array, sort){
-    console.log(article_data,documentflows_array)
+    console.log(article_data)
+    console.log(documentflows_array)
 
     let sorted_article_data
 
@@ -278,26 +278,14 @@ function list_articles(article_data, documentflows_array, sort){
     // console.log(startDate,endDate)
 
     sorted_article_data.forEach(item => {
-        console.log(documentflows_array)
+        // console.log(documentflows_array)
         const document_id = item.article.Id //DocumentId
         
         let filteredArray = documentflows_array.flatMap(innerArray =>
             innerArray.filter(item => item.result.articleID === document_id)
         );
-        console.log(filteredArray)
-
-        // let filteredArray = documentflows_array.map(subArray => {
-        //         subArray.filter(item => {
-        //             console.log(item.result.articleID, document_id)
-        //             return item.result.articleID === document_id
-        //         })
-        //     })
-            // .filter(subArray => subArray.length > 0);
-
-        // filteredArray = filteredArray[0]
         // console.log(filteredArray)
  
-        // console.log(filteredArray)
         make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,tick_size_large,action_width_very_small)
     })
 
@@ -464,7 +452,7 @@ function load_article_info(data){
 
     article_item.forEach(item => {
         item.addEventListener('click', function() {
-            document_id = parseInt(item.getAttribute('data-id'))
+            document_id = item.getAttribute('data-doc')
 
             display_info(document_id)
 
@@ -474,51 +462,62 @@ function load_article_info(data){
     })
 
     function display_info(id){
-        // console.log(actor_data)
+        console.log(id)
 
         let output = ''
 
         article_item.forEach(item => {
             item.classList.remove('selected');
-
             if (item.getAttribute('data-id') == id){
                item.classList.add('selected') 
             }
         })
 
-        console.log()
         const all_act_doc = actor_data.filter((item) => item.document_id === id)
-        const actors = all_act_doc.map(item => item.actor);
-        const list_actors = Array.from(new Set(actors.map(a => a.actor_id))).map(id => actors.find(a => a.actor_id === id));
+        const actors = all_act_doc.map(item => item.result.actor.Name);
+        // const list_actors = all_act_doc.map(item => item.result.actor.Name);
+        // console.log(actors)
 
-        list_actors.sort((a, b) => {
-            let nameA = a.name;
-            let nameB = b.name;
-            return nameA.localeCompare(nameB);
-        });
+        const list_actors = ''
+        // const list_actors = Array.from(new Set(actors.map(a => {
+        //         console.log(a)
+        //         return a.result.actor.Name
+        //     })))
+        //     .map(id => actors.find(a => a.result.actor.Name === id));
         // console.log(list_actors)
 
-        let the_other_actors = ''
-        for (let i = 0; i < list_actors.length; i++) {
-            actor = list_actors[i].name
-            the_other_actors += '<span class="actor_chips">' + actor + '</span>'
-        }
+        // list_actors.sort((a, b) => {
+        //     let nameA = a.name;
+        //     let nameB = b.name;
+        //     return nameA.localeCompare(nameB);
+        // });
+        // // console.log(list_actors)
 
-        data.forEach(item => {
-            if (item.document_id == id){
+        // let the_other_actors = ''
+        // for (let i = 0; i < list_actors.length; i++) {
+        //     actor = list_actors[i].name
+        //     the_other_actors += '<span class="actor_chips">' + actor + '</span>'
+        // }
 
-                output += '<div id="the_title">' + item.title + '</div>'
+        documents_data.forEach(item => {
+            let article = item.article
+            console.log(item)
+            console.log(article.Id, id)
+
+            if (article.Id === id){
+
+                output += '<div id="the_title">' + article.title + '</div>'
 
                 output += '<div id="the_info">'
-                output += '<span>'  + item.author_name + ', </span>'
-                output += '<span>' + item.year + ', </span>'
-                output += '<span>' + item.issue + ', </span>'
-                output += '<span>' + item.volume + '</span>'
+                output += '<span>'  + article.author_name + ', </span>'
+                output += '<span>' + article.year + ', </span>'
+                output += '<span>' + article.issue + ', </span>'
+                output += '<span>' + article.volume + '</span>'
                 output += '</div>'
 
                 output += '<div id="the_abstract" class="info_box">'
                 output += '<h2>Abstract</h2>'
-                output += '<p>' + item.abstract + '</p>'
+                output += '<p>' + article.abstract + '</p>'
                 output += '</div>'
 
                 output += '<div class="meta" style="margin-top: 2rem;">'
@@ -547,7 +546,10 @@ function load_article_info(data){
 
         document.getElementById('article_info_box').setAttribute('data-document',id)
     }
-    display_info(id)
+
+    let first_id = documents_data[0].article.Id
+    console.log(first_id)
+    display_info(first_id)
 }
 
 function chat_with_NLP(){
