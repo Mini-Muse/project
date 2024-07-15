@@ -467,6 +467,7 @@ function chat_with_NLP(){
 
         const messageReceived = document.createElement('div');
         messageReceived.className = 'chat_reply';
+        messageReceived.textContent = 'uhm ...'
         // messageReceived.textContent = 'question ' + count_prompts + ' about document ' + documentId + ' ...';
 
         the_messageSent = document.getElementById(box_id)
@@ -497,7 +498,7 @@ function chat_with_NLP(){
                 reply_data = json
                 console.log(reply_data)
 
-                response_message = reply_data.query
+                response_message = reply_data.response.replace('Response: ','')
 
                 messageReceived.textContent = response_message
             })

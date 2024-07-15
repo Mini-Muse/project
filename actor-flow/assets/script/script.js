@@ -1,5 +1,5 @@
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=100' // 50 100 400 1000
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=1000' // 50 100 400 1000
 // const API_actionflow = '../assets/data/data_.json'
 
 const API_document = 'https://minimuse.nlp.idsia.ch/api/documents'
