@@ -100,17 +100,14 @@ async function load_data(){
         actionflows_array = Object.values(actionflows);
         // console.log(actionflows_array)
 
-        // // fix null date
+        // fix null date
         actionflows_array.forEach(item => {
             item.forEach(event => {
                 // console.log(event.result.date)
                 if (!event.result.date) {
-                    year = getRandom(1900, 1980)
-                    mont = getRandom(1, 12)
-                    day_ = getRandom(1, 27)
-
-                    event.result.date = year + '-' + mont + '-' + day_
-                    date = year + '-' + mont + '-' + day_
+                    
+                    date = random_date()
+                    event.result.date = date
 
                     event.result.null_date = true
                 }

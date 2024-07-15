@@ -289,6 +289,15 @@ function get_statistics(data){
     timespan_actions.innerHTML = years;
 }
 
+function random_date(){
+    year = getRandom(1900, 1920)
+    mont = getRandom(1, 12)
+    day_ = getRandom(1, 27)
+    date = year + '-' + mont + '-' + day_
+
+    return date
+}
+
 document.addEventListener("DOMContentLoaded", function(){
 
     load_footer()

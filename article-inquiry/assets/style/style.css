@@ -97,9 +97,9 @@
     grid-column-gap: 10px;*/
 }
 
-.article_box:last-child {
+/*.article_box:last-child {
     border-bottom: none;
-}
+}*/
 
 .article_box:hover {
     background-color: white;
