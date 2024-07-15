@@ -139,7 +139,8 @@ function get_action_category(action){
         'befasst',
         'befasste',
         'vorzulegen',
-        'schubladisierte'
+        'schubladisierte',
+        'stellten'
     ]
 
     movement_list = [
@@ -150,7 +151,8 @@ function get_action_category(action){
         'gingen',
         'ging',
         'preschte',
-        'austrat'
+        'austrat',
+        'stammt'
     ]
 
     pursuit_list = [

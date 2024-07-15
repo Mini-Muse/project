@@ -65,11 +65,22 @@ async function load_data(){
             item.forEach(event => {
                 // console.log(event.result.date)
                 if (!event.result.date) {
+
+                    let date_ = event.result.actor.Name
+                    if (date_.includes('1939')){
+                        date = '1939-01-01'
+                        event.result.null_date = false
+                    }
+                    else if (date_.includes('1890')){
+                        date = '1890-01-01'
+                        event.result.null_date = false
+                    }
+                    else {
+                        date = random_date()
+                        event.result.null_date = true
+                    }
                     
-                    date = random_date()
                     event.result.date = date
-                    
-                    event.result.null_date = true
                 }
             })
         })
