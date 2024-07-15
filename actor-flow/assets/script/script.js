@@ -73,6 +73,11 @@ async function load_data(){
                     date = year + '-' + mont + '-' + day_
 
                     event.result.null_date = true
+                    // if (year < 1920){
+                    // }
+                    // else {
+                    //     event.result.null_date = false
+                    // }
                 }
             })
         })
@@ -135,7 +140,7 @@ function display_timeline(data, container, filter, sort){
     }
     // console.log(filteredArray)
 
-    // display some data in the console
+    // // display some data in the console
     // filteredArray.forEach(item => {
     //     item.forEach(event => {
     //         console.log(event.result.action.Name)

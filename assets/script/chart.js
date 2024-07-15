@@ -17,16 +17,16 @@ const action_width_very_small = action_width_large/3;
 function get_color(value){
 
     const categoryColors = {
-        'decide': '#C9DFE5',
-        'get': '#FFB6C1',
-        'influence': '#40E0D0',
-        'make': '#E0BBB6',
-        'manage': '#FFDAB9',
-        'movement': '#b1dbee',
-        'pursuit' : '#FF7F50',
+        'decide': '#9DD1E7',
+        'get': '#85D6D0',
+        'influence': '#D79E96', // '#40E0D0',
+        'make': '#D79E96',
+        'manage': '#92D2EE',
+        'movement': '#ff8c67',
+        'pursuit' : '#D7D7FA',
         'react': '#E6E6FA',
-        'state': '#f2cfb0', // #efd295
-        'transform': '#FFD700'
+        'state': '#E3B081', // #efd295
+        'transform': '#EFC700'
     };
 
     let color = '#C0C0C0' // // #7fbbdb "#000000";
@@ -79,7 +79,14 @@ function action_full_name(action_category){
 function get_action_category(action){
     let category = ''
 
+
     decide_list = [
+        'liesse',
+        'leiste',
+        'setzte',
+        'stellte',
+        'hielt',
+        'belassen',
         'abgelehnt',
         'ablehnte',
         'abzulehnen',
@@ -115,10 +122,12 @@ function get_action_category(action){
         'ausprägte',
         'baute',
         'bedienten',
-        'befolgte'
+        'befolgte',
+        'formulieren'
     ]
 
     manage_list = [
+        'waltet',
         'abzuschliessen',
         'analysierte',
         'ausgeschlossen',
@@ -129,7 +138,8 @@ function get_action_category(action){
         'bedingt',
         'befasst',
         'befasste',
-        'vorzulegen'
+        'vorzulegen',
+        'schubladisierte'
     ]
 
     movement_list = [
@@ -153,33 +163,40 @@ function get_action_category(action){
         'aufgefallen',
         'ausbrachen',
         'auslöste'
-    ]
+    ]   
 
     state_list = [
-        'befand',
-        'befanden',
-        'bat',
+        'bezeichnen',
+        'argumentierte',
+        'begründete',
+        'gilt',
+        'siehe',
+        'sieht',
+        'sah',
         'affirme',
         'argumentierte',
-        'betont',
-        'betonte',
-        'bedeutete',
-        'bezeichnete',
-        'fragte',
-        'nannte',
         'ausdrückte',
-        'nennt',
-        'stellte',
-        'zitiert',
-        'zitierte',
-        'begründete',
-        'erklärte',
         'aussah',
         'aussi',
+        'bat',
         'beantwortet',
         'bedaure',
         'bedeutete',
-        'befindet'
+        'bedeutete',
+        'befand',
+        'befanden',
+        'befindet',
+        'begründete',
+        'betont',
+        'betonte',
+        'bezeichnete',
+        'erklärte',
+        'fragte',
+        'nannte',
+        'nennt',
+        'stellte',
+        'zitiert',
+        'zitierte'
     ]
 
     transform_list = [
