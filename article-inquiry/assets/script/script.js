@@ -350,9 +350,9 @@ function load_article_info(data){
                 output += '<div id="the_title">' + article.title + '</div>'
 
                 output += '<div id="the_info">'
-                output += '<span data-meta="author_name">'  + article.Author + ', </span>'
-                output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + ', </span>'
-                output += '<span data-meta="issue">issue ' + article.IssueNumber + ', </span>'
+                output += '<span data-meta="author_name">'  + article.Author + '</span>'
+                output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + '</span><br/>'
+                output += '<span data-meta="issue">issue ' + article.IssueNumber + '</span>'
                 output += '</div>'
 
                 output += '<div id="the_abstract" class="info_box">'
