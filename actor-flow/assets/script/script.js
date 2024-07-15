@@ -157,7 +157,7 @@ function display_timeline(data, container, filter, sort){
     };
 
     const sort_date = (a, b) => {
-        console.log(a[0].result.date)
+        // console.log(a[0].result.date)
 
         const dateA = new Date(a[0].result.date);
         const dateB = new Date(b[0].result.date);

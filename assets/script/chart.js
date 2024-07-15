@@ -10,7 +10,7 @@ let year_b = 1900;
 
 const shift = 2;
 
-const action_width_large = 10;
+const action_width_large = 8;
 const action_width_small = action_width_large/3*2;
 const action_width_very_small = action_width_large/3;
 
@@ -25,7 +25,7 @@ function get_color(value){
         'movement': '#b1dbee',
         'pursuit' : '#FF7F50',
         'react': '#E6E6FA',
-        'state': '#efd295',
+        'state': '#f2cfb0', // #efd295
         'transform': '#FFD700'
     };
 
@@ -79,11 +79,16 @@ function action_full_name(action_category){
 function get_action_category(action){
     let category = ''
 
-    decice_list = [
+    decide_list = [
         'abgelehnt',
         'ablehnte',
         'abzulehnen',
-        'accepter'
+        'accepter',
+        'beabsichtigte',
+        'beantragte',
+        'entschied',
+        'beabsichtigte',
+        'beantragte'
     ]
 
     get_list = [
@@ -91,25 +96,40 @@ function get_action_category(action){
         'verliert',
         'gewonnen',
         'brauchten',
-        'erreichte'
+        'erreichte',
+        'beansprucht'
     ]
 
     influence_list = [
         'kämpften',
-        'drängten'
+        'drängten',
+        'beflügelte'
     ]
 
     make_list = [
         'schrieb',
         'verfasst',
         'formulieren',
-        'aufführen'
+        'aufführen',
+        'aufführt',
+        'ausprägte',
+        'baute',
+        'bedienten',
+        'befolgte'
     ]
 
     manage_list = [
         'abzuschliessen',
-        'vorzulegen',
-        'analysierte'
+        'analysierte',
+        'ausgeschlossen',
+        'ausgesetzt',
+        'ausreichten',
+        'auszuschliessen',
+        'beauftragte',
+        'bedingt',
+        'befasst',
+        'befasste',
+        'vorzulegen'
     ]
 
     movement_list = [
@@ -119,30 +139,56 @@ function get_action_category(action){
         'fortfuhren',
         'gingen',
         'ging',
-        'preschte'
+        'preschte',
+        'austrat'
+    ]
+
+    pursuit_list = [
+
     ]
 
     react_list = [
-        'agierte'
+        'agierte',
+        'aufgefallen',
+        'aufgefallen',
+        'ausbrachen',
+        'auslöste'
     ]
 
     state_list = [
+        'befand',
+        'befanden',
+        'bat',
         'affirme',
         'argumentierte',
         'betont',
         'betonte',
+        'bedeutete',
         'bezeichnete',
         'fragte',
         'nannte',
+        'ausdrückte',
         'nennt',
         'stellte',
         'zitiert',
         'zitierte',
         'begründete',
-        'erklärte'
+        'erklärte',
+        'aussah',
+        'aussi',
+        'beantwortet',
+        'bedaure',
+        'bedeutete',
+        'befindet'
     ]
 
-    if (decice_list.includes(action)) {
+    transform_list = [
+        'ausgedünnt'
+    ]
+
+    action = action.toLowerCase()
+
+    if (decide_list.includes(action)) {
         category = 'decide';
     } 
     else if (get_list.includes(action)) {
@@ -162,9 +208,15 @@ function get_action_category(action){
     } 
     else if (react_list.includes(action)) {
         category = 'react';
+    }
+    else if (pursuit_list.includes(action)) {
+        category = 'pursuit';
     } 
     else if (state_list.includes(action)) {
         category = 'state';
+    } 
+    else if (transform_list.includes(action)) {
+        category = 'transform';
     } 
 
     return category
