@@ -462,69 +462,59 @@ function load_article_info(data){
     })
 
     function display_info(id){
-        console.log(id)
+        // console.log(id)
 
         let output = ''
 
         article_item.forEach(item => {
             item.classList.remove('selected');
-            if (item.getAttribute('data-id') == id){
+            if (item.getAttribute('data-doc') == id){
                item.classList.add('selected') 
             }
         })
 
-        const all_act_doc = actor_data.filter((item) => item.document_id === id)
-        const actors = all_act_doc.map(item => item.result.actor.Name);
-        // const list_actors = all_act_doc.map(item => item.result.actor.Name);
-        // console.log(actors)
+        // list all actors in the same article id
+        const all_act_doc = actor_data.filter((item) => item.result.articleID === id)
 
-        const list_actors = ''
-        // const list_actors = Array.from(new Set(actors.map(a => {
-        //         console.log(a)
-        //         return a.result.actor.Name
-        //     })))
-        //     .map(id => actors.find(a => a.result.actor.Name === id));
-        // console.log(list_actors)
+        // list unique actors
+        const list_actors = all_act_doc.map(item => item.result.actor.Name);
+        const unique_actors = [...new Set(list_actors)];
+        console.log(unique_actors)
 
-        // list_actors.sort((a, b) => {
-        //     let nameA = a.name;
-        //     let nameB = b.name;
-        //     return nameA.localeCompare(nameB);
-        // });
-        // // console.log(list_actors)
+        unique_actors.sort((a, b) => {
+            return a.localeCompare(b);
+        });
 
-        // let the_other_actors = ''
-        // for (let i = 0; i < list_actors.length; i++) {
-        //     actor = list_actors[i].name
-        //     the_other_actors += '<span class="actor_chips">' + actor + '</span>'
-        // }
+        let all_actors = ''
+        for (let i = 0; i < unique_actors.length; i++) {
+            actor = unique_actors[i]
+            all_actors += '<span class="actor_chips">' + actor + '</span>'
+        }
 
         documents_data.forEach(item => {
             let article = item.article
-            console.log(item)
-            console.log(article.Id, id)
+            // console.log(item)
 
             if (article.Id === id){
 
                 output += '<div id="the_title">' + article.title + '</div>'
 
                 output += '<div id="the_info">'
-                output += '<span>'  + article.author_name + ', </span>'
-                output += '<span>' + article.year + ', </span>'
-                output += '<span>' + article.issue + ', </span>'
-                output += '<span>' + article.volume + '</span>'
+                output += '<span data-meta="author_name">'  + article.Author + ', </span>'
+                output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + ', </span>'
+                output += '<span data-meta="issue">issue ' + article.IssueNumber + ', </span>'
                 output += '</div>'
 
                 output += '<div id="the_abstract" class="info_box">'
                 output += '<h2>Abstract</h2>'
-                output += '<p>' + article.abstract + '</p>'
+                output += '<p data-meta="summary">' + article.Summary + '</p>'
                 output += '</div>'
 
                 output += '<div class="meta" style="margin-top: 2rem;">'
                 if (list_actors.length > 0){
-                    output += '<p>actors</p>'
-                    output += '<div class="other_actors_container">'
-                    output += the_other_actors
+                    output += '<p><strong>actors</strong></p>'
+                    output += '<div class="all_actors_container">'
+                    output += all_actors
                     output += '</div>'
                 }
                 else {
@@ -535,7 +525,7 @@ function load_article_info(data){
 
                 output += '</div>'
 
-                link = 'https://www.e-periodica.ch/digbib/view?pid=szg-006%3A2023%3A73%3A%3A4#4'
+                link = 'https://www.e-periodica.ch/digbib/view?pid=szg-006%3A2021%3A71%3A%3A273'
                 output += '<div id="read" class="info_box"><a href="' + link + '" target="blank">Read the article ...</a></div>'
                 // &#128279;
                 // &#x1F517;
@@ -548,7 +538,6 @@ function load_article_info(data){
     }
 
     let first_id = documents_data[0].article.Id
-    console.log(first_id)
     display_info(first_id)
 }
 

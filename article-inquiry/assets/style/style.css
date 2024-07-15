@@ -79,7 +79,7 @@
 
 #article_info_box{
     padding: 20px;
-    height: 30vh;
+/*    height: 30vh;*/
     border-bottom: 1px dashed #bcbcbc;
     box-shadow: 0px 5px 5px 1px rgba(200, 200, 200, .3);
     position: relative;
@@ -152,6 +152,11 @@
     justify-content: center;
 }
 
+.all_actors_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 /* -------- prompt box -------- */ 
 
 #chat {
@@ -170,10 +175,11 @@
     align-items: center;
     padding: 10px;
     background-color: #f9f9f9;
-/*    position: absolute;
-    bottom: -40px;*/
+    position: absolute;
+    bottom: 38px;
     border-top: 1px solid #dbdbdb;
-    width: calc(100% - 20px);
+    width: calc(40% - 20px);
+    z-index: 1;
 }
 
 #input_box input[type="text"] {
