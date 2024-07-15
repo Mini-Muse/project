@@ -110,7 +110,8 @@ function get_action_category(action){
     make_list = [
         'schrieb',
         'verfasst',
-        'formulieren'
+        'formulieren',
+        'aufführen'
     ]
 
     manage_list = [
@@ -252,7 +253,18 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             // console.log(category, color)
             return color
         })
+        .attr("stroke",function(d){
+            return '#838383'
+        })
+        .attr("stroke-dasharray",function(d){
+            if (d.result.null_date == true) {
+                return '3'
+            }
+        })
         .attr("data-per",1)
+        .attr("data-nullDate", function(d){
+            return d.result.null_date
+        })
         .attr("data-art", function(d){
             return d.result.articleID
         })
@@ -286,6 +298,16 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
                 return 'no keywords available'
             }
         })
+        // .on('mouseover', function (d, i) {
+        //     d3.select(this).transition()
+        //         .duration('50')
+        //         .attr('opacity', '.5')
+        // })
+        // .on('mouseout', function (d, i) {
+        //     d3.select(this).transition()
+        //         .duration('50')
+        //         .attr('opacity', '1');
+        // })
 
     // xAxis  ---------------
     // let xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%Y"));
@@ -322,9 +344,11 @@ function timeline_labels() {
             let act = this.getAttribute('data-act')
 
             let title = this.getAttribute('data-tit') 
-            let date = this.getAttribute('data-dat') 
+            let date_ = this.getAttribute('data-dat') 
             let location = this.getAttribute('data-loc') 
             let extract = this.getAttribute('data-ext') 
+
+            // this.style.
 
             // print text
             empty_infobox()
@@ -339,8 +363,13 @@ function timeline_labels() {
                     action_category = action_full_name(get_action_category(title)) + ': '
                 }
                 
+                let date = date_
+                if (this.getAttribute('data-nullDate') == 'true'){
+                    date = date_ + '?'
+                }
+
                 let output = '';
-                output += '<span style="font-weight:bold;">' + date + '</span><span>, ' + location + '</span><br/>' 
+                output += '<span style="font-weight:bold;">' + date + '</span>, <span>location: ' + location + '</span><br/>' 
                 output += '<span class="action_cat" style="background-color:' + get_color(get_action_category(title)) +'">' + action_category + '' + title + '</span>'
                 output += '<p>' + extract + '</p>' // .slice(0, 20)
 
@@ -350,7 +379,6 @@ function timeline_labels() {
                 // highlight element
                 remove_highlights()
                 this.classList.add('select_action')
-                // this.style.backgroundColor = 'red'
             }
 
         })

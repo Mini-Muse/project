@@ -71,6 +71,8 @@ async function load_data(){
 
                     event.result.date = year + '-' + mont + '-' + day_
                     date = year + '-' + mont + '-' + day_
+
+                    event.result.null_date = true
                 }
             })
         })
