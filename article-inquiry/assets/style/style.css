@@ -97,6 +97,10 @@
     grid-column-gap: 10px;*/
 }
 
+.article_box:last-child {
+    border-bottom: none;
+}
+
 .article_box:hover {
     background-color: white;
 }
@@ -112,6 +116,7 @@
 #the_title {
     font-size: 1.5rem;
     font-weight: bold;
+    line-height: 120%;
 }
 
 #the_info {
@@ -160,7 +165,7 @@
 /* -------- prompt box -------- */ 
 
 #chat {
-    min-height: 20vh;
+    min-height: 50vh;
     height: 30vh;
     padding: 20px;
     overflow-x: scroll;

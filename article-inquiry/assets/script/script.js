@@ -1,11 +1,11 @@
 const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents'
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=300' // 1000
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=200' // 1000
 // const API_actionflow =  '../assets/data/data_.json'
 
 const NLP_algorithm = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId='
 
-let documents_data;
+let documents_data; 
 let documentflows_array;
 let actor_data;
 let reply_data;
@@ -131,9 +131,9 @@ async function load_data(){
 
         list_articles(documents_data, documentflows_array, 'date')
         load_article_info(documents_data)
-        // get_statistics(actionflows_array)   
+        get_statistics(actionflows_array)   
 
-        // chat_with_NLP()
+        chat_with_NLP()
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -293,156 +293,6 @@ function list_articles(article_data, documentflows_array, sort){
     overall_timeline('overall_timeline',startDate,endDate)
 }
 
-function get_statistics(data){
-    // console.log(data)
-
-    let actors = 0;
-    let articles = 0;
-    let actions = 0;
-    let years = 0;
-
-    const actorCount = {};
-    const articleCount = {};
-
-    // get number of actors ---------------
-    data.forEach(item => {
-        item.forEach(action => {
-            // console.log(action.result)
-            // const actorName = action.actor.actor_id;
-            const actorName = action.result.actor.Name
-            actorCount[actorName] = (actorCount[actorName] || 0) + 1;
-        })
-    });
-    actors = Object.keys(actorCount).length;
-
-
-    // get number of articles ---------------
-    data.forEach(item => {
-        item.forEach(action => {
-            // console.log(action.result.articleID)
-            // const actorName = action.result.actor.Id
-            const documentID = action.result.articleID
-            articleCount[documentID] = (articleCount[documentID] || 0) + 1;
-        })
-    });
-    articles = Object.keys(articleCount).length;
-
-
-    // get number of actions ---------------
-    data.forEach((item,i) => {
-        item.forEach((action,a) => {
-            actions += 1
-        })
-    })
-
-    // get number of years ---------------
-    // console.log(data[0][0].result)
-    let startDate = fix_date(data[0][0].result.date);
-    let endDate = startDate 
-
-    data.forEach(item => {
-        item.forEach(event => {
-            date = event.result.date
-            if (fix_date(date) < startDate ) {
-                startDate = date;
-            }
-            if (fix_date(date) > endDate ) {
-                endDate = date;
-            }
-        })
-    });
-
-    year_a = parseInt(startDate.toString().slice(0, 4)) 
-    year_b = parseInt(endDate.toString().slice(0, 4))
-    years = year_b - year_a
-    // console.log(year_a,year_b)
-
-    // get containers ---------------
-    const actor_count = document.getElementById('actor_count');
-    const articles_actions = document.getElementById('articles_actions');
-    const total_actions = document.getElementById('total_actions');
-    const timespan_actions = document.getElementById('timespan_actions');
-
-    // display statistics ---------------
-    actor_count.innerHTML = actors;
-    articles_actions.innerHTML = articles;
-    total_actions.innerHTML = actions;
-    timespan_actions.innerHTML = years;
-}
-
-// function get_statistics(data){
-//     // console.log(data)
-
-//     let actors = 0;
-//     let articles = 0;
-//     let actions = 0;
-//     let years = 0;
-
-//     const actorCount = {};
-//     const articleCount = {};
-
-//     // get number of actors ---------------
-//     data.forEach(item => {
-//         item.forEach(action => {
-//             const actorName = action.actor.actor_id;
-//             actorCount[actorName] = (actorCount[actorName] || 0) + 1;
-//         })
-//     });
-//     actors = Object.keys(actorCount).length;
-
-
-//     // get number of articles ---------------
-//     data.forEach(item => {
-//         item.forEach(action => {
-//             const actorName = action.document_id;
-//             articleCount[actorName] = (articleCount[actorName] || 0) + 1;
-//         })
-//     });
-//     articles = Object.keys(articleCount).length;
-
-
-//     // get number of actions ---------------
-//     data.forEach((item,i) => {
-//         item.forEach((action,a) => {
-//             actions += 1
-//         })
-//     })
-
-
-//     // get number of years ---------------
-//     let startDate = fix_date(data[0][0].date.value);
-//     let endDate = startDate 
-
-//     data.forEach(item => {
-//         item.forEach(event => {
-//             date = event.date.value
-//             if (fix_date(date) < startDate ) {
-//                 startDate = date;
-//             }
-//             if (fix_date(date) > endDate ) {
-//                 endDate = date;
-//             }
-//         })
-//     });
-
-//     year_a = parseInt(startDate.toString().slice(0, 4)) 
-//     year_b = parseInt(endDate.toString().slice(0, 4))
-//     years = year_b - year_a
-//     // console.log(year_a,year_b)
-
-//     // get containers ---------------
-//     const actor_count = document.getElementById('actor_count');
-//     const articles_actions = document.getElementById('articles_actions');
-//     const total_actions = document.getElementById('total_actions');
-//     const timespan_actions = document.getElementById('timespan_actions');
-
-//     // display statistics ---------------
-//     actor_count.innerHTML = actors;
-//     articles_actions.innerHTML = articles;
-//     total_actions.innerHTML = actions;
-//     timespan_actions.innerHTML = years;
-// }
-
 function load_article_info(data){
     // console.log(data)
 
@@ -564,6 +414,7 @@ function chat_with_NLP(){
     function send_prompt(){
         const input = document.getElementById('chat_input');
         const message = input.value.trim();
+
         
         if (message) {
             addMessageToChatBox(message);
@@ -590,8 +441,10 @@ function chat_with_NLP(){
         chat.scrollTop = chat.scrollHeight;  // Scroll to the bottom
         //'reply_' + count_prompts.toString()
 
+        // console.log(box_id, message)
+        load_NLP_reply(box_id, message)
         // setTimeout(load_NLP_reply(box_id),100)
-        waitAndRun(load_NLP_reply, box_id, message)
+        // waitAndRun(load_NLP_reply, box_id, message)
             // .then(function() {
             //     console.log(box_id);
             // });
@@ -615,16 +468,26 @@ function chat_with_NLP(){
 
         const messageReceived = document.createElement('div');
         messageReceived.className = 'chat_reply';
-        messageReceived.textContent = 'question ' + count_prompts + ' about document ' + documentId + ' ...';
+        // messageReceived.textContent = 'question ' + count_prompts + ' about document ' + documentId + ' ...';
 
         the_messageSent = document.getElementById(box_id)
         the_messageSent.appendChild(messageReceived)
-        // get_NLP_reply(documentId,query)
+
+        const headers = new Headers();
+        headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
+        
+        let doc_id = documentId //.replace('e','')
+        get_NLP_reply(doc_id,query)
 
         async function get_NLP_reply(documentId,query){
-            url = NLP_algorithm + documentId +'&query=' + query 
+            query_url = NLP_algorithm + documentId +'&query=' + query 
 
-            await fetch(url)
+            await fetch(query_url, {
+                method: 'GET',
+                withCredentials: true,
+                headers: headers
+                // credentials: 'include'
+            }) 
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -634,9 +497,13 @@ function chat_with_NLP(){
             .then(json => {
                 reply_data = json
                 console.log(reply_data)
+
+                messageReceived.textContent = reply_data
             })
             .catch(error => {
                 console.error('There was a problem with the prompt fetch operation:', error);
+
+                messageReceived.textContent = 'Something was wrong. Please, try again later.'
             });
         }
     }
@@ -649,7 +516,7 @@ function sort_data(){
     the_sort.addEventListener('change', (event) => {
         const article_list = document.getElementById('articles_box')
         const sort = event.target.value;
-        console.log(sort)
+        // console.log(sort)
 
         article_list.innerHTML = ''
 

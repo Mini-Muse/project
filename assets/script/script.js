@@ -212,6 +212,83 @@ function getRandom(min, max) {
     return result;
 }
 
+function get_statistics(data){
+    // console.log(data)
+
+    let actors = 0;
+    let articles = 0;
+    let actions = 0;
+    let years = 0;
+
+    const actorCount = {};
+    const articleCount = {};
+
+    // get number of actors ---------------
+    data.forEach(item => {
+        item.forEach(action => {
+            // console.log(action.result)
+            // const actorName = action.actor.actor_id;
+            const actorName = action.result.actor.Name
+            actorCount[actorName] = (actorCount[actorName] || 0) + 1;
+        })
+    });
+    actors = Object.keys(actorCount).length;
+
+
+    // get number of articles ---------------
+    data.forEach(item => {
+        item.forEach(action => {
+            // console.log(action.result.articleID)
+            // const actorName = action.result.actor.Id
+            const documentID = action.result.articleID
+            articleCount[documentID] = (articleCount[documentID] || 0) + 1;
+        })
+    });
+    articles = Object.keys(articleCount).length;
+
+
+    // get number of actions ---------------
+    data.forEach((item,i) => {
+        item.forEach((action,a) => {
+            actions += 1
+        })
+    })
+
+    // get number of years ---------------
+    // console.log(data[0][0].result)
+    let startDate = fix_date(data[0][0].result.date);
+    let endDate = startDate 
+
+    data.forEach(item => {
+        item.forEach(event => {
+            date = event.result.date
+            if (fix_date(date) < startDate ) {
+                startDate = date;
+            }
+            if (fix_date(date) > endDate ) {
+                endDate = date;
+            }
+        })
+    });
+
+    year_a = parseInt(startDate.toString().slice(0, 4)) 
+    year_b = parseInt(endDate.toString().slice(0, 4))
+    years = year_b - year_a
+    // console.log(year_a,year_b)
+
+    // get containers ---------------
+    const actor_count = document.getElementById('actor_count');
+    const articles_actions = document.getElementById('articles_actions');
+    const total_actions = document.getElementById('total_actions');
+    const timespan_actions = document.getElementById('timespan_actions');
+
+    // display statistics ---------------
+    actor_count.innerHTML = actors;
+    articles_actions.innerHTML = articles;
+    total_actions.innerHTML = actions;
+    timespan_actions.innerHTML = years;
+}
+
 document.addEventListener("DOMContentLoaded", function(){
 
     load_footer()
