@@ -96,12 +96,6 @@ function display_timeline(data, container, filter, sort){
     // console.log(filter,sort)
 
     let filteredArray
-    // data.forEach(item => {
-    //     item.forEach(event => {
-    //         console.log(event.result.actorType[0])
-    //     })
-    // })
-
     if (filter == 'all') {
         filteredArray = data
     }
@@ -138,6 +132,13 @@ function display_timeline(data, container, filter, sort){
         }
     }
     // console.log(filteredArray)
+
+    // display some data in the console
+    // filteredArray.forEach(item => {
+    //     item.forEach(event => {
+    //         console.log(event.result.action.Name)
+    //     })
+    // })
 
     // sort 
     const sort_authors = (a, b) => {

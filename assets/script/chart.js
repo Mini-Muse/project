@@ -14,27 +14,167 @@ const action_width_large = 10;
 const action_width_small = action_width_large/3*2;
 const action_width_very_small = action_width_large/3;
 
-const colors = [
-    '#F0E3CB',
-    '#C9DFE5',
-    '#E0BBB6',
-    '#BAB7DE',
-    '#C1DDAB'
-] 
+// const colors = [
+//     '#F0E3CB',
+//     '#C9DFE5',
+//     '#E0BBB6',
+//     '#BAB7DE',
+//     '#C1DDAB'
+// ] 
 
 function get_color(value){
+
     const categoryColors = {
-        "a": "#efd295",
-        "b": "#C9DFE5"
-        // "Edited": "#C9DFE5",
-        // "Order": "#E0BBB6"
+        'decide': '#C9DFE5',
+        'get': '#FFB6C1',
+        'influence': '#40E0D0',
+        'make': '#E0BBB6',
+        'manage': '#FFDAB9',
+        'movement': '#b1dbee',
+        'pursuit' : '#FF7F50',
+        'react': '#E6E6FA',
+        'state': '#efd295',
+        'transform': '#FFD700'
     };
 
+    let color = '#C0C0C0' // // #7fbbdb "#000000";
     if (categoryColors.hasOwnProperty(value)) {
-        return categoryColors[value];
-    } else {
-        return '#7fbbdb' //"#000000";
+        color = categoryColors[value];
     }
+    return color 
+}
+
+function action_full_name(action_category){
+    let full_name = ''
+
+    if (action_category == 'decide'){
+        full_name = 'decide something'
+    }
+    else if (action_category == 'get'){
+        full_name = 'get something'
+    }
+    else if (action_category == 'influence'){
+        full_name = 'influence something'
+    }
+    else if (action_category == 'make'){
+        full_name = 'make something'
+    }
+    else if (action_category == 'manage'){
+        full_name = 'manage something'
+    }
+    else if (action_category == 'movement'){
+        full_name = 'movement towards something'
+    }
+    else if (action_category == 'pursuit'){
+        full_name = 'pursuit something'
+    }
+    else if (action_category == 'react'){
+        full_name = 'react to something'
+    }
+    else if (action_category == 'state'){
+        full_name = 'state something'
+    }
+    else if (action_category == 'transform'){
+        full_name = 'transform something'
+    }
+    else {
+        full_name = ''
+    }
+
+    return full_name
+}
+
+function get_action_category(action){
+    let category = ''
+
+    decice_list = [
+        'abgelehnt',
+        'ablehnte',
+        'abzulehnen',
+        'accepter'
+    ]
+
+    get_list = [
+        'abnahm',
+        'verliert',
+        'gewonnen',
+        'brauchten',
+        'erreichte'
+    ]
+
+    influence_list = [
+        'kämpften',
+        'drängten'
+    ]
+
+    make_list = [
+        'schrieb',
+        'verfasst',
+        'formulieren'
+    ]
+
+    manage_list = [
+        'abzuschliessen',
+        'vorzulegen',
+        'analysierte'
+    ]
+
+    movement_list = [
+        'belassen',
+        'blieb',
+        'brachte',
+        'fortfuhren',
+        'gingen',
+        'ging',
+        'preschte'
+    ]
+
+    react_list = [
+        'agierte'
+    ]
+
+    state_list = [
+        'affirme',
+        'argumentierte',
+        'betont',
+        'betonte',
+        'bezeichnete',
+        'fragte',
+        'nannte',
+        'nennt',
+        'stellte',
+        'zitiert',
+        'zitierte',
+        'begründete',
+        'erklärte'
+    ]
+
+    if (decice_list.includes(action)) {
+        category = 'decide';
+    } 
+    else if (get_list.includes(action)) {
+        category = 'get';
+    } 
+    else if (influence_list.includes(action)) {
+        category = 'influence';
+    } 
+    else if (make_list.includes(action)) {
+        category = 'make';
+    } 
+    else if (manage_list.includes(action)) {
+        category = 'manage';
+    } 
+    else if (movement_list.includes(action)) {
+        category = 'movement';
+    } 
+    else if (react_list.includes(action)) {
+        category = 'react';
+    } 
+    else if (state_list.includes(action)) {
+        category = 'state';
+    } 
+
+    return category
 }
 
 function get_actors_per_article(data){
@@ -106,7 +246,11 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return date
         })
         .attr("fill",function(d){
-            return get_color(d.result.action.Name)
+            let action = d.result.action.Name
+            let category = get_action_category(action)
+            let color = get_color(category)
+            // console.log(category, color)
+            return color
         })
         .attr("data-per",1)
         .attr("data-art", function(d){
@@ -190,9 +334,14 @@ function timeline_labels() {
                 let the_info_box = document.getElementById('info_box_' + act);
                 // console.log(act)
 
+                let action_category = ''
+                if (get_action_category(title) != ''){
+                    action_category = action_full_name(get_action_category(title)) + ': '
+                }
+                
                 let output = '';
                 output += '<span style="font-weight:bold;">' + date + '</span><span>, ' + location + '</span><br/>' 
-                output += '<span class="action_cat" style="background-color:' + get_color(title) +'">' + title + '</span>'
+                output += '<span class="action_cat" style="background-color:' + get_color(get_action_category(title)) +'">' + action_category + '' + title + '</span>'
                 output += '<p>' + extract + '</p>' // .slice(0, 20)
 
                 the_info_box.innerHTML = output
