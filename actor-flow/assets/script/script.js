@@ -1,5 +1,5 @@
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=50'
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=100' // 50 100 400 1000
 // const API_actionflow = '../assets/data/data_.json'
 
 const API_document = 'https://minimuse.nlp.idsia.ch/api/documents'
@@ -65,7 +65,7 @@ async function load_data(){
             item.forEach(event => {
                 // console.log(event.result.date)
                 if (!event.result.date) {
-                    year = getRandom(1900, 1950)
+                    year = getRandom(1900, 1920)
                     mont = getRandom(1, 12)
                     day_ = getRandom(1, 27)
 
@@ -92,10 +92,10 @@ async function load_data(){
 
         remove_modal(false)
 
-        // result_box = document.getElementById('result_box')
-        // result_box.innerHTML = 'The credentials are incorrect'
+        result_box = document.getElementById('result_box')
+        result_box.innerHTML = 'The credentials are incorrect'
 
-        // error_message(actors_box)
+        error_message(actors_box)
     });
 }
 
@@ -483,7 +483,7 @@ function show_articles(data,actor_id) {
 
         const list_actors_ = data[item].actors
         const list_actors = [...new Set(list_actors_)];
-        console.log(list_actors)
+        // console.log(list_actors)
         // list_actors = data[item].filter((obj) => {
         //     // console.log(obj)
         //     // the_actor.actor_id != actor_id
@@ -546,13 +546,39 @@ function show_articles(data,actor_id) {
         let doc_id = data[item].article.DocumentId
         const the_container = 'article_timeline_' + id + '_' + doc_id
         
-        const filtered_data = raw_data.filter(item => {
-            // console.log(item.result.actor.Name, id)
-            item.result.actor.Name == id && item.result.articleID === doc_id
-        })
-        // console.log(filtered_data,the_container)
+        let id_ = id.toLowerCase()
 
-        make_timeline(filtered_data,the_container,startDate,endDate,tick_size_small,action_width_large)
+        let individual_timeline_data = actionflows_array.filter(item => {
+            console.log(item)
+            return item.result.articleID == doc_id && item.result.actor.Name.toLowerCase() == id_
+        }); // item.result.actor.Name.toLowerCase() === id_
+        console.log(individual_timeline_data)
+
+        // let individual_timeline_data = actionflows_array.filter(subArray => {
+        //     // console.log()
+        //     subArray.filter(obj => {
+        //         console.log(obj)
+        //         return obj.result
+        //     //     return /*item.result.actor && item.result.actor.Name == id_ && */ item.result.articleID == doc_id
+        //     })
+        // });
+
+
+        // const individual_timeline_data = actionflows_array.filter(inner => {
+        // actionflows_array.map(item => console.log(item.result)) 
+        //     inner.filter(obj => obj.result.actor.Name.toLowerCase() == 'abstimmungstexte')
+        //     console.log(id_)
+        //     // inner.filter(obj => {
+        //     //     name_ = obj.result.actor.Name.toLowerCase()
+        //     //     console.log(obj)
+        //     //     // console.log(name_, id_)
+                
+        //     //     return name_ === id_ // && obj.result.articleID === doc_id
+        //     // })
+
+        // })
+
+        make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size_small,action_width_large)
 
         // (individual_timeline_data,the_container,startDate,endDate,tick_size,action_width)
 

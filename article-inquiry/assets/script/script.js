@@ -1,6 +1,6 @@
-const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents'
+const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents' // ?limit=50
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=200' // 1000
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=200' // 1000 200
 // const API_actionflow =  '../assets/data/data_.json'
 
 const NLP_algorithm = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId='
@@ -352,7 +352,7 @@ function load_article_info(data){
                 output += '<div id="the_title">' + article.title + '</div>'
 
                 output += '<div id="the_info">'
-                output += '<span data-meta="author_name">'  + article.Author + '</span>'
+                output += '<span data-meta="author_name">'  + article.Author + '</span>, '
                 output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + '</span><br/>'
                 output += '<span data-meta="issue">issue ' + article.IssueNumber + '</span>'
                 output += '</div>'
@@ -478,7 +478,7 @@ function chat_with_NLP(){
         const headers = new Headers();
         headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
         
-        let doc_id = documentId //.replace('e','')
+        let doc_id = 1 // documentId 
         get_NLP_reply(doc_id,query)
 
         async function get_NLP_reply(documentId,query){
@@ -500,7 +500,9 @@ function chat_with_NLP(){
                 reply_data = json
                 console.log(reply_data)
 
-                messageReceived.textContent = reply_data
+                response_message = reply_data.query
+
+                messageReceived.textContent = response_message
             })
             .catch(error => {
                 console.error('There was a problem with the prompt fetch operation:', error);

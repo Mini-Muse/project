@@ -276,9 +276,12 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
     xScale = d3.scaleTime()
         .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
         .range([0, box_w - timeline_margin[1] - timeline_margin[3]] )
-        // console.log(startDate,endDate)
 
     // timeline_container
+    if (timeline_box.innerHTML.trim() != '') {
+        timeline_box.innerHTML = ''
+    }
+
     let timeline_container = d3.select(timeline_box).append('svg')
         .attr("width", box_w)
         .attr("height", box_h)
@@ -308,14 +311,15 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return date
         })
         .attr("fill",function(d){
-            let action = d.result.action.Name
+            let action_ = d.result.action.Name
+            let action = action_.replace('¬ ','')
             let category = get_action_category(action)
             let color = get_color(category)
             // console.log(category, color)
             return color
         })
         .attr("stroke",function(d){
-            return '#838383'
+            return '#b1b1b1' //'#838383'
         })
         .attr("stroke-dasharray",function(d){
             if (d.result.null_date == true) {
@@ -341,7 +345,13 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return d.result.date
         })
         .attr("data-loc", function(d){
-            return d.result.location
+            let location = '…'
+
+            if (d.result.location){
+                location = d.result.location.Name
+            }
+            // console.log(d.result.location)
+            return location
         })
         .attr("data-ext", function(d){
             let output = ''
