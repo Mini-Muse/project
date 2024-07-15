@@ -206,7 +206,7 @@ function display_timeline(data, container, filter, sort){
         })
     });
     // console.log(startDate,endDate)
-    console.log(filteredArray)
+    // console.log(filteredArray)
 
     let xScale; 
 
