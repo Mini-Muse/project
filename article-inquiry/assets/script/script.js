@@ -191,15 +191,15 @@ function list_articles(article_data, documentflows_array, sort){
     let sorted_article_data
 
     const sort_date = (a, b) => {
-        const dateA = new Date(b.year);
-        const dateB = new Date(a.year);
+        const dateA = new Date(parseInt(a.article.VolumeYearOfPublication));
+        const dateB = new Date(parseInt(b.article.VolumeYearOfPublication));
 
-        return dateA - dateB;
+        return dateB - dateA;
     };
 
-    const sort_author = (a, b) => { // to be changed
-        const nameA = a.issue; //a[0].actor.name.toUpperCase();
-        const nameB = b.issue; //b[0].actor.name.toUpperCase();
+    const sort_author = (a, b) => {
+        const nameA = a.article.Author;
+        const nameB = b.article.Author;
 
         if (nameA < nameB) {
             return -1;
@@ -479,7 +479,7 @@ function load_article_info(data){
         // list unique actors
         const list_actors = all_act_doc.map(item => item.result.actor.Name);
         const unique_actors = [...new Set(list_actors)];
-        console.log(unique_actors)
+        // console.log(unique_actors)
 
         unique_actors.sort((a, b) => {
             return a.localeCompare(b);
@@ -512,16 +512,15 @@ function load_article_info(data){
 
                 output += '<div class="meta" style="margin-top: 2rem;">'
                 if (list_actors.length > 0){
-                    output += '<p><strong>actors</strong></p>'
+                    output += '<p style="font-weight:bold;">Actors</strong></p>'
                     output += '<div class="all_actors_container">'
                     output += all_actors
                     output += '</div>'
                 }
                 else {
-                    output += '<p>no actors detected</p>'
+                    output += '<p>No actors detected</p>'
                 }
                 output += '</div>'
-
 
                 output += '</div>'
 
@@ -649,8 +648,8 @@ function sort_data(){
 
     the_sort.addEventListener('change', (event) => {
         const article_list = document.getElementById('articles_box')
-
         const sort = event.target.value;
+        console.log(sort)
 
         article_list.innerHTML = ''
 
