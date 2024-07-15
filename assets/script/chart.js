@@ -14,14 +14,6 @@ const action_width_large = 10;
 const action_width_small = action_width_large/3*2;
 const action_width_very_small = action_width_large/3;
 
-// const colors = [
-//     '#F0E3CB',
-//     '#C9DFE5',
-//     '#E0BBB6',
-//     '#BAB7DE',
-//     '#C1DDAB'
-// ] 
-
 function get_color(value){
 
     const categoryColors = {
@@ -343,7 +335,9 @@ function timeline_labels() {
             let per = this.getAttribute('data-per') 
             let act = this.getAttribute('data-act')
 
-            let title = this.getAttribute('data-tit') 
+            let title_ = this.getAttribute('data-tit') 
+            let title = title_.replace('¬ ','')
+
             let date_ = this.getAttribute('data-dat') 
             let location = this.getAttribute('data-loc') 
             let extract = this.getAttribute('data-ext') 
@@ -371,7 +365,7 @@ function timeline_labels() {
                 let output = '';
                 output += '<span style="font-weight:bold;">' + date + '</span>, <span>location: ' + location + '</span><br/>' 
                 output += '<span class="action_cat" style="background-color:' + get_color(get_action_category(title)) +'">' + action_category + '' + title + '</span>'
-                output += '<p>' + extract + '</p>' // .slice(0, 20)
+                output += '<p>keywords: ' + extract + '</p>' // .slice(0, 20)
 
                 the_info_box.innerHTML = output
                 // console.log(date, location, title)
