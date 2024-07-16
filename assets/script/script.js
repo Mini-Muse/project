@@ -139,7 +139,20 @@ function fix_date(date){
     else {
         new_date = String(date)
     }    
-    return new_date
+
+    the_date = new_date.replace('Dezember ','')
+        .replace('15 ','')
+        .replace('April ','')
+        .replace('August ','')
+        .replace('Februar ','')
+        .replace('Januar ','')
+        .replace('May ','')
+        .replace('November ','')
+        .replace('Oktober ','')
+        .replace('September ','')
+        .replace('StGB erst ','')
+
+    return the_date
 }
 
 function error_message(container){
@@ -255,26 +268,41 @@ function get_statistics(data){
     })
 
     // get number of years ---------------
+    // get number of years ---------------
     // console.log(data[0][0].result)
-    let startDate = fix_date(data[0][0].result.date);
-    let endDate = startDate 
+    let startDate = fix_date('1800-01-01') // fix_date(data[0][0].result.date.Name); // fix_date(data[0][0].result.date.Name);
+    let endDate = fix_date('1990-01-01') //startDate 
+    // console.log(startDate)
 
     data.forEach(item => {
         item.forEach(event => {
-            date = event.result.date
+
+            if (event.result.date.Name){
+                date_ = event.result.date.Name
+                date = fix_date(date_.replace('von ',''))
+
+                if (isNaN(date)){
+                    date = 0
+                }
+            }
+            else {
+                date = fix_date(event.result.date)
+            }
+            
             if (fix_date(date) < startDate ) {
-                startDate = date;
+                startDate = fix_date(date);
+                // console.log(date)
             }
             if (fix_date(date) > endDate ) {
-                endDate = date;
+                endDate = fix_date(date);
             }
         })
     });
 
     year_a = parseInt(startDate.toString().slice(0, 4)) 
     year_b = parseInt(endDate.toString().slice(0, 4))
-    years = year_b - year_a
-    // console.log(year_a,year_b)
+    years = 1982 - 1500 // year_b - year_a
+    // console.log(year_a,year_b,endDate)
 
     // get containers ---------------
     const actor_count = document.getElementById('actor_count');
@@ -293,7 +321,7 @@ function random_date(){
     year = getRandom(1890, 1930)
     mont = getRandom(1, 12)
     day_ = getRandom(1, 27)
-    date = year + '-' + mont + '-' + day_
+    date = year //+ '-' + mont + '-' + day_
 
     return date
 }

@@ -63,7 +63,8 @@ async function load_data(){
         // fix null date
         actionflows_array.forEach(item => {
             item.forEach(event => {
-                // console.log(event.result.date)
+
+                // console.log(event.result.date.Name)
                 if (!event.result.date) {
 
                     let date_ = event.result.actor.Name
@@ -195,7 +196,7 @@ function display_timeline(data, container, filter, sort){
     let box_h; 
 
     // get start and end date ---------------
-    startDate = fix_date('1900-01-01') //fix_date(data[0][0].date.value);
+    startDate = fix_date('1800-01-01') //fix_date(data[0][0].date.value);
     endDate = startDate 
 
     // set an array of actors per article
@@ -208,11 +209,23 @@ function display_timeline(data, container, filter, sort){
             all_actions += 1
             date = event.result.date
 
-            if (fix_date(date) < startDate ) {
-                startDate = date;
+            if (event.result.date.Name) {
+                if (fix_date(event.result.date.Name) < startDate ) {
+                    startDate = fix_date(event.result.date.Name);
+                }
+                if (fix_date(event.result.date.Name) > endDate ) {
+                    endDate = fix_date(event.result.date.Name);
+                }  
+                // console.log(startDate,endDate)
             }
-            if (fix_date(date) > endDate ) {
-                endDate = date;
+
+            if (!event.result.date.Name){
+                if (fix_date(date) < startDate ) {
+                    startDate = fix_date(date);
+                }
+                if (fix_date(date) > endDate ) {
+                    endDate = fix_date(date);
+                }  
             }
         })
     });
@@ -588,82 +601,96 @@ function show_articles(data,actor_id) {
     }
 }
 
-function get_statistics(data){
-    // console.log(data)
+// function get_statistics(data){
+//     // console.log(data)
 
-    let actors = 0;
-    let articles = 0;
-    let actions = 0;
-    let years = 0;
+//     let actors = 0;
+//     let articles = 0;
+//     let actions = 0;
+//     let years = 0;
 
-    const actorCount = {};
-    const articleCount = {};
+//     const actorCount = {};
+//     const articleCount = {};
 
-    // get number of actors ---------------
-    data.forEach(item => {
-        item.forEach(action => {
-            // console.log(action.result)
-            // const actorName = action.actor.actor_id;
-            const actorName = action.result.actor.Name
-            actorCount[actorName] = (actorCount[actorName] || 0) + 1;
-        })
-    });
-    actors = Object.keys(actorCount).length;
-
-
-    // get number of articles ---------------
-    data.forEach(item => {
-        item.forEach(action => {
-            // console.log(action.result.articleID)
-            // const actorName = action.result.actor.Id
-            const documentID = action.result.articleID
-            articleCount[documentID] = (articleCount[documentID] || 0) + 1;
-        })
-    });
-    articles = Object.keys(articleCount).length;
+//     // get number of actors ---------------
+//     data.forEach(item => {
+//         item.forEach(action => {
+//             // console.log(action.result)
+//             // const actorName = action.actor.actor_id;
+//             const actorName = action.result.actor.Name
+//             actorCount[actorName] = (actorCount[actorName] || 0) + 1;
+//         })
+//     });
+//     actors = Object.keys(actorCount).length;
 
 
-    // get number of actions ---------------
-    data.forEach((item,i) => {
-        item.forEach((action,a) => {
-            actions += 1
-        })
-    })
+//     // get number of articles ---------------
+//     data.forEach(item => {
+//         item.forEach(action => {
+//             // console.log(action.result.articleID)
+//             // const actorName = action.result.actor.Id
+//             const documentID = action.result.articleID
+//             articleCount[documentID] = (articleCount[documentID] || 0) + 1;
+//         })
+//     });
+//     articles = Object.keys(articleCount).length;
 
-    // get number of years ---------------
-    // console.log(data[0][0].result)
-    let startDate = fix_date(data[0][0].result.date);
-    let endDate = startDate 
 
-    data.forEach(item => {
-        item.forEach(event => {
-            date = event.result.date
-            if (fix_date(date) < startDate ) {
-                startDate = date;
-            }
-            if (fix_date(date) > endDate ) {
-                endDate = date;
-            }
-        })
-    });
+//     // get number of actions ---------------
+//     data.forEach((item,i) => {
+//         item.forEach((action,a) => {
+//             actions += 1
+//         })
+//     })
 
-    year_a = parseInt(startDate.toString().slice(0, 4)) 
-    year_b = parseInt(endDate.toString().slice(0, 4))
-    years = year_b - year_a
-    // console.log(year_a,year_b)
+//     // get number of years ---------------
+//     // console.log(data[0][0].result)
+//     let startDate = fix_date('1890-01-01') // fix_date(data[0][0].result.date.Name); // fix_date(data[0][0].result.date.Name);
+//     let endDate = startDate 
+//     // console.log(startDate)
 
-    // get containers ---------------
-    const actor_count = document.getElementById('actor_count');
-    const articles_actions = document.getElementById('articles_actions');
-    const total_actions = document.getElementById('total_actions');
-    const timespan_actions = document.getElementById('timespan_actions');
+//     data.forEach(item => {
+//         item.forEach(event => {
 
-    // display statistics ---------------
-    actor_count.innerHTML = actors;
-    articles_actions.innerHTML = articles;
-    total_actions.innerHTML = actions;
-    timespan_actions.innerHTML = years;
-}
+//             if (event.result.date.Name){
+//                 date_ = event.result.date.Name
+//                 date = fix_date(date_.replace('von ',''))
+
+//                 if (isNaN(date)){
+//                     date = 0
+//                 }
+//             }
+//             else {
+//                 date = fix_date(event.result.date)
+//             }
+            
+//             if (fix_date(date) < startDate ) {
+//                 startDate = date;
+//                 // console.log(date)
+//             }
+//             if (fix_date(date) > endDate ) {
+//                 endDate = date;
+//             }
+//         })
+//     });
+
+//     year_a = parseInt(startDate.toString().slice(0, 4)) 
+//     year_b = parseInt(endDate.toString().slice(0, 4))
+//     years = year_b - year_a
+//     // console.log(year_a,year_b,endDate)
+
+//     // get containers ---------------
+//     const actor_count = document.getElementById('actor_count');
+//     const articles_actions = document.getElementById('articles_actions');
+//     const total_actions = document.getElementById('total_actions');
+//     const timespan_actions = document.getElementById('timespan_actions');
+
+//     // display statistics ---------------
+//     actor_count.innerHTML = actors;
+//     articles_actions.innerHTML = articles;
+//     total_actions.innerHTML = actions;
+//     timespan_actions.innerHTML = years;
+// }
 
 function sort_data(){
     const the_sort = document.getElementById('the_sort');

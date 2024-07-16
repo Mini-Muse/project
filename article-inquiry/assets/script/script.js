@@ -1,6 +1,6 @@
 const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents' // ?limit=50
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=200' // 1000 200
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=2000' // 1000 200
 // const API_actionflow =  '../assets/data/data_.json'
 
 const NLP_algorithm = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId='
@@ -251,8 +251,11 @@ function list_articles(article_data, documentflows_array, sort){
 
     articles_box.innerHTML = output
 
-    let startDate = fix_date(documentflows_array[0][0].result.date) 
-    let endDate = startDate 
+    startDate = fix_date('1500-01-01') //fix_date(data[0][0].date.value);
+    endDate = startDate 
+
+    // let startDate = fix_date(documentflows_array[0][0].result.date) 
+    // let endDate = startDate 
     // console.log(startDate)
 
     year_a = parseInt(startDate.toString().slice(0, 4)) 

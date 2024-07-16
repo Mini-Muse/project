@@ -300,7 +300,14 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
     let action_items = actions_box.append("rect")
         .attr("class", "act")
         .attr("x", function(d){
-            let the_date = new Date(fix_date(d.result.date))
+            if (d.result.date.Name){
+                date = fix_date(d.result.date.Name)
+            }
+            else {
+                date = fix_date(d.result.date)                
+            }
+
+            let the_date = new Date(fix_date(date))
             let x_pos = xScale(the_date) - (action_width/2) // + (action_width/1)
             return x_pos
         })
@@ -309,7 +316,14 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         .attr("height",box_h - margin[0] -  5) //  - margin[0] - margin[3]
         .attr("r", 5)
         .attr("data-date", function(d){
-            let date = xScale(new Date(fix_date(d.result.date))) 
+            if (d.result.date.Name){
+                date = fix_date(d.result.date.Name)
+                // console.log(date)
+            }
+            else {
+                date = d.result.date
+                // console.log(date)
+            }
             return date
         })
         .attr("fill",function(d){
@@ -344,7 +358,14 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return d.result.action.Name
         })
         .attr("data-dat", function(d){
-            return d.result.date
+            if (d.result.date.Name){
+                date = fix_date(d.result.date.Name)
+            }
+            else {
+                date = d.result.date
+            }
+            // console.log(date)
+            return date
         })
         .attr("data-loc", function(d){
             let location = '…'
