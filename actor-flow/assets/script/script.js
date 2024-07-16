@@ -60,9 +60,15 @@ async function load_data(){
         }, []);
         actionflows_array = Object.values(actionflows);
 
+        // actionflows_array.filter(item => event.result.date.Name > 1600)
+
         // fix null date
         actionflows_array.forEach(item => {
             item.forEach(event => {
+
+                // if (event.result.date.Name){
+                //     console.log(event.result.date.Name)
+                // }
 
                 // console.log(event.result.date.Name)
                 if (!event.result.date) {
@@ -499,7 +505,7 @@ function show_articles(data,actor_id) {
 
         const list_actors_ = data[item].actors
         const list_actors = [...new Set(list_actors_)];
-        // console.log(list_actors)
+        // console.log(data[item])
         // list_actors = data[item].filter((obj) => {
         //     // console.log(obj)
         //     // the_actor.actor_id != actor_id
