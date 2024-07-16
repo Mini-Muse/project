@@ -1,0 +1,188 @@
+decide_list = [
+    'abgelehnt',
+    'ablehnte',
+    'abzulehnen',
+    'accepter',
+    'beabsichtigte',
+    'beabsichtigte',
+    'beantragte',
+    'belassen',
+    'entschied',
+    'hielt',
+    'leiste',
+    'liesse',
+    'setzte',
+    'stellte'
+]
+
+get_list = [
+    'abnahm',
+    'auffangen',
+    'beansprucht',
+    'besorgen',
+    'brauchten',
+    'einholen',
+    'erhalten',
+    'erreichte',
+    'erwerben',
+    'gewonnen',
+    'holen',
+    'kriegen',
+    'verliert'
+]
+
+influence_list = [
+    'beeinflussen',
+    'beflügelte',
+    'betonen',
+    'drängten',
+    'kämpften',
+    'lehren',
+    'leiten',
+    'manipulieren',
+    'motivieren',
+    'steuern',
+    'überreden',
+    'überzeugen'
+]
+
+make_list = [
+    'aufführen',
+    'aufführt',
+    'ausprägte',
+    'baute',
+    'bedienten',
+    'befolgte',
+    'begann',
+    'endete',
+    'formulieren',
+    'formulieren',
+    'schrieb',
+    'verfasst'
+]
+
+manage_list = [
+    'abzuschliessen',
+    'analysierte',
+    'ausgeschlossen',
+    'ausgesetzt',
+    'ausreichten',
+    'auszuschliessen',
+    'beauftragte',
+    'bedingt',
+    'befasst',
+    'befasste',
+    'leitete',
+    'schubladisierte',
+    'stellten',
+    'vorzulegen',
+    'waltet'
+]
+
+movement_list = [
+    'austrat',
+    'belassen',
+    'bewegen',
+    'blieb',
+    'brachte',
+    'fliegen',
+    'fortfuhren',
+    'gehen',
+    'ging',
+    'gingen',
+    'kam',
+    'kamen',
+    'kommen',
+    'kommt',
+    'preschte',
+    'rennen',
+    'segeln',
+    'stammt'
+]
+
+pursuit_list = [
+    'anstreben',
+    'bemühen',
+    'erreichen',
+    'fahnden',
+    'folgen',
+    'nachgehen',
+    'sich bemühen',
+    'streben',
+    'suchen',
+    'verfolgen',
+    'zielen'
+]
+
+react_list = [
+    'ablehnen',
+    'agierte',
+    'aufgefallen',
+    'aufgefallen',
+    'ausbrachen',
+    'auslöste',
+    'beanspruchten',
+    'beantworten',
+    'behauptete',
+    'beklagen',
+    'berichtete',
+    'eingreifen',
+    'entgegnen',
+    'erwidern',
+    'klagen',
+    'protestieren',
+    'reagieren',
+    'replizieren',
+    'zustimmen'
+]   
+
+state_list = [
+    'affirme',
+    'argumentierte',
+    'argumentierten',
+    'ausdrückte',
+    'aussah',
+    'aussi',
+    'bat',
+    'beantwortet',
+    'bedaure',
+    'bedeutete',
+    'bedeutete',
+    'befand',
+    'befanden',
+    'befindet',
+    'begründete',
+    'begründete',
+    'bestätigte',
+    'betont',
+    'betonte',
+    'bezeichnen',
+    'bezeichnete',
+    'erklärte',
+    'fragte',
+    'gilt',
+    'nannte',
+    'nennt',
+    'sah',
+    'siehe',
+    'sieht',
+    'stellte',
+    'zeigte',
+    'zitiert',
+    'zitierte',
+    'äusserte'
+]
+
+transform_list = [
+    'anreichern',
+    'ausgedünnt',
+    'beitrat',
+    'erneuern',
+    'modifizieren',
+    'reformieren',
+    'umformen',
+    'umstrukturieren',
+    'umwandeln',
+    'verbessern',
+    'verändern'
+]

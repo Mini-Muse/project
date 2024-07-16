@@ -19,17 +19,17 @@ function get_color(value){
     const categoryColors = {
         'decide': '#9DD1E7',
         'get': '#85D6D0',
-        'influence': '#D79E96', // '#40E0D0',
+        'influence': '#D79E96',
         'make': '#D79E96',
         'manage': '#92D2EE',
         'movement': '#ff8c67',
         'pursuit' : '#D7D7FA',
-        'react': '#E6E6FA',
-        'state': '#E3B081', // #efd295
+        'react': '#ccccf1',
+        'state': '#E3B081',
         'transform': '#EFC700'
     };
 
-    let color = '#C0C0C0' // // #7fbbdb "#000000";
+    let color = '#C0C0C0'
     if (categoryColors.hasOwnProperty(value)) {
         color = categoryColors[value];
     }
@@ -81,53 +81,69 @@ function get_action_category(action){
 
 
     decide_list = [
-        'liesse',
-        'leiste',
-        'setzte',
-        'stellte',
-        'hielt',
-        'belassen',
         'abgelehnt',
         'ablehnte',
         'abzulehnen',
         'accepter',
         'beabsichtigte',
-        'beantragte',
-        'entschied',
         'beabsichtigte',
-        'beantragte'
+        'beantragte',
+        'belassen',
+        'entschied',
+        'hielt',
+        'leiste',
+        'liesse',
+        'setzte',
+        'stellte'
     ]
 
     get_list = [
         'abnahm',
-        'verliert',
-        'gewonnen',
+        'auffangen',
+        'beansprucht',
+        'besorgen',
         'brauchten',
+        'einholen',
+        'erhalten',
         'erreichte',
-        'beansprucht'
+        'erwerben',
+        'gewonnen',
+        'holen',
+        'kriegen',
+        'verliert'
     ]
 
     influence_list = [
-        'kämpften',
+        'beeinflussen',
+        'beflügelte',
+        'betonen',
         'drängten',
-        'beflügelte'
+        'kämpften',
+        'lehren',
+        'leiten',
+        'manipulieren',
+        'motivieren',
+        'steuern',
+        'überreden',
+        'überzeugen'
     ]
 
     make_list = [
-        'schrieb',
-        'verfasst',
-        'formulieren',
         'aufführen',
         'aufführt',
         'ausprägte',
         'baute',
         'bedienten',
         'befolgte',
-        'formulieren'
+        'begann',
+        'endete',
+        'formulieren',
+        'formulieren',
+        'schrieb',
+        'verfasst'
     ]
 
     manage_list = [
-        'waltet',
         'abzuschliessen',
         'analysierte',
         'ausgeschlossen',
@@ -138,45 +154,74 @@ function get_action_category(action){
         'bedingt',
         'befasst',
         'befasste',
-        'vorzulegen',
+        'leitete',
         'schubladisierte',
-        'stellten'
+        'stellten',
+        'vorzulegen',
+        'waltet'
     ]
 
     movement_list = [
+        'austrat',
         'belassen',
+        'bewegen',
         'blieb',
         'brachte',
+        'fliegen',
         'fortfuhren',
-        'gingen',
+        'gehen',
         'ging',
+        'gingen',
+        'kommen',
+        'kam',
+        'kamen',
+        'kommt',
         'preschte',
-        'austrat',
+        'rennen',
+        'segeln',
         'stammt'
     ]
 
     pursuit_list = [
-
+        'anstreben',
+        'bemühen',
+        'erreichen',
+        'fahnden',
+        'folgen',
+        'nachgehen',
+        'sich bemühen',
+        'streben',
+        'suchen',
+        'verfolgen',
+        'zielen'
     ]
 
     react_list = [
+        'ablehnen',
         'agierte',
         'aufgefallen',
         'aufgefallen',
         'ausbrachen',
-        'auslöste'
+        'auslöste',
+        'beanspruchten',
+        'beantworten',
+        'behauptete',
+        'beklagen',
+        'berichtete',
+        'eingreifen',
+        'entgegnen',
+        'erwidern',
+        'klagen',
+        'protestieren',
+        'reagieren',
+        'replizieren',
+        'zustimmen'
     ]   
 
     state_list = [
-        'bezeichnen',
-        'argumentierte',
-        'begründete',
-        'gilt',
-        'siehe',
-        'sieht',
-        'sah',
         'affirme',
         'argumentierte',
+        'argumentierten',
         'ausdrückte',
         'aussah',
         'aussi',
@@ -189,20 +234,39 @@ function get_action_category(action){
         'befanden',
         'befindet',
         'begründete',
+        'begründete',
+        'bestätigte',
         'betont',
         'betonte',
+        'bezeichnen',
         'bezeichnete',
         'erklärte',
         'fragte',
+        'gilt',
         'nannte',
         'nennt',
+        'sah',
+        'siehe',
+        'sieht',
         'stellte',
+        'zeigte',
         'zitiert',
-        'zitierte'
+        'zitierte',
+        'äusserte'
     ]
 
     transform_list = [
-        'ausgedünnt'
+        'anreichern',
+        'ausgedünnt',
+        'beitrat',
+        'erneuern',
+        'modifizieren',
+        'reformieren',
+        'umformen',
+        'umstrukturieren',
+        'umwandeln',
+        'verbessern',
+        'verändern'
     ]
 
     action = action.toLowerCase()
