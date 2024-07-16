@@ -456,6 +456,11 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
                 return 'no keywords available'
             }
         })
+        .attr("data-comp", function(d){
+            let completness = d.result.completeness
+            return completness
+        })
+
         // .on('mouseover', function (d, i) {
         //     d3.select(this).transition()
         //         .duration('50')

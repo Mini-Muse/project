@@ -348,6 +348,19 @@ function actor_type(value){
     return type
 }
 
+function completeness(result){
+    let value = 0
+
+    if (result.location){
+        value++
+    }
+    if (result.date){
+        value++
+    }
+
+    return value
+}
+
 document.addEventListener("DOMContentLoaded", function(){
 
     load_footer()

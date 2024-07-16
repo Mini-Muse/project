@@ -49,7 +49,6 @@ async function load_data(){
 
         // remove miscellaneus actors
         data = data.filter((item) => item.result.actorType.length  > 0 &&  item.result.actorType[0] != 'MISC')
-        console.log(data)
 
         // group objects by actor name
         const actionflows = data.reduce((acc, obj) => {
@@ -61,16 +60,57 @@ async function load_data(){
             return acc;
         }, []);
         actionflows_array = Object.values(actionflows);
+        // console.log(actionflows)
+
+        // gather the completeness of the results
+        // -----------------------------------------------
+
+        let total_completeness = {};
+        let total_actions = {};
+        actionflows_array.forEach(subArray => {
+            let actions = 0
+
+            subArray.forEach(item => {
+                actions++
+
+                let result = item.result
+                let articleID = result.articleID
+                let complete = completeness(result)
+                // console.log(complete)
+
+                if (total_completeness[articleID]) {
+                    total_completeness[articleID] += complete;
+                } else {
+                    total_completeness[articleID] = complete;
+                }
+
+                if (total_actions[articleID]) {
+                    total_actions[articleID] += actions;
+                } else {
+                    total_actions[articleID] = actions;
+                }
+            })
+        });
+
+        actionflows_array.forEach(subArray => {
+            subArray.forEach(item => {
+                let comp = completeness(item.result)
+                let articleID = item.result.articleID
+                let the_completeness = (total_completeness[articleID] / 2) * 100 / total_actions[articleID]
+
+                // console.log(articleID, total_actions[articleID], total_completeness[articleID])
+                // console.log(articleID, comp, total_completeness[articleID], total_actions[articleID], the_completeness)
+
+                item.result.completeness = the_completeness
+            })
+        });
+        console.log(actionflows_array)
 
         // actionflows_array.filter(item => event.result.date.Name > 1600)
 
         // fix null date
         actionflows_array.forEach(item => {
             item.forEach(event => {
-
-                // if (event.result.date.Name){
-                //     console.log(event.result.date.Name)
-                // }
 
                 // console.log(event.result.date.Name)
                 if (!event.result.date) {
@@ -151,18 +191,22 @@ function display_timeline(data, container, filter, sort){
     let count_actions = {}
     filteredArray.forEach(item => {
         item.forEach(event => {
+            let actor_name = event.result.actor.Name
             let action = event.result.action.Name
             let category = get_action_category(action)
+            let completeness = event.result.completeness
 
-            if (category == ''){
-                if (count_actions[action]) {
-                    count_actions[action]++;
-                } 
-                else {
-                    count_actions[action] = 1;
-                }
-                // console.log(action, ' > ',category)
-            }
+            // console.log(actor_name, completeness)
+
+            // if (category == ''){
+            //     if (count_actions[action]) {
+            //         count_actions[action]++;
+            //     } 
+            //     else {
+            //         count_actions[action] = 1;
+            //     }
+            //     // console.log(action, ' > ',category)
+            // }
         })
     })
     // console.log(count_actions)
@@ -201,11 +245,19 @@ function display_timeline(data, container, filter, sort){
         return b.length - a.length;
     }
 
+    const sort_completness = (a, b) => {
+        console.log(a[0].result.completeness)
+        return b[0].result.completeness - a[0].result.completeness;
+    }
+
     if (sort == 'name'){
         data = filteredArray.sort(sort_authors);
     }
     else if (sort == 'actions'){ // number of action
         data = filteredArray.sort(sort_action);
+    }
+    else if (sort == 'completness'){ // number of action
+        data = filteredArray.sort(sort_completness);
     }
     else {
         data = filteredArray.sort(sort_date);
