@@ -4,7 +4,6 @@ const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&lim
 
 const API_document = 'https://minimuse.nlp.idsia.ch/api/documents'
 
-let raw_data
 let actionflows_array
 let actor_per_article
 
@@ -46,7 +45,10 @@ async function load_data(){
     })
     .then(json => {
         data = json
-        raw_data = json
+        // console.log(data)
+
+        // remove miscellaneus actors
+        data = data.filter((item) => item.result.actorType.length  > 0 &&  item.result.actorType[0] != 'MISC')
         console.log(data)
 
         // group objects by actor name
@@ -117,13 +119,7 @@ function display_timeline(data, container, filter, sort){
         filteredArray = data
     }
     else {
-        if (filter == 'MISC'){
-            filteredArray = data.map(subArray => subArray
-                .filter(obj => obj.result.actorType[0] === "MISC")
-            )
-            .filter(subArray => subArray.length > 0)
-        }
-        else if (filter == 'PER'){
+        if (filter == 'PER'){
             filteredArray = data.map(subArray => subArray
                 .filter(obj => obj.result.actorType[0] === "PER")
             )
@@ -291,7 +287,8 @@ function display_timeline(data, container, filter, sort){
             
         let actor_role = actor_name_box.append('p')
             .text(function(d){
-                return item[0].result.actorType // '<actor role>' //
+                let role = item[0].result.actorType 
+                return actor_type(role)
             })
             .attr('class','actor_name_role')
 

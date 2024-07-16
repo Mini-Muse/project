@@ -326,6 +326,28 @@ function random_date(){
     return date
 }
 
+function actor_type(value){
+    let type = value 
+
+    if (value == 'PER'){
+        type = 'person'
+    }
+    else if (value == 'ORG'){
+        type = 'organization'
+    }
+    else if (value == 'DATE'){
+        type = 'date'
+    }
+    else if (value == 'LOC'){
+        type = 'location'
+    }
+    else {
+        type = 'undefined'
+    }
+
+    return type
+}
+
 document.addEventListener("DOMContentLoaded", function(){
 
     load_footer()
