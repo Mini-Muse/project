@@ -423,7 +423,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         })
         .attr("data-dat", function(d){
             if (d.result.date.Name){
-                date = fix_date(d.result.date.Name)
+                date = d.result.date.Name //fix_date(d.result.date.Name)
             }
             else {
                 date = d.result.date
@@ -432,12 +432,11 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return date
         })
         .attr("data-loc", function(d){
-            let location = '…'
+            let location = 'unknown …'
 
-            if (d.result.location){
+            if (d.result.location && d.result.location.Name){
                 location = d.result.location.Name
             }
-            // console.log(d.result.location)
             return location
         })
         .attr("data-ext", function(d){

@@ -341,6 +341,9 @@ function actor_type(value){
     else if (value == 'LOC'){
         type = 'location'
     }
+    else if (value == 'MISC'){
+        type = 'miscellaneous'
+    }
     else {
         type = 'undefined'
     }
@@ -359,6 +362,41 @@ function completeness(result){
     }
 
     return value
+}
+
+function filter_raw_actions(data){
+    
+    let filtered_data = data
+
+    // remove miscellaneus actors
+    filtered_data = data.filter((item) => item.result.actorType.length > 0 && item.result.actorType != 'MISC') 
+
+    // remove actions without a valid date
+    const treshold = 1500
+    filtered_data = data.filter((item) => 
+        item.result.date && !item.result.date.Name || // && containsOnlyDigits(item.result.date) === true ||// && check_treshold(item.result.date.Name,treshold) === true
+        item.result.date && item.result.date.Name //&& containsOnlyDigits(item.result.date.Name) === true
+    )
+
+    function check_treshold(str, treshold){
+        let in_treshold = false
+
+        if (containsOnlyDigits(str) == true){
+            if (str >= treshold){
+                console.log(str)
+                in_treshold = true 
+            }
+        }
+        
+        return in_treshold
+    }
+
+    function containsOnlyDigits(str) {
+        new_str = /^\d+$/.test(str)
+        return new_str;   
+    }
+
+    return filtered_data
 }
 
 document.addEventListener("DOMContentLoaded", function(){

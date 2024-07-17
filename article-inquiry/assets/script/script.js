@@ -87,6 +87,8 @@ async function load_data(){
         actor_data = json
         // console.log(actor_data)
 
+        actor_data = filter_raw_actions(actor_data)
+        
         // group objects by actor name
         const actionflows = actor_data.reduce((acc, obj) => {
             const actorName = obj.result.actor.Name

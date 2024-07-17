@@ -45,10 +45,9 @@ async function load_data(){
     })
     .then(json => {
         data = json
-        // console.log(data)
 
-        // remove miscellaneus actors
-        data = data.filter((item) => item.result.actorType.length  > 0 &&  item.result.actorType[0] != 'MISC')
+        data = filter_raw_actions(data)
+        console.log(data)
 
         // group objects by actor name
         const actionflows = data.reduce((acc, obj) => {
@@ -104,7 +103,7 @@ async function load_data(){
                 item.result.completeness = the_completeness
             })
         });
-        console.log(actionflows_array)
+        // console.log(actionflows_array)
 
         // actionflows_array.filter(item => event.result.date.Name > 1600)
 
@@ -346,8 +345,9 @@ function display_timeline(data, container, filter, sort){
             
         let actor_role = actor_name_box.append('p')
             .text(function(d){
-                let role = item[0].result.actorType 
-                return actor_type(role)
+                let role_ = item[0].result.actorType
+                let role = actor_type(role_)
+                return role
             })
             .attr('class','actor_name_role')
 
