@@ -268,14 +268,18 @@ function list_articles(article_data, documentflows_array, sort){
 
     documentflows_array.forEach(item => {
         item.forEach(event => {
-            date = event.result.date
-            // console.log(date)
 
-            if (fix_date(date) < startDate ) {
-                startDate = date;
-            }
-            if (fix_date(date) > endDate ) {
-                endDate = date;
+            date = event.result.date.Name
+            date0 = small_fix_date(date)
+
+            if (containsOnlyDigits(date0) == true && date0 > 200){
+                // console.log(date0)
+                if (fix_date(date0) < startDate ) {
+                    startDate = fix_date(date0);
+                }
+                if (fix_date(date0) > endDate ) {
+                    endDate = fix_date(date0);
+                }  
             }
         })
     });

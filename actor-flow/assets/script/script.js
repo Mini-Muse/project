@@ -108,32 +108,32 @@ async function load_data(){
         // actionflows_array.filter(item => event.result.date.Name > 1600)
 
         // fix null date
-        actionflows_array.forEach(item => {
-            item.forEach(event => {
+        // actionflows_array.forEach(item => {
+        //     item.forEach(event => {
 
-                // console.log(event.result.date.Name)
-                if (!event.result.date) {
+        //         // console.log(event.result.date.Name)
+        //         if (!event.result.date) {
 
-                    let date_ = event.result.actor.Name
-                    if (date_.includes('1939')){
-                        date = '1939-01-01'
-                        event.result.null_date = false
-                    }
-                    else if (date_.includes('1890')){
-                        date = '1890-01-01'
-                        event.result.null_date = false
-                    }
-                    else {
-                        date = random_date()
-                        event.result.null_date = true
-                    }
+        //             let date_ = event.result.actor.Name
+        //             if (date_.includes('1939')){
+        //                 date = '1939-01-01'
+        //                 event.result.null_date = false
+        //             }
+        //             else if (date_.includes('1890')){
+        //                 date = '1890-01-01'
+        //                 event.result.null_date = false
+        //             }
+        //             else {
+        //                 date = random_date()
+        //                 event.result.null_date = true
+        //             }
                     
-                    event.result.date = date
-                }
-            })
-        })
+        //             event.result.date = date
+        //         }
+        //     })
+        // })
 
-        display_timeline(actionflows_array,'actors_box','all','name')
+        display_timeline(actionflows_array,'actors_box','all','name') // name action
 
         filter_data()
         sort_data()
@@ -183,34 +183,9 @@ function display_timeline(data, container, filter, sort){
             .filter(subArray => subArray.length > 0)
         }
     }
-    // console.log(filteredArray)
-
-    // display some data in the console
-    // ----------------------------------------------
-    let count_actions = {}
-    filteredArray.forEach(item => {
-        item.forEach(event => {
-            let actor_name = event.result.actor.Name
-            let action = event.result.action.Name
-            let category = get_action_category(action)
-            let completeness = event.result.completeness
-
-            // console.log(actor_name, completeness)
-
-            // if (category == ''){
-            //     if (count_actions[action]) {
-            //         count_actions[action]++;
-            //     } 
-            //     else {
-            //         count_actions[action] = 1;
-            //     }
-            //     // console.log(action, ' > ',category)
-            // }
-        })
-    })
-    // console.log(count_actions)
 
     // sort 
+    // ---------------------------------
     const sort_authors = (a, b) => {
         const nameA = a[0].result.actor.Name.toUpperCase();
         const nameB = b[0].result.actor.Name.toUpperCase();
@@ -224,20 +199,31 @@ function display_timeline(data, container, filter, sort){
         return 0;
     };
 
-    const sort_date = (a, b) => {
-        // console.log(a[0].result.date)
+    // sort by date
+    function parseDate(date_value) {
+        date = null
 
-        let dateA = new Date(a[0].result.date)
-        let dateB = new Date(b[0].result.date)
+        if (date_value.Name && containsOnlyDigits(date_value.Name) == true) { // )
+            let dx = date_value.Name
 
-        if(a[0].result.date.Name){
-            console.log(fix_date(a[0].result.date.Name))
+            // remove outliers 
+            if (dx < 2050 && dx.includes(' ') == false) {
 
-            dateA = new Date(fix_date(a[0].result.date.Name));
-            dateB = new Date(fix_date(a[0].result.date.Name));
+                d0 = small_fix_date(dx)
+                d1 = parseInt(d0)
+
+                date_ = fix_date(d1)
+                date = new Date(date_)
+                // console.log(date)
+            }
         }
+        return date;
+    }
 
-        return dateA - dateB;
+    const sort_date = (a, b) => {
+        const dateA = parseDate(a[0].result.date)
+        const dateB = parseDate(b[0].result.date)
+        return dateB - dateA;
     };
 
     const sort_action = (a, b) => {
@@ -245,25 +231,24 @@ function display_timeline(data, container, filter, sort){
     }
 
     const sort_completness = (a, b) => {
-        console.log(a[0].result.completeness)
         return b[0].result.completeness - a[0].result.completeness;
     }
 
     if (sort == 'name'){
-        data = filteredArray.sort(sort_authors);
+        sorted_filtered_data = filteredArray.sort(sort_authors);
     }
     else if (sort == 'actions'){ // number of action
-        data = filteredArray.sort(sort_action);
+        sorted_filtered_data = filteredArray.sort(sort_action);
     }
     else if (sort == 'completness'){ // completness of the results
-        data = filteredArray.sort(sort_completness);
+        sorted_filtered_data = filteredArray.sort(sort_completness);
     }
-    else {
-        data = filteredArray.sort(sort_date);
+    else if (sort == 'date') {
+        sorted_filtered_data = filteredArray.sort(sort_date);
     }
-    console.log(data)
+    // console.log(sorted_filtered_data)
 
-    get_statistics(filteredArray) 
+    get_statistics(sorted_filtered_data) 
 
     let all_actions = 0
 
@@ -271,43 +256,49 @@ function display_timeline(data, container, filter, sort){
     let box_h; 
 
     // get start and end date ---------------
-    startDate = fix_date('1800-01-01') //fix_date(data[0][0].date.value);
+    startDate = fix_date('1500-01-01') // fix_date(data[0][0].date) // fix_date('1500-01-01') //fix_date(data[0][0].date.value);
     endDate = startDate 
 
-    // set an array of actors per article
-    // actor_per_article = get_actors_per_article(data)
-
-    data.forEach(item => {
+    sorted_filtered_data.forEach(item => {
 
         item.forEach(event => {
 
             all_actions += 1
-            date = event.result.date
+            date = event.result.date.Name
+            date0 = small_fix_date(date)
 
-            if (event.result.date.Name) {
-                if (fix_date(event.result.date.Name) < startDate ) {
-                    startDate = fix_date(event.result.date.Name);
+            if (containsOnlyDigits(date0) == true && date0 > 200){
+                // console.log(date0)
+                if (fix_date(date0) < startDate ) {
+                    startDate = fix_date(date0);
                 }
-                if (fix_date(event.result.date.Name) > endDate ) {
-                    endDate = fix_date(event.result.date.Name);
-                }  
-            }
-
-            if (!event.result.date.Name){
-                if (fix_date(date) < startDate ) {
-                    startDate = fix_date(date);
-                }
-                if (fix_date(date) > endDate ) {
-                    endDate = fix_date(date);
+                if (fix_date(date0) > endDate ) {
+                    endDate = fix_date(date0);
                 }  
             }
         })
     });
+    // console.log(startDate, endDate)
 
     let xScale; 
 
+    // display some data in the console
+    // ----------------------------------------------
+    let count_actions = {}
+    sorted_filtered_data.forEach(item => {
+        item.forEach(event => {
+            let actor_name = event.result.actor.Name
+            let action = event.result.action.Name
+            let category = get_action_category(action)
+            let completeness = event.result.completeness
+
+            // console.log(fix_date(event.result.date.Name), actor_name)
+        })
+    })
+    // console.log(count_actions)
+
     // display data
-    data.forEach((item,i) => {
+    sorted_filtered_data.forEach((item,i) => {
 
         let the_container = d3.select('#' + container)
 
@@ -385,7 +376,6 @@ function display_timeline(data, container, filter, sort){
             .attr("class","open_box")
             .attr("data-open","false")
             .attr("data-actor", function(d){
-                // actor = item[0].result.actor.Name
                 let name = item[0].result.actor.Name
                 let actor_name = name.replace(' ','_')
 
@@ -393,7 +383,6 @@ function display_timeline(data, container, filter, sort){
             })
             .append("p")
             .attr("id", function (d) {
-                // id = item[0].result.actor.Id
                 let name = item[0].result.actor.Name
                 let actor_name = name.replace(' ','_')
 

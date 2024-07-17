@@ -133,25 +133,37 @@ function getCookie(name) {
 function fix_date(date){
     let new_date;
 
-    if (date.length == 4){
-        new_date = String(date) + '-01-01'
+    // console.log(typeof date, date)
+    d0 = small_fix_date(date)
+
+    if (d0.length == 4){
+        new_date = String(d0) + '-01-01'
     }
     else {
-        new_date = String(date)
+        new_date = String(d0)
     }    
+    // console.log(typeof new_date, new_date)
+    return new_date
+}
 
-    the_date = new_date.replace('Dezember ','')
-        .replace('15 ','')
-        .replace('April ','')
-        .replace('August ','')
-        .replace('Februar ','')
-        .replace('Januar ','')
-        .replace('May ','')
-        .replace('November ','')
-        .replace('Oktober ','')
-        .replace('September ','')
-        .replace('StGB erst ','')
+function small_fix_date(date){
+    // console.log(date)
 
+    if (typeof date == 'string') {
+        the_date = date.replace('Dezember ','')
+            .replace('15 ','')
+            .replace('April ','')
+            .replace('August ','')
+            .replace('Dezember ','')
+            .replace('Februar ','')
+            .replace('Januar ','')
+            .replace('Mai ','')
+            .replace('May ','')
+            .replace('November ','')
+            .replace('Oktober ','')
+            .replace('September ','')
+            .replace('StGB erst ','')
+    }
     return the_date
 }
 
@@ -372,11 +384,21 @@ function filter_raw_actions(data){
     filtered_data = data.filter((item) => item.result.actorType.length > 0 && item.result.actorType != 'MISC') 
 
     // remove actions without a valid date
-    const treshold = 1500
+    const treshold_a = 1500
+    const treshold_b = 2100
     filtered_data = filtered_data.filter((item) => 
-        item.result.date && !item.result.date.Name || // && containsOnlyDigits(item.result.date) === true ||// && check_treshold(item.result.date.Name,treshold) === true
-        item.result.date && item.result.date.Name //&& containsOnlyDigits(item.result.date.Name) === true
+        item.result.date && !item.result.date.Name && parseInt(fix_date(item.result.date)) > treshold_a  || // && item.result.date > treshold_a && item.result.date < treshold_b || 
+        item.result.date && item.result.date.Name && parseInt(fix_date(item.result.date.Name)) > treshold_a // &&  item.result.date.Name < treshold_b
     )
+    
+    // sort arrays of actions by action date 
+    function sort_date(a, b) {
+        const dateA = a.result.date ? new Date(fix_date(a.result.date.Name) || fix_date(a.result.date)) : new Date();
+        const dateB = b.result.date ? new Date(fix_date(b.result.date.Name) || fix_date(b.result.date)) : new Date();
+        return dateA - dateB;
+    }
+    sorted_filtered_data = filtered_data.sort(sort_date);
+    // console.log(sorted_filtered_data)
 
     function check_treshold(str, treshold){
         let in_treshold = false
@@ -387,16 +409,15 @@ function filter_raw_actions(data){
                 in_treshold = true 
             }
         }
-        
         return in_treshold
     }
 
-    function containsOnlyDigits(str) {
-        new_str = /^\d+$/.test(str)
-        return new_str;   
-    }
+    return sorted_filtered_data
+}
 
-    return filtered_data
+function containsOnlyDigits(str) {
+    new_str = /^\d+$/.test(str)
+    return new_str;   
 }
 
 document.addEventListener("DOMContentLoaded", function(){

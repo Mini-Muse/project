@@ -372,8 +372,12 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             }
 
             let the_date = new Date(fix_date(date))
-            let x_pos = xScale(the_date) - (action_width/2) // + (action_width/1)
+            let x_pos = xScale(the_date) - (action_width/2)
             return x_pos
+        })
+        .attr("data-dateCorrect", function (d) {
+            let date = fix_date(d.result.date.Name)
+            return date
         })
         .attr("y",0)
         .attr("width",action_width)
@@ -382,11 +386,9 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         .attr("data-date", function(d){
             if (d.result.date.Name){
                 date = fix_date(d.result.date.Name)
-                // console.log(date)
             }
             else {
-                date = d.result.date
-                // console.log(date)
+                date = fix_date(d.result.date)
             }
             return date
         })
@@ -395,7 +397,6 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             let action = action_.replace('¬ ','')
             let category = get_action_category(action)
             let color = get_color(category)
-            // console.log(category, color)
             return color
         })
         .attr("stroke",function(d){
@@ -458,6 +459,10 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         .attr("data-comp", function(d){
             let completness = d.result.completeness
             return completness
+        })
+        .attr("data-actionId", function (d) {
+            let actionId = d.result.action.Id
+            return actionId
         })
 
         // .on('mouseover', function (d, i) {
