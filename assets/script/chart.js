@@ -364,6 +364,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
     let action_items = actions_box.append("rect")
         .attr("class", "act")
         .attr("x", function(d){
+            // console.log(d)
             if (d.result.date.Name){
                 date = fix_date(d.result.date.Name)
             }
@@ -538,7 +539,7 @@ function timeline_labels() {
                 }
 
                 let output = '';
-                output += '<span style="font-weight:bold;">' + date + '</span>, <span>location: ' + location + '</span><br/>' 
+                output += '<span style="font-weight:bold;">' + date + '</span> | <span>location: ' + location + '</span><br/>' 
                 output += '<span class="action_cat" style="background-color:' + get_color(get_action_category(title)) +'">' + action_category + '' + title + '</span>'
                 output += '<p>keywords: ' + extract + '</p>' // .slice(0, 20)
 

@@ -105,34 +105,6 @@ async function load_data(){
         });
         // console.log(actionflows_array)
 
-        // actionflows_array.filter(item => event.result.date.Name > 1600)
-
-        // fix null date
-        // actionflows_array.forEach(item => {
-        //     item.forEach(event => {
-
-        //         // console.log(event.result.date.Name)
-        //         if (!event.result.date) {
-
-        //             let date_ = event.result.actor.Name
-        //             if (date_.includes('1939')){
-        //                 date = '1939-01-01'
-        //                 event.result.null_date = false
-        //             }
-        //             else if (date_.includes('1890')){
-        //                 date = '1890-01-01'
-        //                 event.result.null_date = false
-        //             }
-        //             else {
-        //                 date = random_date()
-        //                 event.result.null_date = true
-        //             }
-                    
-        //             event.result.date = date
-        //         }
-        //     })
-        // })
-
         display_timeline(actionflows_array,'actors_box','all','name') // name action
 
         filter_data()
@@ -452,10 +424,6 @@ function get_articles(data){
     }
 
     function display_articles(actor_id){
-        // console.log(actor_id)
-        // console.log(data)
-
-        // actor_id = actor_id //parseInt(actor_id)
 
         // filter articles by actor id
         const documentsRelatedToActorId = data.flatMap(innerList => 
@@ -469,29 +437,15 @@ function get_articles(data){
         );
         // console.log(documentsRelatedToActorId)
 
-        // get documents id and filter out duplicate documents
-        // const documentsData = documentsRelatedToActorId.map(item => {
-        //     return data.filter(subArray => 
-        //         subArray.some(item => item.result.articleID === actor_id)
-        //     );
-        // });
         const uniqueDocumentIds = [...new Set(documentsRelatedToActorId)];
-        // console.log(documentsData)
-
-        // const all_actors = data
-        //     // .filter(item => item.actor.actor_id != actor_id) // filter out actor with actor_id == something
-        //     .map(item => item.actor) // extract actor objects
-        //     .filter((actor, index, self) => self.findIndex(a => a.actor_id === actor.actor_id) === index); // Filter unique actors based on actor_id
-        // // console.log(all_actors)
 
         async function callApisAndGetJson(uniqueDocumentIds) {
             // console.log(uniqueDocumentIds)
 
-            const doc_id = uniqueDocumentIds.map(result => result.result.articleID);
+            const doc_id_ = uniqueDocumentIds.map(result => result.result.articleID);
             const actor_id = uniqueDocumentIds.map(result => result.result.actor.Name);
-            // console.log(actor_id)
 
-            const API_document_id = API_document // + doc_id
+            const API_document_id = API_document 
 
             const headers = new Headers();
             headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
@@ -513,28 +467,21 @@ function get_articles(data){
             })
             .then(json => {
                 all_documents = json
-                // console.log(all_documents)
-
                 const single_document = all_documents.filter(article => {
-                    // console.log(doc_id, article.article.Id)
-                    return doc_id.includes(article.article.Id)
+                    return doc_id_.includes(article.article.Id)
                 });
-                single_document[0].actors = actor_id
-                // console.log(single_document)
-
-                show_articles(single_document,actor_id)
+                show_articles(single_document)
             }) 
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             })
         }
-
         callApisAndGetJson(uniqueDocumentIds)
     }
 }
 
-function show_articles(data,actor_id) {
-    // console.log(data,actor_id)
+function show_articles(data) {
+    // console.log(data)
     
     article_boxes = document.querySelectorAll(".article_boxes");
 
@@ -553,25 +500,38 @@ function show_articles(data,actor_id) {
     
     const actor_line = document.getElementById('actor_id_' + id);
 
-    // console.log(actor_per_article)
+    // display aticle data
+    // ----------------------------------
     for (let item = 0; item < data.length; item++) {
         let article = data[item].article
         // console.log(article)
+
+        the_doc_id = article.Id
         
-        the_other_actors = ''
+        // get all actors
+        let all_actors = sorted_filtered_data.map(subArray => subArray
+            .filter(obj => obj.result.articleID === the_doc_id)
+        )
+        all_actors = all_actors.filter(element => element.length > 0)
+        // console.log(all_actors)
 
-        const list_actors_ = data[item].actors
-        const list_actors = [...new Set(list_actors_)];
-        // console.log(data[item])
-        // list_actors = data[item].filter((obj) => {
-        //     // console.log(obj)
-        //     // the_actor.actor_id != actor_id
-        // })
-        // console.log(list_actors)
+        // get unique actors
+        let unique_actors_ = all_actors
+            .map(element => element[0].result.actor.Name)
+            .filter(name => name) 
+            .reduce((uniqueNames, name) => {
+                uniqueNames.add(name);
+                return uniqueNames;
+            }, new Set());
 
-        // add commas
-        for (let i = 0; i < list_actors.length; i++) {
-            the_other_actors += '<span class="actor_chips">' + list_actors[i] + '</span>'
+        unique_actors = Array.from(unique_actors_)
+        // console.log(unique_actors)
+
+        // add chips
+        the_actors = ''
+        for (let i = 0; i < unique_actors.length; i++) {
+            // console.log(unique_actors[i])
+            the_actors += '<span class="actor_chips">' + unique_actors[i] + '</span>'
         }
         
         let title = article.title
@@ -580,7 +540,7 @@ function show_articles(data,actor_id) {
         let date = 0
         let year = article.VolumeYearOfPublication
         let issue = article.IssueNumber
-        let doc_id = article.DocumentId
+        let doc_id = article.Id
         // console.log(data[item])
 
         output += '<div class="article_row">'
@@ -595,11 +555,11 @@ function show_articles(data,actor_id) {
             output += '</div>'
             
             output += '<div class="meta">'
-            if (list_actors.length > 0){
+            if (all_actors.length > 0){
                 output += '<p>actors</p>'
 
                 output += '<div class="other_actors_container">'
-                output += the_other_actors
+                output += the_actors
                 output += '</div>'
             }
             output += '</div>'
@@ -622,45 +582,15 @@ function show_articles(data,actor_id) {
     for (let item = 0; item < data.length; item++) {
         // console.log(data[item])
 
-        let doc_id = data[item].article.DocumentId
+        let doc_id = data[item].article.Id
         const the_container = 'article_timeline_' + id + '_' + doc_id
-        
-        let id_ = id.toLowerCase()
 
-        let individual_timeline_data = actionflows_array.filter(item => {
-            console.log(item)
-            return item.result.articleID == doc_id && item.result.actor.Name.toLowerCase() == id_
-        }); // item.result.actor.Name.toLowerCase() === id_
-        console.log(individual_timeline_data)
+        const individual_timeline_data = actionflows_array.filter(innerArray => {
+            return innerArray.some(item => item.result.articleID === doc_id);
+        });
+        // console.log(individual_timeline_data[0])
 
-        // let individual_timeline_data = actionflows_array.filter(subArray => {
-        //     // console.log()
-        //     subArray.filter(obj => {
-        //         console.log(obj)
-        //         return obj.result
-        //     //     return /*item.result.actor && item.result.actor.Name == id_ && */ item.result.articleID == doc_id
-        //     })
-        // });
-
-
-        // const individual_timeline_data = actionflows_array.filter(inner => {
-        // actionflows_array.map(item => console.log(item.result)) 
-        //     inner.filter(obj => obj.result.actor.Name.toLowerCase() == 'abstimmungstexte')
-        //     console.log(id_)
-        //     // inner.filter(obj => {
-        //     //     name_ = obj.result.actor.Name.toLowerCase()
-        //     //     console.log(obj)
-        //     //     // console.log(name_, id_)
-                
-        //     //     return name_ === id_ // && obj.result.articleID === doc_id
-        //     // })
-
-        // })
-
-        make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size_small,action_width_large)
-
-        // (individual_timeline_data,the_container,startDate,endDate,tick_size,action_width)
-
+        make_timeline(individual_timeline_data[0],the_container,startDate,endDate,tick_size_small,action_width_large)
     }
 }
 
