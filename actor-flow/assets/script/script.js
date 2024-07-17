@@ -255,12 +255,13 @@ function display_timeline(data, container, filter, sort){
     else if (sort == 'actions'){ // number of action
         data = filteredArray.sort(sort_action);
     }
-    else if (sort == 'completness'){ // number of action
+    else if (sort == 'completness'){ // completness of the results
         data = filteredArray.sort(sort_completness);
     }
     else {
         data = filteredArray.sort(sort_date);
     }
+    console.log(data)
 
     get_statistics(filteredArray) 
 
@@ -276,7 +277,7 @@ function display_timeline(data, container, filter, sort){
     // set an array of actors per article
     // actor_per_article = get_actors_per_article(data)
 
-    filteredArray.forEach(item => {
+    data.forEach(item => {
 
         item.forEach(event => {
 
@@ -290,7 +291,6 @@ function display_timeline(data, container, filter, sort){
                 if (fix_date(event.result.date.Name) > endDate ) {
                     endDate = fix_date(event.result.date.Name);
                 }  
-                // console.log(startDate,endDate)
             }
 
             if (!event.result.date.Name){
@@ -303,13 +303,11 @@ function display_timeline(data, container, filter, sort){
             }
         })
     });
-    // console.log(startDate,endDate)
-    // console.log(filteredArray)
 
     let xScale; 
 
     // display data
-    filteredArray.forEach((item,i) => {
+    data.forEach((item,i) => {
 
         let the_container = d3.select('#' + container)
 

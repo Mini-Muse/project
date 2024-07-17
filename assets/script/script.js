@@ -373,7 +373,7 @@ function filter_raw_actions(data){
 
     // remove actions without a valid date
     const treshold = 1500
-    filtered_data = data.filter((item) => 
+    filtered_data = filtered_data.filter((item) => 
         item.result.date && !item.result.date.Name || // && containsOnlyDigits(item.result.date) === true ||// && check_treshold(item.result.date.Name,treshold) === true
         item.result.date && item.result.date.Name //&& containsOnlyDigits(item.result.date.Name) === true
     )
