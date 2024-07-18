@@ -167,12 +167,11 @@
     .all_actions_row {
         width: 125%;
         padding: 10px 0;
-        /*max-height: 350px;
-        overflow-y: scroll;*/
     }
 
     .all_actions {
-        padding-left: 10px;
+        padding: 0px 10px .5rem 10px;
+        border-bottom: 1px solid #dbdbdb;
     }
 
     .single_action_row {

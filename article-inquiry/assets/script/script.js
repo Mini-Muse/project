@@ -1,6 +1,6 @@
-const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents' // ?limit=50
+const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents?limit=100' // ?limit=50
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
-const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=2000' // 1000 200
+const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=20000' // 1000 200
 // const API_actionflow =  '../assets/data/data_.json'
 
 const NLP_algorithm = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId='
