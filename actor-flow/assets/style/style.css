@@ -89,6 +89,8 @@
 
 .info_box {
     padding: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .open_box {

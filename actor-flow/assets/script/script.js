@@ -623,7 +623,7 @@ function show_articles(data,actor) {
 
                 output_actions += '<div class="single_action_row">'
                 
-                let date = action.date.Name + '<br>'
+                let date = '<span>date: ' + action.date.Name + '</span><br>'
 
                 let location = ''
                 if (action.location && action.location.Name){
@@ -643,8 +643,8 @@ function show_articles(data,actor) {
 
                 // console.log(date)
 
-                output_actions += date
                 output_actions += action_
+                output_actions += date
                 output_actions += location
                 output_actions += key
 
