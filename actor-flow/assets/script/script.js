@@ -504,7 +504,7 @@ function show_articles(data) {
     // ----------------------------------
     for (let item = 0; item < data.length; item++) {
         let article = data[item].article
-        // console.log(article)
+        console.log(article)
 
         the_doc_id = article.Id
         
@@ -556,7 +556,7 @@ function show_articles(data) {
             
             output += '<div class="meta">'
             if (all_actors.length > 0){
-                output += '<p>actors</p>'
+                output += '<p class="label">actors</p>'
 
                 output += '<div class="other_actors_container">'
                 output += the_actors
