@@ -517,7 +517,7 @@ function show_articles(data,actor) {
         // console.log(all_actors)
 
         // get unique actors
-        let unique_actors_ = all_actors
+        let unique_actors__ = all_actors
             .map(element => element[0].result.actor.Name)
             .filter(name => name) 
             .reduce((uniqueNames, name) => {
@@ -525,8 +525,10 @@ function show_articles(data,actor) {
                 return uniqueNames;
             }, new Set());
 
-        unique_actors = Array.from(unique_actors_)
-        // console.log(unique_actors)
+        unique_actors_ = Array.from(unique_actors__)
+
+        // remove the selected actor
+        unique_actors = unique_actors_.filter(item => item !== actor)
 
         // add chips
         the_actors = ''
@@ -556,7 +558,7 @@ function show_articles(data,actor) {
             
             output += '<div class="meta">'
             if (all_actors.length > 0){
-                output += '<p class="small_label">actors</p>'
+                output += '<p class="small_label">other actors</p>'
 
                 output += '<div class="other_actors_container">'
                 output += the_actors
