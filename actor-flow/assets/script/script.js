@@ -73,32 +73,34 @@ async function load_data(){
                 actions++
 
                 let result = item.result
-                let articleID = result.articleID
+                // let articleID = result.articleID
+                let actor_id = result.actor.Name
                 let complete = completeness(result)
-                // console.log(complete)
-
-                if (total_completeness[articleID]) {
-                    total_completeness[articleID] += complete;
+                
+                if (total_actions[actor_id]) {
+                    total_actions[actor_id] += actions;
                 } else {
-                    total_completeness[articleID] = complete;
+                    total_actions[actor_id] = actions;
                 }
 
-                if (total_actions[articleID]) {
-                    total_actions[articleID] += actions;
+                if (total_completeness[actor_id]) {
+                    total_completeness[actor_id] += complete
                 } else {
-                    total_actions[articleID] = actions;
+                    total_completeness[actor_id] = complete
                 }
             })
-        });
+        })
+        // console.log(total_actions)
+        // console.log(total_completeness)
 
         actionflows_array.forEach(subArray => {
             subArray.forEach(item => {
-                let comp = completeness(item.result)
+                // let comp = completeness(item.result)
                 let articleID = item.result.articleID
-                let the_completeness = (total_completeness[articleID] / 2) * 100 / total_actions[articleID]
-
-                // console.log(articleID, total_actions[articleID], total_completeness[articleID])
-                // console.log(articleID, comp, total_completeness[articleID], total_actions[articleID], the_completeness)
+                let actor_id = item.result.actor.Name
+                let the_completeness = total_completeness[actor_id] * 100 / (total_actions[actor_id] * 2)
+                // console.log(the_completeness)
+                // console.log(item.result.actor.Name, total_actions[actor_id] * 2, total_completeness[actor_id])
 
                 item.result.completeness = the_completeness
             })
@@ -615,10 +617,14 @@ function show_articles(data,actor) {
                 let act_color = get_color(get_action_category(action.action.Name))
                 let action_ = '<span class="action_cat" style="background-color:' + act_color + '">' + action.action.Name + '</span><br>'
 
-                let key = ''
-                if (action.actionDetails.Name){
-                    key = 'keywords: ' + action.actionDetails.Name
+                // console.log(action.actionDetails[0].Name)
+                if (action.actionDetails[0] && action.actionDetails[0].Name){
+                    key = 'keywords: ' + action.actionDetails[0].Name
                 }
+                else {
+                    key = ''
+                }
+
                 // console.log(date)
 
                 output_actions += date
