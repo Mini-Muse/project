@@ -404,7 +404,17 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return '#b1b1b1' //'#838383'
         })
         .attr("stroke-dasharray",function(d){
-            if (d.result.null_date == true) {
+            if (d.result.date.Name){
+                date = fix_date(d.result.date.Name)
+            }
+            else {
+                date = fix_date(d.result.date)                
+            }
+
+            let the_date = new Date(fix_date(date))
+            let x_pos = xScale(the_date) - (action_width/2)
+
+            if (d.result.null_date == true || x_pos.toString() == 'NaN') {
                 return '3'
             }
         })
