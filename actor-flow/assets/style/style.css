@@ -27,10 +27,6 @@
 
 #timeline_recap .recap_b .shift {
     grid-column-start: 2;
-/*    margin-left: 15%;
-    width: 55%;
-    margin-right: calc(20px + 30%);*/
-
 }
 
 /* -------- actors -------- */ 
@@ -64,7 +60,6 @@
     font-family: "Source Sans 3", Times, sans-serif;
     display: flex;
     align-items: center;
-/*    width: 15%;*/
 }
 
     .actor_name {
@@ -104,7 +99,7 @@
 
 .info_box p {
     line-height: 120%;
-    margin-top: .25rem;
+/*    margin-top: .25rem;*/
 }
 
 .open_box, .go_to_article {
@@ -158,8 +153,6 @@
 }
 
     .article_info {
-/*        width: 15%;*/
-/*        display: flex;*/
         padding-top: 10px;
         padding-bottom: 10px;
     }
@@ -167,18 +160,24 @@
     .article_timeline {
         padding-top: 10px;
         padding-bottom: 10px;
-        border-right:  1px solid #dbdbdb;
+        border-left: 1px solid #dbdbdb;
+        border-right: 1px solid #dbdbdb;
     }
 
     .all_actions_row {
-        padding: 10px;
-        max-height: 350px;
-        overflow-y: scroll;
+        width: 125%;
+        padding: 10px 0;
+        /*max-height: 350px;
+        overflow-y: scroll;*/
+    }
+
+    .all_actions {
+        padding-left: 10px;
     }
 
     .single_action_row {
         border-bottom: 1px solid #bcbcbc;
-        padding: .5rem 0;
+        padding: .5rem;
     }
     
     .single_action_row:last-child {

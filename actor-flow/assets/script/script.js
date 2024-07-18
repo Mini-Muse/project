@@ -340,7 +340,6 @@ function display_timeline(data, container, filter, sort){
         let open_box = article_box.append("div")
             .attr("id", function (d) {
                 name = item[0].result.actor.Name
-                // id_ = item[0].result.actor.Id
                 id = name.replace(' ','_')
 
                 return "open_box_" + id
@@ -396,7 +395,6 @@ function get_articles(data){
                 display_articles(the_actor_id)
 
                 open_boxes[item].setAttribute('data-open','true')
-                // console.log(the_actor_id)
 
                 switch_arrow(id,'true')
             }
@@ -599,11 +597,11 @@ function show_articles(data,actor) {
         for (let i = 0; i < individual_timeline_data.length; i++) {
             let actions = individual_timeline_data[i]
 
-            output_actions = '<p class="small_label">all actor\'s actions</p>'
+            output_actions = '<p class="small_label all_actions">all actor\'s actions</p>'
 
             for (let i = 0; i < actions.length; i++) {
                 let action = actions[i].result
-                console.log(action)
+                // console.log(action)
 
                 output_actions += '<div class="single_action_row">'
                 
@@ -621,11 +619,11 @@ function show_articles(data,actor) {
                 if (action.actionDetails.Name){
                     key = 'keywords: ' + action.actionDetails.Name
                 }
-                console.log(date)
+                // console.log(date)
 
                 output_actions += date
-                output_actions += location
                 output_actions += action_
+                output_actions += location
                 output_actions += key
 
                 output_actions += '</div>'
@@ -674,9 +672,7 @@ function filter_data(){
         ov_timeline.innerHTML = ''
         
         display_timeline(actionflows_array,'actors_box',filter,sort)
-        // console.log(sort,filter)
     })
-
 }
 
 async function fetch_credentials(){
@@ -696,8 +692,6 @@ async function fetch_credentials(){
     .then(json => {
         console.log(json)
     })
-
-    // load_data()
 }
 
 document.addEventListener('DOMContentLoaded', function() {

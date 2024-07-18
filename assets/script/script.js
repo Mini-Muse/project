@@ -395,7 +395,7 @@ function filter_raw_actions(data){
     function sort_date(a, b) {
         const dateA = a.result.date ? new Date(fix_date(a.result.date.Name) || fix_date(a.result.date)) : new Date();
         const dateB = b.result.date ? new Date(fix_date(b.result.date.Name) || fix_date(b.result.date)) : new Date();
-        return dateA - dateB;
+        return dateB - dateA;
     }
     sorted_filtered_data = filtered_data.sort(sort_date);
     // console.log(sorted_filtered_data)
