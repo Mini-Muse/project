@@ -454,7 +454,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return date
         })
         .attr("data-loc", function(d){
-            let location = 'unknown …'
+            let location = '-'
 
             if (d.result.location && d.result.location.Name){
                 location = d.result.location.Name
@@ -474,7 +474,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
                 return output
             }
             else {
-                return 'no keywords available'
+                return '-'
             }
         })
         .attr("data-comp", function(d){
@@ -561,9 +561,13 @@ function timeline_labels() {
                 let output = '';
                 output += '<div>'
                 output += '<span class="action_cat" style="background-color:' + get_color(get_action_category(title)) +'">' + action_category + '' + title + '</span><br/>'
-                output += '<span>date: ' + date + '</span><br/>'
-                output += '<span>location: ' + location + '</span><br/>' 
-                output += '<p>keywords: ' + extract + '</p>' // .slice(0, 20)
+
+                output += '<table class="action_metadata">'
+                output += '<tr><td>date</td><td>' + date + '</td></tr>'
+                output += '<tr><td>location</td><td>' + location + '</td></tr>' 
+                output += '<tr><td>keywords</td><td>' + extract + '</td></tr>' // .slice(0, 20)
+                output += '</table>'
+
                 output += '</div>'
 
                 the_info_box.innerHTML = output

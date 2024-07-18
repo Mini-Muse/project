@@ -615,38 +615,39 @@ function show_articles(data,actor) {
         for (let i = 0; i < individual_timeline_data.length; i++) {
             let actions = individual_timeline_data[i]
 
-            output_actions = '<p class="small_label all_actions">all actor\'s actions</p>'
+            output_actions = '<p class="small_label all_actions">' + actor + ': actions</p>'
 
             for (let i = 0; i < actions.length; i++) {
                 let action = actions[i].result
                 // console.log(action)
 
-                output_actions += '<div class="single_action_row">'
-                
-                let date = '<span>date: ' + action.date.Name + '</span><br>'
-
-                let location = ''
-                if (action.location && action.location.Name){
-                    location = 'location: ' + action.location.Name + '<br>'
-                }
-
                 let act_color = get_color(get_action_category(action.action.Name))
-                let action_ = '<span class="action_cat" style="background-color:' + act_color + '">' + action.action.Name + '</span><br>'
+                let the_action = '<span class="action_cat" style="background-color:' + act_color + '">' + action.action.Name + '</span>'
+                
+                let date = '<tr><td>date</td><td>' + action.date.Name + '</td></tr>'
 
-                // console.log(action.actionDetails[0].Name)
-                if (action.actionDetails[0] && action.actionDetails[0].Name){
-                    key = 'keywords: ' + action.actionDetails[0].Name
+                if (action.location && action.location.Name){
+                    loc = '<tr><td>location</td><td>' + action.location.Name + '</td></tr>'
                 }
                 else {
-                    key = ''
+                    loc = '<tr><td>location</td><td>' + '-' + '</td></tr>'
                 }
 
-                // console.log(date)
+                if (action.actionDetails[0] && action.actionDetails[0].Name){
+                    key = '<tr><td>keywords</td><td>' + action.actionDetails[0].Name  + '</td></tr>'
+                }
+                else {
+                    key = '<tr><td>keywords</td><td>' + '-' + '</td></tr>'
+                }
 
-                output_actions += action_
+                output_actions += '<div class="single_action_row">'
+                output_actions += the_action
+
+                output_actions += '<table class="action_metadata">'
                 output_actions += date
-                output_actions += location
+                output_actions += loc
                 output_actions += key
+                output_actions += '</table>'
 
                 output_actions += '</div>'
             }

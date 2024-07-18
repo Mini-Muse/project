@@ -46,8 +46,7 @@
 }
 
 #actors_box li .actor_row div {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    width: 100%;
     overflow-x: auto;
 }
 
@@ -102,6 +101,15 @@
 .info_box p {
     line-height: 120%;
 /*    margin-top: .25rem;*/
+}
+
+.info_box .action_metadata, .single_action_row .action_metadata {
+    margin-top: .2rem;
+    width: 100%;
+}
+
+.action_metadata td:first-child {   
+    width: 40%;
 }
 
 .open_box, .go_to_article {
@@ -167,7 +175,7 @@
     }
 
     .all_actions_row {
-        width: 125%;
+/*        width: 125%;*/
         padding: 10px 0;
     }
 
@@ -177,8 +185,9 @@
     }
 
     .single_action_row {
+        width: 100%;
         border-bottom: 1px solid #dbdbdb;
-        padding: .5rem;
+        padding: .6rem .5rem;
     }
     
     .single_action_row:last-child {
