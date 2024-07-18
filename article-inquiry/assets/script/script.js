@@ -139,10 +139,10 @@ async function load_data(){
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
 
-        // result_box = document.getElementById('result_box')
-        // result_box.innerHTML = 'The credentials are incorrect'
+        result_box = document.getElementById('result_box')
+        result_box.innerHTML = 'The credentials are incorrect'
 
-        // error_message(actors_box)
+        error_message(actors_box)
     });
 }
 

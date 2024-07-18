@@ -167,13 +167,24 @@
     .article_timeline {
         padding-top: 10px;
         padding-bottom: 10px;
+        border-right:  1px solid #bcbcbc;
     }
 
-    .empty_article_row {
-        padding-top: 10px;
-        padding-bottom: 10px;
+    .all_actions_row {
+        padding: 10px;
+        max-height: 350px;
+        overflow-y: scroll;
+    }
+
+    .single_action_row {
+        border-bottom: 1px solid #bcbcbc;
+        padding: .5rem 0;
     }
     
+    .single_action_row:last-child {
+        margin-bottom: 1rem;
+    }
+
 .article_row:last-child {
     border-bottom: none;
 }

@@ -531,7 +531,6 @@ function show_articles(data,actor) {
         // add chips
         the_actors = ''
         for (let i = 0; i < unique_actors.length; i++) {
-            // console.log(unique_actors[i])
             the_actors += '<span class="actor_chips">' + unique_actors[i] + '</span>'
         }
         
@@ -569,7 +568,7 @@ function show_articles(data,actor) {
 
         output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
         
-        output += '<div class="empty_article_row"></div>'
+        output += '<div class="all_actions_row" id="detail_timeline_' + id + '_' + doc_id + '"></div>'
         //output += '<div class="go_to_article"></div>' //<a href="' + link + '" style="color: gray">&rarr;</a></div>'
 
         output += '</div>'
@@ -592,6 +591,49 @@ function show_articles(data,actor) {
         })
         .filter(innerArray => innerArray.length > 0)
         // console.log(individual_timeline_data)
+
+        let actions_box = document.getElementById('detail_timeline_' + id + '_' + doc_id)
+
+        // display all actor action in an article
+        output_actions = ''
+        for (let i = 0; i < individual_timeline_data.length; i++) {
+            let actions = individual_timeline_data[i]
+
+            output_actions = '<p class="small_label">all actor actions</p>'
+
+            for (let i = 0; i < actions.length; i++) {
+                let action = actions[i].result
+                console.log(action)
+
+                output_actions += '<div class="single_action_row">'
+                
+                let date = action.date.Name + '<br>'
+
+                let location = ''
+                if (action.location && action.location.Name){
+                    location = 'location: ' + action.location.Name + '<br>'
+                }
+
+                let act_color = get_color(get_action_category(action.action.Name))
+                let action_ = '<span class="action_cat" style="background-color:' + act_color + '">' + action.action.Name + '</span><br>'
+
+                let key = ''
+                if (action.actionDetails.Name){
+                    key = 'keywords: ' + action.actionDetails.Name
+                }
+                console.log(date)
+
+                output_actions += date
+                output_actions += location
+                output_actions += action_
+                output_actions += key
+
+                output_actions += '</div>'
+            }
+
+        }
+
+        actions_box.innerHTML = output_actions
 
         make_timeline(individual_timeline_data[0],the_container,startDate,endDate,tick_size_small,action_width_large)
     }
