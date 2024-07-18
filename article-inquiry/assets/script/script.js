@@ -337,16 +337,37 @@ function load_article_info(data){
         // list unique actors
         const list_actors = all_act_doc.map(item => item.result.actor.Name);
         const unique_actors = [...new Set(list_actors)];
-        // console.log(unique_actors)
 
         unique_actors.sort((a, b) => {
             return a.localeCompare(b);
         });
 
+        // list locations
+        let list_locations = all_act_doc.filter(item => item.result.location)
+            .map(item => item.result.location.Name);
+        const unique_locations = [...new Set(list_locations)];
+
+        unique_locations.sort((a, b) => {
+            return a.localeCompare(b);
+        });
+        // console.log(unique_locations)
+
         let all_actors = ''
         for (let i = 0; i < unique_actors.length; i++) {
             actor = unique_actors[i]
             all_actors += '<span class="actor_chips">' + actor + '</span>'
+        }
+
+        let all_locations = ''
+        for (let i = 0; i < unique_locations.length; i++) {
+            loc = unique_locations[i]
+
+            if (i == (unique_locations.length - 1)){
+                all_locations += '<span>' + loc + '</span>'  
+            }
+            else {
+                all_locations += '<span>' + loc + ' |&nbsp;</span>'
+            }
         }
 
         documents_data.forEach(item => {
@@ -364,15 +385,28 @@ function load_article_info(data){
                 output += '</div>'
 
                 output += '<div id="the_abstract" class="info_box">'
-                output += '<h2 class="small_label">Abstract</h2>'
+                output += '<h2 class="small_label">abstract</h2>'
                 output += '<p data-meta="summary">' + article.Summary + '</p>'
                 output += '</div>'
 
                 output += '<div class="meta" style="margin-top: 2rem;">'
                 if (list_actors.length > 0){
-                    output += '<p class="small_label">Actors</strong></p>'
+                    output += '<p class="small_label">actors</strong></p>'
                     output += '<div class="all_actors_container">'
                     output += all_actors
+                    output += '</div>'
+                }
+                else {
+                    output += '<p class="small_label">No actors detected</p>'
+                }
+                output += '</div>'
+
+                // locations
+                output += '<div class="meta" style="margin-top: 2rem;">'
+                if (list_locations.length > 0){
+                    output += '<p class="small_label">locations</strong></p>'
+                    output += '<div class="all_actors_container">'
+                    output += all_locations
                     output += '</div>'
                 }
                 else {

@@ -121,6 +121,8 @@
 
 #the_info {
     margin-top: 0.5rem;
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 1rem;
 }
 
 #the_abstract h2, #the_actors h2 {
