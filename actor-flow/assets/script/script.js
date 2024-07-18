@@ -599,7 +599,7 @@ function show_articles(data,actor) {
         for (let i = 0; i < individual_timeline_data.length; i++) {
             let actions = individual_timeline_data[i]
 
-            output_actions = '<p class="small_label">all actor actions</p>'
+            output_actions = '<p class="small_label">all actor\'s actions</p>'
 
             for (let i = 0; i < actions.length; i++) {
                 let action = actions[i].result
