@@ -364,19 +364,19 @@ function load_article_info(data){
                 output += '</div>'
 
                 output += '<div id="the_abstract" class="info_box">'
-                output += '<h2 class="label">Abstract</h2>'
+                output += '<h2 class="small_label">Abstract</h2>'
                 output += '<p data-meta="summary">' + article.Summary + '</p>'
                 output += '</div>'
 
                 output += '<div class="meta" style="margin-top: 2rem;">'
                 if (list_actors.length > 0){
-                    output += '<p class="label">Actors</strong></p>'
+                    output += '<p class="small_label">Actors</strong></p>'
                     output += '<div class="all_actors_container">'
                     output += all_actors
                     output += '</div>'
                 }
                 else {
-                    output += '<p class="label">No actors detected</p>'
+                    output += '<p class="small_label">No actors detected</p>'
                 }
                 output += '</div>'
 
