@@ -310,6 +310,11 @@ background      #f7f8ff / #fefefe
     font-size: 0.9rem;
 }
 
+.small_label {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
 /* -------- actors -------- */ 
 
 .meta:first-child {

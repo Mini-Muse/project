@@ -52,6 +52,7 @@
 #actors_box li .actor_row div {
     padding-top: 10px;
     padding-bottom: 10px;
+    overflow-x: auto;
 }
 
 .actor {
@@ -184,12 +185,6 @@
 .article_timeline svg {
     opacity: .5;
 }
-
-.label {
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
 
 /* -------- media queries -------- */ 
 

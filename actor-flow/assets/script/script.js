@@ -179,7 +179,7 @@ function display_timeline(data, container, filter, sort){
             let dx = date_value.Name
 
             // remove outliers 
-            if (dx < 2050 && dx.includes(' ') == false) {
+            if (dx < 2050 && dx.includes(' ') == false && containsOnlyDigits(dx) == true) {
 
                 d0 = small_fix_date(dx)
                 d1 = parseInt(d0)
@@ -467,10 +467,11 @@ function get_articles(data){
             })
             .then(json => {
                 all_documents = json
+
                 const single_document = all_documents.filter(article => {
                     return doc_id_.includes(article.article.Id)
                 });
-                show_articles(single_document)
+                show_articles(single_document,actor_id[0])
             }) 
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -480,8 +481,8 @@ function get_articles(data){
     }
 }
 
-function show_articles(data) {
-    // console.log(data)
+function show_articles(data,actor) {
+    // console.log(actor)
     
     article_boxes = document.querySelectorAll(".article_boxes");
 
@@ -504,7 +505,7 @@ function show_articles(data) {
     // ----------------------------------
     for (let item = 0; item < data.length; item++) {
         let article = data[item].article
-        console.log(article)
+        // console.log(article)
 
         the_doc_id = article.Id
         
@@ -556,7 +557,7 @@ function show_articles(data) {
             
             output += '<div class="meta">'
             if (all_actors.length > 0){
-                output += '<p class="label">actors</p>'
+                output += '<p class="small_label">actors</p>'
 
                 output += '<div class="other_actors_container">'
                 output += the_actors
@@ -584,11 +585,13 @@ function show_articles(data) {
 
         let doc_id = data[item].article.Id
         const the_container = 'article_timeline_' + id + '_' + doc_id
+        // console.log(doc_id)
 
-        const individual_timeline_data = actionflows_array.filter(innerArray => {
-            return innerArray.some(item => item.result.articleID === doc_id);
-        });
-        // console.log(individual_timeline_data[0])
+        const individual_timeline_data = actionflows_array.map(innerArray => {
+            return innerArray.filter(item => item.result.articleID == doc_id && item.result.actor.Name == actor)
+        })
+        .filter(innerArray => innerArray.length > 0)
+        // console.log(individual_timeline_data)
 
         make_timeline(individual_timeline_data[0],the_container,startDate,endDate,tick_size_small,action_width_large)
     }
