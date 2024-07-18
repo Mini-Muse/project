@@ -364,15 +364,25 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
     let action_items = actions_box.append("rect")
         .attr("class", "act")
         .attr("x", function(d){
-            // console.log(d)
-            if (d.result.date.Name){
-                date = fix_date(d.result.date.Name)
+
+            datex = small_fix_date(d.result.date.Name)
+            // console.log(date)
+
+            // fix multiple dates
+            if (datex.includes('/') == true){
+                date_ = datex.split('/')[0]
+            }
+            else if (datex.includes('-') == true){
+                date_ = datex.split('-')[0]
+            }
+            else if (datex.includes(' ') == true){
+                date_ = datex.split(' ')[0]
             }
             else {
-                date = fix_date(d.result.date)                
+                date_ = datex
             }
 
-            let the_date = new Date(fix_date(date))
+            let the_date = new Date(fix_date(date_))
             let x_pos = xScale(the_date) - (action_width/2)
             return x_pos
         })

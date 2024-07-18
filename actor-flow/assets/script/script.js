@@ -177,18 +177,32 @@ function display_timeline(data, container, filter, sort){
     function parseDate(date_value) {
         date = null
 
-        if (date_value.Name && containsOnlyDigits(date_value.Name) == true) { // )
-            let dx = date_value.Name
+        if (date_value.Name){
+            let dx = small_fix_date(date_value.Name)
+            
+            if (containsOnlyDigits(dx) == true) { // )
 
-            // remove outliers 
-            if (dx < 2050 && dx.includes(' ') == false && containsOnlyDigits(dx) == true) {
+                // remove outliers 
+                if (dx < 2050 && dx.includes(' ') == false) {
+                    d1 = parseInt(dx)
 
-                d0 = small_fix_date(dx)
-                d1 = parseInt(d0)
-
-                date_ = fix_date(d1)
-                date = new Date(date_)
-                // console.log(date)
+                    date_ = fix_date(d1)
+                    date = new Date(date_)
+                }
+            }
+            else {
+                if (dx.includes('/') == true){
+                    date_ = dx.split('/')[0]
+                    date = new Date(date_)
+                }
+                else if (dx.includes('-') == true){
+                    date_ = dx.split('-')[0]
+                    date = new Date(date_)
+                }
+                else if (dx.includes(' ') == true){
+                    date_ = dx.split(' ')[0]
+                    date = new Date(date_)
+                }
             }
         }
         return date;
