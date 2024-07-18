@@ -125,9 +125,9 @@
     padding-bottom: 1rem;
 }
 
-#the_abstract h2, #the_actors h2 {
+/*#the_abstract h2, #the_actors h2 {
     font-weight: bold;
-}
+}*/
 
 .info_box {
     margin-top: 2rem;
@@ -162,6 +162,10 @@
 .all_actors_container {
     display: flex;
     flex-wrap: wrap;
+}
+
+.meta {
+    margin-top: 1.5rem;
 }
 
 /* -------- prompt box -------- */ 

@@ -211,8 +211,24 @@ function list_articles(article_data, documentflows_array, sort){
         return 0;
     };
 
+    const sort_title = (a, b) => {
+        const titleA = a.article.title;
+        const titleB = b.article.title;
+
+        if (titleA < titleB) {
+            return -1;
+        }
+        if (titleA > titleB) {
+            return 1;
+        }
+        return 0;
+    };
+
     if (sort == 'date'){
         sorted_article_data = article_data.sort(sort_date);
+    }
+    else if (sort == 'title'){
+        sorted_article_data = article_data.sort(sort_title);
     }
     else {
         sorted_article_data = article_data.sort(sort_author);
@@ -384,12 +400,12 @@ function load_article_info(data){
                 output += '<span data-meta="issue">issue ' + article.IssueNumber + '</span>'
                 output += '</div>'
 
-                output += '<div id="the_abstract" class="info_box">'
+                output += '<div id="the_abstract" class="meta">'
                 output += '<h2 class="small_label">abstract</h2>'
                 output += '<p data-meta="summary">' + article.Summary + '</p>'
                 output += '</div>'
 
-                output += '<div class="meta" style="margin-top: 2rem;">'
+                output += '<div class="meta">'
                 if (list_actors.length > 0){
                     output += '<p class="small_label">actors</strong></p>'
                     output += '<div class="all_actors_container">'
@@ -397,12 +413,13 @@ function load_article_info(data){
                     output += '</div>'
                 }
                 else {
-                    output += '<p class="small_label">No actors detected</p>'
+                    output += '<p class="small_label">actors</strong></p>'
+                    output += '<p>no actors detected</p>'
                 }
                 output += '</div>'
 
                 // locations
-                output += '<div class="meta" style="margin-top: 2rem;">'
+                output += '<div class="meta">'
                 if (list_locations.length > 0){
                     output += '<p class="small_label">locations</strong></p>'
                     output += '<div class="all_actors_container">'
@@ -410,7 +427,8 @@ function load_article_info(data){
                     output += '</div>'
                 }
                 else {
-                    output += '<p class="small_label">No actors detected</p>'
+                    output += '<p class="small_label">locations</strong></p>'
+                    output += '<p>no locations detected</p>'
                 }
                 output += '</div>'
 
@@ -561,7 +579,6 @@ function sort_data(){
     the_sort.addEventListener('change', (event) => {
         const article_list = document.getElementById('articles_box')
         const sort = event.target.value;
-        // console.log(sort)
 
         article_list.innerHTML = ''
 
@@ -571,7 +588,6 @@ function sort_data(){
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // load_data()
     sort_data()
 
     menu()

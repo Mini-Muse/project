@@ -176,7 +176,7 @@
     }
 
     .single_action_row {
-        border-bottom: 1px solid #bcbcbc;
+        border-bottom: 1px solid #dbdbdb;
         padding: .5rem;
     }
     
@@ -194,6 +194,11 @@
 
 .article_timeline svg {
     opacity: .5;
+}
+
+.article_info .meta:first-child {
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 1rem;
 }
 
 /* -------- media queries -------- */ 
