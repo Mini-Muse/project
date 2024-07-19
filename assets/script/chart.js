@@ -353,7 +353,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         .attr("height", box_h)
 
     let plot = timeline_container.append('g')
-        .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")") 
+        .attr("transform","translate(" + timeline_margin[1] + "," + timeline_margin[0] + ")")  // timeline_margin[1], timeline_margin[0]
 
     let actions_box = plot.selectAll("g")
         .data(my_data)
@@ -392,7 +392,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         })
         .attr("y",0)
         .attr("width",action_width)
-        .attr("height",box_h - margin[0] -  5) //  - margin[0] - margin[3]
+        .attr("height",box_h - (margin[0]*2) ) //  - margin[0] - margin[3]
         .attr("r", 5)
         .attr("data-date", function(d){
             if (d.result.date.Name){
