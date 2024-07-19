@@ -449,8 +449,8 @@ background      #f7f8ff / #fefefe
 
 #access_window .text {
     width: 60%;
-    margin: 8rem auto 10rem;
-    font-size: 1.5rem;
+    margin: 7rem auto 10rem;
+    font-size: 1.2rem;
     line-height: 140%;
 }
 
@@ -469,7 +469,7 @@ background      #f7f8ff / #fefefe
 
 #login_container {
     text-align: center;
-    font-size: 1.2rem;
+/*    font-size: 1.2rem;*/
 }
 
 #login_container form {
@@ -480,6 +480,7 @@ background      #f7f8ff / #fefefe
 #login_container label {
     margin-bottom: 5px;
     text-align: left;
+    font-size: 1rem;
 }
 
 #login_container input {
@@ -496,12 +497,12 @@ background      #f7f8ff / #fefefe
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 1rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 #login_container #enter {
     background-color: #007bff;
-    margin-top: 2rem;
+    margin-top: 1.7rem;
 }
 
 #login_container #enter:hover {

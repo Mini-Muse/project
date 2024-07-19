@@ -289,6 +289,24 @@
 
 @media screen and (max-width: 600px) {
 
+    #error_quote {
+        display: block;
+        height: auto;
+    }
+
+    .error_box {
+        margin-bottom: 1.7rem;
+        font-size: .9rem;
+    }
+
+    .quote_box {
+        font-size: 1.5rem;
+    }
+
+    .error_box, .quote_box {
+        width: 100%;
+    }
+
     /* -------- actor list -------- */ 
 
     /*#actors_box li .actor_row {
