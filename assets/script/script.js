@@ -99,14 +99,17 @@ function close_buttons(){
     const close_modal = document.getElementById('close_modal');
     const cancel_button = document.getElementById('cancel');
     const access_the_window_ = document.getElementById('access_window');
-    
-    close_modal.addEventListener('click', () => {
-        access_the_window_.remove()
-    });
+    const ops_message = document.getElementById('ops_message');
 
-    cancel_button.addEventListener('click', () => {
+    const the_message = 'Ops! I can not load the data.'
+
+    function close_function(){
         access_the_window_.remove()
-    });
+        ops_message.innerHTML = the_message
+    }
+
+    close_modal.addEventListener('click', close_function)
+    cancel_button.addEventListener('click', close_function)
 }
 
 

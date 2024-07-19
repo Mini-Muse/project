@@ -33,6 +33,7 @@
 
 #actors {
     margin: 0 0 5rem;
+    border-bottom: 1px solid #bcbcbc;
 }
 
 #actors_box li .actor_row {

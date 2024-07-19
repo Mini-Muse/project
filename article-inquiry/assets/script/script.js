@@ -149,6 +149,7 @@ async function load_data(){
 function build_page(){
 
     container = document.getElementById('main');
+    document.getElementById('ops_message').remove();
 
     // column articles
     // --------------------
