@@ -412,6 +412,17 @@ function containsOnlyDigits(str) {
     return new_str;   
 }
 
+function waiting_message(container){
+    the_container = document.getElementById(container)
+
+    let output = ''
+    output += '<div id="waiting_message">'
+    output += 'Loading the data ...'
+    output += '</div>'
+
+    the_container.innerHTML = output
+}    
+
 document.addEventListener("DOMContentLoaded", function(){
 
     load_footer()

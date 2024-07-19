@@ -21,6 +21,8 @@ async function load_data(){
 
     let data;
 
+    waiting_message('actors_box')
+
     const headers = new Headers();
     headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
 
@@ -42,6 +44,7 @@ async function load_data(){
             remove_modal(true)
         }
         return response.json(); 
+
     })
     .then(json => {
         data = json

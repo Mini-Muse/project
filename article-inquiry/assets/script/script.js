@@ -31,6 +31,8 @@ async function load_data(){
 
     let data;
 
+    waiting_message('main')
+
     const headers = new Headers();
     headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
 
@@ -149,7 +151,19 @@ async function load_data(){
 function build_page(){
 
     container = document.getElementById('main');
-    document.getElementById('ops_message').remove();
+
+    // remove error and waiting message boxes
+    const selector_a = "#ops_message"; 
+    const selector_b = "#waiting_message";
+    const divExists_a = document.querySelector(selector_a) !== null;
+    const divExists_b = document.querySelector(selector_b) !== null;
+
+    if (divExists_a) {
+        document.querySelector(selector_a).remove()
+    }
+    if (divExists_b) {
+        document.querySelector(selector_b).remove()
+    } 
 
     // column articles
     // --------------------

@@ -245,7 +245,6 @@ function get_action_category(action){
         'gilt',
         'nannte',
         'nennt',
-        'sah',
         'siehe',
         'sieht',
         'stellte',
@@ -566,6 +565,7 @@ function timeline_labels() {
                 }
 
                 let output = '';
+
                 output += '<div>'
                 output += '<span class="action_cat" style="background-color:' + get_color(get_action_category(title)) +'">' + action_category + '' + title + '</span><br/>'
 
@@ -578,7 +578,6 @@ function timeline_labels() {
                 output += '</div>'
 
                 the_info_box.innerHTML = output
-                // console.log(date, location, title)
 
                 // highlight element
                 remove_highlights()

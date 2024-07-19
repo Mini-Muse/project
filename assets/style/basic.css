@@ -399,8 +399,6 @@ background      #f7f8ff / #fefefe
     margin-bottom: 1rem;
 }
 
-
-
 /* -------- error message -------- */ 
 
 #error_quote {
@@ -437,6 +435,17 @@ background      #f7f8ff / #fefefe
     font-size: 1.5rem;
     line-height: 140%;
 }
+
+/* -------- waiting message -------- */ 
+
+#waiting_message {
+    width: 100%;
+    padding: 6rem  1rem;
+    font-size: 1.5rem;
+    line-height: 140%;
+    text-align: center;
+}
+
 
 /* -------- access window -------- */
 
