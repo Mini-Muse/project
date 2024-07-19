@@ -440,12 +440,21 @@ background      #f7f8ff / #fefefe
 
 #waiting_message {
     width: 100%;
+    display: flex;
+    justify-content: center;
     padding: 6rem  1rem;
     font-size: 1.5rem;
     line-height: 140%;
-    text-align: center;
 }
 
+#waiting_message p {
+    display: flex;
+    align-items: center;
+}
+
+#waiting_message img {
+    margin-left: 1rem;
+}
 
 /* -------- access window -------- */
 

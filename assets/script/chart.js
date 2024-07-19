@@ -610,10 +610,34 @@ function getDaysDifference(date1, date2) {
     return dayDifference;
 }
 
+function get_timespan(data){ // get start and end date
+
+    startDate = fix_date('2000-01-01') // fix_date(data[0][0].date) // fix_date('1500-01-01') //fix_date(data[0][0].date.value);
+    endDate = startDate 
+
+    data.forEach(item => {
+        item.forEach(event => {
+
+            date = event.result.date.Name
+            date0 = small_fix_date(date)
+
+            if (containsOnlyDigits(date0) == true && date0 > 200){
+                if (fix_date(date0) < startDate ) {
+                    startDate = fix_date(date0);
+                }
+                if (fix_date(date0) > endDate ) {
+                    endDate = fix_date(date0);
+                }  
+            }
+        })
+    });
+    return [startDate, endDate]
+}
+
 function overall_timeline(container,startDate,endDate){
     // console.log(startDate,endDate)
 
-    let overall_timeline = document.getElementById(container)
+    const overall_timeline = document.getElementById(container)
     w_ = overall_timeline.offsetWidth;
     h_ = overall_timeline.offsetHeight;
 
@@ -631,10 +655,8 @@ function overall_timeline(container,startDate,endDate){
         .domain([parseDate(startDate), parseDate(endDate)]) // 1920 // "1750-01-01"
         .range([0, w_ - timeline_margin[1] - timeline_margin[0]] )
 
-
     let timeFormat = d3.timeFormat("%Y")
     let difference = getDaysDifference(startDate, endDate)
-    // console.log(startDate, endDate,difference)
 
     if (difference < (365*5)) {
         timeFormat = d3.timeFormat("%Y.%m")

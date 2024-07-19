@@ -93,8 +93,6 @@ async function load_data(){
                 }
             })
         })
-        // console.log(total_actions)
-        // console.log(total_completeness)
 
         actionflows_array.forEach(subArray => {
             subArray.forEach(item => {
@@ -108,10 +106,8 @@ async function load_data(){
                 item.result.completeness = the_completeness
             })
         });
-        // console.log(actionflows_array)
 
-        display_timeline(actionflows_array,'actors_box','all','name') // name action
-
+        display_timeline(actionflows_array,'actors_box','all','name')
         filter_data()
         sort_data()
     })
@@ -240,44 +236,21 @@ function display_timeline(data, container, filter, sort){
     else if (sort == 'date') {
         sorted_filtered_data = filteredArray.sort(sort_date);
     }
-    // console.log(sorted_filtered_data)
 
     get_statistics(sorted_filtered_data) 
-
-    let all_actions = 0
+    overall_timeline('overall_timeline',get_timespan(filteredArray)[0],get_timespan(filteredArray)[1])
+    // console.log(get_timespan(filteredArray)[0],get_timespan(filteredArray)[1])
+    
+    startDate = get_timespan(data)[0]
+    endDate = get_timespan(data)[1]
 
     let box_w;
-    let box_h; 
-
-    // get start and end date ---------------
-    startDate = fix_date('1500-01-01') // fix_date(data[0][0].date) // fix_date('1500-01-01') //fix_date(data[0][0].date.value);
-    endDate = startDate 
-
-    sorted_filtered_data.forEach(item => {
-
-        item.forEach(event => {
-
-            all_actions += 1
-            date = event.result.date.Name
-            date0 = small_fix_date(date)
-
-            if (containsOnlyDigits(date0) == true && date0 > 200){
-                // console.log(date0)
-                if (fix_date(date0) < startDate ) {
-                    startDate = fix_date(date0);
-                }
-                if (fix_date(date0) > endDate ) {
-                    endDate = fix_date(date0);
-                }  
-            }
-        })
-    });
-    // console.log(startDate, endDate)
-
+    let box_h;
     let xScale; 
 
     // display some data in the console
     // ----------------------------------------------
+
     let count_actions = {}
     sorted_filtered_data.forEach(item => {
         item.forEach(event => {
@@ -285,11 +258,9 @@ function display_timeline(data, container, filter, sort){
             let action = event.result.action.Name
             let category = get_action_category(action)
             let completeness = event.result.completeness
-
             // console.log(fix_date(event.result.date.Name), actor_name)
         })
     })
-    // console.log(count_actions)
 
     // display data
     sorted_filtered_data.forEach((item,i) => {

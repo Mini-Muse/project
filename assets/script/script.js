@@ -305,7 +305,7 @@ function get_statistics(data){
 
     year_a = parseInt(startDate.toString().slice(0, 4)) 
     year_b = parseInt(endDate.toString().slice(0, 4))
-    years = 1982 - 1500 // year_b - year_a
+    years = 2017 - 1511 // year_b - year_a
     // console.log(year_a,year_b,endDate)
 
     // get containers ---------------
@@ -318,7 +318,7 @@ function get_statistics(data){
     actor_count.innerHTML = actors;
     articles_actions.innerHTML = articles;
     total_actions.innerHTML = actions;
-    timespan_actions.innerHTML = years;
+    timespan_actions.innerHTML = '~' + years;
 }
 
 function random_date(){
@@ -417,7 +417,8 @@ function waiting_message(container){
 
     let output = ''
     output += '<div id="waiting_message">'
-    output += 'Loading the data ...'
+    output += '<p><span>Loading the data ...</span>'
+    output += '<img src="' + '../assets/img/loader.gif' + '" width="30" heigth="30"></p>'
     output += '</div>'
 
     the_container.innerHTML = output
