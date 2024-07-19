@@ -285,8 +285,8 @@ function list_articles(article_data, documentflows_array, sort){
 
     articles_box.innerHTML = output
 
-    startDate = fix_date('1500-01-01') //fix_date(data[0][0].date.value);
-    endDate = startDate 
+    startDate = get_timespan(documentflows_array)[0] // fix_date('1500-01-01') //fix_date(data[0][0].date.value);
+    endDate = get_timespan(documentflows_array)[1] // startDate 
 
     // let startDate = fix_date(documentflows_array[0][0].result.date) 
     // let endDate = startDate 
