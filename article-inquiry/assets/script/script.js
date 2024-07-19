@@ -251,7 +251,8 @@ function list_articles(article_data, documentflows_array, sort){
             output += '<div>'
             output += '<span class="article_title">' + article.title + '</span><br/>'
             output += '<span class="article_author">by ' + article.Author + ', </span>'
-            output += '<span class="article_date">' + article.VolumeYearOfPublication + '</span>'
+            output += '<span class="article_date">' + article.VolumeYearOfPublication + ', </span>'
+            output += '<span class="article_issue">issue ' + article.IssueNumber + '</span>'
             output += '</div>'
         output += '</div>'
 
@@ -396,7 +397,7 @@ function load_article_info(data){
 
                 output += '<div id="the_info">'
                 output += '<span data-meta="author_name">'  + article.Author + '</span>, '
-                output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + '</span><br/>'
+                output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + '</span>, '
                 output += '<span data-meta="issue">issue ' + article.IssueNumber + '</span>'
                 output += '</div>'
 
