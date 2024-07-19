@@ -466,11 +466,18 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             if (d.result.actionDetails.length > 0){
                 let array = d.result.actionDetails
 
+                let count = 0
                 array.forEach(item => {
                     let text = item.Name
-                    output += text
+
+                    if (count != (array.length - 1)){
+                        output += text + ' | '
+                    }
+                    else {
+                        output += text
+                    }
+                    count++
                 })
-                
                 return output
             }
             else {

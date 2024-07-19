@@ -633,11 +633,28 @@ function show_articles(data,actor) {
                     loc = '<tr><td>location</td><td>' + '-' + '</td></tr>'
                 }
 
-                if (action.actionDetails[0] && action.actionDetails[0].Name){
-                    key = '<tr><td>keywords</td><td>' + action.actionDetails[0].Name  + '</td></tr>'
+                let key = '<tr><td>keywords</td>'
+                if (action.actionDetails.length > 0 ){
+                    let keys = action.actionDetails
+                    let count  = 0 
+
+                    key += '<td>'
+                    keys.forEach(item => {
+
+                        if (keys.length-1 != count){
+                            key += item.Name  + ' | '
+                        }
+                        else {
+                            key += item.Name
+                        }
+
+                        count++
+                    })
+
+                    key += '</td></tr>'
                 }
                 else {
-                    key = '<tr><td>keywords</td><td>' + '-' + '</td></tr>'
+                    key += '<td>' + '-' + '</td></tr>'
                 }
 
                 output_actions += '<div class="single_action_row">'
