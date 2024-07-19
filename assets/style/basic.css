@@ -542,7 +542,7 @@ background      #f7f8ff / #fefefe
     }
 
     .navbar-header {
-    	width: 100%;
+    	width: calc(100% - 20px);
     }
 
     .navbar-header .title {
@@ -585,6 +585,21 @@ background      #f7f8ff / #fefefe
         top: 1.5rem;
     }
 
+    /* -------- filter and sort -------- */ 
+
+    #data_recap .recap {
+        padding: .5rem;
+        grid-template-columns: 3fr 3fr;
+    }
+
+    #data_recap .recap .detail {
+        margin: .5rem 0;
+    }
+
+    .recap .detail .value {
+        font-size: 1.5rem;
+    }
+
     /* -------- access window -------- */ 
 
     #access_window .text {
@@ -601,6 +616,7 @@ background      #f7f8ff / #fefefe
 
 
 @media screen and (max-width: 600px) {
+
 
     /* -------- footer -------- */ 
 

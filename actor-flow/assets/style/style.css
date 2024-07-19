@@ -286,3 +286,22 @@
         width: 91%;
     }
 }
+
+@media screen and (max-width: 600px) {
+
+    /* -------- actor list -------- */ 
+
+    /*#actors_box li .actor_row {
+        display: block;
+    }
+
+    #actors_box li .actor_timeline {
+        width: 80%;
+        float: left;
+    }
+
+    #actors_box  li.open_box {
+        width: 20%;
+        float: right;
+    }*/
+}

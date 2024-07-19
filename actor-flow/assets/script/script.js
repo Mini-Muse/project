@@ -647,10 +647,8 @@ function show_articles(data,actor) {
                         else {
                             key += item.Name
                         }
-
                         count++
                     })
-
                     key += '</td></tr>'
                 }
                 else {
