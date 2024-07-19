@@ -127,6 +127,9 @@ async function load_data(){
 function display_timeline(data, container, filter, sort){
     // console.log(filter,sort)
 
+    // remove placeholders
+    document.getElementById(container).innerHTML = ''
+
     let filteredArray
     if (filter == 'all') {
         filteredArray = data

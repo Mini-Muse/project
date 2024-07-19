@@ -84,7 +84,6 @@ function access_window(){
 }
 
 function remove_modal(psw){
-    // console.log(psw)
     const access_the_window_ = document.getElementById('access_window');
 
     if (psw == true){
@@ -93,8 +92,6 @@ function remove_modal(psw){
     else {
         const result_box = document.getElementById('result_box')
         result_box.innerHTML = 'The credentials are incorrect'
-
-        // access_the_window_.remove()
     }
 }
 
@@ -104,20 +101,12 @@ function close_buttons(){
     const access_the_window_ = document.getElementById('access_window');
     
     close_modal.addEventListener('click', () => {
-        // remove_modal(false)
         access_the_window_.remove()
     });
 
     cancel_button.addEventListener('click', () => {
-        // remove_modal(false)
         access_the_window_.remove()
     });
-
-    // document.onkeydown = function(evt) {
-    //     if (evt.key === "Escape" || evt.key === "Esc"){
-    //         remove_modal(false)
-    //     }
-    // }
 }
 
 
