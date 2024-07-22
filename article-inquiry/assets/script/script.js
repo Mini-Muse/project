@@ -192,7 +192,25 @@ function build_page(){
     input_box.id = 'input_box';
 
     let output = ''
-    const input = '<input type="text" id="chat_input" placeholder="Ask a question about the selected article ..." /><button id="send_button">➔</button>'
+
+    const questions = [
+        "Welche Rolle spielte Ludwig Pfyffer?",
+        "Warum wurde die Mehrheit der in Luzern tätigen Jesuitenpatres bis zur Mitte des 17. Jahrhunderts aus dem Reich rekrutiert, und wie änderte sich diese Praxis im frühen 17. Jahrhundert?",
+        "Welche Auswirkungen hatten die transterritorialen Verflechtungen der Jesuiten auf die Niederlassungsgründungen in der Eidgenossenschaft und deren personelle Besetzung?"
+    ]
+
+    const random_index = Math.floor(Math.random() * questions.length);
+
+    let input = ''
+    input += '<div>'
+    input += '<div id="chatbot_help" class="info">ⓘ</div>'
+    input += '<div id="chatbot_help_message"><p>Try to ask the question: ' + questions[0] + '</p></div>'
+    input += '</div>'
+
+    input += '<div id="chat_bot">'
+    input += '<textarea type="text" id="chat_input" placeholder="Ask a question in German about the selected article ..." rows="2" cols="50" /></textarea>'
+    input += '<button id="send_button">➔</button>'
+    input += '</div>'
 
     article_box.appendChild(prompt_box)
 
