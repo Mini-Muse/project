@@ -417,7 +417,7 @@ function waiting_message(container){
 
     let output = ''
     output += '<div id="waiting_message">'
-    output += '<p><span>Loading the data ...</span>'
+    output += '<p><span>Loading data ...</span>'
     output += '<img src="' + '../assets/img/loader.gif' + '" width="30" heigth="30"></p>'
     output += '</div>'
 
