@@ -34,7 +34,7 @@ body {
 #content { 
     margin: 3.5rem auto 0;
     border-bottom: 1px solid #BBB;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 #content article {
@@ -46,11 +46,12 @@ body {
 
 #content article h2 {
     width: 25%;
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
 #content article div {
-    width: calc(75% - 1rem);
+    width: calc(70% - 1rem);
     line-height: 140%;
 }
 
