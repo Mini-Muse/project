@@ -556,7 +556,7 @@ function show_articles(data,actor) {
             
             output += '<div class="meta">'
             if (all_actors.length > 0){
-                output += '<p class="small_label">other actors</p>'
+                output += '<p class="small_label">other historical entities</p>'
 
                 output += '<div class="other_actors_container">'
                 output += the_actors

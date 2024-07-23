@@ -32,7 +32,7 @@ function load_footer(){
     const search = window.location.search;
     const hash = window.location.hash;
 
-    if (pathname.includes('actor-flow') || pathname.includes('article-inquiry')){
+    if (pathname.includes('action-flow') || pathname.includes('article-inquiry')){
         footer_url = '../assets/content/footer.html';
     }
 

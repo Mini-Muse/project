@@ -52,10 +52,6 @@
     overflow-x: auto;
 }
 
-/*#actors_box li .actor_row:last-child {
-    border-bottom: none;
-}*/
-
 .actor {
     display: flex;
     align-items: center;

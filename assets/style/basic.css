@@ -656,6 +656,9 @@ background      #f7f8ff / #fefefe
 
 @media screen and (max-width: 600px) {
 
+    #autocomplete {
+        width: calc(100% - 40px);
+    }
 
     /* -------- footer -------- */ 
 

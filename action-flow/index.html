@@ -26,7 +26,7 @@
             </div>
             <ul class="menu">
                 <li class="current">
-                    Actor flow
+                    Action flow
                 </li>
                 <a href="../article-inquiry">
                     <li>
@@ -42,7 +42,7 @@
             <div>
                 <label class="option">Filter</label>
                 <select name="filter" id="the_filter" class="select select_round">
-                    <option value="all">all actors</option>
+                    <option value="all">all entities</option>
                     <!-- <option value="MISC">MISC</option> -->
                     <option value="PER">persons</option>
                     <option value="ORG">organizations</option>
@@ -55,7 +55,7 @@
             <div>
                 <label class="option">Sort</label>
                 <select name="sort" id="the_sort" class="select select_round">
-                    <option value="name">by actor name</option>
+                    <option value="name">by entity name</option>
                     <option value="actions">by number of actions</option>
                     <option value="date">by action date</option>
                     <option value="completness">by completness of results</option>
@@ -67,8 +67,7 @@
         </div>
         <div id="help_box">
             <p>
-                Click on an actor to view the actions he/she have undertaken and the articles that mention them. 
-                Hover the bars or click on the arrows to read the action details.
+                Click on an historical entity to view the actions he/she have undertaken and the articles that mention them. Hover the bars or click on the arrows to read the action details.
             </p>
         </div>
     </div>
@@ -79,7 +78,7 @@
                 <div id="actor_count" class="value">0</div> 
                 <div class="label">
                     <span class="small_recap">
-                        actors
+                        historical entities
                     </span>        
                 </div>
             </div>
@@ -114,7 +113,7 @@
         <div class="recap" style="text-align: center;"></div>
         <div class="recap_b" style="text-align: center;">
             <div class="search_container">
-                <input type="text" id="search_input" placeholder="Search an actor">
+                <input type="text" id="search_input" placeholder="Search a historical entity">
                 <button id="search_button">
                     <img src="../assets/img/search.svg" width="30" height="30" />
                 </button>

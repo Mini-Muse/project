@@ -141,8 +141,9 @@ async function load_data(){
         sort_data()
 
         // get the list of authors for the search bar, and remove duplicates
-        const author_list_ = documents_data.map(item => item.article.Author)
-        const author_list = [...new Set(author_list_)]
+        const author_list_0 = documents_data.map(item => item.article.Author)
+        const author_list_ = [...new Set(author_list_0)]
+        const author_list = author_list_.sort()
         // console.log(author_list)
 
         search_box(author_list)
@@ -229,8 +230,8 @@ function build_page(){
 }
 
 function list_articles(article_data, documentflows_array, sort){
-    console.log(article_data)
-    console.log(documentflows_array)
+    // console.log(article_data)
+    // console.log(documentflows_array)
 
     let sorted_article_data
 
@@ -451,7 +452,7 @@ function load_article_info(data){
 
                 output += '<div class="meta">'
                 if (list_actors.length > 0){
-                    output += '<p class="small_label">actors</strong></p>'
+                    output += '<p class="small_label">historical entities</strong></p>'
                     output += '<div class="all_actors_container">'
                     output += all_actors
                     output += '</div>'
@@ -631,7 +632,7 @@ function sort_data(){
 }
 
 function search_box(author_list){
-    console.log(author_list)
+    // console.log(author_list)
 
     const search_input = document.getElementById('search_input')
     const autocompleteList = document.getElementById('autocomplete_list');
@@ -670,9 +671,7 @@ function search_box(author_list){
         if (search_input.value != '') {
 
             const query = search_input.value.toLowerCase();
-
             const articles = documents_data.filter(item => item.article.Author.toLowerCase() === query)
-            // console.log(articles)
 
             list_articles(articles, documentflows_array, 'date')
 
