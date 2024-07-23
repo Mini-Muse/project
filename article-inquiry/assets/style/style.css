@@ -216,12 +216,14 @@
     left: 80px;
     top: -1px;
     height: calc(80px - 20px);
-    width: 75%;
+    width: 76%;
     border-top: 1px solid #bcbcbc;
     border-left: 1px solid #bcbcbc;
     box-shadow: inset 0 0 10px 1px #3e36c624;
     opacity: 0;
-    transition: opacity .3s ease-in-out;
+    transition: .3s ease-in-out;
+    display: flex;
+    align-items: center;
 }
 
 #chatbot_help:hover + #chatbot_help_message {

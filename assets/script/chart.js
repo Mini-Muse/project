@@ -392,7 +392,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
         .attr("y",0)
         .attr("width",action_width)
         .attr("height",box_h - (margin[0]*2) ) //  - margin[0] - margin[3]
-        .attr("r", 5)
+        .attr("rx", 5)
         .attr("data-date", function(d){
             if (d.result.date.Name){
                 date = fix_date(d.result.date.Name)
