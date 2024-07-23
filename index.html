@@ -61,9 +61,7 @@
             <h2>Methodology</h2>
             <div>
                 <p>
-                    The Mini-Muse project adopts a user-centered design approach to develop user-friendly ITC and design solutions and to meet real user needs. The  project uses technologies based on natural language recognition and integration within a novel archival interface paradigm. 
-                    <br/>
-                    The project runs over 12 months and consists of the following work packages:
+                    The Mini-Muse project adopts a user-centered design approach to develop user-friendly ITC and design solutions and to meet real user needs. The  project uses technologies based on natural language recognition and integration within a novel archival interface paradigm. The project runs over 12 months and consists of the following work packages:
                 </p>
                 <ul>
                     <li>
@@ -89,10 +87,10 @@
                     <strong>Swiss Historical Journal</strong>
                     <br/>
                     The project uses a set of articles coming from the <a href="https://www.e-periodica.ch/digbib/volumes?lang=en&UID=szg-006" target="blank" title="Go to the IDe website">Swiss Historical Journal</a>, published quarterly by the <a href="https://www.sgg-ssh.ch/" target="blank" title="Go to the Swiss History Society  website">Swiss History Society</a> since 1951, and made available online by <a href="https://www.e-periodica.ch/" target="blank" title="Go to the E-Periodica website">E-Periodica</a>, a service by ETH Library.
-                    <br/>
                     The Swiss Historical Journal features scientific articles about Swiss history and global history in German, French and Italian. It is printed by the Schwabe Verlag in Basel.
-                    <br/>
-                    For the aim of the project we focused on a small set of articles about politics.
+                </p>
+                <p>
+                    For the aim of the project we selected on a small set of articles with the following attributes: in German, about politics, recent (published after 2012). Furthermore, we selected more than one article coming from the same issue, with shared historical entities.
                 </p>
             </div>
         </article>
@@ -102,7 +100,17 @@
             <div>
                 <p>
                     The project utilizes information extraction algorithms to build a piece of software capable of interpreting the text present in the publications and indexing content, such as dates, titles and subtitles, places, historical entities and performed actions. While text summarization is intended as a means to extract key information and to produce narratives according to user visual and textual input.
+                    <br/><br/>
+                    NLP algorithms maps action flows, the sequence of actions in a text showing who did what, when, and where. The projects uses two types of NLP algorithms:
                 </p>
+                <ul style="list-style: disc;  margin-left: 2rem;">
+                    <li>
+                        <strong>Rule-based</strong>: Text Parsing, NER, Dependency Parsing, and Rule-Based Systems analyze sentence structures and grammatical relationships to classify and link entities like historical figures, objects, and locations.
+                    </li>
+                    <li>
+                        <strong>Large Language Model-based (LLM)</strong>: leveraging models like GPT-4 that use structured prompting and large text inputs to understand and interpret complex contexts, identifying actions, actors, and relationships, and inferring details like time and location for accurate action flow detection.
+                    </li>
+                </ul>
             </div>
         </article>
 
@@ -111,6 +119,9 @@
             <div>
                 <p>
                     The project adopts metadata and information visualization methods and tools, through an humanistic approach, to define the layout and the set of charts of the graphical user interface of the tool providing readers with preliminary insights on the articles while doing their research.
+                </p>
+                <p>
+                    Specifically, the prototype uses an <strong>interactive timeline</strong> programmatically built with the D3 JavaScript Library. The position of the timeline bar shows when the historical entity undertook an individual action, and the color of the bar indicates the type of action undertaken.
                 </p>
             </div>
         </article>

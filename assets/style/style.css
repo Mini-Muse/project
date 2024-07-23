@@ -55,17 +55,26 @@ body {
     line-height: 140%;
 }
 
-#content article ul {
-    margin: 1rem 0 1rem 0;
-}
-
 #content article ul li {
     margin-bottom: 1rem;
+}
+
+#content article ul li:last-child {
+    margin-bottom: 0;
+}
+
+#content p {
+    margin-bottom: 1rem;
+}
+
+#content p:last-child {
+    margin-bottom: 0;
 }
 
 #content strong {
     font-weight: bold;
 }
+
 
 /* -------- media queries -------- */
 
