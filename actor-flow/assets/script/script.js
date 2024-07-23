@@ -761,7 +761,6 @@ function search_box(actionflows_array,actors_list){
                 const result = element[0]?.result;
                 return result?.actor?.Name.toLowerCase() === query;
             });
-            // console.log(query, action_flow)
 
             display_timeline(action_flow,'actors_box','all','name')
         }

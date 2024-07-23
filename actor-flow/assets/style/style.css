@@ -27,6 +27,7 @@
 
 #timeline_recap .recap_b .shift {
     grid-column-start: 2;
+    margin-top: 1rem;
 }
 
 /* -------- actors -------- */ 
