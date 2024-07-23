@@ -98,9 +98,19 @@
         <div class="recap" style="text-align: center;"></div>
         <div class="recap_b" style="text-align: center;">
             <div class="shift">
-                <div>&nbsp;</div>
+                <div class="search">
+                    <div class="search_container">
+                        <input type="text" id="search_input" placeholder="Search an author">
+                        <button id="search_button">
+                            <img src="../assets/img/search.svg" width="30" height="30" />
+                        </button>
+                        <div id="autocomplete">
+                            <div id="autocomplete_list" class="autocomplete_items"></div>
+                        </div>
+                    </div>
+                </div>
                 <div id="overall_timeline"></div>
-                <div>&nbsp;</div>
+                <div class="the_empty">&nbsp;</div>
             </div>
         </div>
     </section>

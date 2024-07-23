@@ -137,6 +137,16 @@ async function load_data(){
         get_statistics(actionflows_array)   
 
         chat_with_NLP()
+
+        sort_data()
+
+        // get the list of authors for the search bar, and remove duplicates
+        const author_list_ = documents_data.map(item => item.article.Author)
+        const author_list = [...new Set(author_list_)]
+        // console.log(author_list)
+
+        search_box(author_list)
+
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -620,9 +630,69 @@ function sort_data(){
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function search_box(author_list){
+    console.log(author_list)
 
-    sort_data()
+    const search_input = document.getElementById('search_input')
+    const autocompleteList = document.getElementById('autocomplete_list');
+    const search_button = document.getElementById('search_button')
+
+    // autocomplete search
+    search_input.addEventListener('input', function() {
+
+        const query = this.value.toLowerCase();
+        
+        // Clear previous autocomplete items
+        autocompleteList.innerHTML = '';
+
+        if (query) {
+            const filteredData = author_list.filter(item => item.toLowerCase().includes(query));
+            
+            if (filteredData.length) {
+                filteredData.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.textContent = item;
+                    
+                    // Add click event to select the item
+                    itemDiv.addEventListener('click', function() {
+                        search_input.value = item;
+                        autocompleteList.innerHTML = '';  // Clear the list
+                    });
+
+                    autocompleteList.appendChild(itemDiv);
+                });
+            }
+        }
+    });
+
+    // search button
+    search_button.addEventListener('click', function() {
+        if (search_input.value != '') {
+
+            const query = search_input.value.toLowerCase();
+
+            const articles = documents_data.filter(item => item.article.Author.toLowerCase() === query)
+            // console.log(articles)
+
+            list_articles(articles, documentflows_array, 'date')
+
+        }
+        else {
+            list_articles(documents_data, documentflows_array, 'date')
+        }
+    })
+
+    // Close the autocomplete list if the user clicks outside of it
+    document.addEventListener('click', function(e) {
+        const autocompleteList = document.getElementById('autocomplete_list');
+        if (e.target !== document.getElementById('search_input')) {
+            autocompleteList.innerHTML = '';
+        }
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
 
     menu()
     access_window()

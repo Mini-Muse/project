@@ -778,7 +778,6 @@ function search_box(actionflows_array,actors_list){
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
 
     access_window()
