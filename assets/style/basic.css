@@ -110,58 +110,50 @@ background      #f7f8ff / #fefefe
 
 /* -------- search options -------- */ 
 
-#search_options {
-    margin-top: 3.5rem;
+.search_container {
+    position: relative;
+    display: inline-block;
+    width: 300px;
+/*    margin-top: 50px;*/
 }
 
-#search_box {
-    font-family: "Source Serif 4", Times, serif;
-    height: 9rem;
-    border-bottom: 1px solid #bcbcbc;
-    padding: 20px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-#query {
-    margin-bottom: 0.5rem;
-    width: 100%;
-}
-
-#search_box .content {
-    margin-left: 1rem;
-}
-
-#query input[type=text] {
-    font-family: "Source Serif 4", Times, serif;
-    font-weight: bold;
-    font-size: 4.5rem;
-    width: 95%;
-    background-color: transparent;
-}
-
-#autocomplete_list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border: 1px solid #bcbcbc;
-    position: absolute;
-    background-color: white;
+#search_input {
     width: 50%;
-    height: 10rem;
-    overflow-y: scroll;
-    display: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-#autocomplete_list li {
-    padding: 8px;
+#autocomplete {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 99;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #d4d4d4;
+    border-radius: 6px;
+}
+
+.autocomplete_items {
+    border-bottom: none;
+    border-top: none;
+    background-color: white;
+}
+
+.autocomplete_items div {
+    padding: 10px;
     cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+    text-align: left;
 }
 
-#autocomplete_list li:hover {
-    background-color: #f0f0f0;
+.autocomplete_items div:hover {
+    background-color: #e9e9e9;
 }
+
 
 /* -------- filter and sort -------- */ 
 

@@ -106,10 +106,17 @@ async function load_data(){
                 item.result.completeness = the_completeness
             })
         });
+        // console.log(actionflows_array)
 
         display_timeline(actionflows_array,'actors_box','all','name')
         filter_data()
         sort_data()
+
+        // get the list of actors for the search bar, and remove duplicates
+        const actors_list_ = actionflows_array.flatMap(innerArray => innerArray.map(item => item.result.actor?.Name)).filter(name => name);
+        const actors_list = [...new Set(actors_list_)]
+        
+        search_box(actionflows_array,actors_list)
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -708,6 +715,70 @@ async function fetch_credentials(){
         console.log(json)
     })
 }
+
+function search_box(actionflows_array,actors_list){
+    // console.log(actors_list)
+
+    const search_input = document.getElementById('search_input')
+    const autocompleteList = document.getElementById('autocomplete_list');
+    const search_button = document.getElementById('search_button')
+
+    // autocomplete search
+    search_input.addEventListener('input', function() {
+
+        const query = this.value.toLowerCase();
+        
+        // Clear previous autocomplete items
+        autocompleteList.innerHTML = '';
+
+        if (query) {
+            const filteredData = actors_list.filter(item => item.toLowerCase().includes(query));
+            
+            if (filteredData.length) {
+                filteredData.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.textContent = item;
+                    
+                    // Add click event to select the item
+                    itemDiv.addEventListener('click', function() {
+                        search_input.value = item;
+                        autocompleteList.innerHTML = '';  // Clear the list
+                    });
+
+                    autocompleteList.appendChild(itemDiv);
+                });
+            }
+        }
+    });
+
+    // search button
+    search_button.addEventListener('click', function() {
+        if (search_input.value != '') {
+
+            const query = search_input.value.toLowerCase();
+
+            const action_flow = actionflows_array.filter(element => {
+                const result = element[0]?.result;
+                return result?.actor?.Name.toLowerCase() === query;
+            });
+            // console.log(query, action_flow)
+
+            display_timeline(action_flow,'actors_box','all','name')
+        }
+        else {
+            display_timeline(actionflows_array,'actors_box','all','name')
+        }
+    })
+
+    // Close the autocomplete list if the user clicks outside of it
+    document.addEventListener('click', function(e) {
+        const autocompleteList = document.getElementById('autocomplete_list');
+        if (e.target !== document.getElementById('search_input')) {
+            autocompleteList.innerHTML = '';
+        }
+    });
+}
+
 
 document.addEventListener('DOMContentLoaded', function() {
 

@@ -270,7 +270,7 @@
 */
 	/* -------- search options -------- */ 
 
-	#query input[type=text] {
+/*	#query input[type=text] {
 		font-size: 2rem;
 	}
 
@@ -292,7 +292,7 @@
 
     #autocomplete_list {
         width: 91%;
-    }
+    }*/
 }
 
 @media screen and (max-width: 600px) {
