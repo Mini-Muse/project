@@ -158,7 +158,10 @@ function get_action_category(action){
         'schubladisierte',
         'stellten',
         'vorzulegen',
-        'waltet'
+        'waltet',
+        'nahm',
+        'schickte',
+        'organisierten'
     ]
 
     movement_list = [
@@ -179,7 +182,8 @@ function get_action_category(action){
         'preschte',
         'rennen',
         'segeln',
-        'stammt'
+        'stammt',
+        'angetreten'
     ]
 
     pursuit_list = [
@@ -251,7 +255,8 @@ function get_action_category(action){
         'zeigte',
         'zitiert',
         'zitierte',
-        'äusserte'
+        'äusserte',
+        'formulierte'
     ]
 
     transform_list = [
