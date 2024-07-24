@@ -297,7 +297,7 @@ function list_articles(article_data, documentflows_array, sort){
             output += '<span class="article_title">' + article.Title + '</span><br/>'
             output += '<span class="article_author">by ' + article.Author + ', </span>'
             output += '<span class="article_date">' + article.VolumeYearOfPublication + ', </span>'
-            output += '<span class="article_issue">issue ' + article.IssueNumber + '</span>'
+            output += '<span class="article_issue">issue n. ' + article.IssueNumber + '</span>'
             output += '</div>'
         output += '</div>'
 
@@ -443,7 +443,8 @@ function load_article_info(data){
                 output += '<div id="the_info">'
                 output += '<span data-meta="author_name">'  + article.Author + '</span>, '
                 output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + '</span>, '
-                output += '<span data-meta="issue">issue ' + article.IssueNumber + '</span>'
+                output += '<span data-meta="issue">issue n. ' + article.IssueNumber + ', </span>'
+                output += '<span data-meta="volume">volume n. ' + article.VolumeNumber + '</span>'
                 output += '</div>'
 
                 output += '<div id="the_abstract" class="meta">'
@@ -487,7 +488,7 @@ function load_article_info(data){
                 the_link = link + '#' + page
 
                 output += '<div id="read" class="info_box"><a href="' + the_link + '" target="blank">Read the article on E-Periodica 🔗</a></div>'
-                console.log(article.PagePhysicalNo)
+                // console.log(article.PagePhysicalNo)
 
                 document.getElementById('article_info_box').innerHTML = output
             }
