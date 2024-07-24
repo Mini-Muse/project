@@ -58,6 +58,7 @@ async function load_data(){
     })
     .then(json => {
         documents_data = json
+        console.log(documents_data)
     })
     .catch(error => {
         console.error('There was a problem with the document fetch operation:', error);
@@ -256,8 +257,8 @@ function list_articles(article_data, documentflows_array, sort){
     };
 
     const sort_title = (a, b) => {
-        const titleA = a.article.title;
-        const titleB = b.article.title;
+        const titleA = a.article.Title;
+        const titleB = b.article.Title;
 
         if (titleA < titleB) {
             return -1;
@@ -293,7 +294,7 @@ function list_articles(article_data, documentflows_array, sort){
         
         output += '<div class="the_meta">'
             output += '<div>'
-            output += '<span class="article_title">' + article.title + '</span><br/>'
+            output += '<span class="article_title">' + article.Title + '</span><br/>'
             output += '<span class="article_author">by ' + article.Author + ', </span>'
             output += '<span class="article_date">' + article.VolumeYearOfPublication + ', </span>'
             output += '<span class="article_issue">issue ' + article.IssueNumber + '</span>'
@@ -437,7 +438,7 @@ function load_article_info(data){
 
             if (article.Id === id){
 
-                output += '<div id="the_title">' + article.title + '</div>'
+                output += '<div id="the_title">' + article.Title + '</div>'
 
                 output += '<div id="the_info">'
                 output += '<span data-meta="author_name">'  + article.Author + '</span>, '
@@ -479,10 +480,14 @@ function load_article_info(data){
 
                 output += '</div>'
 
-                link = 'https://www.e-periodica.ch/digbib/view?pid=szg-006%3A2021%3A71%3A%3A273'
-                output += '<div id="read" class="info_box"><a href="' + link + '" target="blank">Read the article ...</a></div>'
-                // &#128279;
-                // &#x1F517;
+                link_ = article.LinkToEPeriodicaVolumne
+                link = link_.split('#')[0]
+                page = article.PagePhysicalNo[0]
+
+                the_link = link + '#' + page
+
+                output += '<div id="read" class="info_box"><a href="' + the_link + '" target="blank">Read the article on E-Periodica 🔗</a></div>'
+                console.log(article.PagePhysicalNo)
 
                 document.getElementById('article_info_box').innerHTML = output
             }
