@@ -84,7 +84,7 @@ article img {
     height: auto;
     transition: .3s ease-in-out;
     box-shadow: 0 5px 11px #ccc;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -150,8 +150,8 @@ article img {
 
 @media screen and (max-width: 600px) {
 
-    #cover { 
-/*        height: 50vh;*/
+    #cover h1 { 
+        margin-bottom: 1rem;
     }
 
     #cover p {
@@ -170,6 +170,10 @@ article img {
     #launch_prototype {
         top: calc(50% - (190px /2));
         left: calc(50% - (190px /2));
+    }
+
+    #footer_home img {
+        max-width: 45%;
     }
 
 
