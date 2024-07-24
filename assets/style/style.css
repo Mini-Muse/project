@@ -90,8 +90,8 @@ article img {
 
 #launch_prototype {
     position: absolute;
-    top: calc(50% - 150px / 2);
-    left: calc(50% - 150px / 2);
+    top: calc(50% - 190px / 2);
+    left: calc(50% - 190px / 2);
     width: 150px;
     height: 150px;
     display: flex;
@@ -165,6 +165,11 @@ article img {
 
     #content article h2, #content article div {
         width: 100%;
+    }
+
+    #launch_prototype {
+        top: calc(50% - (190px /2));
+        left: calc(50% - (190px /2));
     }
 
 
