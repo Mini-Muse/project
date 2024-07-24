@@ -294,6 +294,8 @@ function list_articles(article_data, documentflows_array, sort){
         
         output += '<div class="the_meta">'
             output += '<div>'
+            // output += '<span class="article_thumbnail"><img src="' + article.LinkToEPeriodicaJPG + '" style="max-width: 100%; height: auto;"/><span>'
+
             output += '<span class="article_title">' + article.Title + '</span><br/>'
             output += '<span class="article_author">by ' + article.Author + ', </span>'
             output += '<span class="article_date">' + article.VolumeYearOfPublication + ', </span>'
