@@ -288,14 +288,16 @@ function list_articles(article_data, documentflows_array, sort){
         // console.log(item)
 
         const article = item.article
-        const document_id = article.Id //.DocumentId
+        const document_id = article.Id // .CId  //.DocumentId
 
         output += '<div class="article_box" data-id="' + i + '"data-doc="' + document_id + '">'
         
         output += '<div class="the_meta">'
-            output += '<div>'
-            // output += '<span class="article_thumbnail"><img src="' + article.LinkToEPeriodicaJPG + '" style="max-width: 100%; height: auto;"/><span>'
+            output += '<div id="cover">'
+            output += '<img src="' + article.LinkToEPeriodicaJPG + '" style="max-width: 100%; height: auto;"/>'
+            output += '</div>'
 
+            output += '<div id="cover_meta">'
             output += '<span class="article_title">' + article.Title + '</span><br/>'
             output += '<span class="article_author">by ' + article.Author + ', </span>'
             output += '<span class="article_date">' + article.VolumeYearOfPublication + ', </span>'
@@ -352,6 +354,7 @@ function list_articles(article_data, documentflows_array, sort){
     sorted_article_data.forEach(item => {
         // console.log(documentflows_array)
         const document_id = item.article.Id //DocumentId
+        // console.log(document_id)
         
         let filteredArray = documentflows_array.flatMap(innerArray =>
             innerArray.filter(item => item.result.articleID === document_id)

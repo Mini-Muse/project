@@ -142,11 +142,23 @@
 
 .the_meta {
     border-right: 1px solid #dbdbdb;
-    width: 50%;
+    width: 53%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px 20px 20px;
 }
 
-    .the_meta div {
-        padding: 20px;
+    #cover {
+        width: 30%;
+    }
+
+    #cover img {
+        border: 1px solid #dbdbdb;
+    }
+
+    #cover_meta {
+        width: calc(70% - 20px);
+        margin-left: 20px;
     }
 
 .the_timeline {
@@ -155,7 +167,7 @@
 }
 
 .the_arrow{
-    width: 10%;
+    width: 7%;
     border-left: 1px solid #dbdbdb;
     display: flex;
     align-items: center;
