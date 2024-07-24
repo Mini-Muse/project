@@ -534,7 +534,7 @@ function show_articles(data,actor) {
             the_actors += '<span class="actor_chips">' + unique_actors[i] + '</span>'
         }
         
-        let title = article.title
+        let title = article.Title
         let link = '#'
         let author = article.Author
         let date = 0
@@ -550,12 +550,12 @@ function show_articles(data,actor) {
             output += '<p><a href="' + link + '">' + title + '</a></p> '
             output += '<p>'
                 output += '<span>by ' + author.replace(',',' ') + '</span>, '
-                output += '<span>' + year + ', issue ' + issue + '</span>'
+                output += '<span>' + year + ', issue n. ' + issue + '</span>'
             output += '</p>'
             output += '</div>'
             
             output += '<div class="meta">'
-            console.log(all_actors)
+            // console.log(all_actors)
             if (all_actors.length > 1){
                 output += '<p class="small_label">other historical entities</p>'
 

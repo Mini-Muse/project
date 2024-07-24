@@ -487,7 +487,7 @@ function load_article_info(data){
 
                 the_link = link + '#' + page
 
-                output += '<div id="read" class="info_box"><a href="' + the_link + '" target="blank">Read the article on E-Periodica 🔗</a></div>'
+                output += '<div id="read" class="info_box"><a href="' + the_link + '" target="blank">Read the article on E-Periodica</a></div>'
                 // console.log(article.PagePhysicalNo)
 
                 document.getElementById('article_info_box').innerHTML = output
