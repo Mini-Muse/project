@@ -424,6 +424,14 @@ function waiting_message(container){
     the_container.innerHTML = output
 }    
 
+function format_author_name(name) {
+    const surname = name.split(',')[0]
+    const name_ = name.split(',')[1]
+
+    let output = name_ + ' ' + surname
+    return output
+}
+
 document.addEventListener("DOMContentLoaded", function(){
 
     load_footer()

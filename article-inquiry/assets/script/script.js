@@ -298,12 +298,12 @@ function list_articles(article_data, documentflows_array, sort){
         
         output += '<div class="the_meta">'
             output += '<div id="cover">'
-            output += '<img src="' + article.LinkToEPeriodicaJPG + '" style="max-width: 100%; height: auto;"/>'
+            output += '<img src="' + article.LinkToEPeriodicaJPG + '" width="1744" height="2600" style="max-width: 100%; height: auto;" alt="Cover of the article :' + article.Title + '"/>'
             output += '</div>'
 
             output += '<div id="cover_meta">'
             output += '<span class="article_title">' + article.Title + '</span><br/>'
-            output += '<span class="article_author">by ' + article.Author + ', </span>'
+            output += '<span class="article_author">by ' + format_author_name(article.Author)  + ', </span>'
             output += '<span class="article_date">' + article.VolumeYearOfPublication + ', </span>'
             output += '<span class="article_issue">issue n. ' + article.IssueNumber + '</span>'
             output += '</div>'
@@ -453,19 +453,19 @@ function load_article_info(data){
                 // CId: Compound ID
 
                 let pages = article.PagePhysicalNo
-                console.log(pages)
+                // console.log(pages)
 
                 output += '<div id="title_cover">'
 
                 output += '<div id="the_cover">'
-                output += '<img src="' + article.LinkToEPeriodicaJPG + '" style="max-width: 100%; height: auto;"/>'
+                output += '<img src="' + article.LinkToEPeriodicaJPG + '" width="1744" height="2600" style="max-width: 100%; height: auto;" alt="Cover of the article :' + article.Title + '"/>'
                 output += '</div>'
 
                 output += '<div id="the_cover_meta">'
 
                 output += '<div id="the_title">' + article.Title + '</div>'
                 output += '<div id="the_info">'
-                output += '<span data-meta="author_name">'  + article.Author + '</span>, '
+                output += '<span data-meta="author_name">by '  + format_author_name(article.Author) + '</span>, '
                 output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + '</span>, '
                 output += '<span data-meta="issue">issue n. ' + article.IssueNumber + '</span><br/>'
                 output += '<span data-meta="volume">volume n. ' + article.VolumeNumber + '</span>, '

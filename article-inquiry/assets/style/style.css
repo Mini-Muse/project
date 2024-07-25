@@ -199,6 +199,7 @@
 
 #the_cover img {
     border: 1px solid #dbdbdb;
+    box-shadow: 2px 5px 4px #dddddd;
 }
 
 #the_cover_meta {

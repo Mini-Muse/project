@@ -550,7 +550,7 @@ function show_articles(data,actor) {
             // output += '<p><a href="' + link + '">' + title + '</a></p> '
             output += '<p style="font-weight: bold;">' + title + '</p> '
             output += '<p>'
-                output += '<span>by ' + author.replace(',',' ') + '</span>, '
+                output += '<span>by ' + format_author_name(author) + '</span>, '
                 output += '<span>' + year + ', issue n. ' + issue + '</span>'
             output += '</p>'
             output += '</div>'
