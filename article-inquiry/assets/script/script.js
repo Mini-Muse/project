@@ -288,7 +288,8 @@ function list_articles(article_data, documentflows_array, sort){
         // console.log(item)
 
         const article = item.article
-        const document_id = article.Id // .CId  //.DocumentId
+        const document_id_ = article.CId //Id // .CId  //.DocumentId
+        const document_id = document_id_.replace('"','')
 
         output += '<div class="article_box" data-id="' + i + '"data-doc="' + document_id + '">'
         
@@ -352,15 +353,19 @@ function list_articles(article_data, documentflows_array, sort){
     // console.log(startDate,endDate)
 
     sorted_article_data.forEach(item => {
+        console.log(sorted_article_data)
+
+        const document_id_ = item.article.CId // article.Id //DocumentId // "szg-006_2016_66-e1-66-1-e216-article-die_schwei-szg"
         // console.log(documentflows_array)
-        const document_id = item.article.Id //DocumentId
-        // console.log(document_id)
+        console.log(document_id_)
         
         let filteredArray = documentflows_array.flatMap(innerArray =>
-            innerArray.filter(item => item.result.articleID === document_id)
+            innerArray.filter(item => item.result.articleID === document_id_)
         );
         console.log(filteredArray)
- 
+    
+        const document_id = document_id_.replace('"','')
+
         make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,tick_size_large,action_width_very_small)
     })
 
