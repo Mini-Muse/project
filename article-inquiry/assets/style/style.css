@@ -127,13 +127,8 @@
 
 #the_info {
     margin-top: 0.5rem;
-    border-bottom: 1px solid #dbdbdb;
     padding-bottom: 1rem;
 }
-
-/*#the_abstract h2, #the_actors h2 {
-    font-weight: bold;
-}*/
 
 .info_box {
     margin-top: 2rem;
@@ -149,7 +144,7 @@
 }
 
     #cover {
-        width: 30%;
+        width: 15%;
     }
 
     #cover img {
@@ -157,7 +152,7 @@
     }
 
     #cover_meta {
-        width: calc(70% - 20px);
+        width: calc(85% - 20px);
         margin-left: 20px;
     }
 
@@ -183,6 +178,26 @@
 
 .meta {
     margin-top: 1.5rem;
+}
+
+#title_cover {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 20px;
+}
+
+#the_cover {
+    width: 25%;
+}
+
+#the_cover img {
+    border: 1px solid #dbdbdb;
+}
+
+#the_cover_meta {
+    width: 75%;
+    margin-left: 20px;
 }
 
 /* -------- prompt box -------- */ 
