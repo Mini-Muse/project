@@ -349,7 +349,6 @@ function display_timeline(data, container, filter, sort){
             .attr("data-actor", function(d){
                 let name = item[0].result.actor.Name
                 let actor_name = name.replace(' ','_')
-
                 return name
             })
             .append("p")
@@ -422,6 +421,7 @@ function get_articles(data){
     }
 
     function display_articles(actor_id){
+        // console.log(actor_id)
 
         // filter articles by actor id
         const documentsRelatedToActorId = data.flatMap(innerList => 
@@ -465,9 +465,10 @@ function get_articles(data){
             })
             .then(json => {
                 all_documents = json
+                console.log(all_documents)
 
                 const single_document = all_documents.filter(article => {
-                    return doc_id_.includes(article.article.Id)
+                    return doc_id_.includes(article.article.CId)
                 });
                 show_articles(single_document,actor_id[0])
             }) 
@@ -480,7 +481,7 @@ function get_articles(data){
 }
 
 function show_articles(data,actor) {
-    // console.log(actor)
+    // console.log(data,actor)
     
     article_boxes = document.querySelectorAll(".article_boxes");
 
@@ -503,9 +504,9 @@ function show_articles(data,actor) {
     // ----------------------------------
     for (let item = 0; item < data.length; item++) {
         let article = data[item].article
-        // console.log(article)
+        console.log(article)
 
-        the_doc_id = article.Id
+        the_doc_id = article.CId
         
         // get all actors
         let all_actors = sorted_filtered_data.map(subArray => subArray
@@ -540,7 +541,7 @@ function show_articles(data,actor) {
         let date = 0
         let year = article.VolumeYearOfPublication
         let issue = article.IssueNumber
-        let doc_id = article.Id
+        let doc_id = article.CId
         // console.log(data[item])
 
         output += '<div class="article_row">'
@@ -567,9 +568,9 @@ function show_articles(data,actor) {
 
         output += '</div>'
 
-        output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id + '"></div>'
+        output += '<div class="article_timeline" id="article_timeline_' + id + '_' + doc_id.replace('"','_x_') + '"></div>'
         
-        output += '<div class="all_actions_row" id="detail_timeline_' + id + '_' + doc_id + '"></div>'
+        output += '<div class="all_actions_row" id="detail_timeline_' + id + '_' + doc_id.replace('"','_x_') + '"></div>'
         //output += '<div class="go_to_article"></div>' //<a href="' + link + '" style="color: gray">&rarr;</a></div>'
 
         output += '</div>'
@@ -583,8 +584,8 @@ function show_articles(data,actor) {
     for (let item = 0; item < data.length; item++) {
         // console.log(data[item])
 
-        let doc_id = data[item].article.Id
-        const the_container = 'article_timeline_' + id + '_' + doc_id
+        let doc_id = data[item].article.CId
+        const the_container = 'article_timeline_' + id + '_' + doc_id.replace('"','_x_')
         // console.log(doc_id)
 
         const individual_timeline_data = actionflows_array.map(innerArray => {
@@ -593,7 +594,8 @@ function show_articles(data,actor) {
         .filter(innerArray => innerArray.length > 0)
         // console.log(individual_timeline_data)
 
-        let actions_box = document.getElementById('detail_timeline_' + id + '_' + doc_id)
+        let actions_box = document.getElementById('detail_timeline_' + id + '_' + doc_id.replace('"','_x_') )
+        console.log(doc_id.replace('"','_x_'))
 
         // display all actor action in an article
         output_actions = ''
@@ -651,7 +653,6 @@ function show_articles(data,actor) {
 
                 output_actions += '</div>'
             }
-
         }
 
         actions_box.innerHTML = output_actions

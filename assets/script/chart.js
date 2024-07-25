@@ -437,7 +437,9 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
             return d.result.null_date
         })
         .attr("data-art", function(d){
-            return d.result.articleID
+            const id_ = d.result.articleID
+            const id =  id_.replace('"','_x_')
+            return id
         })
         .attr("data-act", function(d,index){ // actor
             let name = d.result.actor.Name
