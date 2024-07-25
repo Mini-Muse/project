@@ -86,15 +86,18 @@ function get_action_category(action_){
         'abzulehnen',
         'accepter',
         'beabsichtigte',
-        'beabsichtigte',
         'beantragte',
         'belassen',
+        'beschloss',
+        'einigte',
+        'entsandte',
         'entschied',
         'hielt',
         'leiste',
         'liesse',
         'setzte',
-        'stellte'
+        'stellte',
+        'übernahm'
     ]
 
     get_list = [
@@ -102,9 +105,14 @@ function get_action_category(action_){
         'auffangen',
         'beansprucht',
         'besorgen',
+        'bewarb',
+        'bezog',
         'brauchten',
         'einholen',
+        'entrichtet',
+        'erfuhr',
         'erhalten',
+        'erlangten',
         'erreichte',
         'erwerben',
         'gewonnen',
@@ -141,7 +149,8 @@ function get_action_category(action_){
         'formulieren',
         'schrieb',
         'verfasst',
-        'abgedruckt'
+        'abgedruckt',
+        'schreibt'
     ]
 
     manage_list = [
@@ -162,7 +171,9 @@ function get_action_category(action_){
         'waltet',
         'nahm',
         'schickte',
-        'organisierten'
+        'organisierten',
+        'führte',
+        'legte'
     ]
 
     movement_list = [
@@ -185,7 +196,9 @@ function get_action_category(action_){
         'segeln',
         'stammt',
         'angetreten',
-        'abliefen'
+        'abliefen',
+        'übertragen',
+        'gekommen'
     ]
 
     pursuit_list = [
@@ -221,7 +234,9 @@ function get_action_category(action_){
         'protestieren',
         'reagieren',
         'replizieren',
-        'zustimmen'
+        'zustimmen',
+        'intervenierte',
+        'beugte'
     ]   
 
     state_list = [
@@ -239,6 +254,7 @@ function get_action_category(action_){
         'befand',
         'befanden',
         'befindet',
+        'bestärkt',
         'begründete',
         'begründete',
         'bestätigte',
