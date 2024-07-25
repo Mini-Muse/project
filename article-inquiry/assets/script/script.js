@@ -288,8 +288,8 @@ function list_articles(article_data, documentflows_array, sort){
         // console.log(item)
 
         const article = item.article
-        const document_id_ = article.CId //Id // .CId  //.DocumentId
-        const document_id = document_id_.replace('"','')
+        const document_id_ = article.CId
+        const document_id = document_id_.replace('"','_x_')
 
         output += '<div class="article_box" data-id="' + i + '"data-doc="' + document_id + '">'
         
@@ -353,18 +353,18 @@ function list_articles(article_data, documentflows_array, sort){
     // console.log(startDate,endDate)
 
     sorted_article_data.forEach(item => {
-        console.log(sorted_article_data)
+        // console.log(sorted_article_data)
 
         const document_id_ = item.article.CId // article.Id //DocumentId // "szg-006_2016_66-e1-66-1-e216-article-die_schwei-szg"
         // console.log(documentflows_array)
-        console.log(document_id_)
+        // console.log(document_id_)
         
         let filteredArray = documentflows_array.flatMap(innerArray =>
             innerArray.filter(item => item.result.articleID === document_id_)
         );
-        console.log(filteredArray)
+        // console.log(filteredArray)
     
-        const document_id = document_id_.replace('"','')
+        const document_id = document_id_.replace('"','_x_')
 
         make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,tick_size_large,action_width_very_small)
     })
@@ -375,8 +375,6 @@ function list_articles(article_data, documentflows_array, sort){
 
 function load_article_info(data){
     // console.log(data)
-
-    let id = data[0].document_id
 
     const article_item = document.querySelectorAll('.article_box')
 
@@ -404,7 +402,8 @@ function load_article_info(data){
         })
 
         // list all actors in the same article id
-        const all_act_doc = actor_data.filter((item) => item.result.articleID === id)
+        const all_act_doc = actor_data.filter((item) => item.result.articleID === id.replace('_x_',"\"") )
+        // console.log(actor_data)
 
         // list unique actors
         const list_actors = all_act_doc.map(item => item.result.actor.Name);
@@ -444,9 +443,11 @@ function load_article_info(data){
 
         documents_data.forEach(item => {
             let article = item.article
-            // console.log(item)
+            let id_fix = id.replace('_x_',"\"")
+            // console.log(article.CId, id_fix)
 
-            if (article.Id === id){
+            if (article.CId === id_fix){ 
+                // CId: Compound ID
 
                 output += '<div id="title_cover">'
 
@@ -517,7 +518,7 @@ function load_article_info(data){
         document.getElementById('article_info_box').setAttribute('data-document',id)
     }
 
-    let first_id = documents_data[0].article.Id
+    let first_id = documents_data[0].article.CId
     display_info(first_id)
 }
 
