@@ -310,7 +310,7 @@ function list_articles(article_data, documentflows_array, sort){
         output += '</div>'
 
         output += '<div class="the_timeline">'
-            output += '<div id="the_timeline_' + document_id + '"></div>'
+            output += '<div id="the_timeline_' + document_id + '" class="the_timeline_box"></div>'
         output += '</div>'
 
         output += '<div class="the_arrow">'

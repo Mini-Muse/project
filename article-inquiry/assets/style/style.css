@@ -163,6 +163,10 @@
     align-items: center;
 }
 
+.the_timeline_box {
+    width: 100%;
+}
+
 .the_arrow{
     width: 7%;
     border-left: 1px solid #dbdbdb;

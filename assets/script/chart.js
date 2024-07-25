@@ -343,6 +343,7 @@ function make_timeline(individual_timeline_data,the_container,startDate,endDate,
 
     box_w = timeline_box.offsetWidth;
     box_h = tick_size // t_box.offsetHeight;
+    // console.log(box_w)
 
     // years ---------------
 
