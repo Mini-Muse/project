@@ -159,6 +159,8 @@
 .the_timeline {
     width: 40%;
     margin-top: .4rem;
+    display: flex;
+    align-items: center;
 }
 
 .the_arrow{
