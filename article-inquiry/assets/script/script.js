@@ -290,9 +290,11 @@ function list_articles(article_data, documentflows_array, sort){
         const article = item.article
         const document_id_ = article.CId
         const document_id = document_id_.replace('"','_x_')
-        const doc_id = item.article.DocumentId
+        const doc_id_ = item.article.ArticleId 
+        const doc_id = doc_id_.replace('"','_x_')
+        // console.log(doc_id)
 
-        output += '<div class="article_box" data-id="' + i + '"data-doc="' + document_id + '" data-docid="' + doc_id + '" >'
+        output += '<div class="article_box" data-id="' + i + '" data-doc="' + document_id + '" data-docid="' + doc_id + '" >' // data-doc="' + document_id + 
         
         output += '<div class="the_meta">'
             output += '<div id="cover">'
@@ -356,16 +358,14 @@ function list_articles(article_data, documentflows_array, sort){
     sorted_article_data.forEach(item => {
         // console.log(sorted_article_data)
 
-        const document_id_ = item.article.CId // article.Id //DocumentId // "szg-006_2016_66-e1-66-1-e216-article-die_schwei-szg"
-        // console.log(documentflows_array)
-        // console.log(document_id_)
+        const document_id_ = item.article.ArticleId
         
         let filteredArray = documentflows_array.flatMap(innerArray =>
             innerArray.filter(item => item.result.articleID === document_id_)
         );
-        // console.log(filteredArray)
     
         const document_id = document_id_.replace('"','_x_')
+        // console.log(document_id)
 
         make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,tick_size_large,action_width_very_small)
     })
@@ -383,8 +383,8 @@ function load_article_info(data){
         item.addEventListener('click', function() {
             id = item.getAttribute('data-doc')
             document_id = item.getAttribute('data-docid')
-            console.log(document_id)
 
+            // console.log(document_id)
             display_info(id,document_id)
 
             count_prompts = 0;
@@ -399,13 +399,13 @@ function load_article_info(data){
 
         article_item.forEach(item => {
             item.classList.remove('selected');
-            if (item.getAttribute('data-doc') == id){
+            if (item.getAttribute('data-docid') == id){
                item.classList.add('selected') 
             }
         })
 
         // list all actors in the same article id
-        const all_act_doc = actor_data.filter((item) => item.result.articleID === id.replace('_x_',"\"") )
+        const all_act_doc = actor_data.filter((item) => item.result.articleID === id.replace('_x_','"') )
         // console.log(actor_data)
 
         // list unique actors
@@ -516,11 +516,11 @@ function load_article_info(data){
             }
         })
 
-        document.getElementById('article_info_box').setAttribute('data-documentId',document_id)
+        document.getElementById('article_info_box').setAttribute('data-docid',document_id)
     }
 
-    let first_id = documents_data[0].article.CId
-    display_info(first_id)
+    let first_id = documents_data[0].article.ArticleId
+    display_info(first_id,first_id)
 }
 
 function chat_with_NLP(){
@@ -530,8 +530,8 @@ function chat_with_NLP(){
     const send_button = document.getElementById('send_button')
     const chat = document.getElementById('chat')
 
-    document_id = document.getElementById('article_info_box').getAttribute('data-documentId')
-    chat.setAttribute("data-documentId", document_id);
+    document_id = document.getElementById('article_info_box').getAttribute('data-docid')
+    chat.setAttribute("data-docid", document_id);
 
     chat.innerHTML = ''
     // console.log(document_id)
@@ -587,8 +587,8 @@ function chat_with_NLP(){
     function load_NLP_reply(box_id, message) {
 
         // prepare data to be sent to the server
-        documentId = document.getElementById('chat').getAttribute('data-documentId')
-        query = message
+        documentId = document.getElementById('chat').getAttribute('data-docid')
+        query = message.replaceAll(' ','%20')
 
         const filler_words = [
             'uhm ...',
@@ -613,7 +613,7 @@ function chat_with_NLP(){
         get_NLP_reply(doc_id,query)
 
         async function get_NLP_reply(documentId,query){
-            query_url = NLP_algorithm + documentId +'&query=' + query 
+            query_url = NLP_algorithm + documentId.replace('_x_','"') +'&query=' + query 
             console.log(query_url)
 
             await fetch(query_url, {
@@ -632,9 +632,32 @@ function chat_with_NLP(){
                 reply_data = json
                 console.log(reply_data)
 
-                response_message = reply_data.response.replace('Response: ','')
+                // response
+                let response_message = reply_data.response //.replace('Response: ','')
 
-                messageReceived.textContent = response_message
+                // references
+                let reference_articles = []
+
+                if(reply_data.articleIds.length > 0){
+                    reply_data.articleIds.forEach(item => {
+                        if (documentId.includes(item) != false){
+                            console.log(item)
+
+                            reference_article = documents_data.filter(docu =>
+                                docu.article.ArticleId == item
+                            )
+                            reference_articles.push(reference_article)
+                        }
+                    })
+                    // console.log(reference_articles)
+                }
+
+                let references = ''
+
+                // reply message = 
+                reply_message = response_message + references
+
+                messageReceived.textContent = reply_message
             })
             .catch(error => {
                 console.error('There was a problem with the prompt fetch operation:', error);
