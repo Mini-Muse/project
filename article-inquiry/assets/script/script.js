@@ -214,7 +214,7 @@ function build_page(){
     const random_index = Math.floor(Math.random() * questions.length);
 
     let input = ''
-    input += '<div>'
+    input += '<div style="width: 80px;">'
     input += '<div id="chatbot_help" class="info">ⓘ</div>'
     input += '<div id="chatbot_help_message"><p>Try to ask the question: ' + questions[0] + '</p></div>'
     input += '</div>'
