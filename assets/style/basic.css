@@ -324,6 +324,7 @@ background      #f7f8ff / #fefefe
 .small_label {
     font-size: 0.9rem;
     font-weight: bold;
+    margin-bottom: .2rem;
 }
 
 /* -------- actors -------- */ 
