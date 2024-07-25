@@ -452,6 +452,9 @@ function load_article_info(data){
             if (article.CId === id_fix){ 
                 // CId: Compound ID
 
+                let pages = article.PagePhysicalNo
+                console.log(pages)
+
                 output += '<div id="title_cover">'
 
                 output += '<div id="the_cover">'
@@ -464,8 +467,9 @@ function load_article_info(data){
                 output += '<div id="the_info">'
                 output += '<span data-meta="author_name">'  + article.Author + '</span>, '
                 output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + '</span>, '
-                output += '<span data-meta="issue">issue n. ' + article.IssueNumber + ', </span>'
-                output += '<span data-meta="volume">volume n. ' + article.VolumeNumber + '</span>'
+                output += '<span data-meta="issue">issue n. ' + article.IssueNumber + '</span><br/>'
+                output += '<span data-meta="volume">volume n. ' + article.VolumeNumber + '</span>, '
+                output += '<span data-meta="volume">pp. ' + (pages[0] - 2) + '-' + (pages[pages.length - 1] - 2) +'</span>' // pages[0] + '-' pages[1]
                 output += '</div>'
                 output += '</div>'
 
