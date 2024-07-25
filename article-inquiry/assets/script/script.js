@@ -359,7 +359,7 @@ function list_articles(article_data, documentflows_array, sort){
         let filteredArray = documentflows_array.flatMap(innerArray =>
             innerArray.filter(item => item.result.articleID === document_id)
         );
-        // console.log(filteredArray)
+        console.log(filteredArray)
  
         make_timeline(filteredArray,'the_timeline_' + document_id,startDate,endDate,tick_size_large,action_width_very_small)
     })
@@ -443,17 +443,28 @@ function load_article_info(data){
 
             if (article.Id === id){
 
-                output += '<div id="the_title">' + article.Title + '</div>'
+                output += '<div id="title_cover">'
 
+                output += '<div id="the_cover">'
+                output += '<img src="' + article.LinkToEPeriodicaJPG + '" style="max-width: 100%; height: auto;"/>'
+                output += '</div>'
+
+                output += '<div id="the_cover_meta">'
+
+                output += '<div id="the_title">' + article.Title + '</div>'
                 output += '<div id="the_info">'
                 output += '<span data-meta="author_name">'  + article.Author + '</span>, '
                 output += '<span data-meta="publication_year">' + article.VolumeYearOfPublication + '</span>, '
                 output += '<span data-meta="issue">issue n. ' + article.IssueNumber + ', </span>'
                 output += '<span data-meta="volume">volume n. ' + article.VolumeNumber + '</span>'
                 output += '</div>'
+                output += '</div>'
+
+                output += '</div>'
+
 
                 output += '<div id="the_abstract" class="meta">'
-                output += '<h2 class="small_label">abstract</h2>'
+                output += '<h2 class="small_label">abstract <span style="color: gray; font-weight: normal;">(AI-generated)</span></h2>'
                 output += '<p data-meta="summary">' + article.Summary + '</p>'
                 output += '</div>'
 
@@ -465,8 +476,8 @@ function load_article_info(data){
                     output += '</div>'
                 }
                 else {
-                    output += '<p class="small_label">actors</strong></p>'
-                    output += '<p>no actors detected</p>'
+                    output += '<p class="small_label">historical entities</strong></p>'
+                    output += '<p>no historical entities detected</p>'
                 }
                 output += '</div>'
 
@@ -493,7 +504,6 @@ function load_article_info(data){
                 the_link = link + '#' + page
 
                 output += '<div id="read" class="info_box"><a href="' + the_link + '" target="blank">Read the article on E-Periodica</a></div>'
-                // console.log(article.PagePhysicalNo)
 
                 document.getElementById('article_info_box').innerHTML = output
             }
@@ -582,10 +592,18 @@ function chat_with_NLP(){
         documentId = document.getElementById('chat').getAttribute('data-document')
         query = message
 
+        const filler_words = [
+            'uhm ...',
+            'so ...',
+            'hmmm ...',
+            'well ...'
+        ]
+
+        random_word_id = Math.floor(Math.random() * ((filler_words.length-1) - 0 + 1)) + 0;
+
         const messageReceived = document.createElement('div');
         messageReceived.className = 'chat_reply';
-        messageReceived.textContent = 'uhm ...'
-        // messageReceived.textContent = 'question ' + count_prompts + ' about document ' + documentId + ' ...';
+        messageReceived.textContent = filler_words[random_word_id]
 
         the_messageSent = document.getElementById(box_id)
         the_messageSent.appendChild(messageReceived)
