@@ -350,6 +350,7 @@ background      #f7f8ff / #fefefe
 
 
 /* -------- timeline -------- */ 
+
 .the_axis {
     opacity: 0.5;
 } 
@@ -365,6 +366,13 @@ background      #f7f8ff / #fefefe
 
 .domain {
     display: none;
+}
+
+/* -------- articles -------- */ 
+
+.AI {
+    font-weight: normal;
+    color: gray;
 }
 
 /* -------- footer -------- */

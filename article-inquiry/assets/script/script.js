@@ -290,8 +290,9 @@ function list_articles(article_data, documentflows_array, sort){
         const article = item.article
         const document_id_ = article.CId
         const document_id = document_id_.replace('"','_x_')
+        const doc_id = item.article.DocumentId
 
-        output += '<div class="article_box" data-id="' + i + '"data-doc="' + document_id + '">'
+        output += '<div class="article_box" data-id="' + i + '"data-doc="' + document_id + '" data-docid="' + doc_id + '" >'
         
         output += '<div class="the_meta">'
             output += '<div id="cover">'
@@ -380,17 +381,19 @@ function load_article_info(data){
 
     article_item.forEach(item => {
         item.addEventListener('click', function() {
-            document_id = item.getAttribute('data-doc')
+            id = item.getAttribute('data-doc')
+            document_id = item.getAttribute('data-docid')
+            console.log(document_id)
 
-            display_info(document_id)
+            display_info(id,document_id)
 
             count_prompts = 0;
             chat_with_NLP()
         })
     })
 
-    function display_info(id){
-        // console.log(id)
+    function display_info(id,document_id){
+        // console.log(id,document_id)
 
         let output = ''
 
@@ -515,7 +518,7 @@ function load_article_info(data){
             }
         })
 
-        document.getElementById('article_info_box').setAttribute('data-document',id)
+        document.getElementById('article_info_box').setAttribute('data-documentId',document_id)
     }
 
     let first_id = documents_data[0].article.CId
@@ -529,8 +532,8 @@ function chat_with_NLP(){
     const send_button = document.getElementById('send_button')
     const chat = document.getElementById('chat')
 
-    document_id = document.getElementById('article_info_box').getAttribute('data-document')
-    chat.setAttribute("data-document", document_id);
+    document_id = document.getElementById('article_info_box').getAttribute('data-documentId')
+    chat.setAttribute("data-documentId", document_id);
 
     chat.innerHTML = ''
     // console.log(document_id)
@@ -571,15 +574,8 @@ function chat_with_NLP(){
 
         chat.appendChild(messageSent);
         chat.scrollTop = chat.scrollHeight;  // Scroll to the bottom
-        //'reply_' + count_prompts.toString()
 
-        // console.log(box_id, message)
         load_NLP_reply(box_id, message)
-        // setTimeout(load_NLP_reply(box_id),100)
-        // waitAndRun(load_NLP_reply, box_id, message)
-            // .then(function() {
-            //     console.log(box_id);
-            // });
     }
 
     function waitAndRun(func, argument_a, argument_b) {
@@ -591,11 +587,9 @@ function chat_with_NLP(){
     }
 
     function load_NLP_reply(box_id, message) {
-        // box = document.getElementById(box_id)
-        // id = box_id.replace('reply_','')
 
         // prepare data to be sent to the server
-        documentId = document.getElementById('chat').getAttribute('data-document')
+        documentId = document.getElementById('chat').getAttribute('data-documentId')
         query = message
 
         const filler_words = [
@@ -617,11 +611,12 @@ function chat_with_NLP(){
         const headers = new Headers();
         headers.set('Authorization', 'Basic ' + btoa(user + ':' + pass));
         
-        let doc_id = 1 // documentId 
+        let doc_id = documentId 
         get_NLP_reply(doc_id,query)
 
         async function get_NLP_reply(documentId,query){
             query_url = NLP_algorithm + documentId +'&query=' + query 
+            console.log(query_url)
 
             await fetch(query_url, {
                 method: 'GET',

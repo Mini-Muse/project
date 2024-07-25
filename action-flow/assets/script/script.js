@@ -465,7 +465,7 @@ function get_articles(data){
             })
             .then(json => {
                 all_documents = json
-                console.log(all_documents)
+                // console.log(all_documents)
 
                 const single_document = all_documents.filter(article => {
                     return doc_id_.includes(article.article.CId)
@@ -504,7 +504,7 @@ function show_articles(data,actor) {
     // ----------------------------------
     for (let item = 0; item < data.length; item++) {
         let article = data[item].article
-        console.log(article)
+        // console.log(article)
 
         the_doc_id = article.CId
         
@@ -558,7 +558,7 @@ function show_articles(data,actor) {
             output += '<div class="meta">'
             // console.log(all_actors)
             if (all_actors.length > 1){
-                output += '<p class="small_label">other historical entities</p>'
+                output += '<p class="small_label">other historical entities <span class="AI">(AI-extracted)</span></p>'
 
                 output += '<div class="other_actors_container">'
                 output += the_actors
@@ -595,14 +595,14 @@ function show_articles(data,actor) {
         // console.log(individual_timeline_data)
 
         let actions_box = document.getElementById('detail_timeline_' + id + '_' + doc_id.replace('"','_x_') )
-        console.log(doc_id.replace('"','_x_'))
+        // console.log(doc_id.replace('"','_x_'))
 
         // display all actor action in an article
         output_actions = ''
         for (let i = 0; i < individual_timeline_data.length; i++) {
             let actions = individual_timeline_data[i]
 
-            output_actions = '<p class="small_label all_actions">' + actor + ': actions</p>'
+            output_actions = '<p class="small_label all_actions">' + actor + ': actions <span class="AI">(AI-extracted)</span></p>'
 
             for (let i = 0; i < actions.length; i++) {
                 let action = actions[i].result
