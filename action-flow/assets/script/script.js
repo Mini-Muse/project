@@ -265,7 +265,6 @@ function display_timeline(data, container, filter, sort){
             let action = event.result.action.Name
             let category = get_action_category(action)
             let completeness = event.result.completeness
-            // console.log(fix_date(event.result.date.Name), actor_name)
         })
     })
 

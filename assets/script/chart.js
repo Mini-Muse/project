@@ -76,7 +76,7 @@ function action_full_name(action_category){
     return full_name
 }
 
-function get_action_category(action){
+function get_action_category(action_){
     let category = ''
 
 
@@ -140,7 +140,8 @@ function get_action_category(action){
         'formulieren',
         'formulieren',
         'schrieb',
-        'verfasst'
+        'verfasst',
+        'abgedruckt'
     ]
 
     manage_list = [
@@ -183,7 +184,8 @@ function get_action_category(action){
         'rennen',
         'segeln',
         'stammt',
-        'angetreten'
+        'angetreten',
+        'abliefen'
     ]
 
     pursuit_list = [
@@ -273,7 +275,7 @@ function get_action_category(action){
         'verändern'
     ]
 
-    action = action.toLowerCase()
+    const action = action_.toLowerCase()
 
     if (decide_list.includes(action)) {
         category = 'decide';
@@ -304,6 +306,9 @@ function get_action_category(action){
     } 
     else if (transform_list.includes(action)) {
         category = 'transform';
+    }
+    else {
+        console.log(action)
     } 
 
     return category
@@ -332,7 +337,7 @@ function get_actors_per_article(data){
 }
 
 function make_timeline(individual_timeline_data,the_container,startDate,endDate,tick_size,action_width){
-    // console.log(individual_timeline_data,the_container)
+    // console.log(individual_timeline_data)
     
     timeline_box = document.getElementById(the_container)
 
