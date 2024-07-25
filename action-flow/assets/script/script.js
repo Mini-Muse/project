@@ -558,7 +558,7 @@ function show_articles(data,actor) {
             output += '<div class="meta">'
             // console.log(all_actors)
             if (all_actors.length > 1){
-                output += '<p class="small_label">other historical entities <span class="AI">(AI-extracted)</span></p>'
+                output += '<p class="small_label">other historical entities <span class="AI">AI <span>extracted</span></span></p>'
 
                 output += '<div class="other_actors_container">'
                 output += the_actors
@@ -602,7 +602,7 @@ function show_articles(data,actor) {
         for (let i = 0; i < individual_timeline_data.length; i++) {
             let actions = individual_timeline_data[i]
 
-            output_actions = '<p class="small_label all_actions">' + actor + ': actions <span class="AI">(AI-extracted)</span></p>'
+            output_actions = '<p class="small_label all_actions">' + actor + ': actions <span class="AI">AI <span>extracted</span></span></p>'
 
             for (let i = 0; i < actions.length; i++) {
                 let action = actions[i].result

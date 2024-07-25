@@ -203,10 +203,10 @@
     border-bottom: none;
 }
 
-.article_row p {
+/*.article_row p {
     margin-bottom: 0.1rem;
 }
-
+*/
 .article_timeline svg {
     opacity: .5;
 }

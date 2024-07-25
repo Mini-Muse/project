@@ -473,33 +473,31 @@ function load_article_info(data){
 
 
                 output += '<div id="the_abstract" class="meta">'
-                output += '<h2 class="small_label">abstract <span class="AI">(AI-generated)</span></h2>'
+                output += '<h2 class="small_label">abstract <span class="AI">AI <span>generated</span></span></h2>'
                 output += '<p data-meta="summary">' + article.Summary + '</p>'
                 output += '</div>'
 
                 output += '<div class="meta">'
+                output += '<p class="small_label">historical entities <span class="AI">AI <span>extracted</span></span></p>'
                 if (list_actors.length > 0){
-                    output += '<p class="small_label">historical entities <span class="AI">(AI-extracted)</span></p>'
                     output += '<div class="all_actors_container">'
                     output += all_actors
                     output += '</div>'
                 }
                 else {
-                    output += '<p class="small_label">historical entities <span class="AI">(AI-extracted)</span></p>'
                     output += '<p>no historical entities detected</p>'
                 }
                 output += '</div>'
 
                 // locations
                 output += '<div class="meta">'
+                output += '<p class="small_label">locations <span class="AI">AI <span>extracted</span></span></p>'
                 if (list_locations.length > 0){
-                    output += '<p class="small_label">locations <span class="AI">(AI-extracted)</span></p>'
                     output += '<div class="all_actors_container">'
                     output += all_locations
                     output += '</div>'
                 }
                 else {
-                    output += '<p class="small_label">locations <span class="AI">(AI-extracted)</span></p>'
                     output += '<p>no locations detected</p>'
                 }
                 output += '</div>'
