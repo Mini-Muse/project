@@ -338,9 +338,9 @@ function get_action_category(action_){
     else if (transform_list.includes(action)) {
         category = 'transform';
     }
-    else {
-        console.log(action)
-    } 
+    // else {
+    //     console.log(action)
+    // } 
 
     return category
 }

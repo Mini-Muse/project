@@ -243,28 +243,23 @@ function get_statistics(data){
     // get number of actors ---------------
     data.forEach(item => {
         item.forEach(action => {
-            // console.log(action.result)
-            // const actorName = action.actor.actor_id;
             const actorName = action.result.actor.Name
             actorCount[actorName] = (actorCount[actorName] || 0) + 1;
         })
     });
     actors = Object.keys(actorCount).length;
 
-
     // get number of articles ---------------
     data.forEach(item => {
         item.forEach(action => {
-            // console.log(action.result.articleID)
-            // const actorName = action.result.actor.Id
             const documentID = action.result.articleID
             articleCount[documentID] = (articleCount[documentID] || 0) + 1;
         })
     });
     articles = Object.keys(articleCount).length;
 
-
     // get number of actions ---------------
+    // console.log(data)
     data.forEach((item,i) => {
         item.forEach((action,a) => {
             actions += 1
@@ -272,8 +267,6 @@ function get_statistics(data){
     })
 
     // get number of years ---------------
-    // get number of years ---------------
-    // console.log(data[0][0].result)
     let startDate = fix_date('1800-01-01') // fix_date(data[0][0].result.date.Name); // fix_date(data[0][0].result.date.Name);
     let endDate = fix_date('1990-01-01') //startDate 
     // console.log(startDate)
