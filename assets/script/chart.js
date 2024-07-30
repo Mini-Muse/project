@@ -96,7 +96,8 @@ function get_action_category(action_){
         'liesse',
         'setzte',
         'stellte',
-        'übernahm'
+        'übernahm',
+        'entlassen'
     ]
 
     get_list = [
@@ -132,7 +133,9 @@ function get_action_category(action_){
         'motivieren',
         'steuern',
         'überreden',
-        'überzeugen'
+        'überzeugen',
+        'forciert',
+        'verbot'
     ]
 
     make_list = [
@@ -179,7 +182,9 @@ function get_action_category(action_){
         'trat',
         'zählte',
         'zählt',
-        'versandte'
+        'versandte',
+        'sandten',
+        'einstellte'
     ]
 
     movement_list = [
@@ -283,7 +288,8 @@ function get_action_category(action_){
         'zitierte',
         'äusserte',
         'formulierte',
-        'verfügte'
+        'verfügte',
+        'erwähnte'
     ]
 
     transform_list = [
