@@ -79,7 +79,6 @@ function action_full_name(action_category){
 function get_action_category(action_){
     let category = ''
 
-
     decide_list = [
         'abgelehnt',
         'ablehnte',
@@ -150,7 +149,10 @@ function get_action_category(action_){
         'schrieb',
         'verfasst',
         'abgedruckt',
-        'schreibt'
+        'schreibt',
+        'zog',
+        'verfasste',
+        'veröffentlichte'
     ]
 
     manage_list = [
@@ -173,7 +175,11 @@ function get_action_category(action_){
         'schickte',
         'organisierten',
         'führte',
-        'legte'
+        'legte',
+        'trat',
+        'zählte',
+        'zählt',
+        'versandte'
     ]
 
     movement_list = [
@@ -212,7 +218,8 @@ function get_action_category(action_){
         'streben',
         'suchen',
         'verfolgen',
-        'zielen'
+        'zielen',
+        'verfolgt'
     ]
 
     react_list = [
@@ -236,7 +243,8 @@ function get_action_category(action_){
         'replizieren',
         'zustimmen',
         'intervenierte',
-        'beugte'
+        'beugte',
+        'versteigt'
     ]   
 
     state_list = [
@@ -274,7 +282,8 @@ function get_action_category(action_){
         'zitiert',
         'zitierte',
         'äusserte',
-        'formulierte'
+        'formulierte',
+        'verfügte'
     ]
 
     transform_list = [
@@ -323,9 +332,9 @@ function get_action_category(action_){
     else if (transform_list.includes(action)) {
         category = 'transform';
     }
-    // else {
-    //     console.log(action)
-    // } 
+    else {
+        console.log(action)
+    } 
 
     return category
 }
