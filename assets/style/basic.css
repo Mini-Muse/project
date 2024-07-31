@@ -431,12 +431,19 @@ background      #f7f8ff / #fefefe
 }
 
 .footer_div {
-    width: calc(37.5% - 1rem);
+    width: calc(50% - 1rem);
 }
 
 #footer p {
     margin-bottom: 1rem;
 }
+
+.footer_main {
+    width: calc(70% - 1rem); 
+    display: flex; 
+    justify-content: space-between;
+}
+
 
 /* -------- error message -------- */ 
 
@@ -690,6 +697,7 @@ background      #f7f8ff / #fefefe
 
     /* -------- footer -------- */ 
 
+
     #footer {
         margin-bottom: 5rem;
     }
@@ -700,6 +708,11 @@ background      #f7f8ff / #fefefe
 
     #footer div {
         margin-bottom: 2.5rem;
+    }
+
+    .footer_main {
+        width: 100%;
+        display: block; 
     }
 
     .footer_logo, .footer_div {
