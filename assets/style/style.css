@@ -6,20 +6,31 @@ body {
 
 #cover { 
     font-family: "Source Sans 3", Times, sans-serif;
-    font-size: 2.3rem;
     width: 100%;
-    line-height: 140%;
     margin-bottom: 5rem;
 }
 
 #cover h1 {
     color: #0e2a8f;
+    font-size: 2.3rem;
     font-weight: bold;
+    line-height: 140%;
+}
+
+#cover h2 {
+    font-size: 2.3rem;
+    line-height: 140%;
 }
 
 #title {
     margin: 6rem auto 6rem;
     width: 60%;
+}
+
+#title p {
+    font-size: 1.8rem; 
+    line-height: 140%; 
+    margin-top: 1.5rem;
 }
 
 #home_timeline {
@@ -48,7 +59,7 @@ body {
     margin-bottom: 4rem;
 }
 
-#content article h2 {
+#content article h3 {
     width: 25%;
     font-size: 1.3rem;
     font-weight: bold;
@@ -135,10 +146,6 @@ article img {
         width: 95%;
     }
 
-    #cover p {
-        font-size: 2rem;
-    }
-
     #content {
         font-size: 1rem;
     }
@@ -154,8 +161,16 @@ article img {
 
 @media screen and (max-width: 600px) {
 
+    #title {
+        margin: 2.5rem auto 10rem;
+    }
+
     #cover h1 { 
-        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+
+    #cover h2 { 
+        font-size: 1.8rem;
     }
 
     #cover p {
