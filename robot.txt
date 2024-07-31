@@ -1,0 +1,9 @@
+# robot.txt
+
+User-agent: Googlebot
+Disallow: /
+
+User-agent: *
+Disallow: /
+
+sitemap: https://mini-muse.github.io/project/sitemap.txt
