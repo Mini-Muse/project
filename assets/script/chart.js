@@ -600,7 +600,7 @@ function timeline_labels() {
 
                 let action_category = ''
                 if (get_action_category(title) != ''){
-                    action_category = action_full_name(get_action_category(title)) + ': '
+                    action_category = ' <span style="text-transform: lowercase;">(' + action_full_name(get_action_category(title)) + ')</span>'
                 }
                 
                 let date = date_
@@ -611,7 +611,7 @@ function timeline_labels() {
                 let output = '';
 
                 output += '<div>'
-                output += '<span class="action_cat" style="background-color:' + get_color(get_action_category(title)) +'">' + action_category + '' + title + '</span><br/>'
+                output += '<span class="action_cat" style="background-color:' + get_color(get_action_category(title)) +'">' + title + '' + action_category + '</span><br/>'
 
                 output += '<table class="action_metadata">'
                 output += '<tr><td>date</td><td>' + date + '</td></tr>'
