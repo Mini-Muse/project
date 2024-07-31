@@ -162,7 +162,7 @@ article img {
 @media screen and (max-width: 600px) {
 
     #title {
-        margin: 2.5rem auto 10rem;
+        margin: 1rem auto 10rem;
     }
 
     #cover h1 { 
@@ -174,7 +174,7 @@ article img {
     }
 
     #cover p {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     #content article {
@@ -182,7 +182,12 @@ article img {
         width: 95%;
     }
 
-    #content article h2, #content article div {
+    #content article h2, #content article h3 {
+        width: 100%;
+        margin-bottom: .5rem;
+    }
+
+    #content article div {
         width: 100%;
     }
 
