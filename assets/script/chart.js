@@ -19,12 +19,12 @@ function get_color(value){
     const categoryColors = {
         'decide': '#9DD1E7',
         'get': '#85D6D0',
-        'influence': '#D79E96',
+        'influence': '#a8eea6ff',
         'make': '#D79E96',
-        'manage': '#92D2EE',
+        'manage': '#5ea7c7',
         'movement': '#ff8c67',
         'pursuit' : '#D7D7FA',
-        'react': '#ccccf1',
+        'react': '#b586e4ff',
         'state': '#E3B081',
         'transform': '#EFC700'
     };
