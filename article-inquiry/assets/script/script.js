@@ -1,9 +1,12 @@
-const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents?limit=100' // ?limit=50
 // const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
+// const API_document = 'https://minimuse.nlp.idsia.ch/api/documents'
 const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=20000' // 1000 200
-// const API_actionflow =  '../assets/data/data_.json'
-
 const NLP_algorithm = 'https://minimuse.nlp.idsia.ch/api/chat-document?documentId='
+const documents_API = 'https://minimuse.nlp.idsia.ch/api/documents?limit=100' // ?limit=50
+
+// const documents_API = '../assets/data/api/documents.json'
+// const API_actionflow = '../assets/data/api/actionflows.json'
+
 
 let documents_data; 
 let documentflows_array;
@@ -667,6 +670,7 @@ function chat_with_NLP(){
                 console.error('There was a problem with the prompt fetch operation:', error);
 
                 messageReceived.textContent = 'Something was wrong. Please, try again later.'
+
             });
         }
     }
