@@ -1,8 +1,8 @@
-// const API_actionflow = 'https://minimuse.nlp.idsia.ch/actionflows'
 const API_actionflow = 'https://minimuse.nlp.idsia.ch/api/actionflows?skip=0&limit=1500' // 50 100 400 1000
-// const API_actionflow = '../assets/data/data_.json'
+// const API_actionflow = '../assets/data/api/actionflows.json'
 
 const API_document = 'https://minimuse.nlp.idsia.ch/api/documents'
+// const API_document = '../assets/data/api/documents.json'
 
 let actionflows_array
 let actor_per_article
