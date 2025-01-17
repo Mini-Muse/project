@@ -100,7 +100,7 @@ article img {
     transition: .3s ease-in-out;
     box-shadow: 0 5px 11px #ccc;
     border-radius: 5px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 #launch_prototype {
