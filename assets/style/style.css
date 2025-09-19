@@ -131,11 +131,16 @@ article img {
     opacity: .6;
 }
 
+.video_container {
+    border:1px solid #ccc;
+    width: 150%;
+}
+
+
 /* -------- media queries -------- */
 
 
 @media screen and (max-width: 768px) {
-
 
     #cover {
         line-height: 100%;
@@ -194,6 +199,10 @@ article img {
     #launch_prototype {
         top: calc(50% - (190px /2));
         left: calc(50% - (190px /2));
+    }
+
+    .video_container {
+        width: 100%;
     }
 
     #footer_home img {
